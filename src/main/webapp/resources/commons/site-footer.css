@@ -1,0 +1,36 @@
+@charset "UTF-8";
+ /*푸터*/
+    #footer{
+        min-width: 1000px;
+        width: 100%;
+        height: 150px;
+        border: 1px solid #383838;
+        background-color: #383838;
+        opacity: 0.8; 
+        float: left;
+    }
+    #footer-img-area{
+        width: 20%;
+        height: 100%;
+        float: left;
+    }
+    #footer-img{
+        widows: 55%;
+        height: 55%;
+        padding-left: 35%;
+        padding-top: 11%;  
+    }
+    #footer-text-area{
+        width: 80%;
+        height: 100%;
+        float: left;
+    }
+    #footer-text{
+        width: 50%;
+        height: 50%;
+        margin-top: 4.3%;
+        color: white;
+        font-family: 'Noto Sans KR';
+        font-weight: lighter;
+        font-size: 13px;
+    }
