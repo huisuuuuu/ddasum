@@ -9,7 +9,5 @@
 <body>
 	<h1>따숨, 마음을 나누다</h1>
 	<h3>메인페이지</h3>
-	
-	<a href="/admin/adminTest.do">테스트</a>
 </body>
 </html>
