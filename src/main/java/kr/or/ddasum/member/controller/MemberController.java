@@ -18,7 +18,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
 	public String login() {
-		
+		System.out.println("연습이에요");
 		return "/member/memberLogin";
 		
 	}
