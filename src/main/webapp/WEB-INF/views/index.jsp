@@ -25,7 +25,7 @@
 		</fieldset>
 	</form>
 	
-	<a href="/admin/adminMain.jsp">관리자</a>
+	<a href="/admin/adminMain.do">관리자</a>
 
 </body>
 </html>

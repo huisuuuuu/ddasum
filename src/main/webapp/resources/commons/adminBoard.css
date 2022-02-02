@@ -17,12 +17,9 @@
 .container .container_top .count-all span {
     font-weight: 700;
 }
-#green {
-	color: #5EB656;
-    font-weight: 700;
-}
 
 .box-search {
+	width : 500px;
 	float: right;
 }
 .btn-write {
@@ -37,6 +34,7 @@
 	width: 130px;
 	height: 40px;
 	position: relative;
+	margin-right : 20px;
 }
 .select-search>select {
 	width: 100%;
@@ -60,28 +58,50 @@
 	color: #AAAAAA;
 	z-index: 999;
 }
+
 .input-search {
-	float: left;
-	width: 350px;
+	float: right;
+	width: 300px;
 	height: 40px;
 	border: 0.5px solid #D8D8D8;
 	box-sizing: border-box;
-	margin-right: 10px;
+	margin-right: 10px;	
 }
-.icon-search {
-	font-size: 16px;
-	margin: 12px 10px 0 18px;
-	color: #C8C8C8;
-}
+
 .input-search>input {
 	border: 0;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 16px;
 	color: #2A2A2A;
+	margin-top : 5px;
+	margin-left : 10px;
 }
+
+.search-btn {
+	width: 40px;
+	height: 40px;
+	border: 0;
+	float : right;
+}
+
+.search {
+	width : 40px;
+	height : 40px;
+	border : 0;
+	background-color: rgb(255, 167, 126, 0.4);
+	cursor: pointer;	
+}
+
+.icon-search {
+	font-size: 16px;
+	margin: 0px auto;
+	color: #C8C8C8;
+}
+
 .box-search>input {
 	float: left;
 }
+
 
 .container .table_wrap {
     width: 100%;
@@ -151,6 +171,11 @@
 	font-size: 16px;
 	color : white;
 }
+
+.container table tr td button.ok_btn {
+    background-color: #FFA77E;
+}
+
 .container table tr td button.man_btn {
     background-color: white;
     border: 0.5px solid #AAAAAA;
@@ -209,7 +234,7 @@
     transition: ease 0.3s;
 }
 #page_wrap .page_ul li a.page_active {
-    background-color: #AFD485;
+    background-color: #FFA77E;
     border-radius: 50%;
     color: #fff;
 }

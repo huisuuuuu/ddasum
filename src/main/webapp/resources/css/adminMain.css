@@ -17,6 +17,11 @@ body {
 	box-sizing: border-box;
 }
 
+a {
+	text-decoration-line : none;
+	text-decoration : none;
+}
+
 /* 전체영역 */
 
 #wrap {
@@ -79,9 +84,7 @@ body {
 
 #menubox1 {
 	background-color : white;
-	text-align: center;
-	
-	
+	text-align: center;	
 	margin-right : 20px; 
 	
 }
