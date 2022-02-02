@@ -23,6 +23,8 @@
 		<input type="submit" value="로그인"/><br>
 		</fieldset>
 	</form>
+	
+	<a href="/admin/adminMain.jsp">관리자</a>
 
 </body>
 </html>

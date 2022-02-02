@@ -6,132 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>따숨 관리자 메인</title>
-<style>
-
-/*페이지세로 가변적인 길이 유지*/
-html {
-   height: 100%;
-}
-body {
-   height: 100%;
-}
-
-* {
-	margin : 0px;
-	padding : 0px;
-}
-
-* > div {
-	box-sizing: border-box;
-}
-
-/* 전체영역 */
-
-#wrap {
-   min-height: 100%;
-   background-color : #FFA77E;
-   
-}
-
-/* 헤더영역 */
-#header {
-	width : 100%;
-	height : 350px;
-	margin : auto;
-}
-
-#logo {
-	width : 100%;
-	height : 300px;
-	padding : 30px;
-	margin : 0px auto;
-	text-align: center;
-}
-
-/* 메뉴영역 */
-#contents {
-	width : 100%;
-	height : 450px;
-}
-
-#menu-area {
-	
-	width : 1200px;
-	height : 100%;
-	margin : 0px auto;
-
-	
-}
-
-#menu_area_wrap {
-	    width: 100%;
-
-    display: flex;
-}
-
-.menu {
-	width: 24%;
-    height: 100%;
-    padding: 115px 50px;
-    background-color: white;
-	box-shadow: 2px 3px 8px rgb(0 0 0 / 10%);
-    border-radius: 20px;
-    margin-right: 20px;
-    box-sizing: border-box;
-
-}
-
-.menu:last-child {
-	margin-right: 0;
-
-}
-
-#menubox1 {
-	background-color : white;
-	text-align: center;
-	
-	
-	margin-right : 20px; 
-	
-}
-
-#menubox2 {
-	background-color : white;
-	text-align: center;
-
-}
-
-#menubox3 {
-	background-color : white;
-	text-align: center;
-
-	
-}
-
-#menubox4 {
-	background-color : white;
-	text-align: center;
-	 
-	
-}
-
-/* 푸터 영역 */
-#footer {
-	width : 100%;
-	height : 200px;
-	padding : 100px 100px;
-}
-
-#logbtn {
-	background-color : #F7E3D4;
-	border-radius : 15px;
-	width : 195px;
-	height : 50px;
-	float : right;
-}
-
-
-</style>
+<link rel="stylesheet" type="text/css"	href="/resources/css/adminMain.css">
+<!--  jQuery 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -176,7 +55,7 @@ body {
 	
 	<div id="footer">
 		<div id="logbtn">
-			
+			<button type="button" class="admin_main_btn">로그아웃</button>
 		</div>
 	</div>
 </div>
