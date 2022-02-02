@@ -1,0 +1,28 @@
+@charset "UTF-8";
+.main_tit {
+	width: 100%;
+	height: auto;
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 100px;
+}
+
+.main_tit h1 {
+	width: 100%;
+	font-size: 36px;
+	font-weight: bold;
+	position: relative;
+	display: block;
+	text-align: center;
+}
+
+.under {
+	width: 80px;
+	height: 5px;
+	background: #FFA77E;
+	position: relative;
+	display: inline-block;
+	margin: 0 auto;
+}

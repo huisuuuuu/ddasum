@@ -16,10 +16,45 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
-	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
-	public String login() {
+	@RequestMapping(value="/member/loginPage.do", method = RequestMethod.GET)
+	public String loginPage() {
 		
-		return "/member/memberLogin";
+		return "/member/loginPage";
+		
+	}
+	
+	@RequestMapping(value="/member/joinPage.do", method = RequestMethod.GET)
+	public String joinPage() {
+		
+		return "/member/joinPage";
+		
+	}
+	
+	@RequestMapping(value="/member/findIdPage.do", method = RequestMethod.GET)
+	public String findIdPage() {
+		
+		return "/member/findIdPage";
+		
+	}
+	
+	@RequestMapping(value="/member/saleRestaurantPage.do", method = RequestMethod.GET)
+	public String saleRestaurantPage() {
+		
+		return "/member/saleRestaurantPage";
+		
+	}
+	
+	@RequestMapping(value="/member/memberJoinPage.do", method = RequestMethod.GET)
+	public String memberJoinPage() {
+		
+		return "/member/memberJoinPage";
+		
+	}
+	
+	@RequestMapping(value="/member/bizMemberJoinPage.do", method = RequestMethod.GET)
+	public String bizMemberJoinPage() {
+		
+		return "/member/bizMemberJoinPage";
 		
 	}
 }
