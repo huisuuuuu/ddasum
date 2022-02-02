@@ -47,7 +47,7 @@
 
 <!-- AOP 처리를 위한 Transaction advisor 설정 -->
 <aop:config>
-	<aop:pointcut expression="execution(* kr.or.ddasum.*ServiceImpl.*(..))" id="txPointCut"/>
+	<aop:pointcut expression="execution(* kr.or.ddasum..*ServiceImpl.*(..))" id="txPointCut"/>
 	<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
 </aop:config>
 
