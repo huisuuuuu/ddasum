@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+.contents_wrap{
+	
+	width: 100%;
+	height: auto;
+	margin-top: 30px;
+	margin-bottom: 150px;
+	position: relative;
+	display: inline-block;
+	
+}
+
+#choiceJoin{
+	
+	width: 487px;
+	margin: 0 auto;
+}
+
+#choiceJoin>div{
+	
+	width: 231px;
+	height: 212px;
+	border-radius: 10px;
+	box-shadow: 2px 3px 8px rgb(0 0 0 / 10%);
+	
+}
+
+#choiceJoin a{
+	
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-decoration: none;
+}
+
+#choiceJoin img{
+	
+	width: 90px;
+	height: 90px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	
+}
+
+#memberJoin{
+	
+	float: left;
+	margin-right: 25px;
+	
+}
+
+#bizMemberJoin{
+	
+	float: right;
+}
+
+#choiceJoin span{
+	
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	font-size: 26px;
+	color: #FFA77E;
+	margin: 0 auto;
+}
+
+#joinSituation{
+	
+	width: 262px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+#joinSituation>ol>li{
+	list-style: none;
+	text-align: center;
+	float: left;
+	font-size: 15px;
+}
+
+#choiceMember{
+	font-weight: bold;
+	color: #666666;
+}
+
+#accountCreation{
+	color: #A5A5A5;
+}
+
+#successJoin{
+	color: #A5A5A5;
+}
+
