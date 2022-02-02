@@ -37,6 +37,13 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping(value="/member/findPwdPage.do", method = RequestMethod.GET)
+	public String findPwdPage() {
+		
+		return "/member/findPwdPage";
+		
+	}
+	
 	@RequestMapping(value="/member/saleRestaurantPage.do", method = RequestMethod.GET)
 	public String saleRestaurantPage() {
 		
@@ -57,4 +64,12 @@ public class MemberController {
 		return "/member/bizMemberJoinPage";
 		
 	}
+	
+	@RequestMapping(value="/member/successJoinPage.do", method = RequestMethod.POST)
+	public String successJoinPage() {
+		
+		return "/member/successJoinPage";
+		
+	}
+	
 }
