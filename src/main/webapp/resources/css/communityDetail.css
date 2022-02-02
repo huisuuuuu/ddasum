@@ -1,0 +1,184 @@
+@charset "UTF-8";
+    @import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap');
+        
+    * {
+        box-sizing: border-box;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    #content_wrapper {
+        width: 1280px;
+    }
+
+    #page_title {
+        font-size: 32px;
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+        line-height: 40%;
+    }
+
+    #title_underbar {
+        border: 2px solid #FFA77E;
+        width: 60px;
+        display: flex;
+    }
+
+    .align_buttons {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 1fr;
+    }
+
+    .basic_button {
+        background-color: #fff;
+        border: 1px solid #707070;
+        border-radius: 5px;
+        width: 75px;
+        height: 35px;
+        margin: 5px 3px;
+    }
+
+    #board_detail {
+        border: 1px solid #707070;
+        width: 100%;
+        min-width: 800px;
+        padding: 20px;
+        line-height: 30px
+    }
+
+    .underbar {
+        border: 0.px solid #666;
+        width: 100%;
+    }
+
+    #detail_area {
+        color: #707070;
+        font-size: 17px;
+    }
+
+    #detail_title {
+        color: #707070;
+        font-size: 20px;
+    }
+
+    #profile {
+        float: left;
+        border: 1px solid black;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        margin: 12px 12px 12px 0px;
+    }
+
+    #info {
+        margin: 10px;
+        float: left;
+        font-size: 14px;
+        line-height: 44px
+    }
+
+    .info {
+        float: left;
+        margin-right: 15px;
+        color: #707070;
+    }
+
+    #detail_content {
+        color: #707070;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #comment {
+        background: rgba(255, 167, 126, 0.07);
+        padding: 10px;
+    }
+
+    #comment_detail {
+        line-height: 22px;
+        float: left;
+        width: 90%;
+        min-width: 500px;
+    }
+    .comment_option{
+        width: 10%;
+        min-width: 60px;
+    }
+    .comment_nick {
+        font-size: 13px;
+        color: #707070;
+    }
+
+    .comment {
+        font-size: 13px;
+        color: #707070;
+    }
+
+    .comment_date {
+        font-size: 11px;
+        color: #707070;
+    }
+
+    .indent_arrow {
+        float: left;
+        margin-top: 19px;
+        margin-right: 10px;
+    }
+
+    #comment_area{
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid #707070;
+        border-radius: 5px;
+    }
+    #new_comment {
+        width: 100%;
+        height: 70px;
+        border: none;
+        border-radius: 5px;
+        font-size: 13px;
+        padding: 10px;
+    }
+    input:focus{
+        outline: none;
+    }
+    #comment_submit{
+        border: 1px solid #707070;
+        border-radius: 5px;
+        width: 50px;
+        height: 30px;
+        color: #707070;
+        font-size: 14px;
+        background-color: #fff;
+        margin: 5px;
+    }
+    #secret{
+        display: none;
+    }
+    #secret+label{
+        margin-top: 8px;
+        display: block;
+        width: 25px;
+        height: 25px;
+        background: url("resources/images/open-padlock.png") no-repeat 0 0px / contain;
+    }
+    #secret:checked+label{
+        background: url("resources/images/lock_Checked.png") no-repeat 0 0px / contain;
+    }        
+    #comment_length{
+        color: #707070;
+        line-height: 50px;
+        font-size: 14px;
+        height: 20px;
+        margin-right: 5px;
+    }
+    .comment_delete{
+        background: none;
+        border: none;
+        font-size: 15px;
+    }
+    .align_buttons>a{
+        text-decoration: none;
+        color: #707070;
+    }
