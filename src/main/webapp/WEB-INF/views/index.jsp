@@ -10,6 +10,7 @@
 	}
 </style>
 <title>따숨, 마음을 나누다</title>
+
 </head>
 <body>
 	<h1>따숨, 마음을 나누다</h1>
@@ -23,6 +24,8 @@
 		<input type="submit" value="로그인"/><br>
 		</fieldset>
 	</form>
+	
+	<a href="/admin/adminMain.jsp">관리자</a>
 
 </body>
 </html>
