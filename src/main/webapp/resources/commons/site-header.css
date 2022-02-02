@@ -1,102 +1,102 @@
 @charset "UTF-8";
 
-*{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-        
-        #header{
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+}
 
-            width:100%;
-            height: 105px;
-            background-color: #FFD3BE;
-         }
-        
-        #logo{
-            width: 25%;
-            height: 105px;
-            float: left;
-        }
-        
-        #navigation{
-            width: 50%;
-            height: 105px;
-            float: left;
-        }
-        
-        #gnb_list>li{
-            
-            list-style: none;
-            width:20%;
-            height: 100%;
-            line-height: 105px;
-            text-align: center;
-            float: left;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-        }
-        
-        #gnb_list>li>a{
-            
-            width:100%;
-            height: 100%;
-            display: block;
-            line-height: 105px;
-            color: white;
-            text-decoration: none;
-        }
-        
-        #submenu{
-            background-color: #FFA77E;
-            margin-left: -20px;
-            margin-top: -20px;
-            text-align: center;
-            line-height: 50px;
-            border-radius: 100px;
-            width: 220px;
-            height: 50px;
-            display: none;
-        }
-        
-        #submenu>a{
-        
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-        }
-        
-        #logoImg{
-            width: 79px;
-            height: 66px;
-            margin: 18px 0px 0px 80px;
-        }
-        
-        #member{
-            line-height: 105px;
-            width: 25%;
-            height: 105px;
-            float: left;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
-        #member>span{
-            padding: 15px;
-        }
-        
-        #login{
-            margin-left: 130px;
-        }
-        
-        #join{
-            margin-right: 70px;
-        }
-        
-        #member>span>a{
-            color: white;
-            text-decoration: none;
-        }
+#header {
+	width: 100%;
+	height: 105px;
+	background-color: #FFD3BE;
+}
+
+#logo {
+	width: 25%;
+	height: 105px;
+	float: left;
+}
+
+#navigation {
+	width: 50%;
+	height: 105px;
+	float: left;
+}
+
+#gnb_list>li {
+	list-style: none;
+	width: 20%;
+	height: 100%;
+	line-height: 105px;
+	text-align: center;
+	float: left;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+}
+
+#gnb_list>li>a {
+	width: 100%;
+	height: 100%;
+	display: block;
+	line-height: 105px;
+	color: white;
+	text-decoration: none;
+}
+
+#submenu {
+	background-color: #FFA77E;
+	margin-left: -20px;
+	margin-top: -20px;
+	text-align: center;
+	line-height: 50px;
+	border-radius: 100px;
+	width: 220px;
+	height: 50px;
+	display: none;
+}
+
+#submenu>a {
+	text-decoration: none;
+	color: white;
+	font-size: 16px;
+}
+
+#logoImg {
+	width: 79px;
+	height: 66px;
+	margin: 18px 0px 0px 80px;
+}
+
+#member {
+	line-height: 105px;
+	width: 25%;
+	height: 105px;
+	float: left;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#member>span {
+	width: 25%;
+	heigth: 100%;
+	display: block;
+	float: right;
+}
+
+#join {
+	margin-right: 80px;
+}
+
+#member>span>a {
+	color: white;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-align: center;
+	
+}
