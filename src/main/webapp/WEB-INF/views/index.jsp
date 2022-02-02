@@ -24,5 +24,7 @@
 		</fieldset>
 	</form>
 
+	<a href="/BizMember/enter.do">사업자페이지</a><br>	
+
 </body>
 </html>
