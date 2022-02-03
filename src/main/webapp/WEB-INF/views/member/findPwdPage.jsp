@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/commons/mainTitle.css">
 	<link rel="stylesheet" type="text/css"
-	href="/resources/css/findIdPage.css">
+	href="/resources/css/findPwdPage.css">
 <title>따숨, 마음을 나누다.</title>
 </head>
 <body>
@@ -31,11 +31,11 @@
 						<a href="/member/findPwdPage.do">비밀번호 찾기</a>
 					</div>
 				</div>
-				<form id="findInfoForm" action="/member/findUserId.do" method="post">
-					<label for="userName">이름</label><br/>
-					<input class="findInfoInput" type="text" id="userName" name="userName" placeholder="이름을 입력해 주세요"><br/>
+				<form id="findInfoForm" action="/member/findUserPwd.do" method="post">
+					<label for="userId">아이디</label><br/>
+					<input class="findInfoInput" type="text" id="userId" name="userId" placeholder="아이디를 입력해 주세요"><br/>
 					<label for="email">이메일</label><br/>
-					<input class="findInfoInput" type="email" id="email" name="userEmail" placeholder="이메일을 입력해 주세요"><br/>
+					<input class="findInfoInput" type="email"id="email" name="userEmail" placeholder="이메일을 입력해 주세요"><br/>
 					<input id="findInfoBtn" type="submit" value="확인"><br/>
 				</form>
 			</div>

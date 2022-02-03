@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+.contents_wrap{
+	
+	width: 100%;
+	height: auto;
+	margin-top: 30px;
+	margin-bottom: 150px;
+	position: relative;
+	display: inline-block;
+	
+}
+
+#joinSituation{
+	
+	width: 262px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+#joinSituation>ol>li{
+	list-style: none;
+	text-align: center;
+	float: left;
+	font-size: 15px;
+}
+
+#choiceMember{
+	color: #A5A5A5;
+}
+
+#accountCreation{
+	font-weight: bold;
+	color: #666666;
+}
+
+#successJoin{
+	color: #A5A5A5;
+}
+
+#joinForm{
+	width: 45%;
+	height: auto;
+	margin: 0 auto;
+	
+}
+
+#joinForm>label{
+	font-size: 16px;
+	color: #66666;
+}
+
+#joinForm>input {
+	width: 80%;
+	height: 55px;
+	line-height: nomal;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-right: 7px;
+	border: 1px solid #ddd;
+	font-size: 15px;
+	padding: 2%;
+	color: #66666;
+}
+
+#joinForm>button {
+	width: 18%;
+	height: 55px;
+	margin-bottom: 5px;
+	border: 1px solid #ddd;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 2%;
+	color: #FFA77E;
+	background-color: white;
+	cursor: pointer;
+	
+}
+
+#joinForm>button:hover {
+	width: 18%;
+	height: 55px;
+	margin-bottom: 5px;
+	border: none;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 2%;
+	color: white;
+	background-color: #FFA77E;
+	cursor: pointer;
+	
+}
+
+.join_agree {
+    width: 100%;
+    height: 30px;
+    line-height: 28px;
+    position: relative;
+    display: block;
+    border: 0px solid red;
+}
+
+.agree_box {
+    width: 80%;
+    height: auto;
+    font-weight: 500;
+    font-size: 14px;
+    color: #555;
+    padding: 16px;
+    position: relative;
+    display: inline-block;
+    background: #f3f3f3;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.join_agree a {
+    position: relative;
+    display: inline-block;
+    border: 0px solid red;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 300;
+    color: #888;
+    border-bottom: 1px solid #aaa;
+    float: right;
+    text-decoration: none;
+}
+
+.join_agree a:hover {
+    color: #FFA77E;
+    border-bottom: 1px solid #FFA77E;
+}
+
+.btn_join {
+    font-size: 15px;
+    font-weight: bold;
+    width: 160px;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    background-color: #FFA77E;
+    margin: 0 auto;
+    margin-top: 30px;
+    cursor: pointer;
+}

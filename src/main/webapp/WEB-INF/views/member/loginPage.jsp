@@ -25,9 +25,9 @@
 			<div class="contents_wrap">
 				<div class="login_area">
 					<form id="loginForm" action="/member/login.do" method="post">
-						<input type="text" name="userId" placeholder="아이디"> <input
-							type="password" name="userPwd" placeholder="비밀번호"> <input
-							class="btn_login" type="submit" value="로그인">
+						<input type="text" name="userId" placeholder="아이디">
+						<input type="password" name="userPwd" placeholder="비밀번호">
+						<input class="btn_login" type="submit" value="로그인">
 					</form>
 				</div>
 			</div>
