@@ -14,20 +14,25 @@
 }
 
 .btn_login {
-	width: 100%;
-	height: 100px;
-	line-height: 50px;
+	
+	width: 450px;
+	height: 60px;
+	line-height: normal;
 	text-align: center;
 	color: white;
 	font-size: 16px;
 	font-weight: bold;
-	margin-top: 10px;
 	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 20px;
 	cursor: pointer;
 	background-color: #FFA77E;
+	display: block;
+	border: none;
+	padding: 2%;
 }
 
-.login_area input{
+.login_area input:not(:last-child){
 	display: block;
 	width: 450px;
 	height: 60px;

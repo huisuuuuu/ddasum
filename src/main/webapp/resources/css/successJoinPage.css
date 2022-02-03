@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+#joinSituation{
+	
+	width: 262px;
+	height: 100px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+#joinSituation>ol>li{
+	list-style: none;
+	text-align: center;
+	float: left;
+	font-size: 15px;
+}
+
+#choiceMember{
+	color: #A5A5A5;
+}
+
+#accountCreation{
+	color: #A5A5A5;
+}
+
+#successJoin{
+	font-weight: bold;
+	color: #666666;
+}
+
+.contents_wrap{
+	
+	width: 50%;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 150px;
+	text-align: center;
+	
+}
+
+.contents_wrap>img{
+	width: 140px;
+	height: 140px;
+	margin-bottom: 20px;
+}
+
+.contents_wrap>h1{
+	color: #666666;
+	margin-bottom: 10px;
+}
+
+.contents_wrap>h2{
+	color: #A5A5A5;
+	margin-bottom: 10px;
+	margin-bottom: 80px;
+}
+
+#mainBtn{
+	width: 125px;
+	height: 50px;
+	background-color: #FFA77E;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+}
