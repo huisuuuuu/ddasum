@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     
     
 <!DOCTYPE html>
@@ -14,6 +14,13 @@
 		* div{
 			box-sizing: border-box;
 		}
+		* {
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+		* a{
+        text-decoration: none;
+        color: inherit;
+    	}
 		#wrapper{
 			width: 1920px;
 			height: 1080px;
@@ -24,7 +31,6 @@
 			width: 100%;
 			height: 400px;
 			background-color: #FFD3BE;
-			
 		}
 		#menuListArea{
 			width: 100%;
@@ -53,12 +59,14 @@
 			float: right;
 		}
 		#logOutBTN{
-			width: 100%;
-			height: 100%;
+			width: 150px;
+			height: 70px;
 			background-color: #F7E3D4;
-			margin-right: 100px;
 			right: auto;
 			border-radius: 30px;
+			font-size: 18pt;
+			float: right;
+			border: none;
 		}
 		.menu{
 			width: 25%;
@@ -72,7 +80,6 @@
 			background-color: white;
 			border-top-left-radius: 20px;
 			border-top-right-radius: 20px;
-			
 		}
 		.menuName{
 			width: 100%;
@@ -93,10 +100,9 @@
 		}
 		.title{
 			padding-top: 80px;
-			text-align: center;	
 		}
 		.Title{
-			width: 350px;
+			width: 300px;
 		}
 
 	</style>
@@ -109,7 +115,7 @@
 	<div id="body">
 		<div id="titleArea">
 			<div id="title">
-				<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고" width="400px;">
+				<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고">
 			</div>
 		</div>
 		<div id="menuListArea">
@@ -117,6 +123,8 @@
 				<div class="menu">
 					<a href="/BizMember/bizManage.do">	
 						<div class="menuIcon">
+							<img class="Icons" src="/resources/images/bizMemberEnter_bizManage
+							.png" alt="로고">
 						</div>
 						<div class="menuName">
 						업체 관리
@@ -126,6 +134,7 @@
 				<div class="menu">
 					<a href="/BizMember/goodsManage.do">	
 						<div class="menuIcon">
+							<img class="Icons" src="/resources/images/bizMemberEnter_goodsManage.png" alt="로고">
 						</div>
 						<div class="menuName">
 						상품 관리
@@ -135,6 +144,8 @@
 				<div class="menu">
 					<a href="/BizMember/bizReserv.do">				
 						<div class="menuIcon">
+							<img class="Icons" src="/resources/images/bizMemberEnter_reservManage
+							.png" alt="로고">
 						</div>
 						<div class="menuName">
 						예약 관리
