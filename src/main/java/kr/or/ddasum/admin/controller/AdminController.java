@@ -13,10 +13,30 @@ public class AdminController {
 	@Autowired
 	private AdminService admService;
 	
-	@RequestMapping(value="/admin/adminMain.jsp", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/adminMain.do", method = RequestMethod.GET)
 	public String adminMain() {
 		
 		return "/admin/adminMain";
 		
+	}
+
+	@RequestMapping(value="/admin/adminMemberManageList.do", method = RequestMethod.GET)
+	public String adminMemberManageList() {
+		return "/admin/adminMemberManageList";
+	}
+	
+	@RequestMapping(value="/admin/adminBizManageList.do", method = RequestMethod.GET)
+	public String adminBizManageList() {
+		return "/admin/adminMemberManageList";
+	}
+	
+	@RequestMapping(value="/admin/adminNoticeManageList.do", method = RequestMethod.GET)
+	public String adminNoticeManageList() {
+		return "/admin/adminMemberManageList";
+	}
+	
+	@RequestMapping(value="/admin/adminSupport.do", method = RequestMethod.GET)
+	public String adminSupport() {
+		return "/admin/adminMemberManageList";
 	}
 }

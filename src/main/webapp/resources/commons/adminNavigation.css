@@ -6,35 +6,33 @@
     position: fixed;
     background-color: #FFD3BE;
     z-index: 999;
+    margin : 0px;
 }
 
 #logo {
     width: 100%;
-    height: 120px;
+    height: 150px;
     text-align: center;
-    padding-right: 15px;
+    padding-top: 0px;
  
 }
 #logo>img {
-	height: 35px;
+	height: 85px;
 	margin-top: 40px;
 }
 
-.gnb-list {
+/*불릿 삭제*/
+* > ul {
+	  list-style:none;
+}
+
+* > li {
+	   list-style:none;
+}
+
+.menu_list {
     width: 100%;
-    overflow: hidden;
-}
-
-.top_nav:last-child {
-    margin-top: 45px;
-}
-
-.top_nav > li span {
-    color: #637B65;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    margin-left: 30px;
+    overflow: hidden;    
 }
 
 .mdl_nav > li {
@@ -43,11 +41,12 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
 	line-height: 50px;
-    color: #99AC98;
-    margin-left: 30px;
+    color: #471111;
+    margin-left: 10px;
     position: relative;
     display: inline-block;
     cursor : pointer;
+    
 }
 
 .mdl_nav > li > i {
@@ -81,18 +80,18 @@
 	height: 100%;
 	font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
-    color: #99AC98;
+    color: #471111;
     margin-left: 30px;
     transition: ease 0.3s;    
     
 }
 
 .sub_nav li:hover {
-    background-color: #124016;
+    background-color: #FFF6F2;                               
     transition: ease 0.3s;
 }
 .sub_nav li:hover a {
-    color: #fff;
+    color: #471111;
     transition: ease 0.3s;
 }
 
