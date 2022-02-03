@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>따숨, 마음을 나누다</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
 </head>
 <style>    
     * div{
@@ -343,7 +345,15 @@
            </ul>           
        </div>
        <div id="header-login-area">
-           <a class="header-login-text" href="">로그인</a> &nbsp;&nbsp;<a class="header-login-text">/</a>&nbsp;&nbsp; <a class="header-login-text" href="">회원가입</a>
+	       <c:choose>
+				<c:when test="">
+					
+				</c:when>
+				<c:otherwise>
+		           <a class="header-login-text" href="/member/loginPage.do">로그인</a> &nbsp;&nbsp;<a class="header-login-text">/</a>&nbsp;&nbsp; 
+		           <a class="header-login-text" href="/member/joinPage">회원가입</a>
+	           	</c:otherwise>
+	       </c:choose>
        </div>
    </div>
    
