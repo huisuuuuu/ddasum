@@ -176,6 +176,26 @@
     background-color: #FFA77E;
 }
 
+.container table tr td button.none_btn {
+    background-color: #FFD9C8;
+}
+
+.container table tr td button.wait_btn {
+    background-color: #FFD9C8;
+}
+
+.container table tr td button.pass_btn {
+    background-color: #FFD9C8;
+}
+
+.container table tr td button.success_btn {
+    background-color: #FFD9C8;
+}
+
+.container table tr td button.reject_btn {
+    background-color: #FFD9C8;
+}
+
 .container table tr td button.man_btn {
     background-color: white;
     border: 0.5px solid #AAAAAA;

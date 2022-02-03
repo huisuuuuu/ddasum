@@ -25,7 +25,7 @@
         	<div id="header-box">
             <div class="admin-path">
                 <p>회원 관리</p>
-                <p>회원 정보 관리</p>
+                <p>꿈나무 카드 인증 관리</p>
             </div>
            
             <div class="box-user">
@@ -86,7 +86,7 @@
                                 <td>닉네임1</td>
                                 <td>user11@naver.com</td>
                                 <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
+                                <td><button type="button" class="ok_btn">있음</button></td>
                                 <td><button type="button" class="ok_btn">상세보기</button></td>
                             </tr>
                             <tr>
@@ -95,7 +95,7 @@
                                 <td>닉네임1</td>
                                 <td>user11@naver.com</td>
                                 <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
+                                <td><button type="button" class="none_btn">없음</button></td>
                                 <td><button type="button" class="ok_btn">상세보기</button></td>
                             </tr>
                             <tr>
