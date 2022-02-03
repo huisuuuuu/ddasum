@@ -44,7 +44,7 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 167, 126, 0.5);
-			padding-left: 100px;
+			padding-left: 70px;
 			padding-top: 100px;
 		}
 		#R-upArea{
@@ -122,7 +122,6 @@
 			height: 30px;	
 			font-size: 18pt;
 		}
-		
 		.reservTable{
 			width: 100%;
 			text-align: center;
@@ -147,9 +146,13 @@
 		.Icons{
 			width: 30px;
 		}
+		.submenu{
+			padding-left: 35px;
+		}
 		.submenu_hover{
 			background-color:#FFF6F2;
 			transition: 1s;
+			margin-left: -10px;
 			border-top-left-radius: 50px;
 			border-bottom-left-radius: 50px;
 		}

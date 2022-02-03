@@ -43,7 +43,7 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 167, 126, 0.5);
-			padding-left: 100px;
+			padding-left: 70px;
 			padding-top: 100px;
 		}
 		#R-upArea{
@@ -55,6 +55,7 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 211, 190, 0.2);
+			float: left;
 		}
 		#logoArea{
 			width: 100px;
@@ -84,25 +85,12 @@
 		}
 		#content-title{
 			width: 100%;
-			height: 10%;
+			height: 5%;
 			font-size: 20pt;			
 		}
 		#content{
 			width: 100%;
 			height: 95%;
-		}
-		#content-L{
-		}
-		#content-R{
-			width: 15%;
-			height: 100%;
-			float: left;
-		}
-		#content-result{
-			width: 55%;
-			height: 100%;
-			float: left;
-			border-bottom-right-radius: 20px;
 		}
 		ul{
 			list-style: none;
@@ -139,9 +127,13 @@
 		.Icons{
 			width: 30px;
 		}
+		.submenu{
+			padding-left: 35px;
+		}
 		.submenu_hover{
 			background-color:#FFF6F2;
 			transition: 1s;
+			margin-left: -10px;
 			border-top-left-radius: 50px;
 			border-bottom-left-radius: 50px;
 		}
@@ -152,12 +144,20 @@
 		}
 		#searchSection{
 			width: 100%;
-			height: 80%;
+			height: 100%;
 		}
-		#confirmArea{
-			width: 100%;
-			height: 20%;
-			text-align: center;
+		p { 
+			display: block; 
+			padding: 0 69px;
+		}
+		.confirmBTN{
+			width: 100px;
+			height: 35px;
+			font-size: 14pt;
+			color: white;
+			border: none;
+			background-color: #FFA77E;
+			border-radius: 5px;
 		}
 	</style>
 </head>
@@ -205,27 +205,45 @@
 		<div id="R-downArea">
 			<div id="R-searchArea">
 				<h2>후원 정산 현황</h2>
-				<hr>
 				<br>
 				<div id="searchSection">
-				검색기간 	<input type="checkbox" name="daily" >일별
-						<input type="date"> ~ 
-						<input type="date">
-						<button>어제</button>
-						<button>1주일</button>
-						<button>1개월</button>
-						<br>
-						<input type="checkbox" name="daily" >월별
-						<br>
-				검색어 	<select>
-							<option value="">상품명</option>
-							<option value="">예약번호</option>
+					<span>검색기간</span>
+					<input type="checkbox" name="daily">
+					<span>일별</span>
+					<input type="date"> ~ <input type="date">
+					<button>어제</button>
+					<button>1주일</button>
+					<button>1개월</button>
+					<p>
+						<input type="checkbox" name="daily" >
+						<span>월별</span>
+						<input type="month">
+						<select>
+							<option value="">1월</option>
+							<option value="">2월</option>
+							<option value="">3월</option>
+							<option value="">4월</option>
+							<option value="">5월</option>
+							<option value="">6월</option>
+							<option value="">7월</option>
+							<option value="">8월</option>
+							<option value="">9월</option>
+							<option value="">10월</option>
+							<option value="">11월</option>
+							<option value="">12월</option>
 						</select>
-					<input type="text"/>
-				</div>
-				<div id="confirmArea">
-					<input type="submit" value="검색">
-					<input type="button" value="초기화">
+					</p>
+					 			
+					<span>검색어</span>
+					<select>
+						<option value="">상품명</option>
+						<option value="">예약번호</option>
+					</select>
+					<input type="text"/><br>
+					<div style="text-align: center;">
+						<input class="confirmBTN" type="submit" value="검색">
+						<input class="confirmBTN" type="button" value="초기화">
+					</div>
 				</div>
 					<hr>
 			</div>
@@ -235,7 +253,7 @@
 					<div id="content-title">
 						<span style="text-align:left; float:left;">기간별 후원 정산 내역 검색 결과 10건</span>
 						<div class="search" style="text-align:right;">
-							 <img width=50px; src="/resources/images/bizExcel.png"/>
+							 <img width=30px; src="/resources/images/bizExcel.png"/>
 						</div>
 					</div>
 					<div id="content">

@@ -45,7 +45,7 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 167, 126, 0.5);
-			padding-left: 100px;
+			padding-left: 70px;
 			padding-top: 100px;
 			
 		}
@@ -98,9 +98,13 @@
 		.Icons{
 			width: 30px;
 		}
+		.submenu{
+			padding-left: 35px;
+		}
 		.submenu_hover{
 			background-color:#FFF6F2;
 			transition: 1s;
+			margin-left: -10px;
 			border-top-left-radius: 50px;
 			border-bottom-left-radius: 50px;
 		}
@@ -146,12 +150,12 @@
 			text-align: center;
 		}
 		span{
-			font-size: 20pt;
+			font-size: 16pt;
 		}
 		.entertext{
 			width: 300px;
-			height: 50px;
-			font-size: 20pt;
+			height: 35px;
+			font-size: 16pt;
 			border-color: gray;
 		}
 		.imgsize{
@@ -159,7 +163,7 @@
 			padding-top: 40px;
 		}
 		#itemImgInput{
-			width: 290px;
+			width: 300px;
 			height: 220px;
 			border: 1px solid gray;
 			text-align: center;
@@ -170,7 +174,7 @@
 			background-color: #FFA77E;
 			color: white;
 			border-radius: 10px;
-			font-size: 18pt;
+			font-size: 16pt;
 			border: none;
 		}
 	</style>

@@ -46,7 +46,7 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 167, 126, 0.5);
-			padding-left: 100px;
+			padding-left: 70px;
 			padding-top: 100px;
 			
 		}
@@ -97,6 +97,7 @@
 			width: 30%;
 			height: 100%;
 			float: left;
+			text-align: center;
 			border-bottom-left-radius: 20px;
 		}
 		#content-R{
@@ -115,12 +116,26 @@
 			width: 120px;
 			height: 40px;
 			font-size: 18pt;
+			color: #FFA77E;
+			border: 1px solid #FFA77E;
+			background-color: white;
+			border-radius: 5px;
+		}
+		.modifyBTN2{
+			float: right;
+			width: 120px;
+			height: 40px;
+			font-size: 18pt;
+			color: white;
+			border: none;
+			background-color: #FFA77E;
+			border-radius: 5px;
 		}
 		#bizImg{
 			width: 220px;
 			height: 220px;
 			border-radius: 220px;
-			background-color: gray;
+			border: 1px solid gray;
 			margin: 0 auto;
 		}
 		ul{
@@ -137,7 +152,7 @@
 		#typeOption{
 			width: 120px;
 			height: 30px;	
-			font-size: 18pt;
+			font-size: 16pt;
 		}
 		.Title{
 			width: 120px;
@@ -149,13 +164,20 @@
 		.Icons{
 			width: 30px;
 		}
+		.submenu{
+			padding-left: 35px;
+		}		
 		.submenu_hover{
 			background-color:#FFF6F2;
 			transition: 1s;
+			margin-left: -10px;
 			border-top-left-radius: 50px;
 			border-bottom-left-radius: 50px;
 		}
-
+		.imgsize{
+			width:100px;
+			padding-top: 70px;
+		}
 	</style>
 
 </head>
@@ -200,7 +222,7 @@
 	<div id="rightArea">
 		<div id="R-upArea">
 			<div id="bizManage">
-				<h1>업체관리</h1>
+				<h1>업체 관리</h1>
 			</div>
 		</div>
 		<div id="R-downArea">
@@ -211,10 +233,12 @@
 				</div>
 				<div id="content">
 					<div id="content-L">
-						<br>
+						<br><br>
 						<div id="bizImg">
+							<img class="imgsize" src="/resources/images/bizImgAdd.png">
 						</div>
 						<br>
+						<span>업체 사진을 등록해 주세요</span>
 					</div>
 					<div id="content-R">
 					<ul>
@@ -242,17 +266,17 @@
 						<li>01012341234 </li>
 						<li>
 							<select id="typeOption">
-								<option>한식</option>
-								<option>분식</option>
-								<option>양식</option>
-								<option>일식</option>
-								<option>중식</option>
+								<option value="KOR">한식</option>
+								<option value="SCH">분식</option>
+								<option value="WES">양식</option>
+								<option value="JPN">일식</option>
+								<option value="CHI">중식</option>
 							</select></li>
 						<li>서울시 양천구 </li>
 						<li>09:00~22:00 </li>
 						<li>20 </li>
-						<li>후원 <button class="modifyBTN">유형전환</button></li>
-						<li>N <button class="modifyBTN">탈퇴</button></li>
+						<li>후원 <button class="modifyBTN2">유형전환</button></li>
+						<li>N <button class="modifyBTN2">탈퇴</button></li>
 					</ul>
 					
 					</div>
