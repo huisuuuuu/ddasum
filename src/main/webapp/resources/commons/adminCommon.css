@@ -103,6 +103,18 @@ textarea:focus {
 	border-radius : 10px;    
 }
 
+.wri_btn {
+	width : 90px;
+	height : 40px;
+	border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	color : white;
+	background-color: #E6510B;
+}
+
 
 /*버튼
 .btn-rec {

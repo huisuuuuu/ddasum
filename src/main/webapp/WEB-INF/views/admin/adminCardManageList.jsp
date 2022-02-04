@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="/resources/commons/adminNavigation.css">
 <link rel="stylesheet" href="/resources/commons/adminBoard.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="/resources/js/ui.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -72,10 +73,10 @@
                                 <th width="200">관리번호</th>
                                 <th width="200">아이디</th>
                                 <th width="200">이름</th>
-                                <th width="300">가입일</th>
+                                <th width="200">가입일</th>
                                 <th width="200">이용내역</th>
                                 <th width="200">인증확인</th>
-                                <th width="150">승인/반려</th>
+                                <th width="200">승인/반려</th>
                             </tr>
                         </thead>
                         
@@ -86,8 +87,8 @@
                                 <td>김가가</td>
                                 <td>2022-02-02</td>
                                 <td><button type="button" class="ok_btn">있음</button></td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">승인</button></td>
+                                <td><button type="button" class="pass_btn">확인</button></td>
+                                <td><button type="button" class="success_btn">승인</button></td>
                             </tr>
                             <tr>
                                 <td>2</td>
@@ -95,8 +96,8 @@
                                 <td>김나나</td>
                                 <td>2022-02-02</td>
                                 <td><button type="button" class="none_btn">없음</button></td>
-                                <td><button type="button" class="ok_btn">대기</button></td>
-                                <td><button type="button" class="ok_btn">반려</button></td>
+                                <td><button type="button" class="wait_btn">대기</button></td>
+                                <td><button type="button" class="reject_btn">반려</button></td>
                             </tr>
                             <tr>
                                 <td>1</td>

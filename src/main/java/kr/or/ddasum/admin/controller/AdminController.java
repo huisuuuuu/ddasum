@@ -27,16 +27,27 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/adminBizManageList.do", method = RequestMethod.GET)
 	public String adminBizManageList() {
-		return "/admin/adminMemberManageList";
+		return "/admin/adminBizManageList";
 	}
 	
 	@RequestMapping(value="/admin/adminNoticeManageList.do", method = RequestMethod.GET)
 	public String adminNoticeManageList() {
-		return "/admin/adminMemberManageList";
+		return "/admin/adminNoticeManageList";
 	}
 	
 	@RequestMapping(value="/admin/adminSupport.do", method = RequestMethod.GET)
 	public String adminSupport() {
-		return "/admin/adminMemberManageList";
+		return "/admin/adminSupport";
 	}
+	
+	@RequestMapping(value="/admin/adminCardManageList.do", method = RequestMethod.GET)
+	public String adminCardManageList() {
+		return "/admin/adminCardManageList";
+	}
+	
+	@RequestMapping(value="/admin/adminFAQManageList.do", method = RequestMethod.GET)
+	public String adminFAQManageList() {
+		return "/admin/adminFAQManageList";
+	}
+	
 }

@@ -14,6 +14,8 @@
                             <ul class="sub_nav">
                                 <li>
                                 	<a href="/admin/adminMemberManageList.do">회원 정보 관리</a>
+                                </li>
+                                <li>
                                 	<a href="/admin/adminCardManageList.do">꿈나무 카드 인증 관리</a>                                	
                                	</li>
                             </ul>
@@ -21,7 +23,7 @@
 
                         <ul class="mdl_nav">
                             <li>
-								사업자 관리
+								<a href="/admin/adminBizManageList.do">사업자 관리</a>
                             </li>
                         </ul>
                     
@@ -31,15 +33,17 @@
                             </li>
                             <ul class="sub_nav">
                                 <li>
-                                	<a href="">공지사항 관리</a>
-                                	<a href="">자주 묻는 질문 관리</a>                                	
+                                	<a href="/admin/adminNoticeManageList.do">공지사항 관리</a>
+                                </li>
+                                <li>
+                                	<a href="/admin/adminFAQManageList.do">자주 묻는 질문 관리</a>                                	
                                 </li>
                             </ul>
                          </ul>
                                         
                         <ul class="mdl_nav">
                             <li>
-								후원 정산 관리
+								<a href="/admin/adminSupport.do">후원 정산 관리</a>
                             </li>
                         </ul>
             </nav>
