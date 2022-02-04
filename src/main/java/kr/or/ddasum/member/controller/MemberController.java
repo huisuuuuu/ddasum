@@ -41,10 +41,10 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value="/member/saleRestaurantPage.do", method = RequestMethod.GET)
+	@RequestMapping(value="/member/saleRestaurantListPage.do", method = RequestMethod.GET)
 	public String saleRestaurantPage() {
 		
-		return "/member/saleRestaurantPage";
+		return "/member/saleRestaurantListPage";
 		
 	}
 	
@@ -68,5 +68,13 @@ public class MemberController {
 		return "/member/successJoinPage";
 		
 	}
+	
+	@RequestMapping(value="/member/saleRestaurantDetail.do", method = RequestMethod.GET)
+	public String saleRestaurantDetail() {
+		
+		return "/member/saleRestaurantDetail";
+		
+	}
+	
 	
 }
