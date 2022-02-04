@@ -8,6 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="/resources/commons/bizNavigation.css">
+
 <title>Insert title here</title>
 	<style>
 		* div{
@@ -35,18 +38,6 @@
 			height: 100%;		
 			float: left;
 		}
-		#L-upArea{
-			width: 100%;
-			height:108px;
-			background-color: rgba(255, 167, 126, 0.5);
-		}
-		#L-downArea{
-			width: 100%;
-			height:972px;
-			background-color: rgba(255, 167, 126, 0.5);
-			padding-left: 70px;
-			padding-top: 100px;
-		}
 		#R-upArea{
 			width: 100%;
 			height:108px;
@@ -56,11 +47,6 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 211, 190, 0.2);
-		}
-		#logoArea{
-			width: 100px;
-			height: 80px;
-			margin: 0 auto;
 		}
 		#reservManage{
 			width: 95%;
@@ -136,26 +122,6 @@
 		td{
 			height: 70px;
 		}
-		.Title{
-			width: 120px;
-			text-align: center;	
-		}
-		.menulist{
-			font-size: 19pt;
-		}
-		.Icons{
-			width: 30px;
-		}
-		.submenu{
-			padding-left: 35px;
-		}
-		.submenu_hover{
-			background-color:#FFF6F2;
-			transition: 1s;
-			margin-left: -10px;
-			border-top-left-radius: 50px;
-			border-bottom-left-radius: 50px;
-		}
 	</style>
 </head>
 <body>
@@ -163,7 +129,9 @@
 	<div id="leftArea">
 		<div id="L-upArea">
 			<div id="logoArea">
-				<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고" width="400px;">			
+				<a href="/">
+					<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고">
+				</a>
 			</div>
 		</div>
 		<div id="L-downArea">
@@ -196,7 +164,7 @@
 	<div id="rightArea">
 		<div id="R-upArea">
 			<div id="reservManage">
-				<h1>후원 상품 관리</h1>
+				<h1>예약 관리</h1>
 			</div>
 		</div>
 		<div id="R-downArea">

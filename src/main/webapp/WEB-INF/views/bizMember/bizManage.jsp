@@ -10,6 +10,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="/resources/commons/bizNavigation.css">
+
 <title>Insert title here</title>
 	<style>
 		* div{
@@ -37,19 +40,6 @@
 			height: 100%;		
 			float: left;
 		}
-		#L-upArea{
-			width: 100%;
-			height:108px;
-			background-color: rgba(255, 167, 126, 0.5);
-		}
-		#L-downArea{
-			width: 100%;
-			height:972px;
-			background-color: rgba(255, 167, 126, 0.5);
-			padding-left: 70px;
-			padding-top: 100px;
-			
-		}
 		#R-upArea{
 			width: 100%;
 			height:108px;
@@ -59,13 +49,6 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 211, 190, 0.2);
-		}
-		#logoArea{
-			width: 100px;
-			height: 80px;
-			margin: 0 auto;
-			text-align: center;	
-			
 		}
 		#bizManage{
 			width: 95%;
@@ -154,26 +137,6 @@
 			height: 30px;	
 			font-size: 16pt;
 		}
-		.Title{
-			width: 120px;
-			text-align: center;	
-		}
-		.menulist{
-			font-size: 19pt;
-		}
-		.Icons{
-			width: 30px;
-		}
-		.submenu{
-			padding-left: 35px;
-		}		
-		.submenu_hover{
-			background-color:#FFF6F2;
-			transition: 1s;
-			margin-left: -10px;
-			border-top-left-radius: 50px;
-			border-bottom-left-radius: 50px;
-		}
 		.imgsize{
 			width:100px;
 			padding-top: 70px;
@@ -188,7 +151,7 @@
 		<div id="L-upArea">
 			<div id="logoArea">
 				<a href="/">
-					<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고" width="400px;">
+					<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고">
 				</a>
 			</div>
 		</div>
@@ -229,7 +192,7 @@
 			<div id="R-content">
 				<div id="content-title">
 					업체 정보 관리
-					<button class="modifyBTN">변경하기</button>
+					<a href="/BizMember/faqBoard.do"><button class="modifyBTN">변경하기</button></a>
 				</div>
 				<div id="content">
 					<div id="content-L">
@@ -275,7 +238,7 @@
 						<li>서울시 양천구 </li>
 						<li>09:00~22:00 </li>
 						<li>20 </li>
-						<li>후원 <button class="modifyBTN2">유형전환</button></li>
+						<li>후원 <a href="/BizMember/noticeBoard.do"><button class="modifyBTN2">유형전환</button></a></li>
 						<li>N <button class="modifyBTN2">탈퇴</button></li>
 					</ul>
 					
