@@ -8,6 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="/resources/commons/bizNavigation.css">
+
 <title>Insert title here</title>
 	<style>
 		* div{
@@ -35,18 +38,6 @@
 			height: 100%;		
 			float: left;
 		}
-		#L-upArea{
-			width: 100%;
-			height:108px;
-			background-color: rgba(255, 167, 126, 0.5);
-		}
-		#L-downArea{
-			width: 100%;
-			height:972px;
-			background-color: rgba(255, 167, 126, 0.5);
-			padding-left: 70px;
-			padding-top: 100px;
-		}
 		#R-upArea{
 			width: 100%;
 			height:108px;
@@ -57,11 +48,6 @@
 			height:972px;
 			background-color: rgba(255, 211, 190, 0.2);
 			float: left;
-		}
-		#logoArea{
-			width: 100px;
-			height: 80px;
-			margin: 0 auto;
 		}
 		#goodsManage{
 			width: 95%;
@@ -93,7 +79,6 @@
 			width: 30%;
 			height: 100%;
 			float: left;
-			background-color: skyblue;
 			border-bottom-left-radius: 20px;
 		}
 		#content-R{
@@ -164,26 +149,6 @@
 			border-radius: 23px;
 			color: white;
 		}
-		.Title{
-			width: 120px;
-			text-align: center;	
-		}
-		.menulist{
-			font-size: 19pt;
-		}
-		.Icons{
-			width: 30px;
-		}
-		.submenu{
-			padding-left: 35px;
-		}
-		.submenu_hover{
-			background-color:#FFF6F2;
-			transition: 1s;
-			margin-left: -10px;
-			border-top-left-radius: 50px;
-			border-bottom-left-radius: 50px;
-		}
 	</style>
 </head>
 <body>
@@ -192,7 +157,9 @@
 	<div id="leftArea">
 		<div id="L-upArea">
 			<div id="logoArea">
-				<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고" width="400px;">
+				<a href="/">
+					<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고">
+				</a>
 			</div>
 		</div>
 		<div id="L-downArea">
