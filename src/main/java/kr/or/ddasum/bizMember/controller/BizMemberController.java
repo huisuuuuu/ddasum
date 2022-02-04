@@ -41,4 +41,12 @@ public class BizMemberController {
 		return "bizMember/calculateManage";
 		
 	}		
+	
+	@RequestMapping(value="/BizMember/goodDetail.do", method = RequestMethod.GET)
+	public String goodDetail() {
+		
+		return "bizMember/goodDetail";
+		
+	}	
+	
 }

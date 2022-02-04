@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
     
 <!DOCTYPE html>
@@ -12,6 +13,13 @@
 		* div{
 			box-sizing: border-box;
 		}
+		* {
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+		* a{
+        text-decoration: none;
+        color: inherit;
+    	}
 		#wrapper{
 			width: 1920px;
 			height: 1080px;
@@ -36,6 +44,8 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 167, 126, 0.5);
+			padding-left: 70px;
+			padding-top: 100px;
 		}
 		#R-upArea{
 			width: 100%;
@@ -46,6 +56,7 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 211, 190, 0.2);
+			float: left;
 		}
 		#logoArea{
 			width: 100px;
@@ -157,6 +168,22 @@
 			width: 120px;
 			text-align: center;	
 		}
+		.menulist{
+			font-size: 19pt;
+		}
+		.Icons{
+			width: 30px;
+		}
+		.submenu{
+			padding-left: 35px;
+		}
+		.submenu_hover{
+			background-color:#FFF6F2;
+			transition: 1s;
+			margin-left: -10px;
+			border-top-left-radius: 50px;
+			border-bottom-left-radius: 50px;
+		}
 	</style>
 </head>
 <body>
@@ -169,6 +196,30 @@
 			</div>
 		</div>
 		<div id="L-downArea">
+			<div class="submenu"> 
+				<a href="/BizMember/bizManage.do"><br>	
+					<img class="Icons" src="/resources/images/bizSubMenu1.png" alt="로고">
+					<span class="menulist">업체 관리</span><br><br>
+				</a>
+			</div>
+			<div class="submenu"> 
+				<a href="/BizMember/goodsManage.do"><br>
+					<img class="Icons" src="/resources/images/bizSubMenu2.png" alt="로고">
+					<span class="menulist">상품 관리</span><br><br>
+				</a>
+			</div>
+			<div class="submenu"> 
+				<a href="/BizMember/bizReserv.do"><br>
+					<img class="Icons" src="/resources/images/bizSubMenu3.png" alt="로고">
+					<span class="menulist">예약 관리</span><br><br>
+				</a>
+			</div>
+			<div class="submenu"> 
+				<a href="/BizMember/calculateManage.do"><br>
+					<img class="Icons" src="/resources/images/bizSubMenu4.png" alt="로고">
+					<span class="menulist">후원 정산 관리</span><br><br>
+				</a>
+			</div>
 		</div>
 	</div>
 	<div id="rightArea">
@@ -189,7 +240,7 @@
 							</select>
 							<input type="text" placeholder="검색어를 입력해주세요">
 							<input type="submit">
-							<button type="button" class="prdtReg" name="prdtReg">상품등록</button>
+							<a href="/BizMember/goodDetail.do"><button type="button" class="prdtReg" name="prdtReg">상품등록</button></a>
 						</div>
 					</div>
 					<div id="content">
@@ -222,6 +273,14 @@
 		</div>
 	</div>
 </div>
-
+<script>
+	$(function(){
+        $('.submenu').hover(function() {
+            $(this).addClass('submenu_hover');
+        }, function() {
+            $(this).removeClass('submenu_hover');
+        });
+    });
+</script>
 </body>
 </html>
