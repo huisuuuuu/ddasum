@@ -1,0 +1,203 @@
+@charset "UTF-8";
+
+#pageSituation {
+	width: 100%;
+	height: 26px;
+	margin-top: 100px;
+	margin-bottom: 40px;
+}
+
+#pageSituation>ul>li {
+	list-style: none;
+	display: inline-block;
+}
+
+#pageSituation>ul>li:first-child {
+	font-size: 18px;
+	color: #A5A5A5;
+}
+
+#pageSituation>ul>li:last-child {
+	font-size: 18px;
+	font-weight: bold;
+	color: #666666;
+}
+
+#imgAndTitle {
+	width: 100%;
+	height: 500px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 110px;
+}
+
+#imgAndTitle>img {
+	width: 500px;
+	height: 100%;
+}
+
+#imgAndTitle>div {
+	width: 650px;
+	height: 100%;
+}
+
+#restaurantName {
+	width: 100%;
+	height: 36px;
+	margin-bottom: 40px;
+}
+
+#restaurantName>div {
+	width: 69px;
+	height: 27px;
+	line-height: 23px;
+	border-radius: 10px;
+	border: 1px solid #666666;
+	display: inline-block;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: #666666;
+	margin-right: 10px;
+}
+
+#restaurantName>span {
+	font-size: 28px;
+	font-weight: bold;
+}
+
+#mainInfo img {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	float: left;
+}
+
+#call {
+	height: 26px;
+	margin-bottom: 20px;
+}
+
+#call>p {
+	float: left;
+}
+
+#location {
+	height: 26px;
+	margin-bottom: 20px;
+}
+
+#operationHours {
+	height: 26px;
+	margin-bottom: 20px;
+}
+
+#reservationAndLocation {
+	width: 100%;
+	height: 43px;
+	border-bottom: 1.5px solid #A5A5A5;
+}
+
+#reservationAndLocation>span {
+	margin-left: 10px;
+	margin-right: 5px;
+	font-size: 18px;
+	display: block;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}
+
+#reservationAndLocation>span:first-child {
+	color: #FFA77E;
+	font-weight: bold;
+}
+
+#reservationAndLocation>span:last-child {
+	color: #A5A5A5;
+}
+
+#reservationAndLocation>span:first-child:after {
+	content: "";
+	display: block;
+	border: 2px solid #FFA77E;
+	margin-top: 15px;
+	width: 80px;
+	background-color: #FFA77E;
+}
+
+#menu {
+	margin-bottom: 150px;
+}
+
+#menu>h3 {
+	margin: 33px 0px;
+	color: red;
+}
+
+.food{
+	width: 100%;
+	height: 160px;
+	border: 0.3px solid #A5A5A5;
+	border-radius: 10px;
+/* 	box-shadow: 2px 3px 8px rgb(0 0 0 / 10%); */
+}
+
+.food:not(:last-child){
+	margin-bottom: 40px;
+}
+
+.food>img{
+	width: 150px;
+	height: 120px;
+	margin: 20px 30px;
+	float: left;
+}
+
+.food>div{
+	width: 870px;
+	height: 120px;
+	margin-top: 20px;
+	float: left;
+}
+
+.food p:first-child{
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.explain{
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	color: #5E5E5E;
+}
+
+.price{
+	font-size: 18px;
+	color: #5E5E5E;
+	text-decoration: line-through;
+	margin-right: 10px;
+}
+
+.salePrice{
+	font-size: 18px;
+	font-weight: bold;
+	margin-right: 17px;
+}
+
+.food>button{
+	width: 150px;
+	height: 45px;
+	float: left;
+	margin-top: 94px;
+	margin-left: 20px;
+	background-color: #FFA77E;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
