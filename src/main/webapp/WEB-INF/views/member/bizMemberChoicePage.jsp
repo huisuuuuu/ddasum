@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>따숨, 마음을 나누다.</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<div id="wrap">
+<div id="wrap">
 		<header>
 			<%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>
 		</header>
@@ -36,15 +36,15 @@
 				</div>
 				<div id="choiceJoin">
 					<div id="memberJoin">
-						<a href="/member/memberJoinPage.do"> <img id="memberJoinImg"
-							src="/resources/images/memberJoin.png"> <span
-							id="memberJoinWord">일반 회원</span>
+						<a href="/member/bizNumVerify.do"> <img id="memberJoinImg"
+							src="/resources/images/spBizMember.png"> <span
+							id="memberJoinWord">후원 사업자</span>
 						</a>
 					</div>
 					<div id="bizMemberJoin">
-						<a href="/member/bizMemberChoicePage.do"> <img id="bizMemberJoinImg"
-							src="/resources/images/bizMemberJoin.png"> <span
-							id="bizMemberJoinWord">사업자 회원</span>
+						<a href="/member/bizNumVerify.do"> <img id="bizMemberJoinImg"
+							src="/resources/images/dcBizMember.png"> <span
+							id="bizMemberJoinWord">할인 사업자</span>
 						</a>
 					</div>
 				</div>
@@ -60,14 +60,14 @@
 				function() {
 					$(this).css('background-color', '#FFA77E');
 					$('#memberJoinImg').attr('src',
-							'/resources/images/memberJoin_hover.png')
+							'/resources/images/spBizMember_hover.png')
 					$('#memberJoinWord').css('color', 'white');
 
 				},
 				function() {
 					$(this).css('background-color', 'white');
 					$('#memberJoinImg').attr('src',
-							'/resources/images/memberJoin.png')
+							'/resources/images/spBizMember.png')
 					$('#memberJoinWord').css('color', '#FFA77E');
 				});
 
@@ -75,14 +75,14 @@
 				function() {
 					$(this).css('background-color', '#FFA77E');
 					$('#bizMemberJoinImg').attr('src',
-							'/resources/images/bizMemberJoin_hover.png')
+							'/resources/images/dcBizMember_hover.png')
 					$('#bizMemberJoinWord').css('color', 'white');
 
 				},
 				function() {
 					$(this).css('background-color', 'white');
 					$('#bizMemberJoinImg').attr('src',
-							'/resources/images/bizMemberJoin.png')
+							'/resources/images/dcBizMember.png')
 					$('#bizMemberJoinWord').css('color', '#FFA77E');
 				});
 	</script>

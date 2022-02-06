@@ -55,7 +55,21 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value="/member/bizMemberJoinPage.do", method = RequestMethod.GET)
+	@RequestMapping(value="/member/bizMemberChoicePage.do", method = RequestMethod.GET)
+	public String bizMemberChoicePage() {
+		
+		return "/member/bizMemberChoicePage";
+		
+	}
+	
+	@RequestMapping(value="/member/bizNumVerify.do", method = RequestMethod.GET)
+	public String bizNumVerify() {
+		
+		return "/member/bizNumVerify";
+		
+	}
+	
+	@RequestMapping(value="/member/bizMemberJoinPage.do", method = RequestMethod.POST)
 	public String bizMemberJoinPage() {
 		
 		return "/member/bizMemberJoinPage";
