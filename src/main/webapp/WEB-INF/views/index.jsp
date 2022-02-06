@@ -25,10 +25,10 @@
       </fieldset>
    </form>
 
-   
+
    <a href="/admin/adminMain.do">관리자</a>
 
-   <a href="/BizMember/enter.do">사업자페이지</a><br>   
+   <a href="/BizMember/enter.do">사업자페이지</a><br>
 
    <a href="/member/mainPage.do">메인페이지</a>
 </body>

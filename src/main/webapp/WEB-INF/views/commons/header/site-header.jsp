@@ -20,7 +20,7 @@
             <ul id="gnb_list">
                 <li><a href="">스토리</a></li>
                 <li><a href="">후원식당</a></li>
-                <li><a href="/member/saleRestaurantPage.do">할인식당</a></li>
+                <li><a href="/member/saleRestaurantListPage.do">할인식당</a></li>
                 <li><a href="">커뮤니티</a></li>
                 <li id="customercenter"><a href="">고객센터</a>
                 <div id="submenu"><a href="">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="">자주 묻는 질문</a></div>

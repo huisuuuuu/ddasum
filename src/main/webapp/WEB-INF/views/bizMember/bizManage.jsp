@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="/resources/commons/bizNavigation.css">
+
 <title>Insert title here</title>
 	<style>
 		* div{
 			box-sizing: border-box;
 		}
+		* {
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+		* a{
+        text-decoration: none;
+        color: inherit;
+    	}
 		#wrapper{
 			width: 1920px;
 			height: 1080px;
@@ -27,16 +40,6 @@
 			height: 100%;		
 			float: left;
 		}
-		#L-upArea{
-			width: 100%;
-			height:108px;
-			background-color: rgba(255, 167, 126, 0.5);
-		}
-		#L-downArea{
-			width: 100%;
-			height:972px;
-			background-color: rgba(255, 167, 126, 0.5);
-		}
 		#R-upArea{
 			width: 100%;
 			height:108px;
@@ -46,13 +49,6 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 211, 190, 0.2);
-		}
-		#logoArea{
-			width: 100px;
-			height: 80px;
-			margin: 0 auto;
-			text-align: center;	
-			
 		}
 		#bizManage{
 			width: 95%;
@@ -84,6 +80,7 @@
 			width: 30%;
 			height: 100%;
 			float: left;
+			text-align: center;
 			border-bottom-left-radius: 20px;
 		}
 		#content-R{
@@ -102,12 +99,26 @@
 			width: 120px;
 			height: 40px;
 			font-size: 18pt;
+			color: #FFA77E;
+			border: 1px solid #FFA77E;
+			background-color: white;
+			border-radius: 5px;
+		}
+		.modifyBTN2{
+			float: right;
+			width: 120px;
+			height: 40px;
+			font-size: 18pt;
+			color: white;
+			border: none;
+			background-color: #FFA77E;
+			border-radius: 5px;
 		}
 		#bizImg{
 			width: 220px;
 			height: 220px;
 			border-radius: 220px;
-			background-color: gray;
+			border: 1px solid gray;
 			margin: 0 auto;
 		}
 		ul{
@@ -124,11 +135,11 @@
 		#typeOption{
 			width: 120px;
 			height: 30px;	
-			font-size: 18pt;
+			font-size: 16pt;
 		}
-		.Title{
-			width: 120px;
-			text-align: center;	
+		.imgsize{
+			width:100px;
+			padding-top: 70px;
 		}
 	</style>
 
@@ -139,30 +150,58 @@
 	<div id="leftArea">
 		<div id="L-upArea">
 			<div id="logoArea">
-				<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고" width="400px;">
+				<a href="/">
+					<img class="Title" src="/resources/images/ddasum_header_logo.png" alt="로고">
+				</a>
 			</div>
 		</div>
 		<div id="L-downArea">
+			<div class="submenu"> 
+				<a href="/BizMember/bizManage.do"><br>	
+					<img class="Icons" src="/resources/images/bizSubMenu1.png" alt="로고">
+					<span class="menulist">업체 관리</span><br><br>
+				</a>
+			</div>
+			<div class="submenu"> 
+				<a href="/BizMember/goodsManage.do"><br>
+					<img class="Icons" src="/resources/images/bizSubMenu2.png" alt="로고">
+					<span class="menulist">상품 관리</span><br><br>
+				</a>
+			</div>
+			<div class="submenu"> 
+				<a href="/BizMember/bizReserv.do"><br>
+					<img class="Icons" src="/resources/images/bizSubMenu3.png" alt="로고">
+					<span class="menulist">예약 관리</span><br><br>
+				</a>
+			</div>
+			<div class="submenu"> 
+				<a href="/BizMember/calculateManage.do"><br>
+					<img class="Icons" src="/resources/images/bizSubMenu4.png" alt="로고">
+					<span class="menulist">후원 정산 관리</span><br><br>
+				</a>
+			</div>
 		</div>
 	</div>
 	<div id="rightArea">
 		<div id="R-upArea">
 			<div id="bizManage">
-				<h1>업체관리</h1>
+				<h1>업체 관리</h1>
 			</div>
 		</div>
 		<div id="R-downArea">
 			<div id="R-content">
 				<div id="content-title">
 					업체 정보 관리
-					<button class="modifyBTN">변경하기</button>
+					<a href="/BizMember/faqBoard.do"><button class="modifyBTN">변경하기</button></a>
 				</div>
 				<div id="content">
 					<div id="content-L">
-						<br>
+						<br><br>
 						<div id="bizImg">
+							<img class="imgsize" src="/resources/images/bizImgAdd.png">
 						</div>
 						<br>
+						<span>업체 사진을 등록해 주세요</span>
 					</div>
 					<div id="content-R">
 					<ul>
@@ -190,17 +229,17 @@
 						<li>01012341234 </li>
 						<li>
 							<select id="typeOption">
-								<option>한식</option>
-								<option>분식</option>
-								<option>양식</option>
-								<option>일식</option>
-								<option>중식</option>
+								<option value="KOR">한식</option>
+								<option value="SCH">분식</option>
+								<option value="WES">양식</option>
+								<option value="JPN">일식</option>
+								<option value="CHI">중식</option>
 							</select></li>
 						<li>서울시 양천구 </li>
 						<li>09:00~22:00 </li>
 						<li>20 </li>
-						<li>후원 <button class="modifyBTN">유형전환</button></li>
-						<li>N <button class="modifyBTN">탈퇴</button></li>
+						<li>후원 <a href="/BizMember/noticeBoard.do"><button class="modifyBTN2">유형전환</button></a></li>
+						<li>N <button class="modifyBTN2">탈퇴</button></li>
 					</ul>
 					
 					</div>
@@ -209,6 +248,14 @@
 		</div>
 	</div>
 </div>
-
+<script>
+	$(function(){
+        $('.submenu').hover(function() {
+            $(this).addClass('submenu_hover');
+        }, function() {
+            $(this).removeClass('submenu_hover');
+        });
+    });
+</script>
 </body>
 </html>

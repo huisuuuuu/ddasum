@@ -155,10 +155,10 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value="/member/saleRestaurantPage.do", method = RequestMethod.GET)
+	@RequestMapping(value="/member/saleRestaurantListPage.do", method = RequestMethod.GET)
 	public String saleRestaurantPage() {
 		
-		return "/member/saleRestaurantPage";
+		return "/member/saleRestaurantListPage";
 		
 	}
 	
@@ -183,6 +183,7 @@ public class MemberController {
 		
 	}
 	
+
 	
 	//나중에 삭제할 코드
 	@RequestMapping(value = "/member/mainPage.do")
@@ -190,4 +191,14 @@ public class MemberController {
 		return "/main";
 	}
 	
+
+	@RequestMapping(value="/member/saleRestaurantDetail.do", method = RequestMethod.GET)
+	public String saleRestaurantDetail() {
+		
+		return "/member/saleRestaurantDetail";
+		
+	}
+	
+	
+
 }

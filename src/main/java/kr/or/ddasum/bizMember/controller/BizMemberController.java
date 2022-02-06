@@ -41,4 +41,33 @@ public class BizMemberController {
 		return "bizMember/calculateManage";
 		
 	}		
+	
+	@RequestMapping(value="/BizMember/goodDetail.do", method = RequestMethod.GET)
+	public String goodDetail() {
+		
+		return "bizMember/goodDetail";
+		
+	}	
+	
+	@RequestMapping(value="/BizMember/noticeBoard.do", method = RequestMethod.GET)
+	public String noitceBoard() {
+		
+		return "admin/noticeBoard";
+		
+	}
+	
+	@RequestMapping(value="/BizMember/faqBoard.do", method = RequestMethod.GET)
+	public String faqBoard() {
+		
+		return "admin/faqBoard";
+		
+	}
+	
+	@RequestMapping(value="/BizMember/noticeDetail.do", method = RequestMethod.GET)
+	public String noticeDetail() {
+		
+		return "admin/noticeDetail";
+		
+	}
+	
 }
