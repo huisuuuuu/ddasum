@@ -1,9 +1,9 @@
 @charset "UTF-8";
-
     * div{
         box-sizing: border-box;
     }
     * a{
+        color: white;
         text-decoration: none;
     }
     /*헤더*/
@@ -17,27 +17,27 @@
    
     #header-logo-area{ /*로고*/
         width: 20%;
-        height: 100%;
+        height: 105px;
         float: left;   
     }
-    #header-logo-img{
-        width: 45%;
-        height: 100%;
-        padding-left: 10%;        
+    #header-logo-img {
+        width: 79px;
+        height: 66px;
+        margin: 18px 0px 0px 80px;
     }
     #header-meun-area{ /*센터메뉴*/
         width: 60%;
         height: 100%;
         float: left;
         margin:0 auto;
-        padding-top: 30px;
         text-align: center;    
     }
     #header-menu-ul {
         margin:  auto;
         padding: 0px;
         width: 100%;
-        height: 50%;   
+        height: 65%;
+        line-height: 105px;
     }
    
     #header-menu-ul>li {
@@ -46,6 +46,7 @@
         line-height: 35px;
         display: inline-block;
         text-align: center;
+        
     }
 
     #header-menu-ul>li>a {
@@ -59,32 +60,66 @@
     }
     #header-login-area{/*로그인쪽*/
         width: 20%;
-        height: 100%;
+        height: 80%;
         float: left;
         text-align: center;
-        padding-top: 2.5%;
         font-family: 'Noto Sans KR';
         font-size: 16px;
+        line-height: 105px;
+        
     }
-    .header-login-text{
+    #header-login-text{
         width: 100%;
-        height: 10%;
+        height: 100%;
         color: white;
-        text-decoration: none;  
+        text-decoration: none; 
+        
     }
    
     
-    #hover-menu{/*고객센터 호버시 나오는 서브메뉴*/
+    #hover-menu1{/*고객센터 호버시 나오는 서브메뉴*/
         width: 170px;
+        height: 40px;
         background-color: black;
         border-radius: 20px;
-        margin-left: -40px;
+        margin-left: -15px;
         position: absolute;
     }
-    .hover-text{
+    .hover-text1{
         color: white;
         font-family: 'Noto Sans KR';
         font-size: 11px; 
+    }
+    
+    /*새로운 호버*/
+     #header-myPage-hover-text{
+        width: 50%;
+        color: white;
+        text-decoration: none; 
+        float: left;
+         
+    }
+    #header-logout-text{
+        width: 20%;
+        height: 10%;
+        text-decoration: none;
+        float: left;
+    }
+   
+    #hover-menu2{/*아이디 호버시 나오는 서브메뉴*/
+        width: 140px;
+        line-height: 40px;
+        background-color: white;
+        border-radius: 15px;
+        text-align: left;
+        margin-left: 45px;
+        padding-left: 10px;
+        position: absolute;
+    }
+    .hover-text2{
+        color: black;
+        font-family: 'Noto Sans KR';
+        font-size: 14px; 
     }
     
 
@@ -103,11 +138,11 @@
     }
     .content-side-back{/*사이드 빈공간*/
         border: 1px solid white;
-        width: 15%;
+        width: 17.5%;
         float: left;
     }
     #content-center{/*중앙 컨텐츠 공간*/
-        width: 70%;
+        width: 65%;
         float: left;
     }
     #content-center-empty-top-area{
@@ -116,14 +151,14 @@
     }
     
     #content-center-menu1{/*center 위 컨텐츠*/
-        width: 16%;
-        height: 300px;
+         width: 16%;
+        height: 376px;
         float: left;
         background-color: #FFFCF1;
         text-align: center;
         font-family: '상주곶감체';
-        padding-top: 70px;
-        font-size: 20px;
+        padding-top: 85px;
+        font-size: 24px;
         color: black;
         box-shadow: 3px 3px 5px gray;
         border-top-left-radius: 5px;
@@ -131,56 +166,56 @@
         
     }
     #content-center-menu2{
-        width: 16%;
-        height: 300px;
+         width: 16%;
+        height: 376px;
         float: left;
         background-color: #FFFFFF;
         text-align: center;
         font-family: '상주곶감체';
-        padding-top: 70px;
-        font-size: 20px;
+        padding-top: 80px;
+        font-size: 24px;
         color: black;
         box-shadow: 3px 3px 5px gray;
         
     }
     #content-center-menu3{
-        width: 16%;
-        height: 300px;
+         width: 16%;
+        height: 376px;
         float: left;
         background-color: #FFFCF1;
         text-align: center;
         font-family: '상주곶감체';
-        padding-top: 90px;
-        font-size: 20px;
+        padding-top: 105px;
+        font-size: 24px;
         color: black;
         box-shadow: 3px 3px 5px gray;
     }
     #content-center-menu4{
-        width: 16%;
-        height: 300px;
+       width: 16%;
+        height: 376px;
         float: left;
         background-color: #FFFFFF;
         text-align: center;
         font-family: '상주곶감체';
-        padding-top: 70px;
-        font-size: 20px;
+        padding-top: 85px;
+        font-size: 24px;
         color: black;
         box-shadow: 3px 3px 5px gray;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
     }
     .center-menu-img{
-        width: 80px;
+        width: 120px;
     }
     #content-center-company-count{
         width: 33%;
-        height: 300px;
+        height: 376px;
         float: right;
         background-color: #FFFCF1;
         text-align: center;
         font-family: '상주곶감체';
         padding-top: 10px;
-        font-size: 20px;
+        font-size: 28px;
         color: #666666;
         box-shadow: 3px 3px 5px gray;
         border-radius: 5px;
@@ -196,8 +231,8 @@
         float: left;
     }
     #content-center-noti-area1{/*center 아래 컨텐츠(공지사항 관련)*/
-        width: 48%;
-        height: 300px;
+        width: 46%;
+        height: 330px;
         float: left;
         box-shadow: 3px 3px 5px gray;
         border-radius: 8px;
@@ -207,7 +242,7 @@
         width: 85%;
         height: 70px; 
         padding-top: 30px;
-        padding-left: 30px;
+        padding-left: 45px;
         float: left;
     }
     .noti-top-title{
@@ -225,13 +260,13 @@
     }
     .noti-plus-button{
         width: 15px;
-        float: 
     }
     .noti-title {
         width: 70%;
         height: 70%;
         float: left;
         padding-top: 5px;
+        padding-left: 25px;
         
     }
     .noti-sysdate{
@@ -239,14 +274,15 @@
         height: 70%;
         float: left;
         padding-top: 5px;
+        padding-left: 25px;
     }
     .noti-title li{
         list-style-type : square;
-        margin-bottom: 10px;
+        margin-bottom: 19px;
         
     }
     .noti-sysdate li{
-        margin-bottom: 10px;
+        margin-bottom: 19px;
         list-style-type: none;
         color:#666666;
         font-family: 'Noto Sans KR';
@@ -259,14 +295,14 @@
    
     hr{
         border: 0px;
-        width: 430px;
+        width: 580px;
         height: 2px;
         background-color: #FBEEBC;
         
     }
     #content-center-noti-area2{
-        width: 48%;
-        height: 300px;
+        width: 46%;
+        height: 330px;
         float: right;
         box-shadow: 3px 3px 5px gray;
         border-radius: 8px;

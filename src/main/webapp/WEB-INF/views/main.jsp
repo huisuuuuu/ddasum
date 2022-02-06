@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>따숨, 마음을 나누다</title>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/resources/commons/main-header.css">
 <link rel="stylesheet" href="/resources/commons/main-footer.css">
 </head>
@@ -22,20 +22,34 @@
                <li><a href="">후원식당</a></li>
                <li><a href="">할인식당</a></li>
                <li><a href="">커뮤니티</a></li>
-               <li id="notice-button"><a href="">고객센터</a>
-                   <div id="hover-menu" style="display: none">
-                   <a class="hover-text" href="">공지사항</a> &nbsp;&nbsp; <a class="hover-text" href="">자주 묻는 질문</a></div>
+               <li id="notice-button">
+                   <a href="">고객센터</a>
+                   <div id="hover-menu1" style="display: none">
+                   <a class="hover-text1" href="">공지사항</a> &nbsp;&nbsp; <a class="hover-text1" href="">자주 묻는 질문</a></div>
                </li>
-           </ul>           
+           </ul>
        </div>
+       
        <div id="header-login-area">
 	       <c:choose>
-				<c:when test="">
-					
+				<c:when test="${sessionScope.member != null }">
+           			<div id="header-myPage-hover-text"><a href="">${sessionScope.member.userId } 님</a>
+		               <div id="hover-menu2" style="display: none">
+			               <div id="myPage-img-area">
+				               <img src="/resources/images/user.png" style="width: 18px; padding-right: 5px">
+				               <a class="hover-text2" href="/member/myPage.do">마이페이지</a>
+			               </div>
+			               <div id="resolvation-check-img-area">
+				               <img src="/resources/images/reception-bell.png" style="width: 18px; padding-right: 5px">
+				               <a class="hover-text2" href="/member/reservationPage.do">예약 내역 확인</a>
+			               </div>
+            		   </div>
+           			</div>
+            		<div id="header-logout-text"><a href="/member/logout.do">로그아웃</a></div>
 				</c:when>
 				<c:otherwise>
-		           <a class="header-login-text" href="/member/loginPage.do">로그인</a> &nbsp;&nbsp;<a class="header-login-text">/</a>&nbsp;&nbsp; 
-		           <a class="header-login-text" href="/member/joinPage">회원가입</a>
+		           <a class="header-login-text" href="/member/loginPage.do">로그인</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+		           <a class="header-login-text" href="/member/joinPage.do">회원가입</a>
 	           	</c:otherwise>
 	       </c:choose>
        </div>
@@ -73,10 +87,10 @@
                <span>현재</span><br><br>
                <a id="company-count" href="">100</a><span> 여개의 업체가</span><br><br>
                <span>"따뜻한 숨결"을 불어넣고 있습니다.</span><br><br>
-               <img src="/resources/images/center-menu5.png" style="width: 180px;">
+               <img src="/resources/images/center-menu5.png" style="width: 250px;">
            </div>
            <div id="content-center-empty-center-area"></div>
-           <div id="content-center-noti-area1">
+           <div id="content-center-noti-area1"> 
                <div class="noti"><span class="noti-top-title">공지사항</span> </div> <div class="plus-button-area"><a href=""><img class="noti-plus-button" src="/resources/images/plusbutton.png"></a></div>
                <hr>
                <div class="noti-title">
@@ -143,18 +157,22 @@
    
    
    <script>
-        $('#notice-button').hover(function(){
-            $('#hover-menu').css("display","block");
-            
-        }, function() {
-        $('#hover-menu').css("display","none");
-
-
-        });
+	   $('#notice-button').hover(function(){
+	       $('#hover-menu1').css("display","block");   
+	   }, function() {
+	       $('#hover-menu1').css("display","none");
+	   });
+	   
+	  
+	   $('#header-myPage-hover-text').hover(function(){
+	       $('#hover-menu2').css("display","block");    
+	   }, function() {
+	       $('#hover-menu2').css("display","none");
+	   });
        
        $(window).scroll(function(){
         var scroll = $(window).scrollTop();
-        if (scroll > 900) {
+        if (scroll > 1300) {
           $('#header').css("background-color" , "rgba(166,166,166,0.8)");
         }
         else{
