@@ -9,23 +9,23 @@ public class Member {
 	private String userPwd;
 	private String userName;
 	private String nick;
+	private String phone;
 	private String email;
 	private char detail;
 	private String address;
 	private String pImage;
 	private Date enrollDate;
-	private int cardNo;
+	private long cardNo;
 	private char delYN;
-	
 	
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Member(int userNo, String authorityId, String userId, String userPwd, String userName, String nick,
-			String email, char detail, String address, String pImage, Date enrollDate, int cardNo, char delYN) {
+			String phone, String email, char detail, String address, String pImage, Date enrollDate, long cardNo,
+			char delYN) {
 		super();
 		this.userNo = userNo;
 		this.authorityId = authorityId;
@@ -33,6 +33,7 @@ public class Member {
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.nick = nick;
+		this.phone = phone;
 		this.email = email;
 		this.detail = detail;
 		this.address = address;
@@ -41,141 +42,116 @@ public class Member {
 		this.cardNo = cardNo;
 		this.delYN = delYN;
 	}
-
 
 	public int getUserNo() {
 		return userNo;
 	}
 
-
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-
 
 	public String getAuthorityId() {
 		return authorityId;
 	}
 
-
 	public void setAuthorityId(String authorityId) {
 		this.authorityId = authorityId;
 	}
-
 
 	public String getUserId() {
 		return userId;
 	}
 
-
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
 
 	public String getUserPwd() {
 		return userPwd;
 	}
 
-
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
-
 
 	public String getUserName() {
 		return userName;
 	}
 
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 
 	public String getNick() {
 		return nick;
 	}
 
-
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public char getDetail() {
 		return detail;
 	}
 
-
 	public void setDetail(char detail) {
 		this.detail = detail;
 	}
-
 
 	public String getAddress() {
 		return address;
 	}
 
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 	public String getpImage() {
 		return pImage;
 	}
 
-
 	public void setpImage(String pImage) {
 		this.pImage = pImage;
 	}
-
 
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
 
-
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 
-
-	public int getCardNo() {
+	public long getCardNo() {
 		return cardNo;
 	}
 
-
-	public void setCardNo(int cardNo) {
+	public void setCardNo(long cardNo) {
 		this.cardNo = cardNo;
 	}
-
 
 	public char getDelYN() {
 		return delYN;
 	}
 
-
 	public void setDelYN(char delYN) {
 		this.delYN = delYN;
 	}
-	
-	
-	
-	
-	
-	
-	
 }
