@@ -7,6 +7,7 @@
 
         #content_wrapper {
             width: 1280px;
+            margin: 0 auto;
         }
 
         #page_title {
@@ -20,6 +21,7 @@
         #title_underbar {
             border: 2px solid #FFA77E;
             width: 60px;
+            margin: 20px auto;
         }
 
         .c_title {
@@ -47,4 +49,8 @@
             height: 30px;
             font-size: 13px;
             margin-bottom: 5px;
+        }
+        
+        #regBtn{
+        margin-right: 10px;
         }

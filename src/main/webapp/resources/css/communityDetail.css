@@ -8,6 +8,7 @@
 
     #content_wrapper {
         width: 1280px;
+        margin: 0 auto;        
     }
 
     #page_title {
@@ -22,6 +23,7 @@
         border: 2px solid #FFA77E;
         width: 60px;
         display: flex;
+        margin: 20px auto;        
     }
 
     .align_buttons {
@@ -88,6 +90,7 @@
         color: #707070;
         font-size: 16px;
         padding: 10px;
+        min-height: 300px;
     }
 
     #comment {

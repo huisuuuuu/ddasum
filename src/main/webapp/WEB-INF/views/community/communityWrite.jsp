@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>혼밥시러</title>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -14,25 +14,31 @@
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <!--Toast editor css-->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="/resources/css/communityWrite.css">
+	    
 </head>
 <body>
+	<!-- header -->
+	<%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>	
+
     <div id="content_wrapper">
         <div id="page_title">혼밥시러 <br>
             <hr id="title_underbar">
         </div><br><br><br><br>
-        	<form action="community/communityWrite.do" method="post" id="write_Form">
-            <select id="area" name="area" class="area_select" onchange="categoryChange(this)">
+        	<form action="/community/communityInsert.do" method="post" id="writeForm">
+            <select id="area" name="area" class="area_select" onchange="categoryChange(this)" data-name="시도">
                 <option value="" selected disabled hidden>시도 선택</option>
                 <option value="SEOUL">서울</option>
                 <option value="GYEONGGI">경기</option>
                 <option value="INCHEON">인천</option>
             </select>
-            <select name="sigu" id="sigu" class="area_select">
+            <select name="sigu" id="sigu" class="area_select" data-name="시구">
                 <option value="" selected disabled hidden>지역구 선택</option>
             </select>
-            <input type="text" class="c_title" id="board_Title" name="boardTitle" placeholder="제목을 입력해주세요.">
+            <input type="text" class="c_title" id="board_title" name="cTitle" placeholder="제목을 입력해주세요." data-name="제목">
             <div id="editor"></div>
-            <div id="board_content" name=boardContent></div>
+            <input type="text" id="board_content" name="cContent" data-name="내용" hidden>
             </form>
             <br><br><br>
             <div style="text-align:center">
@@ -40,6 +46,7 @@
                 <button class="basic_button" type="reset">취소</button>
             </div>
     </div>
+    <br /><br />
     <script> // editor
         const editor = new toastui.Editor({
             el: document.querySelector('#editor'),
@@ -50,8 +57,7 @@
             hideModeSwitch: 'false', // 에디트 변경 탭 숨김
         });
         // 사용하지 않을 도구 제거     
-        editor.removeToolbarItem('link'); //링크도구 제거
-        editor.removeToolbarItem('image'); //이미지도 제거    
+        editor.removeToolbarItem('link'); //링크도구 제거 
         editor.removeToolbarItem('table'); //테이블도구 제거
         editor.removeToolbarItem('code'); //인라인코드도구 제거
         editor.removeToolbarItem('codeblock'); //코드블록도구 제거
@@ -98,7 +104,6 @@
 
             for (x in listKor) {
                 let opt = document.createElement("option");
-                console.log(x);
                 opt.value = listEng[x];
                 opt.innerHTML = listKor[x];
                 sigu.appendChild(opt);
@@ -108,30 +113,33 @@
 	
 	<script> // data submit
 		$("#regBtn").click(function(){
-			const boardTitle = $("board_Title").val();
-			const boardContent = editor.getHTML();
-			const area = $("area").val();
-			const sigu = $("sigu").val();
+			const boardTitle = $("#board_title").val();
+			const boardContent = editor.getMarkdown();
+			const area = $("#area").val();
+			const sigu = $("#sigu").val();
 			
-			if(boardTitle.length()==0){
+			if(!boardTitle){
 				alert("제목을 입력해주세요");
 				return ;
 			}
-			if(boardContent.length()==0){
+			if(!boardContent){
 				alert("내용을 입력해주세요");
 				return ;
 			}
-			if(area.length.()==0){
+			if(!area){
 				alert("지역을 선택해주세요");
 				return ;
 			}
-			if(sigu.length.()==0){
+			if(!sigu){
 				alert("시구를 선택해주세요");
 				return ;
 			}
+			$("#board_content").html(editor.getMarkdown()); //입력값 가져오기
 			
-			$("write_Form").submit();
+			$("#writeForm").submit();
 		})
 	</script>
+	<!-- footer -->
+	<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>  	
 </body>
 </html>
