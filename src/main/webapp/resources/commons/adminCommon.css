@@ -5,8 +5,9 @@
 	margin : 0px;
 }
 
-a {
-	text-decoration-line : none;
+* a{
+	text-decoration: none;
+	color: inherit;
 }
 
 input:focus,
@@ -104,17 +105,39 @@ textarea:focus {
 }
 
 .wri_btn {
-	width : 90px;
+	width : 75px;
 	height : 40px;
 	border: none;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     font-family: 'Noto Sans KR', sans-serif;
 	font-size: 16px;
 	color : white;
 	background-color: #E6510B;
+	margin-right : 30px;
+
 }
 
+.btn-ok {
+	width: 100px;
+	height: 40px;
+	border: 0;
+	background-color: #FFA77E;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.btn-ok>a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	line-height: 40px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	color: #fff;
+}
 
 /*버튼
 .btn-rec {

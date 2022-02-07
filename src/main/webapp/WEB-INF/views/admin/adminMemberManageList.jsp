@@ -61,7 +61,6 @@
 										<i class="fas fa-search icon-search"></i></button>							
 									</div>								
 							</div>
-							<!-- <input type="submit" class="btn-rec" value="검색"> -->
 						</form>
 					</div>
                 </div>
@@ -87,7 +86,7 @@
                                 <td>닉네임1</td>
                                 <td>user11@naver.com</td>
                                 <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">있음</button></td>
+                                <td><a href="/admin/adminUserDetail.do"><button type="button" class="ok_btn">확인</button></a></td>
                                 <td><button type="button" class="ok_btn">상세보기</button></td>
                             </tr>
                             <tr>
@@ -96,7 +95,7 @@
                                 <td>닉네임1</td>
                                 <td>user11@naver.com</td>
                                 <td>2022-02-02</td>
-                                <td><button type="button" class="none_btn">없음</button></td>
+                                <td><button type="button" class="none_btn">확인</button></td>
                                 <td><button type="button" class="ok_btn">상세보기</button></td>
                             </tr>
                             <tr>

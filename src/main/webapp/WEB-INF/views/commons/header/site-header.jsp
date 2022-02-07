@@ -18,7 +18,7 @@
        </div> 
         <div id="navigation">
             <ul id="gnb_list">
-                <li><a href="">스토리</a></li>
+                <li><a href="/member/storyBoard.do">스토리</a></li>
                 <li><a href="">후원식당</a></li>
                 <li><a href="/member/saleRestaurantListPage.do">할인식당</a></li>
                 <li><a href="">커뮤니티</a></li>

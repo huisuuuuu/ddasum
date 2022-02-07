@@ -50,4 +50,24 @@ public class AdminController {
 		return "/admin/adminFAQManageList";
 	}
 	
+	@RequestMapping(value="/admin/adminNoticeWrite.do", method = RequestMethod.GET)
+	public String adminNoticeWrite() {
+		return "/admin/adminNoticeWrite";
+	}
+	
+	@RequestMapping(value="/admin/adminUserDetail.do", method = RequestMethod.GET)
+	public String adminUserDetail() {
+		return "/admin/adminUserDetail";
+	}
+	
+	@RequestMapping(value="/admin/adminCardConfirm.do", method = RequestMethod.GET)
+	public String adminCardConfirm() {
+		return "/admin/adminCardConfirm";
+	}
+	
+	@RequestMapping(value="/member/storyBoard.do", method = RequestMethod.GET)
+	public String stroyBoard() {
+		return "/member/storyBoard";
+	}
+	
 }

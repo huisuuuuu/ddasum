@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+form {
+	width: 100%;
+}
+
+#content {
+    width: 85%;
+    margin-left: 15%;
+    display: inline-block;
+    padding: 30px;
+    background-color: #FFF6F2;
+    box-sizing : border-box;
+
+}
+
+.container {
+    width: 100%;
+    background-color: #fff;
+    padding: 40px;
+	border-radius : 10px;    
+}
+
+.box-title {
+	width: 100%;
+	height: 90px;
+	padding: 30px;
+	box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	color: #2A2A2A;
+	border: 0
+	
+}
+
+.box-content {
+	width: 100%;
+	height: 400px;
+	padding: 30px;
+	box-sizing: border-box;
+	float : left;
+}
+
+.card-img {
+	width : 600px;
+	hegiht : 375px;
+	float : left;
+}
+
+.card-no-innput
+{
+	border : 1px solid black;
+	width : 200px;
+	float : right;
+}
+
+.box-content>textarea {
+	width: 100%;
+	height: 100%;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	color: #2A2A2A;
+	border: 0;
+	resize: none;
+}
+
+.box-button {
+	margin-top: 30px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+.box-button>input {
+	background-color: #FFA77E;
+	margin-right: 30px;
+}
+.box-button>input[type="reset"] {
+	background-color: #FFA77E;
+	margin-right: 30px;
+}
+.box-button>button {
+	background-color: #C8C8C8;
+}

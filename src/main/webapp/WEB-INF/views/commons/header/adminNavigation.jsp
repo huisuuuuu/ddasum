@@ -9,6 +9,7 @@
             
                         <ul class="mdl_nav">
                             <li>
+                            <img class="icons" src="/resources/images/member.png" alt="회원관리">
 								회원 관리 <i class="fas fa-chevron-down"></i>
                             </li>
                             <ul class="sub_nav">
@@ -23,12 +24,14 @@
 
                         <ul class="mdl_nav">
                             <li>
+                            <img class="icons" src="/resources/images/biz.png" alt="사업자관리">
 								<a href="/admin/adminBizManageList.do">사업자 관리</a>
                             </li>
                         </ul>
                     
                          <ul class="mdl_nav">
                             <li>
+                            <img class="icons" src="/resources/images/help.png" alt="고객센터">
 								고객센터 관리 <i class="fas fa-chevron-down"></i>
                             </li>
                             <ul class="sub_nav">
@@ -43,6 +46,7 @@
                                         
                         <ul class="mdl_nav">
                             <li>
+                            <img class="icons" src="/resources/images/sales.png" alt="후원정산">
 								<a href="/admin/adminSupport.do">후원 정산 관리</a>
                             </li>
                         </ul>

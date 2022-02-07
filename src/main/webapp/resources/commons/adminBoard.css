@@ -138,6 +138,7 @@ a {
 	font-size: 18px;
 	color: #2A2A2A;
     text-align: center;
+    border-bottom: 0.5px solid #D8D8D8;
 }
 
 .container table tr td {

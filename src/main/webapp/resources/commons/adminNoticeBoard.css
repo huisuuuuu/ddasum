@@ -23,8 +23,10 @@ a {
 }
 
 .box-search {
-	width : 500px;
+	border : 1px solid black;
+	width : 600px;
 	float: right;
+	white-space:nowrap;
 }
 .btn-write {
 	float: left;
@@ -106,6 +108,12 @@ a {
 	float: left;
 }
 
+.notice-write {
+	width : 80px;
+	height : 40px;
+	
+}
+
 
 .container .table_wrap {
     width: 100%;
@@ -138,6 +146,7 @@ a {
 	font-size: 18px;
 	color: #2A2A2A;
     text-align: center;
+    border-bottom: 0.5px solid #D8D8D8;
 }
 
 .container table tr td {
@@ -198,10 +207,6 @@ a {
 
 .container table tr td button.reject_btn {
     background-color: #FFA0A2;
-}
-
-.container table tr td button.write_btn {
-    background-color: #E6510B;
 }
 
 .container table tr td button.man_btn {
