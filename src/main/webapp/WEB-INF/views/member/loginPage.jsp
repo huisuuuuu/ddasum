@@ -10,6 +10,8 @@
 	href="/resources/commons/mainTitle.css">
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/loginPage.css">
+<!-- SweetAlert2 CDN -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 <!--  jQuery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <title>따숨, 마음을 나누다.</title>
@@ -57,10 +59,14 @@
 	        var userId = document.getElementById("userId");
 	        var userPwd = document.getElementById("userPwd");
 	        if(userId.value == ""){
-	            alert("ID를 입력해주세요.");
+	        	Swal.fire('아이디를 입력해주세요.');
+	        	$('.swal2-styled.swal2-confirm').html('확인');
+	        	$('.swal2-styled.swal2-confirm').css('background-color','#F8976A');
 	            return false;
 	        }else if(userPwd.value ==""){
-	            alert("비밀번호를 입력해주세요.");
+	        	Swal.fire('비밀번호를 입력해주세요.');
+	        	$('.swal2-styled.swal2-confirm').html('확인');
+	        	$('.swal2-styled.swal2-confirm').css('background-color','#F8976A');
 	            return false;
 	        }else{
 	            return true;
