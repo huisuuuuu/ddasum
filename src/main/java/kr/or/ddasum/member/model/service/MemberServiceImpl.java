@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddasum.member.model.dao.MemberDAO;
+import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
 
 @Service
@@ -15,6 +16,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member memberLogin(Member member) {
 		return mDAO.memberLogin(member);
+	}
+	
+	@Override
+	public BizMember bizMemberLogin(BizMember bizMember) {
+		return mDAO.memberLogin(bizMember);
 	}
 
 	@Override

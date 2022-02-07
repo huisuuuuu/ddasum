@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddasum.member.model.service.MemberService;
+import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
 
 @Controller
@@ -33,10 +34,29 @@ public class MemberController {
 		if(m != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", m);
+			session.setAttribute("bizMember", null);
 			
 			return "main"; 
 		}else {
 			return "member/loginPage";
+		}
+	}
+	
+	@RequestMapping(value = "/member/bizMemberLogin.do", method = RequestMethod.POST)
+	public String bizMemberLogin(BizMember bizMember, HttpServletRequest request ) {
+		
+		BizMember bm = mService.bizMemberLogin(bizMember);
+		
+		System.out.println("업체명  : "+bm.getBizName() );
+		
+		if(bm != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("bizMember", bm);
+			session.setAttribute("member", null);
+			
+			return "main"; 
+		}else {
+			return "member/bizMemberLoginPage";
 		}
 	}
 	
@@ -133,6 +153,13 @@ public class MemberController {
 		return "/member/loginPage";
 		
 	}
+		
+	@RequestMapping(value="/member/bizMemberLoginPage.do", method = RequestMethod.GET)
+	public String bizMemberLoginPage() {
+		
+		return "/member/bizMemberLoginPage";
+		
+	}	
 	
 	@RequestMapping(value="/member/joinPage.do", method = RequestMethod.GET)
 	public String joinPage() {
@@ -196,8 +223,6 @@ public class MemberController {
 		return "/member/successJoinPage";
 		
 	}
-	
-
 	
 	//나중에 삭제할 코드
 	@RequestMapping(value = "/member/mainPage.do")
