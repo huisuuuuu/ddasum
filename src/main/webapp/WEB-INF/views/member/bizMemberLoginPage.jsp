@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/commons/mainTitle.css">
 <link rel="stylesheet" type="text/css"
-	href="/resources/css/loginPage.css">
+	href="/resources/css/bizMemberLoginPage.css">
 <title>따숨, 마음을 나누다.</title>
 </head>
 <body>
@@ -32,9 +32,9 @@
 							<a href="/member/bizMemberLoginPage.do">사업자</a>
 						</div>
 					</div>
-					<form id="loginForm" action="/member/login.do" method="post">
-						<input type="text" name="userId" placeholder="아이디"> <input
-							type="password" name="userPwd" placeholder="비밀번호"> <input
+					<form id="loginForm" action="/member/bizMemberLogin.do" method="post">
+						<input type="text" name="bizId" placeholder="아이디"> <input
+							type="password" name="bizPwd" placeholder="비밀번호"> <input
 							class="btn_login" type="submit" value="로그인">
 					</form>
 				</div>

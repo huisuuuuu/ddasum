@@ -1,5 +1,6 @@
 package kr.or.ddasum.member.model.service;
 
+import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
 
 public interface MemberService {
@@ -9,4 +10,6 @@ public interface MemberService {
 
 	int memberInfoUpdate(Member m);
 	//정두식 추가코드(끝)
+
+	BizMember bizMemberLogin(BizMember bizMember);
 }
