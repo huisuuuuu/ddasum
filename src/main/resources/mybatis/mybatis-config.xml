@@ -4,6 +4,7 @@
 
 	<typeAliases>
 		<typeAlias type="kr.or.ddasum.member.model.vo.Member" alias="member"/>
+		<typeAlias type="kr.or.ddasum.member.model.vo.BizMember" alias="bizMember"/>
 	</typeAliases>
 
 </configuration>

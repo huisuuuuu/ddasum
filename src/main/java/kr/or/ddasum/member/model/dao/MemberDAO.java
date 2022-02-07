@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
 
 @Repository
@@ -19,10 +20,16 @@ public class MemberDAO {
 		return sqlSession.selectOne("member.memberLogin", member);
 		
 	}
+	
+	public BizMember memberLogin(BizMember bizMember) {
+		
+		return sqlSession.selectOne("bizMember.selectLoginBizMember", bizMember);
+	}
 
 	public int memberInfoUpdate(Member m) {
 
 		return sqlSession.update("member.memberInfoUpdate",m);
 		
 	}
+
 }
