@@ -31,5 +31,8 @@
    <a href="/BizMember/enter.do">사업자페이지</a><br>
 
    <a href="/member/mainPage.do">메인페이지</a>
+   
+   <a href="/member/saleRestaurantListPage.do">할인식당</a>
+   
 </body>
 </html>
