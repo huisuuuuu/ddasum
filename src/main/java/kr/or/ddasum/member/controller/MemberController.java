@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +28,7 @@ public class MemberController {
 	
 	//정두식 추가 코드(시작)
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public String memberLogin(Member member, HttpServletRequest request ) {
+	public String memberLogin(Member member, HttpServletRequest request, Model model ) {
 		
 		Member m = mService.memberLogin(member);
 		
@@ -35,28 +36,32 @@ public class MemberController {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", m);
 			session.setAttribute("bizMember", null);
-			
 			return "main"; 
+			
 		}else {
-			return "member/loginPage";
+			model.addAttribute("msg1","로그인 실패");
+			model.addAttribute("msg2","아이디와 비밀번호를 확인해주세요.");
+			model.addAttribute("location","/member/loginPage.do");
+			return "commons/msg";
 		}
 	}
 	
 	@RequestMapping(value = "/member/bizMemberLogin.do", method = RequestMethod.POST)
-	public String bizMemberLogin(BizMember bizMember, HttpServletRequest request ) {
+	public String bizMemberLogin(BizMember bizMember, HttpServletRequest request, Model model ) {
 		
 		BizMember bm = mService.bizMemberLogin(bizMember);
-		
-		System.out.println("업체명  : "+bm.getBizName() );
 		
 		if(bm != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("bizMember", bm);
 			session.setAttribute("member", null);
+			return "bizMember/EnterBizMember"; 
 			
-			return "main"; 
 		}else {
-			return "member/bizMemberLoginPage";
+			model.addAttribute("msg1","로그인 실패");
+			model.addAttribute("msg2","아이디와 비밀번호를 확인해주세요.");
+			model.addAttribute("location","/member/bizMemberLoginPage.do");
+			return "commons/msg";
 		}
 	}
 	

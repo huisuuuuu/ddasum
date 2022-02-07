@@ -32,9 +32,9 @@
 							<a href="/member/bizMemberLoginPage.do">사업자</a>
 						</div>
 					</div>
-					<form id="loginForm" action="/member/bizMemberLogin.do" method="post">
-						<input type="text" name="bizId" placeholder="아이디"> <input
-							type="password" name="bizPwd" placeholder="비밀번호"> <input
+					<form id="loginForm" action="/member/bizMemberLogin.do" method="post" onsubmit="return check();">
+						<input type="text" id="bizId" name="bizId" placeholder="아이디"> <input
+							type="password" id="bizPwd" name="bizPwd" placeholder="비밀번호"> <input
 							class="btn_login" type="submit" value="로그인">
 					</form>
 				</div>
@@ -48,5 +48,23 @@
 			<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>
 		</footer>
 	</div>
+	
+	<script>
+		
+	 function check(){
+	        var bizId = document.getElementById("bizId");
+	        var bizPwd = document.getElementById("bizPwd");
+	        if(bizId.value == ""){
+	            alert("아이디를 입력해주세요.");
+	            return false;
+	        }else if(bizPwd.value ==""){
+	            alert("비밀번호를 입력해주세요.");
+	            return false;
+	        }else{
+	            return true;
+	        }
+	    }
+	
+	</script>
 </body>
 </html>
