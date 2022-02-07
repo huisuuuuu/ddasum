@@ -7,19 +7,21 @@
 
         #content_wrapper {
             width: 1280px;
+            margin: 0 auto;
         }
 
         #page_title {
             font-size: 32px;
             width: 100%;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 50px;
             line-height: 40%;
         }
 
         #title_underbar {
             border: 2px solid #FFA77E;
             width: 60px;
+            margin: 20px auto;
         }
 
         .table_tr {
@@ -36,6 +38,7 @@
             border: 0px;
             background: rgba(255, 167, 126, 0.8);
             border-radius: 10px;
+            cursor: pointer;
         }
 
         #search_wrapper {
@@ -82,53 +85,79 @@
             height: 100%;
             border: 0px;
             border-radius: 0px 5px 5px 0px;
+            cursor: point;
         }
 
         #board_table {
             width: 1280px;
             border-spacing: 0px;
             border-top: 2px solid #707070;
+            border-bottom: 2px solid #707070;
         }
 
-        .board_table_tr {
+        .table_tr_header {
             background: rgba(255, 167, 126, 0.15);
-            width: 800px;
             height: 60px;
-            border-top: 2px solid #707070;
-
             color: #707070;
             font-weight: 700;
         }
-		.board_table_tr>a{
-            text-decoration: none;
+        
+        .table_tr_header>th{
+        	text-align: center;
+        }
+        
+        .table_tr_body{
+        	background: #fff;
+            height: 60px;
+
             color: #707070;
+            font-size: 16px;
+        }
+		.table_tr_body>td{
+            border-bottom: 1px solid #707070;
 		}
+		.table_tr_body:last-child>td{
+            border-bottom: none;
+		}
+		
         .td_no {
-            width: 10%;
+            width: 7%;
             min-width: 110px;
+			text-align: center;            
         }
 
         .td_area {
-            width: 11%;
+            width: 20%;
             min-width: 120px;
+			text-align: center;            
         }
 
         .td_title {
-            width: 38%;
+            width: 32%;
             min-width: 440px;
+            text-align: left;
+            padding-left: 20px;
         }
-
+        
+		.td_title>a{
+			all: unset;
+			cursor: pointer;
+		}
+		
         .td_writer {
             width: 14%;
             min-width: 120px;
+			text-align: center;            
         }
 
         .td_date {
             width: 15%;
             min-width: 130px;
+			text-align: center;            
         }
 
         .td_count {
             width: 12%;
             min-width: 120px;
+			text-align: center;            
         }
