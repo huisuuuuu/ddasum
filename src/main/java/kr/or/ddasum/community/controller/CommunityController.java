@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.community.model.service.CommunityService;
 import kr.or.ddasum.community.model.vo.Community;
+import kr.or.ddasum.community.model.vo.CommunityComment;
 
 @Controller
 public class CommunityController {
@@ -53,7 +56,6 @@ public class CommunityController {
 	@RequestMapping(value="/community/communityDetail.do", method=RequestMethod.GET)
 	public ModelAndView detailOneCommunity(@RequestParam int cNo, @RequestParam int currentPage, ModelAndView mav,
 			@CookieValue(name="view") String cookie) {
-			System.out.println("controller");
 			
 		if (!(cookie.contains(String.valueOf(cNo)))) {
 			cookie += cNo + "/";
@@ -100,10 +102,19 @@ public class CommunityController {
 		int result = cService.insertCommunity(c);
 		
 	}
-	
+
 	@RequestMapping(value="/community/commentInsert.do", method=RequestMethod.POST)
-	public void insertComment() {
+	@ResponseBody
+	public String insertComment(CommunityComment cc, HttpSession session) {
+							
+//		int userNo = ((Member)session.getAttribute("member")).getUserNo();
+		int userNo = 22;
 		
+		cc.setUserNo(userNo);
+		System.out.println("controller " + cc.getpComNo());
+		int result = cService.insertComment(cc);
+		
+		return "fff";
 	}
 	
 	@RequestMapping(value="/community/communityUpdate.do", method=RequestMethod.POST)

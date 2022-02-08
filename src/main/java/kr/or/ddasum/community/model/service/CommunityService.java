@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.or.ddasum.community.model.vo.Community;
+import kr.or.ddasum.community.model.vo.CommunityComment;
 
 public interface CommunityService {
 
@@ -20,5 +21,7 @@ public interface CommunityService {
 	void hitCommunity(int cNo);
 
 	int insertCommunity(Community c);
+
+	int insertComment(CommunityComment cc);
 
 }

@@ -12,17 +12,18 @@ public class CommunityComment {
 	private int comDepth;
 	private int comOrder;
 	private String comContent;
+	private String pImage;	
 	private Date comRegDate;
 	private char comSecretYN;
 	private char comDelYN;
-	
+
 	public CommunityComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public CommunityComment(int cNo, int comNo, int userNo, String nick, int pComNo, int comDepth, int comOrder,
-			String comContent, Date comRegDate, char comSecretYN, char comDelYN) {
+			String comContent, String pImage, Date comRegDate, char comSecretYN, char comDelYN) {
 		super();
 		this.cNo = cNo;
 		this.comNo = comNo;
@@ -32,6 +33,7 @@ public class CommunityComment {
 		this.comDepth = comDepth;
 		this.comOrder = comOrder;
 		this.comContent = comContent;
+		this.pImage = pImage;
 		this.comRegDate = comRegDate;
 		this.comSecretYN = comSecretYN;
 		this.comDelYN = comDelYN;
@@ -101,6 +103,14 @@ public class CommunityComment {
 		this.comContent = comContent;
 	}
 
+	public String getpImage() {
+		return pImage;
+	}
+
+	public void setpImage(String pImage) {
+		this.pImage = pImage;
+	}
+
 	public Date getComRegDate() {
 		return comRegDate;
 	}
@@ -124,5 +134,5 @@ public class CommunityComment {
 	public void setComDelYN(char comDelYN) {
 		this.comDelYN = comDelYN;
 	}
-
+	
 }

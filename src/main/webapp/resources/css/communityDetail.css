@@ -5,7 +5,12 @@
         box-sizing: border-box;
         font-family: 'Noto Sans KR', sans-serif;
     }
-
+	button{
+		cursor: pointer;
+	}
+	a{
+		all: unset;
+	}
     #content_wrapper {
         width: 1280px;
         margin: 0 auto;        
@@ -64,26 +69,27 @@
         font-size: 20px;
     }
 
-    #profile {
+    .profile {
         float: left;
         border: 1px solid black;
         width: 40px;
         height: 40px;
         border-radius: 20px;
-        margin: 12px 12px 12px 0px;
+        margin: 17px 12px 17px 0px;
     }
 
     #info {
         margin: 10px;
         float: left;
         font-size: 14px;
-        line-height: 44px
+        line-height: 50px
     }
 
     .info {
         float: left;
         margin-right: 15px;
         color: #707070;
+
     }
 
     #detail_content {
@@ -98,17 +104,22 @@
         padding: 10px;
     }
 
-    #comment_detail {
+    .comment_detail {
         line-height: 22px;
         float: left;
-        width: 90%;
+        width: 80%;
         min-width: 500px;
     }
     .comment_option{
         width: 10%;
         min-width: 60px;
+        height: 100%;
+        margin-top: 10px;
+        float: right;
+        padding-left:30px;
     }
     .comment_nick {
+    	margin-top: 5px;
         font-size: 13px;
         color: #707070;
     }
@@ -129,13 +140,13 @@
         margin-right: 10px;
     }
 
-    #comment_area{
+    .comment_area{
         width: 100%;
         background-color: #fff;
         border: 1px solid #707070;
         border-radius: 5px;
     }
-    #new_comment {
+    .new_comment {
         width: 100%;
         height: 70px;
         border: none;
@@ -146,7 +157,7 @@
     input:focus{
         outline: none;
     }
-    #comment_submit{
+    .comment_submit{
         border: 1px solid #707070;
         border-radius: 5px;
         width: 50px;
@@ -156,22 +167,25 @@
         background-color: #fff;
         margin: 5px;
     }
-    #secret{
+    .secret_wrapper{
+    	cursor: pointer;
+    }
+    .secret_wrapper>.secret{
         display: none;
     }
-    #secret+label{
+    .secret_wrapper>.check-icon{
         margin-top: 8px;
         display: block;
         width: 25px;
         height: 25px;
-        background: url("resources/images/open-padlock.png") no-repeat 0 0px / contain;
+        background: url("/resources/images/open-padlock.png") no-repeat 0 0px / contain;
     }
-    #secret:checked+label{
-        background: url("resources/images/lock_Checked.png") no-repeat 0 0px / contain;
+    .secret_wrapper>.secret:checked + .check-icon{
+        background: url("/resources/images/lock_Checked.png") no-repeat 0 0px / contain;
     }        
-    #comment_length{
+    .comment_length{
         color: #707070;
-        line-height: 50px;
+        line-height: 40px;
         font-size: 14px;
         height: 20px;
         margin-right: 5px;
@@ -184,4 +198,137 @@
     .align_buttons>a{
         text-decoration: none;
         color: #707070;
+    }
+    .commment_box{
+    	min-height: 80px;
+    }
+    
+     .comment_reply {
+	     background: none;
+	     border: none;
+	     font-size: 15px;
+	     color: #666666;
+	     margin-top: 5px;
+	     cursor: pointer;
+	 }
+	 
+     .more_option {
+     	 margin-top: 5px;
+         background-color: unset;
+         border: none;
+         width: 20px;
+         height: 30px;
+         padding: 2px;
+         cursor: pointer;
+     }	 
+     
+     .depth1{
+     	margin-left: 0px;
+     }
+     .depth2{
+     	width: 40px;
+     	height: 80px;
+     	margin-right: 5px;
+     	float: left;     
+     	background: url("/resources/images/up-arrow.png") no-repeat 0px 17px / contain;
+     }
+     .depth3{
+     	width: 40px;
+     	height: 80px;
+     	margin-right: 5px;
+     	margin-left: 40px;
+     	float: left;     
+     	background: url("/resources/images/up-arrow.png") no-repeat 0px 17px / contain;
+     }
+     .depth4{
+     	width: 40px;
+     	height: 80px;
+     	margin-right: 5px;
+     	margin-left: 80px;
+     	float: left;     
+     	background: url("/resources/images/up-arrow.png") no-repeat 0px 17px / contain;
+     }
+     .depth5{
+     	width: 40px;
+     	height: 80px;
+     	margin-right: 5px;
+     	margin-left: 120px;
+     	float: left;     
+     	background: url("/resources/images/up-arrow.png") no-repeat 0px 17px / contain;
+     }
+     .depth6{
+     	width: 40px;
+     	height: 80px;
+     	margin-right: 5px;
+     	margin-left: 160px;
+     	float: left;     
+     	background: url("/resources/images/up-arrow.png") no-repeat 0px 17px / contain;
+     }            
+     .depth7{
+     	width: 40px;
+     	height: 80px;
+     	margin-right: 5px;
+     	margin-left: 200px;
+     	float: left;     
+     	background: url("/resources/images/up-arrow.png") no-repeat 0px 17px / contain;
+     }
+     
+     
+	 .reply_depth2{
+	 	margin-left: 40px;
+	 	width: 95% !important;
+	 
+	 }
+	 .reply_depth3{
+	 	margin-left: 80px;
+	 	width: 91.5% !important;
+	 
+	 }
+	 .reply_depth4{
+	 	margin-left: 120px;
+	 	width: 88% !important;
+	 
+	 }
+	 .reply_depth5{
+	 	margin-left: 160px;
+	 	width: 84.5% !important;
+	 
+	 }
+	 .reply_depth6{
+	 	margin-left: 200px;
+	 	width: 81% !important;
+	 
+	 }
+	 .reply_depth7{
+	 	margin-left: 240px;
+	 	width: 77.5% !important;
+	 
+	 }	 	 	 	 	 
+     
+      .reply_comment {
+        width: 100%;
+        height: 70px;
+        border: none;
+        border-radius: 5px;
+        font-size: 13px;
+        padding: 10px;
+    }
+    
+    .comment_detail2{
+    	width: 76.5% !important;
+    }
+    .comment_detail3{
+    	width: 73% !important;
+    }
+    .comment_detail4{
+    	width: 69.5% !important;
+    }
+    .comment_detail5{
+    	width: 66% !important;
+    }
+    .comment_detail6{
+    	width: 62.5% !important;
+    }
+    .comment_detail7{
+    	width: 59.5% !important;
     }

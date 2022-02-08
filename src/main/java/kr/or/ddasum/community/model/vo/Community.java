@@ -12,16 +12,17 @@ public class Community {
 	private String cTitle;
 	private String cContent;
 	private Date cRegDate;
+	private String pImage;
 	private int cCount;
 	private char cDelYN;
-	
+
 	public Community() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Community(int cNo, int userNo, String nick, String area, String sigu, String cTitle, String cContent,
-			Date cRegDate, int cCount, char cDelYN) {
+			Date cRegDate, String pImage, int cCount, char cDelYN) {
 		super();
 		this.cNo = cNo;
 		this.userNo = userNo;
@@ -31,6 +32,7 @@ public class Community {
 		this.cTitle = cTitle;
 		this.cContent = cContent;
 		this.cRegDate = cRegDate;
+		this.pImage = pImage;
 		this.cCount = cCount;
 		this.cDelYN = cDelYN;
 	}
@@ -55,7 +57,7 @@ public class Community {
 		return nick;
 	}
 
-	public void setNICK(String nick) {
+	public void setNick(String nick) {
 		this.nick = nick;
 	}
 
@@ -99,6 +101,14 @@ public class Community {
 		this.cRegDate = cRegDate;
 	}
 
+	public String getpImage() {
+		return pImage;
+	}
+
+	public void setpImage(String pImage) {
+		this.pImage = pImage;
+	}
+
 	public int getcCount() {
 		return cCount;
 	}
@@ -114,6 +124,5 @@ public class Community {
 	public void setcDelYN(char cDelYN) {
 		this.cDelYN = cDelYN;
 	}
-
 	
 }
