@@ -32,4 +32,9 @@ public class MemberDAO {
 		
 	}
 
+	public int insertMember(Member m) {
+		
+		return sqlSession.insert("member.memberJoin", m);
+	}
+
 }

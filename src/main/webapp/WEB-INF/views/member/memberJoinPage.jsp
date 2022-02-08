@@ -14,7 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>따숨, 마음을 나누다.</title>
 </head>
 <body>
 	<div id="wrap">
@@ -34,31 +34,33 @@
 						<li id="successJoin">가입 완료</li>
 					</ol>
 				</div>
-				<form id="joinForm" action="/member/successJoinPage.do" method="post">
+				<form id="joinForm" action="/member/memberJoin.do" method="post">
 					<div id="memberColumnList">
 						<label for="userId">아이디</label><br/>
 						<label for="userPwd">비밀번호</label><br/>
 						<label for="userPwd_re">비밀번호 확인</label><br/>
 						<label for="userName">이름</label><br/>
-						<label for="nickName">닉네임</label><br/>
+						<label for="nick">닉네임</label><br/>
 						<label for="email">이메일</label><br/>
 						<label for="phone">휴대폰번호</label><br/>
-						<label for="address">주소</label><br/>
+						<label for="address">거주 지역</label><br/>
 					</div>
 					<div id="memberData">
-						<input type="text" id="userId" name="userId">
+						<input type="text" class="dataInput" id="userId" name="userId">
 						<button type="button">중복 확인</button> <br/>
-						<input type="password" id="userPwd" name="userPwd"><br/>
-						<input type="password" id="userPwd_re" name="userPwd_re"><br/>
-						<input type="text" id="userName" name="userName"><br/>
-						<input type="text" id="nickName" name="nickName">
+						<input type="password" class="dataInput" id="userPwd" name="userPwd"><br/>
+						<input type="password" class="dataInput" id="userPwd_re" name="userPwd_re"><br/>
+						<input type="text" class="dataInput" id="userName" name="userName"><br/>
+						<input type="text" class="dataInput" id="nick" name="nick">
 						<button type="button">중복 확인</button><br/>
-						<input type="text" id="email" name="email">
+						<input type="text" class="dataInput" id="email" name="email">
 						<button type="button">이메일 인증</button><br/>
-						<input type="text" id="phone" name="phone" placeholder="-없이 입력하세요"><br/>
-						<input type="text" id="address" name="address">
-						<button type="button">주소 검색</button><br/>
-						<input type="text" name="address2">
+						<input type="text" class="dataInput" id="phone" name="phone" placeholder="-없이 입력하세요"><br/>
+						<select name="address">
+							<option value="서울">서울</option>
+							<option value="인천">인천</option>
+							<option value="경기도">경기도</option>
+						</select>
 						<div class="agree_box">
 							<ul>
 								<li class="join_agree">
@@ -87,5 +89,8 @@
 			<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>
 		</footer>
 	</div>
+	
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </body>
 </html>
