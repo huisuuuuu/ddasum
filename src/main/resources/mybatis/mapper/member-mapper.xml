@@ -31,4 +31,23 @@
   		where
   			userId = #{userId}
   	</update>
+  	
+  	<insert id="memberJoin" parameterType="member">
+  		INSERT INTO MEMBER VALUES(
+  								MEMBER_SEQ.NEXTVAL,
+  								'USER',
+  								#{userId},
+  								#{userPwd},
+  								#{userName},
+  								#{nick},
+  								#{email},
+  								#{phone},
+  								#{address},
+  								'N',
+  								NULL,
+  								SYSDATE,
+  								NULL,
+  								'N'
+  		)
+  	</insert>
 </mapper>
