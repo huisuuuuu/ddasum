@@ -154,7 +154,7 @@ public class MemberController {
 			return "commons/msg";
 			
 		} else {
-		return "/member/loginPage";
+			return "member/loginPage";
 		}
 	}
 
@@ -170,7 +170,7 @@ public class MemberController {
 			return "commons/msg";
 			
 		} else {
-			return "/member/bizMemberLoginPage";
+			return "member/bizMemberLoginPage";
 		}
 
 	}
@@ -178,76 +178,92 @@ public class MemberController {
 	@RequestMapping(value = "/member/joinPage.do", method = RequestMethod.GET)
 	public String joinPage() {
 
-		return "/member/joinPage";
+		return "member/joinPage";
 
 	}
+	
+	@RequestMapping(value = "/member/memberJoin.do", method = RequestMethod.POST)
+	public String memberJoinus(Member m, Model model) {
 
+		int result = mService.insertMember(m);
+		
+		if(result>0) {
+			return "member/successJoinPage";
+		}else {
+			model.addAttribute("msg1", "회원 가입 실패");
+			model.addAttribute("msg2", "지속적인 문제 발생 시 관리자에게 문의해주세요.");
+			model.addAttribute("location", "/member/joinPage.do");
+			return "commons/msg";
+		}
+		
+	}
+	
 	@RequestMapping(value = "/member/findIdPage.do", method = RequestMethod.GET)
 	public String findIdPage() {
 
-		return "/member/findIdPage";
+		return "member/findIdPage";
 
 	}
 
 	@RequestMapping(value = "/member/findPwdPage.do", method = RequestMethod.GET)
 	public String findPwdPage() {
 
-		return "/member/findPwdPage";
+		return "member/findPwdPage";
 
 	}
 
 	@RequestMapping(value = "/member/saleRestaurantListPage.do", method = RequestMethod.GET)
 	public String saleRestaurantPage() {
 
-		return "/member/saleRestaurantListPage";
+		return "member/saleRestaurantListPage";
 
 	}
 
 	@RequestMapping(value = "/member/memberJoinPage.do", method = RequestMethod.GET)
 	public String memberJoinPage() {
 
-		return "/member/memberJoinPage";
+		return "member/memberJoinPage";
 
 	}
 
 	@RequestMapping(value = "/member/bizMemberChoicePage.do", method = RequestMethod.GET)
 	public String bizMemberChoicePage() {
 
-		return "/member/bizMemberChoicePage";
+		return "member/bizMemberChoicePage";
 
 	}
 
 	@RequestMapping(value = "/member/bizNumVerify.do", method = RequestMethod.GET)
 	public String bizNumVerify() {
 
-		return "/member/bizNumVerify";
+		return "member/bizNumVerify";
 
 	}
 
 	@RequestMapping(value = "/member/bizMemberJoinPage.do", method = RequestMethod.POST)
 	public String bizMemberJoinPage() {
 
-		return "/member/bizMemberJoinPage";
+		return "member/bizMemberJoinPage";
 
 	}
 
 	@RequestMapping(value = "/member/successJoinPage.do", method = RequestMethod.POST)
 	public String successJoinPage() {
 
-		return "/member/successJoinPage";
+		return "member/successJoinPage";
 
 	}
 
 	// 나중에 삭제할 코드
 	@RequestMapping(value = "/member/mainPage.do")
 	public String mainPage() {
-		return "/main";
+		return "main";
 	}
 
 	@RequestMapping(value = "/member/saleRestaurantDetail.do", method = RequestMethod.GET)
 	public String saleRestaurantDetail() {
 
-		return "/member/saleRestaurantDetail";
+		return "member/saleRestaurantDetail";
 
 	}
 

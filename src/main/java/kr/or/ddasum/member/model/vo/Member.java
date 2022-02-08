@@ -18,6 +18,14 @@ public class Member {
 	private long cardNo;
 	private char delYN;
 	
+	@Override
+	public String toString() {
+		return "Member [userNo=" + userNo + ", authorityId=" + authorityId + ", userId=" + userId + ", userPwd="
+				+ userPwd + ", userName=" + userName + ", nick=" + nick + ", phone=" + phone + ", email=" + email
+				+ ", detail=" + detail + ", address=" + address + ", pImage=" + pImage + ", enrollDate=" + enrollDate
+				+ ", cardNo=" + cardNo + ", delYN=" + delYN + "]";
+	}
+
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub

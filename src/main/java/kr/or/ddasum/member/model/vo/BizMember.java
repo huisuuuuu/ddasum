@@ -23,6 +23,17 @@ public class BizMember {
 	private char bizChangeYN;	//사업자전환
 	private char bizDelYN;		//탈퇴여부
 	
+	
+	
+	@Override
+	public String toString() {
+		return "BizMember [bizNo=" + bizNo + ", authorityId=" + authorityId + ", bizId=" + bizId + ", bizPwd=" + bizPwd
+				+ ", ceoName=" + ceoName + ", bizName=" + bizName + ", bizEmail=" + bizEmail + ", bizPhone=" + bizPhone
+				+ ", restaurant=" + restaurant + ", area=" + area + ", address=" + address + ", bizTime=" + bizTime
+				+ ", regNo=" + regNo + ", bizImage=" + bizImage + ", bizEnrollDate=" + bizEnrollDate + ", bizCount="
+				+ bizCount + ", bizChangeYN=" + bizChangeYN + ", bizDelYN=" + bizDelYN + "]";
+	}
+
 	public BizMember() {
 		super();
 		// TODO Auto-generated constructor stub
