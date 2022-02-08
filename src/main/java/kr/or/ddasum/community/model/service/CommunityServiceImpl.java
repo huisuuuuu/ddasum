@@ -48,7 +48,7 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public HashMap<String, Object> detailOneCommunity(int cNo) {
-		System.out.println("service");
+		
 		Community c = cDAO.detailOneCommunity(sqlSession, cNo);
 		
 		ArrayList <CommunityComment> comList = cDAO.detailComment(sqlSession, cNo); 
@@ -82,6 +82,12 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public int insertCommunity(Community c) {
 		
+		return 0;
+	}
+
+	@Override
+	public int insertComment(CommunityComment cc) {
+		cDAO.insertComment(sqlSession, cc);
 		return 0;
 	}
 	

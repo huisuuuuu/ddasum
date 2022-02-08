@@ -94,14 +94,16 @@
 		    P_COM_NO AS pComNo,
 		    COM_DEPTH AS comDepth,
 		    COM_ORDER AS comOrder,
-		    CASE WHEN COM_SECRET_YN = 'Y' THEN cast('***삭제된 댓글입니다***' AS NVARCHAR2(500)) ELSE COM_CONTENT END AS comContent,
+		    COM_CONTENT AS comContent,
 		    COM_REGDATE AS comRegDate,
 		    COM_SECRET_YN AS comSecretYN,
 		    COM_DEL_YN AS comDelYN
 		FROM
 		    COM_COMMENT
-		        LEFT JOIN MEMBER ON (COM_COMMENT.USERNO = MEMBER.USERNO)	
-		ORDER BY DECODE(P_COM_NO, '', COM_NO), P_COM_NO, COM_ORDER
+		        LEFT JOIN MEMBER ON (COM_COMMENT.USERNO = MEMBER.USERNO)
+		WHERE C_NO = #{_parameter}        	
+		START WITH P_COM_NO IS NULL
+		CONNECT BY NOCYCLE PRIOR COM_NO = P_COM_NO
 	</select>
 	
 	<update id="deleteCommunity" parameterType="int">
@@ -116,4 +118,33 @@
 		UPDATE COMMUNITY SET C_COUNT = C_COUNT + 1 WHERE C_NO = #{cNo}
 	</update>
 	
+	<select id="countPCom" parameterType="int" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM COM_COMMENT
+		WHERE C_NO = #{_parameter}		
+	</select>
+
+	<insert id="insertComment" parameterType="kr.or.ddasum.community.model.vo.CommunityComment">
+		INSERT INTO
+			COM_COMMENT
+		VALUES(
+			#{cNo},
+			COM_COMMENT_SEQ.NEXTVAL,
+			#{userNo},
+			<choose>
+				<when test="pComNo==0">
+					'',
+				</when>
+				<otherwise>
+					#{pComNo},
+				</otherwise>
+			</choose>
+			#{comDepth},
+			#{comOrder},
+			#{comContent},
+			SYSDATE,
+			#{comSecretYN},
+			'N')
+	</insert>
 </mapper>
