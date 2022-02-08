@@ -20,7 +20,7 @@ public class CommunityDAO {
 		int limit = recordCountPerPage;
 		
 		RowBounds rb = new RowBounds(offset, limit);
-		sqlSession.selectList("community.selectAllCommunity", null, rb);
+		
 		return new ArrayList<Community> (sqlSession.selectList("community.selectAllCommunity", null, rb));
 	}
 
@@ -61,6 +61,7 @@ public class CommunityDAO {
 		
 		return 0;//sqlSession.update("community.deleteComment", comNo);
 	}
+	
 	public String getPageNavi(SqlSession sqlSession, int recordCountPerPage, int currentPage, int naviCountPerPage) {
 		int communityAllCount = communityAllCount(sqlSession);
 		
@@ -106,6 +107,22 @@ public class CommunityDAO {
 	public void hitCommunity(SqlSessionTemplate sqlSession, int cNo) {
 		
 		sqlSession.update("community.hitCoommunity", cNo);
+	}
+
+	public int insertComment(SqlSessionTemplate sqlSession, CommunityComment cc) {
+		int comOrder = sqlSession.selectOne("community.countPCom", cc.getcNo());
+		System.out.println("order" + comOrder);
+		cc.setComOrder(comOrder);
 		
+		System.out.println(cc.getcNo());
+		System.out.println(cc.getUserNo());
+		System.out.println(cc.getpComNo());
+		System.out.println(cc.getComDepth());
+		System.out.println(cc.getComOrder());
+		System.out.println(cc.getComContent());
+		System.out.println(cc.getComSecretYN());
+		
+		
+		return sqlSession.insert("community.insertComment", cc);
 	}
 }

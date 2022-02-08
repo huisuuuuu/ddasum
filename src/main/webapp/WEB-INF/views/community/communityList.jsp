@@ -56,7 +56,8 @@
                     <th class="td_date">작성일</th>
                     <th class="td_count">조회수</th>
                 </tr>
-				<c:if test="${!requestScope.map['list'].isEmpty() }">
+                <c:choose>
+				<c:when test="${!requestScope.map['list'].isEmpty() }">
 					<c:forEach items="${requestScope.map['list'] }" var="c">
 						<tr class="table_tr_body">
 		                    <td class="td_no">${c.cNo}</td>
@@ -65,13 +66,23 @@
 		                    <td class="td_writer">${c.nick }</td>
 		                    <td class="td_date">${c.cRegDate }</td>
 		                    <td class="td_count">${c.cCount }</td>
-
 	                	</tr>
 	                	
 					</c:forEach>
-				</c:if>
+				</c:when>
+				<c:otherwise>
+						<tr class="table_tr_body">
+		                    <td class="td_no"></td>
+		                    <td class="td_area"></td>
+		                    <td class="td_title">게시물이 없습니다.</td>
+		                    <td class="td_writer"></td>
+		                    <td class="td_date"></td>
+		                    <td class="td_count"></td>
+	                	</tr>				
+				</c:otherwise>
+			</c:choose>				
             </table>
-		
+
         </div>
     </div>
     <br /><br /><br />
