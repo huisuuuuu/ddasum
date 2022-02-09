@@ -34,7 +34,7 @@ crossorigin="anonymous"></script>
 				<div class="resultArea">
 				
 				<c:choose>
-					<c:when test="${!requestScope.list.isEmpty() }">
+					<c:when test="${!requestScop.list.isEmpty() }">
 						<table class="resultTable">
 							<tr class="Row">
 			                    <th class="rt-th-1">번호</th>
@@ -44,9 +44,9 @@ crossorigin="anonymous"></script>
 			                
 			                <c:forEach items="${requestScope.list }" var="m" varStatus="i">
 							<tr>
-			                    <td>${requestScope.iNo }</td>
-			                    <td>${requestScope.iTitle }</td>
-			                    <td>${requestScope.iRegdate }</td>
+			                    <td>${i.count }</td>
+			                	<td><a href="/board/noticeDetail.do?iNo=${m.iNo }">${m.iTitle }</a></td>
+			                    <td>${m.iRegdate }</td>
 			                </tr>
 							</c:forEach>
 						</table>
@@ -67,7 +67,6 @@ crossorigin="anonymous"></script>
 			<jsp:include page="../commons/footer/site-footer.jsp"/>			
 		</div>
 	</div>
-
 
 </body>
 </html>

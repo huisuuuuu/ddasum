@@ -30,24 +30,18 @@ crossorigin="anonymous"></script>
 				<div class="resultArea">
 					<div class="detailTable">
 						<p>
-							<span class="subject">꿈나무 카드 인증 안내</span>
-							<span class="subject">2022.01.27</span>
+							<span class="subject">${requestScope.Notice.iTitle } </span>
+							<span class="regdate">${requestScope.Notice.iRegdate } </span>
 						</p>
 						
 							<span class="noticeContent">
-								안녕하세요. 따숨입니다.
-								<br/>꿈나무 카드 인증 관련 안내드립니다.
-								<br/>
-								<br/>마이페이지 > 꿈나무 카드 인증 메뉴에 아래와 같이 카드 사진을 업로드 한 후 등록 버튼을 클릭하면
-								<br/>관리자가 3일 내에 확인 후 승인 작업을 진행합니다.
-								<br/>
-								<br/>카드 번호 식별 불가 시 반려되므로, 카드 번호를 정확하게 식별할 수 있는 사진을 업로드 해주시길 바랍니다.
+								${requestScope.Notice.iContent }
 							</span>  
 						
 					</div>
 				</div>
 				<div class="listBtn">
-					<input type="button" name="list" value="목록"/>
+					<a href="/board/noticeBoard.do"><input type="button" name="list" value="목록"/></a>
 				</div>
 			</div>
 		</div>

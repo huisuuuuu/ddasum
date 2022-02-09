@@ -5,6 +5,10 @@
             box-sizing: border-box;
             font-family: 'Noto Sans KR', sans-serif; 
         }
+		* a{
+        text-decoration: none;
+        color: inherit;
+    	}
 		#wrapper{
 			width: 1920px;
 			height: 1080px;
@@ -110,4 +114,16 @@
 		.listBtn{
 			text-align: center;
 			padding-top: 10px;
+		}
+		.subject{
+			padding-top: 10px;		
+			font-size: 22pt;
+		}
+		.regdate{
+			padding-top: 10px;		
+			font-size: 18pt;
+		}
+		.noticeContent{
+			padding-top: 10px;		
+			font-size: 18pt;
 		}

@@ -44,7 +44,6 @@ public class BizMemberController {
 		
 		ArrayList<BizGoods> list = bService.goodsManage(bizNo);
 		
-		System.out.println(list);
 		mav.addObject("list", list);
 		mav.setViewName("/bizMember/goodsManage");
 		
@@ -123,7 +122,6 @@ public class BizMemberController {
 
 		int result = bService.updateBiz(bz);
 		
-		System.out.println(result);
 		String rst = "";
 		if (result > 0) {
 			rst = "true";
@@ -134,7 +132,24 @@ public class BizMemberController {
 		return rst;
 	}
 	
-	
+	@RequestMapping(value="/bizMember/addGood.do", method=RequestMethod.POST)
+	public ModelAndView addGood(@SessionAttribute BizMember bizMember, ModelAndView mav) {
+			
+		int result = bService.addGood(bizMember);
+		
+		if(result>0)
+		{
+			mav.addObject("msg", "상품 추가 성공");
+			mav.addObject("location", "/bizMember/goodsManage");
+		}else
+		{
+			mav.addObject("msg", "상품 추가 실패");
+			mav.addObject("location", "/bizMember/goodsManage");
+		}
+		mav.setViewName("commons/msg");
+		return mav;
+		
+	}
 	
 	
 	
