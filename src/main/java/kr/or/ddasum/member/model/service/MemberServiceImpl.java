@@ -36,4 +36,34 @@ public class MemberServiceImpl implements MemberService{
 		return mDAO.insertMember(m);
 	}
 
+	@Override
+	public Member selectIdCheck(String userId) {
+		
+		return mDAO.selectIdCheck(userId);
+	}
+
+	@Override
+	public Member selectNickCheck(String nick) {
+		
+		return mDAO.selectNickCheck(nick);
+	}
+
+	@Override
+	public BizMember selectRegNumCheck(String regNo) {
+		
+		return mDAO.selectRegNumCheck(regNo);
+	}
+
+	@Override
+	public Member findMemberId(Member m) {
+		
+		return mDAO.findMemberId(m);
+	}
+
+	@Override
+	public BizMember findBizMemberId(BizMember bm) {
+		
+		return mDAO.findBizMemberId(bm);
+	}
+
 }

@@ -41,7 +41,7 @@ public class MemberController {
 				model.addAttribute("msg1", "로그인 실패");
 				model.addAttribute("msg2", "아이디와 비밀번호를 확인해주세요.");
 				model.addAttribute("location", "/member/loginPage.do");
-				return "commons/msg";
+				return "commons/errorMsg";
 			}
 	}
 
@@ -60,7 +60,7 @@ public class MemberController {
 			model.addAttribute("msg1", "로그인 실패");
 			model.addAttribute("msg2", "아이디와 비밀번호를 확인해주세요.");
 			model.addAttribute("location", "/member/bizMemberLoginPage.do");
-			return "commons/msg";
+			return "commons/errorMsg";
 		}
 	}
 
@@ -151,7 +151,7 @@ public class MemberController {
 			model.addAttribute("msg1", "알림메세지");
 			model.addAttribute("msg2", "비정상적인 접근입니다.");
 			model.addAttribute("location", "/");
-			return "commons/msg";
+			return "commons/errorMsg";
 			
 		} else {
 			return "member/loginPage";
@@ -167,7 +167,7 @@ public class MemberController {
 			model.addAttribute("msg1", "알림메세지");
 			model.addAttribute("msg2", "비정상적인 접근입니다.");
 			model.addAttribute("location", "/");
-			return "commons/msg";
+			return "commons/errorMsg";
 			
 		} else {
 			return "member/bizMemberLoginPage";
@@ -193,25 +193,133 @@ public class MemberController {
 			model.addAttribute("msg1", "회원 가입 실패");
 			model.addAttribute("msg2", "지속적인 문제 발생 시 관리자에게 문의해주세요.");
 			model.addAttribute("location", "/member/joinPage.do");
-			return "commons/msg";
+			return "commons/errorMsg";
 		}
 		
 	}
 	
-	@RequestMapping(value = "/member/findIdPage.do", method = RequestMethod.GET)
-	public String findIdPage() {
+	@RequestMapping(value = "/member/memberIdCheck.do", method = RequestMethod.GET)
+	public void memberIdCheck(HttpServletResponse response, @RequestParam String userId, Model model) throws IOException{
 
-		return "member/findIdPage";
+		Member m = mService.selectIdCheck(userId);
+		
+		if(m!=null) {
+			response.getWriter().print(true);//사용중
+		}else {
+			response.getWriter().print(false);//사용중
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/memberNickCheck.do", method = RequestMethod.GET)
+	public void memberNickCheck(HttpServletResponse response, @RequestParam String nick, Model model) throws IOException{
+
+		Member m = mService.selectNickCheck(nick);
+		
+		if(m!=null) {
+			response.getWriter().print(true);//사용중
+		}else {
+			response.getWriter().print(false);//사용중
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/bizMemberRegNumCheck.do", method = RequestMethod.POST)
+	public void bizMemberRegNumCheck(HttpServletResponse response, @RequestParam String regNum, Model model) throws IOException{
+		
+		BizMember bm = mService.selectRegNumCheck(regNum);
+		
+		if(bm!=null) {
+			response.getWriter().print(true);//사용중
+			System.out.println("true");
+		}else {
+			response.getWriter().print(false);//사용중
+			System.out.println("false");
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/findIdPwdPage.do", method = RequestMethod.GET)
+	public String findIdPwdPage() {
+
+		return "member/findIdPwdPage";
 
 	}
+	
+	@RequestMapping(value = "/member/findMemberIdPage.do", method = RequestMethod.GET)
+	public String findMemberIdPage() {
 
-	@RequestMapping(value = "/member/findPwdPage.do", method = RequestMethod.GET)
-	public String findPwdPage() {
-
-		return "member/findPwdPage";
+		return "member/findMemberIdPage";
 
 	}
+	
+	@RequestMapping(value = "/member/findMemberPwdPage.do", method = RequestMethod.GET)
+	public String findMemberPwdPage() {
 
+		return "member/findMemberPwdPage";
+
+	}
+	
+	@RequestMapping(value = "/member/findBizMemberIdPage.do", method = RequestMethod.GET)
+	public String findBizMemberIdPage() {
+
+		return "member/findBizMemberIdPage";
+
+	}
+	
+	@RequestMapping(value = "/member/findBizMemberPwdPage.do", method = RequestMethod.GET)
+	public String findBizMemberPwdPage() {
+
+		return "member/findBizMemberPwdPage";
+
+	}
+	
+	@RequestMapping(value = "/member/findMemberId.do", method = RequestMethod.POST)
+	public String findMemberId(@RequestParam String userName, @RequestParam String email, Model model) {
+		
+		Member m = new Member();
+		
+		m.setUserName(userName);
+		m.setEmail(email);
+		
+		Member member = mService.findMemberId(m);
+		
+		if(member != null) {
+			model.addAttribute("msg1", member.getUserName()+"님의 아이디는 "+member.getUserId()+" 입니다.");
+			model.addAttribute("location", "/member/findMemberIdPage.do");
+			return "commons/successMsg";
+		}else {
+			model.addAttribute("msg1", "등록되지 않은 이메일입니다.");
+			model.addAttribute("msg2", "다시 시도해주세요.");
+			model.addAttribute("location", "/member/findMemberIdPage.do");
+			return "commons/errorMsg";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/findBizMemberId.do", method = RequestMethod.POST)
+	public String findBizMemberId(@RequestParam String ceoName, @RequestParam String bizEmail, Model model) {
+		
+		BizMember bm = new BizMember();
+		
+		bm.setCeoName(ceoName);
+		bm.setBizEmail(bizEmail);
+		
+		BizMember bizMember = mService.findBizMemberId(bm);
+		
+		if(bizMember != null) {
+			model.addAttribute("msg1", bizMember.getCeoName()+"님의 아이디는 "+bizMember.getBizId()+" 입니다.");
+			model.addAttribute("location", "/member/findBizMemberIdPage.do");
+			return "commons/successMsg";
+		}else {
+			model.addAttribute("msg1", "등록되지 않은 이메일입니다.");
+			model.addAttribute("msg2", "다시 시도해주세요.");
+			model.addAttribute("location", "/member/findBizMemberIdPage.do");
+			return "commons/errorMsg";
+		}
+		
+	}
+	
 	@RequestMapping(value = "/member/saleRestaurantListPage.do", method = RequestMethod.GET)
 	public String saleRestaurantPage() {
 
