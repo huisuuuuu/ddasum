@@ -1,11 +1,15 @@
 package kr.or.ddasum.member.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.member.model.vo.Detail;
 import kr.or.ddasum.member.model.vo.Member;
 
 @Repository
@@ -69,6 +73,58 @@ public class MemberDAO {
 
 	public int findBizMemberPwd(BizMember bm) {
 		return sqlSession.update("bizMember.findBizMemberPwd", bm);
+	}
+	
+	public ArrayList<Detail> detailMemberList(int currentPage, int recordCountPerPage, int userNo) {
+		
+		RowBounds rb = new RowBounds(((currentPage-1)*recordCountPerPage),recordCountPerPage);
+		
+		
+		ArrayList<Detail> list = new ArrayList<Detail>(sqlSession.selectList("member.detailMemberList",userNo, rb));
+		
+		return list;
+	}
+
+	public String getPageNavi(int currentPage, int recordCountPerPage, int naviCountPerPage, int userNo) {
+		
+		int recordTotalCount = totalCount(userNo);
+		
+		int pageTotalCount;
+		
+		pageTotalCount =(int)Math.ceil(recordTotalCount/(double)recordCountPerPage);
+		
+		int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+
+		if(startNavi!=1) {
+			sb.append("<li><a href='/member/reservationPage.do?currentPage="+(startNavi-1)+"'><i class='fas fa-chevron-left'></i></a></li>");
+		}
+
+		for(int i=startNavi; i<=endNavi; i++) {
+			
+			if(i==currentPage) {
+				sb.append("<li><a href='/member/reservationPage.do?currentPage="+i+"' class='page_active'>"+i+"</a></li>");
+			}else {
+				sb.append("<li><a href='/member/reservationPage.do?currentPage="+i+"'>"+i+"</a></li>");
+			}
+		}
+
+		if(endNavi!=pageTotalCount) {
+			sb.append("<li><a href='/member/reservationPage.do?currentPage="+(endNavi+1)+"'><i class='fas fa-chevron-right'></i></a></li>");
+		}
+		
+		return sb.toString();
+	}
+
+	private int totalCount(int userNo) {
+		return sqlSession.selectOne("member.selectDetailTotalCount",userNo);
+		
 	}
 
 }

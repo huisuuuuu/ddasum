@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fileData">
+  	<insert id="fileUpload" parameterType="fileData">
+  		MERGE INTO profile_img
+            USING DUAL
+            ON (userNo = #{userNo})
+            WHEN MATCHED THEN
+                      UPDATE SET
+                            p_original = #{pOriginal},
+                            p_change = #{pChange},
+                            p_filepath = #{pFilePath},
+                            p_filesize = #{pFileSize},
+                            p_fileupdate = #{pFileUpdate}
+            WHEN NOT MATCHED THEN
+                      INSERT (p_file_No, userNo, Biz_no, p_original,p_change, p_filepath, p_filesize,p_fileupdate,p_del_yn) 
+                                 VALUES (PROFILE_IMG_SEQ.nextval,#{userNo},'',#{pOriginal},#{pChange}, #{pFilePath},#{pFileSize},#{pFileUpdate},'N' )
+  	</insert>
+</mapper>
