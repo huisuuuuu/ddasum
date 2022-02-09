@@ -62,4 +62,13 @@ public class MemberDAO {
 		return sqlSession.selectOne("bizMember.findBizMemberId", bm);
 	}
 
+	public int findMemberPwd(Member m) {
+		
+		return sqlSession.update("member.findeMemberPwd", m);
+	}
+
+	public int findBizMemberPwd(BizMember bm) {
+		return sqlSession.update("bizMember.findBizMemberPwd", bm);
+	}
+
 }
