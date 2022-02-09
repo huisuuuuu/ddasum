@@ -66,4 +66,16 @@ public class MemberServiceImpl implements MemberService{
 		return mDAO.findBizMemberId(bm);
 	}
 
+	@Override
+	public int findMemberPwd(Member m) {
+		
+		return mDAO.findMemberPwd(m);
+	}
+
+	@Override
+	public int findBizMemberPwd(BizMember bm) {
+		
+		return mDAO.findBizMemberPwd(bm);
+	}
+
 }

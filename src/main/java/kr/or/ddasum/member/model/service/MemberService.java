@@ -22,4 +22,8 @@ public interface MemberService {
 	Member findMemberId(Member m);
 
 	BizMember findBizMemberId(BizMember bm);
+
+	int findMemberPwd(Member m);
+
+	int findBizMemberPwd(BizMember bm);
 }
