@@ -19,19 +19,19 @@
 		</header>
 		<div id="content">
 			<div class="main_tit">
-				<h1>아이디&nbsp;/&nbsp;비밀번호 찾기</h1>
+				<h1>사업자&nbsp;아이디&nbsp;/&nbsp;비밀번호 찾기</h1>
 				<div class="under"></div>
 			</div>
 			<div class="contents_wrap">
 				<div id="choiceFindInfo">
 					<div id="choiceFindId">
-						<a href="/member/findIdPage.do">아이디 찾기</a>
+						<a href="/member/findBizMemberIdPage.do">아이디 찾기</a>
 					</div>
 					<div id="choiceFindPwd">
-						<a href="/member/findPwdPage.do">비밀번호 찾기</a>
+						<a href="/member/findBizMemberPwdPage.do">비밀번호 찾기</a>
 					</div>
 				</div>
-				<form id="findInfoForm" action="/member/findUserPwd.do" method="post">
+				<form id="findInfoForm" action="/member/findBizMemberPwd.do" method="post">
 					<label for="userId">아이디</label><br/>
 					<input class="findInfoInput" type="text" id="userId" name="userId" placeholder="아이디를 입력해 주세요"><br/>
 					<label for="email">이메일</label><br/>

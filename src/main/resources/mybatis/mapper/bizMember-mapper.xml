@@ -24,9 +24,59 @@
 			biz_del_yn as bizDelYN
 		FROM
 			biz_member
-		WHERE biz_id = #{bizId} and biz_pwd = #{bizPwd}	
+		WHERE biz_id = #{bizId} and biz_pwd = #{bizPwd}	and biz_del_yn = 'N'
 	</select>
 
+	<select id="selectRegNumCheck" parameterType="String" resultType="bizMember">
+		SELECT
+			biz_no as bizNo,
+			authority_id as authorityId,
+			biz_id as bizId,
+			biz_pwd as bizPwd,
+			ceo_name as ceoName,
+			biz_name as bizName,
+			biz_email as bizEmail,
+			biz_phone as bizPhone,
+			restaurant as restaurant,
+			area as area,
+			address as address,
+			biz_time as bizTime,
+			reg_no as regNo,
+			biz_image as bizImage,
+			biz_enrolldate as bizEnrollDate,
+			biz_count as bizCount,
+			biz_change_yn as bizChangeYN,
+			biz_del_yn as bizDelYN
+		FROM
+			biz_member
+		WHERE reg_no = #{regNo} and biz_del_yn = 'N'
+	</select>
+
+	<select id="findBizMemberId" parameterType="bizMember" resultType="bizMember">
+		SELECT
+			biz_no as bizNo,
+			authority_id as authorityId,
+			biz_id as bizId,
+			biz_pwd as bizPwd,
+			ceo_name as ceoName,
+			biz_name as bizName,
+			biz_email as bizEmail,
+			biz_phone as bizPhone,
+			restaurant as restaurant,
+			area as area,
+			address as address,
+			biz_time as bizTime,
+			reg_no as regNo,
+			biz_image as bizImage,
+			biz_enrolldate as bizEnrollDate,
+			biz_count as bizCount,
+			biz_change_yn as bizChangeYN,
+			biz_del_yn as bizDelYN
+		FROM
+			biz_member
+		WHERE ceo_name = #{ceoName} and biz_email = #{bizEmail} and biz_del_yn = 'N'
+	</select>
+	
 	<select id="bizManage" parameterType="bizMember" resultType="bizMember">
 		SELECT
 			biz_no as bizNo,
@@ -52,8 +102,8 @@
         WHERE m.restaurant = t.restaurant AND m.authority_id = c.AUTHORITY_ID
         	AND biz_id = #{bizId}
 	</select>
-	
-	
+
+
 	<select id="goodsManage" resultType="BizGoods">
 		SELECT
 			menu_no as menuNo,
@@ -71,7 +121,7 @@
         WHERE
             biz_No = #{bizNo}
 	</select>	
-	
+
   	<update id="updateBiz" parameterType="bizMember">
   		update biz_member set 
 	  		ceo_Name = #{ceoName},
@@ -85,13 +135,4 @@
   		where
   			biz_Id = #{bizId}
   	</update>	
-	
-  	<insert id="addGood" parameterType="BizGoods">
-  		INSERT INTO
-  			MENU
-  		VALUES (MENU_SEQ.NEXTVAL,#{bizNo},#{authorityId},#{restaurant},#{menuName},#{menuInfo},#{originalPrice},#{dcPrice},#{menuImage},'N')
-  	</insert>	
-	
-	
-	
 </mapper>
