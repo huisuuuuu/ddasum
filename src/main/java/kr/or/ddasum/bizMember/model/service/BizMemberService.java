@@ -39,16 +39,6 @@ public interface BizMemberService {
 	  */
 	int updateBiz(BizMember bz);
 
-	/**
-	  * @Method Name : addGood
-	  * @작성일 : 2022. 2. 9.
-	  * @작성자 : lee
-	  * @변경이력 : 
-	  * @Method 설명 :신규 메뉴 등록
-	  * @param bizMember
-	 * @return 
-	  */
-	int addGood(BizMember bizMember);
 
 
 

@@ -32,11 +32,6 @@ public class BizMemberServiceImpl implements BizMemberService{
 		
 	}
 
-	@Override
-	public int addGood(BizMember bizMember) {
-		return bDAO.addGood(bizMember);
-	}
-
 	
 
 }
