@@ -25,7 +25,7 @@
                <li id="notice-button">
                    <a href="">고객센터</a>
                    <div id="hover-menu1" style="display: none">
-                   <a class="hover-text1" href="">공지사항</a> &nbsp;&nbsp; <a class="hover-text1" href="">자주 묻는 질문</a></div>
+                   <a class="hover-text1" href="/board/noticeBoard.do">공지사항</a> &nbsp;&nbsp; <a class="hover-text1" href="/board/faqBoard.do">자주 묻는 질문</a></div>
                </li>
            </ul>
        </div>

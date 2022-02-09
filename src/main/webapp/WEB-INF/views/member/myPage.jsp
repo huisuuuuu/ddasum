@@ -440,7 +440,7 @@
                 <div id="info-img-area">
                     <span>프로필 사진</span><br><br>
                     <div id="img-area"> </div><br><br>
-                    <input type="file" id="" value="변경하기"/>
+                    
                 </div>
                 <div id="info-info-area">
                         <div class="data-title">아이디</div><div class="info-data"><span>${sessionScope.member.userId }</span></div>
