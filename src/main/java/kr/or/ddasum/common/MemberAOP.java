@@ -53,4 +53,23 @@ public class MemberAOP {
 		m.setUserPwd(encryptPwd);
 		
 	}
+	
+	//로그인 시 작성한 비밀번호 암호화 처리 AOP 로직
+	
+	@Pointcut("execution(int kr.or.ddasum.member.model.service.MemberServiceImpl.findMemberPwd(..))")
+	public void findMemberPwdPointCut() {}
+	
+	@Before("findMemberPwdPointCut()")
+	public void findMemberPwdEncryption(JoinPoint jp) throws Exception{
+		
+		Member m = (Member)jp.getArgs()[0];
+		
+		String userId = m.getUserId();
+		String userPwd = m.getUserPwd();
+		
+		String encryptPwd = enc.encryptionData(userPwd, userId);
+		
+		m.setUserPwd(encryptPwd);
+		
+	}
 }

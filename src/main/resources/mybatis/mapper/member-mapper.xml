@@ -91,7 +91,14 @@
 		where
 		userId = #{userId}
 	</update>
-
+	
+	<update id="findeMemberPwd" parameterType="member">
+		update member set
+		userPwd = #{userPwd}
+		where
+		userId = #{userId} and email = #{email} and del_YN = 'N'
+	</update>
+	
 	<insert id="memberJoin" parameterType="member">
 		INSERT INTO MEMBER VALUES(
 		MEMBER_SEQ.NEXTVAL,
