@@ -30,7 +30,7 @@ public class BizMemberDAO {
 	  */
 	public BizMember bizManage(BizMember bizMember) {
 
-		return sqlSession.selectOne("bizMember.bizManage", bizMember);
+		return sqlSession.selectOne("bizAdmin.bizManage", bizMember);
 
 	}
 
@@ -44,7 +44,7 @@ public class BizMemberDAO {
 	  */
 	public ArrayList<BizGoods> goodsManage(int bizNo) {
 
-		return new ArrayList<BizGoods> (sqlSession.selectList("bizMember.goodsManage", bizNo));
+		return new ArrayList<BizGoods> (sqlSession.selectList("bizAdmin.goodsManage", bizNo));
 
 		
 	}
@@ -60,7 +60,7 @@ public class BizMemberDAO {
 	  */
 	public int updateBiz(BizMember bz) {
 
-		return sqlSession.update("bizMember.updateBiz",bz);
+		return sqlSession.update("bizAdmin.updateBiz",bz);
 
 	}
 
@@ -73,10 +73,6 @@ public class BizMemberDAO {
 	  * @param bg
 	  * @return
 	  */
-	public int addGood(BizMember bizMember) {
-
-		return sqlSession.insert("bizMember.addGood",bizMember);
-	}
 
 	
 	
