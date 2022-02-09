@@ -17,6 +17,7 @@
 <script src="/resources/js/ui.js"></script>
 </head>
 <body>
+
     <div id="wrap">
         
         <!-- navigation -->
@@ -30,7 +31,7 @@
             </div>
            
             <div class="box-user">
-                <a href="/">관리자</a>
+                <span>관리자님</span>
                 <a href="/">로그아웃</a>
             </div>
             </div>
@@ -79,23 +80,31 @@
                             </tr>
                         </thead>
                         
+                        <c:choose>
+                        <c:when test="${!requestScope.map['list'].isEmpty() }">
+                        	<c:forEach items="${requestScope.map['list'] }" var="m">
+                        
                         <tbody>
                             <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><a href="/admin/adminUserDetail.do"><button type="button" class="ok_btn">확인</button></a></td>
+                                <td>${m.userNo }</td>
+                                <td>${m.userId }user11</td>
+                                <td>${m.nick }</td>
+                                <td>${m.email }</td>
+                                <td>${m.enrollDate }</td>
+                                <td><a href="/admin/adminUserDetail.do"><button type="button" class="ok_btn">있음</button></a></td>
                                 <td><button type="button" class="ok_btn">상세보기</button></td>
                             </tr>
+                            </c:forEach>
+                        </c:when>
+                        </c:choose>
+                        
                             <tr>
                                 <td>꿈나무</td>
                                 <td>user11</td>
                                 <td>닉네임1</td>
                                 <td>user11@naver.com</td>
                                 <td>2022-02-02</td>
-                                <td><button type="button" class="none_btn">확인</button></td>
+                                <td><button type="button" class="none_btn">없음</button></td>
                                 <td><button type="button" class="ok_btn">상세보기</button></td>
                             </tr>
                             <tr>
@@ -184,6 +193,7 @@
                 </div>
             </div>
           </div>
+         </div>
           
 </body>
 </html>
