@@ -107,13 +107,23 @@
 		.modifyBTN2{
 			float: right;
 			width: 120px;
-			height: 40px;
-			font-size: 18pt;
+			height: 32px;
+			font-size: 14pt;
 			color: white;
 			border: none;
 			background-color: #FFA77E;
 			border-radius: 5px;
 		}
+		.modifyBTN3{
+			float: right;
+			width: 120px;
+			height: 32px;
+			font-size: 14pt;
+			color: white;
+			border: none;
+			background-color: #FFA77E;
+			border-radius: 5px;
+		}		
 		#bizImg{
 			width: 220px;
 			height: 220px;
@@ -131,6 +141,7 @@
 			font-size: 18pt;
 			padding: 10px;
 			border-bottom: 1px solid #A5A5A5;
+			height: 40px;
 		}
 		#typeOption{
 			width: 120px;
@@ -141,6 +152,25 @@
 			width:100px;
 			padding-top: 70px;
 		}
+		h1{
+		float: left;
+		}
+		.bizSmallImage{
+				float: right;
+		}
+		.bizId{
+			float: right;
+			font-size: 18pt;
+			text-align: center;		
+			padding-right: 20px;
+			padding-top: 20px;
+		}
+		.logout{
+			float: right;
+			font-size: 18pt;
+			padding-top: 20px;
+		}
+		
 	</style>
 
 </head>
@@ -157,7 +187,7 @@
 		</div>
 		<div id="L-downArea">
 			<div class="submenu"> 
-				<a href="/BizMember/bizManage.do"><br>	
+				<a href="/bizMember/bizManage.do"><br>	
 					<img class="Icons" src="/resources/images/bizSubMenu1.png" alt="로고">
 					<span class="menulist">업체 관리</span><br><br>
 				</a>
@@ -186,13 +216,21 @@
 		<div id="R-upArea">
 			<div id="bizManage">
 				<h1>업체 관리</h1>
+					<span class="logout">
+						<a href="/BizMember/logout.do">로그아웃</a>
+					</span>
+					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
+					<span class="bizSmallImage">
+					</span>
+					
+
 			</div>
 		</div>
 		<div id="R-downArea">
 			<div id="R-content">
 				<div id="content-title">
 					업체 정보 관리
-					<a href="/BizMember/faqBoard.do"><button class="modifyBTN">변경하기</button></a>
+					<a href="updateBizManage.do"><button class="modifyBTN">변경하기</button></a>
 				</div>
 				<div id="content">
 					<div id="content-L">
@@ -221,25 +259,18 @@
 					</div>
 					<div id="content-result">
 					<ul>
-						<li>USER11 </li>
-						<li>1234 </li>
-						<li>홍길동 </li>
-						<li>가가식당 </li>
-						<li>abc@gmail.com </li>
-						<li>01012341234 </li>
-						<li>
-							<select id="typeOption">
-								<option value="KOR">한식</option>
-								<option value="SCH">분식</option>
-								<option value="WES">양식</option>
-								<option value="JPN">일식</option>
-								<option value="CHI">중식</option>
-							</select></li>
-						<li>서울시 양천구 </li>
-						<li>09:00~22:00 </li>
-						<li>20 </li>
-						<li>후원 <a href="/BizMember/noticeBoard.do"><button class="modifyBTN2">유형전환</button></a></li>
-						<li>N <button class="modifyBTN2">탈퇴</button></li>
+						<li>${requestScope.bizMember.bizId }</li>
+						<li>${requestScope.bizMember.bizPwd }</li>
+						<li>${requestScope.bizMember.ceoName }</li>
+						<li>${requestScope.bizMember.bizName }</li>
+						<li>${requestScope.bizMember.bizEmail }</li>
+						<li>${requestScope.bizMember.bizPhone }</li>
+						<li>${requestScope.bizMember.restaurant }</li>
+						<li>${requestScope.bizMember.address }</li>
+						<li>${requestScope.bizMember.bizTime }</li>
+						<li>${requestScope.bizMember.bizCount }</li>
+						<li>${requestScope.bizMember.authorityId }<button class="modifyBTN2"><a href="/BizMember/supportModify.do">유형전환</button></a></li>
+						<li>${requestScope.bizMember.bizDelYN }<a href="/board/noticeBoard.do"><button class="modifyBTN3">탈퇴</button></a></li>
 					</ul>
 					
 					</div>
