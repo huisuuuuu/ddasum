@@ -1,5 +1,7 @@
 package kr.or.ddasum.member.model.service;
 
+import java.util.HashMap;
+
 import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
 
@@ -26,4 +28,6 @@ public interface MemberService {
 	int findMemberPwd(Member m);
 
 	int findBizMemberPwd(BizMember bm);
+	
+	HashMap<String, Object> detailMemberList(int currentPage, int userNo);
 }
