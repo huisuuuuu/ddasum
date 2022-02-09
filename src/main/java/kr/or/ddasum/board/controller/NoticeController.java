@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.board.model.service.NoticeService;
@@ -31,6 +32,17 @@ public class NoticeController {
 		return mav;
 	}
 
+	@RequestMapping(value="/board/noticeDetail.do", method = RequestMethod.GET)
+	public ModelAndView noticeDetail(ModelAndView mav, @RequestParam int iNo) {
+		
+		Notice n = nService.noticeDetail(iNo);
+		
+		mav.addObject("Notice", n);
+		mav.setViewName("admin/noticeDetail");
+		return mav;
+	}
+	
+	
 	@RequestMapping(value="/board/faqBoard.do", method = RequestMethod.GET)
 	public String faqBoard() {
 		
@@ -38,11 +50,6 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping(value="/board/noticeDetail.do", method = RequestMethod.GET)
-	public String noticeDetail() {
-		
-		return "admin/noticeDetail";
-		
-	}
+
 	
 }

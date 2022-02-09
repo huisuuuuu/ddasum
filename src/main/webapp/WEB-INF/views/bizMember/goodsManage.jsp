@@ -149,6 +149,24 @@
 			border-radius: 23px;
 			color: white;
 		}
+		h1{
+		float: left;
+		}
+		.bizSmallImage{
+				float: right;
+		}
+		.bizId{
+			float: right;
+			font-size: 18pt;
+			text-align: center;		
+			padding-right: 20px;
+			padding-top: 20px;
+		}
+		.logout{
+			float: right;
+			font-size: 18pt;
+			padding-top: 20px;
+		}
 	</style>
 </head>
 <body>
@@ -193,6 +211,13 @@
 		<div id="R-upArea">
 			<div id="goodsManage">
 				<h1>후원 상품 관리</h1>
+					<span class="logout">
+						<a href="/BizMember/logout.do">로그아웃</a>
+					</span>
+					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
+					<span class="bizSmallImage">
+					</span>
+				
 			</div>
 		</div>
 		<div id="R-downArea">
@@ -224,18 +249,19 @@
 			 					<th>상품가격</th>
 			 					<th>관리</th>
 			 				</tr>
-
+						<c:forEach items="${requestScope.list }" var="m" varStatus="i">
 							<tr>
 								<td><input type="checkbox" name="chk" value="1"></td>
-								<td>1</td>
+								<td>${i.count }</td>
 								<td>IMG</td>
-								<td>${requestScope.list.menuName } </td>
-								<td>${requestScope.list.menuInfo } </td>
-								<td>${requestScope.list.originalPrice }원</td>
+								<td>${m.menuName } </td>
+								<td>${m.menuInfo } </td>
+								<td>${m.originalPrice }</td>
 								<td>
 									<button type="button" class="prdtEdt" name="prdtEdt">수정</button>  
 								</td>
 							</tr>
+						</c:forEach>
 						</table>
 						</c:when>
 						<c:otherwise>

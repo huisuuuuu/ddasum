@@ -64,6 +64,20 @@ public class BizMemberDAO {
 
 	}
 
+	/**
+	  * @Method Name : addGood
+	  * @작성일 : 2022. 2. 9.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param bg
+	  * @return
+	  */
+	public int addGood(BizMember bizMember) {
+
+		return sqlSession.insert("bizMember.addGood",bizMember);
+	}
+
 	
 	
 	

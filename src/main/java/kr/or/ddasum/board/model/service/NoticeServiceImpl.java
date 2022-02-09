@@ -22,6 +22,12 @@ public class NoticeServiceImpl implements NoticeService{
 		
 
 	}
+
+	@Override
+	public Notice noticeDetail(int iNo) {
+
+		return nDAO.noticeDetail(iNo);
+	}
 	
 
 	
