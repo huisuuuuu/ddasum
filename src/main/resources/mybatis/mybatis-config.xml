@@ -7,15 +7,9 @@
 		<typeAlias type="kr.or.ddasum.member.model.vo.BizMember" alias="bizMember"/>
 		<typeAlias type="kr.or.ddasum.bizMember.model.vo.BizGoods" alias="BizGoods"/>
 		<typeAlias type="kr.or.ddasum.board.model.vo.Notice" alias="notice"/>
-<<<<<<< HEAD
 		<typeAlias type="kr.or.ddasum.admin.model.vo.AdminMember" alias="admin"/>
 		<typeAlias type="kr.or.ddasum.file.model.vo.FileData" alias="fileData"/>
 		<typeAlias type="kr.or.ddasum.member.model.vo.Detail" alias="detail"/>
-
-=======
-		<typeAlias type="kr.or.ddasum.file.model.vo.FileData" alias="fileData"/>
-		<typeAlias type="kr.or.ddasum.member.model.vo.Detail" alias="detail"/>
->>>>>>> 02846eb117bb4ec024018991c11540165de1bdf9
 	</typeAliases>
 
 </configuration>
