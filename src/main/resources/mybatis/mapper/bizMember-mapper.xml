@@ -86,7 +86,11 @@
   			biz_Id = #{bizId}
   	</update>	
 	
-	
+  	<insert id="addGood" parameterType="BizGoods">
+  		INSERT INTO
+  			MENU
+  		VALUES (MENU_SEQ.NEXTVAL,#{bizNo},#{authorityId},#{restaurant},#{menuName},#{menuInfo},#{originalPrice},#{dcPrice},#{menuImage},'N')
+  	</insert>	
 	
 	
 	

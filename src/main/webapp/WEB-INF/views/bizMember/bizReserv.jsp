@@ -122,6 +122,24 @@
 		td{
 			height: 70px;
 		}
+		h1{
+		float: left;
+		}
+		.bizSmallImage{
+				float: right;
+		}
+		.bizId{
+			float: right;
+			font-size: 18pt;
+			text-align: center;		
+			padding-right: 20px;
+			padding-top: 20px;
+		}
+		.logout{
+			float: right;
+			font-size: 18pt;
+			padding-top: 20px;
+		}
 	</style>
 </head>
 <body>
@@ -165,6 +183,13 @@
 		<div id="R-upArea">
 			<div id="reservManage">
 				<h1>예약 관리</h1>
+					<span class="logout">
+						<a href="/BizMember/logout.do">로그아웃</a>
+					</span>
+					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
+					<span class="bizSmallImage">
+					</span>				
+				
 			</div>
 		</div>
 		<div id="R-downArea">
