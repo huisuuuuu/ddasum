@@ -17,4 +17,20 @@
             i_del_yn = 'N'
 	</select>
 
+	<select id="noticeDetail" resultType="notice">
+		SELECT
+			info_id as infoId,
+			i_no as iNo,
+			i_title as iTitle,
+			i_content as iContent,
+			i_regdate as iRegDate,
+			i_image as iImage,
+			i_del_yn as iDelYN
+		FROM
+			INFO
+        where
+            i_no = #{i_no} and i_del_yn = 'N'
+	</select>
+
+
 </mapper>

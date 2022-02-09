@@ -45,7 +45,7 @@
 			</div>
 			<div class="joinOrFindInfo">
 				<a href="/member/joinPage.do">회원가입</a>&nbsp;&nbsp; <span class="bar">|</span>&nbsp;&nbsp;
-				<a href="/member/findIdPage.do">ID/PW 찾기</a>
+				<a href="/member/findIdPwdPage.do">ID/PW 찾기</a>
 			</div>
 		</div>
 		<footer>

@@ -12,4 +12,18 @@ public interface MemberService {
 	BizMember bizMemberLogin(BizMember bizMember);
 
 	int insertMember(Member m);
+
+	Member selectIdCheck(String userId);
+
+	Member selectNickCheck(String nick);
+
+	BizMember selectRegNumCheck(String regNo);
+
+	Member findMemberId(Member m);
+
+	BizMember findBizMemberId(BizMember bm);
+
+	int findMemberPwd(Member m);
+
+	int findBizMemberPwd(BizMember bm);
 }

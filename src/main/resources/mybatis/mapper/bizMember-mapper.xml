@@ -24,20 +24,20 @@
 			biz_del_yn as bizDelYN
 		FROM
 			biz_member
-		WHERE biz_id = #{bizId} and biz_pwd = #{bizPwd}	
+		WHERE biz_id = #{bizId} and biz_pwd = #{bizPwd}	and biz_del_yn = 'N'
 	</select>
 
-	<select id="bizManage" parameterType="bizMember" resultType="bizMember">
+	<select id="selectRegNumCheck" parameterType="String" resultType="bizMember">
 		SELECT
 			biz_no as bizNo,
-			c.AUTHORITY_INFO as authorityId,
+			authority_id as authorityId,
 			biz_id as bizId,
 			biz_pwd as bizPwd,
 			ceo_name as ceoName,
 			biz_name as bizName,
 			biz_email as bizEmail,
 			biz_phone as bizPhone,
-			t.RESTAURANT_TYPE as restaurant,
+			restaurant as restaurant,
 			area as area,
 			address as address,
 			biz_time as bizTime,
@@ -48,46 +48,40 @@
 			biz_change_yn as bizChangeYN,
 			biz_del_yn as bizDelYN
 		FROM
-			biz_member m, TYPE_GROUP t, AUTHORITY c
-        WHERE m.restaurant = t.restaurant AND m.authority_id = c.AUTHORITY_ID
-        	AND biz_id = #{bizId}
+			biz_member
+		WHERE reg_no = #{regNo} and biz_del_yn = 'N'
 	</select>
-	
-	
-	<select id="goodsManage" resultType="BizGoods">
+
+	<select id="findBizMemberId" parameterType="bizMember" resultType="bizMember">
 		SELECT
-			menu_no as menuNo,
 			biz_no as bizNo,
 			authority_id as authorityId,
+			biz_id as bizId,
+			biz_pwd as bizPwd,
+			ceo_name as ceoName,
+			biz_name as bizName,
+			biz_email as bizEmail,
+			biz_phone as bizPhone,
 			restaurant as restaurant,
-			menu_name as menuName,
-			menu_info as menuInfo,
-			original_price as originalPrice,
-			dc_price as dcPrice,
-			menu_image as menuImage,
-			menu_del_yn as menuDelYN
+			area as area,
+			address as address,
+			biz_time as bizTime,
+			reg_no as regNo,
+			biz_image as bizImage,
+			biz_enrolldate as bizEnrollDate,
+			biz_count as bizCount,
+			biz_change_yn as bizChangeYN,
+			biz_del_yn as bizDelYN
 		FROM
-			MENU
-        WHERE
-            biz_No = #{bizNo}
-	</select>	
-	
-  	<update id="updateBiz" parameterType="bizMember">
+			biz_member
+		WHERE ceo_name = #{ceoName} and biz_email = #{bizEmail} and biz_del_yn = 'N'
+	</select>
+
+  	<update id="findBizMemberPwd" parameterType="bizMember">
   		update biz_member set 
-	  		ceo_Name = #{ceoName},
-	  		biz_Name = #{bizName},
-	  		biz_Email = #{bizEmail},
-	  		biz_Phone = #{bizPhone},
-	  		restaurant = #{restaurant},
-	  		address = #{address},
-	  		biz_Time = #{bizTime},
-	  		biz_Count = #{bizCount}
+	  		biz_Pwd = #{bizPwd}
   		where
-  			biz_Id = #{bizId}
-  	</update>	
-	
-	
-	
-	
-	
+  			biz_Id = #{bizId} and biz_email = #{bizEmail} and biz_del_yn = 'N'
+  	</update>		
+  	
 </mapper>
