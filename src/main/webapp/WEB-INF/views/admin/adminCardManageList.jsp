@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-<link rel="stylesheet" href="/resources/commons/adminCommon.css">
-<link rel="stylesheet" href="/resources/commons/adminNavigation.css">
-<link rel="stylesheet" href="/resources/commons/adminBoard.css">
+  <link rel="stylesheet" type="text/css" href="/resources/commons/adminCommon.css">
+  <link rel="stylesheet" type="text/css" href="/resources/commons/adminBoard.css">
+  <link rel="stylesheet" type="text/css" href="/resources/commons/styles.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
 </head>

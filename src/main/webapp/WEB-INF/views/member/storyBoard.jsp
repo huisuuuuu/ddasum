@@ -37,6 +37,26 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
 <script src="/resources/js/swiper.js"></script>
 </head>
+
+<body>
+   <div id="wrap">
+      <header>
+         <%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>
+      </header>
+      <div id="content">
+         <div class="main_tit">
+            <h1>스토리보드</h1>
+            <div class="under"></div>
+         </div>
+         <div class="contents_wrap">
+         </div>
+      </div>
+      <footer>
+         <%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>
+      </footer>
+   </div>
+</body>
+
 <body>
 <!-- header -->
 			<%@ include file="/WEB-INF/views/commons/header/site-header.jsp" %>
