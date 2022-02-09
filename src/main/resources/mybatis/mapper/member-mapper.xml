@@ -1,53 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
-  	<select id="memberLogin" parameterType="member" resultType="member">
-  		select 
-  			userNo as userNo,
-  			authority_ID as authorityId, 
-  			userId as userId, 
-  			userPwd as userPwd, 
-  			userName as userName, 
-  			nick as nick, 
-  			email as email, 
-  			detail as detail, 
-  			phone as phone, 
-  			address as address, 
-  			p_image as pImage, 
-  			enrollDate as enrollDate, 
-  			card_No as cardNo, 
-  			del_YN as delYN 
-  		from member where userId = #{userId} and userPwd = #{userPwd} and del_YN = 'N'
-  	</select>
-  	
-  	<update id="memberInfoUpdate" parameterType="member">
-  		update member set 
-	  		userPwd = #{userPwd},
-	  		userName = #{userName},
-	  		nick = #{nick},
-	  		email = #{email},
-	  		address = #{address},
-	  		phone = #{phone}
-  		where
-  			userId = #{userId}
-  	</update>
-  	
-  	<insert id="memberJoin" parameterType="member">
-  		INSERT INTO MEMBER VALUES(
-  								MEMBER_SEQ.NEXTVAL,
-  								'USER',
-  								#{userId},
-  								#{userPwd},
-  								#{userName},
-  								#{nick},
-  								#{email},
-  								#{phone},
-  								#{address},
-  								'N',
-  								NULL,
-  								SYSDATE,
-  								NULL,
-  								'N'
-  		)
-  	</insert>
+	<select id="memberLogin" parameterType="member"
+		resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where userId = #{userId} and userPwd = #{userPwd} and del_YN =
+		'N'
+	</select>
+
+	<select id="selectIdCheck" parameterType="String"
+		resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where userId = #{userId} and del_YN = 'N'
+	</select>
+
+	<select id="selectNickCheck" parameterType="String" resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where nick = #{nick} and del_YN = 'N'
+	</select>
+	
+		<select id="findMemberId" parameterType="member" resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where userName = #{userName} and email = #{email} and del_YN = 'N'
+	</select>
+	
+	<update id="memberInfoUpdate" parameterType="member">
+		update member set
+		userPwd = #{userPwd},
+		userName = #{userName},
+		nick = #{nick},
+		email = #{email},
+		address = #{address},
+		phone = #{phone}
+		where
+		userId = #{userId}
+	</update>
+
+	<insert id="memberJoin" parameterType="member">
+		INSERT INTO MEMBER VALUES(
+		MEMBER_SEQ.NEXTVAL,
+		'USER',
+		#{userId},
+		#{userPwd},
+		#{userName},
+		#{nick},
+		#{email},
+		#{phone},
+		#{address},
+		'N',
+		NULL,
+		SYSDATE,
+		NULL,
+		'N'
+		)
+	</insert>
 </mapper>

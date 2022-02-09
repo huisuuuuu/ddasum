@@ -14,6 +14,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<!-- SweetAlert2 CDN -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 <title>따숨, 마음을 나누다.</title>
 </head>
 <body>
@@ -47,12 +49,12 @@
 					</div>
 					<div id="memberData">
 						<input type="text" class="dataInput" id="userId" name="userId">
-						<button type="button">중복 확인</button> <br/>
+						<button type="button" id="idCheckBtn">중복 확인</button> <br/>
 						<input type="password" class="dataInput" id="userPwd" name="userPwd"><br/>
 						<input type="password" class="dataInput" id="userPwd_re" name="userPwd_re"><br/>
 						<input type="text" class="dataInput" id="userName" name="userName"><br/>
 						<input type="text" class="dataInput" id="nick" name="nick">
-						<button type="button">중복 확인</button><br/>
+						<button type="button" id="nickCheckBtn">중복 확인</button><br/>
 						<input type="text" class="dataInput" id="email" name="email">
 						<button type="button">이메일 인증</button><br/>
 						<input type="text" class="dataInput" id="phone" name="phone" placeholder="-없이 입력하세요"><br/>
@@ -90,7 +92,98 @@
 		</footer>
 	</div>
 	
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+	<script>
+		$('#idCheckBtn').click(function(){
+			var userId = $('input[name=userId]').val();
+			
+			if($('input[name=userId]').val() ==''){
+				Swal.fire({
+					  icon: 'error',
+					  title: '아이디를 입력해주세요.',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+			}else{
+			
+			$.ajax({
+				url: "/member/memberIdCheck.do",
+				data: {"userId":userId},
+				type: "get",
+				success: function(result){
+					if(result=="true")
+					{
+						$('input[name=userId]').val("");
+						$('input[name=userId]').focus();
+						
+						Swal.fire({
+							  icon: 'error',
+							  title: '이미 사용중인 아이디입니다.',
+							  showConfirmButton: false,
+							  timer: 1500
+							})
+						
+							
+					}else
+					{
+						Swal.fire({
+							  icon: 'success',
+							  title: '사용 가능한 아이디입니다.',
+							  showConfirmButton: false,
+							  timer: 1500
+							})
+					}
+				},
+				error: function(){
+					console.log('ajax 통신 실패');
+				}
+			});
+		}
+		});
+		
+		$('#nickCheckBtn').click(function(){
+			var nick = $('input[name=nick]').val();
+			
+			if($('input[name=nick]').val() ==''){
+				Swal.fire({
+					  icon: 'error',
+					  title: '닉네임을 입력해주세요.',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+			}else{
+			
+			$.ajax({
+				url: "/member/memberNickCheck.do",
+				data: {"nick":nick},
+				type: "get",
+				success: function(result){
+					if(result=="true")
+					{
+						$('input[name=nick]').val("");
+						$('input[name=nick]').focus();
+						
+						Swal.fire({
+							  icon: 'error',
+							  title: '이미 사용중인 닉네임입니다.',
+							  showConfirmButton: false,
+							  timer: 1500
+							})
+					}else
+					{
+						Swal.fire({
+							  icon: 'success',
+							  title: '사용 가능한 닉네임입니다.',
+							  showConfirmButton: false,
+							  timer: 1500
+							})
+					}
+				},
+				error: function(){
+					console.log('ajax 통신 실패');
+				}
+			});
+		};	
+		});
+	</script>
 </body>
 </html>
