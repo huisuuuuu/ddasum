@@ -156,7 +156,7 @@
 		</div>
 		<div id="L-downArea">
 			<div class="submenu"> 
-				<a href="/BizMember/bizManage.do"><br>	
+				<a href="/bizMember/bizManage.do"><br>	
 					<img class="Icons" src="/resources/images/bizSubMenu1.png" alt="로고">
 					<span class="menulist">업체 관리</span><br><br>
 				</a>
