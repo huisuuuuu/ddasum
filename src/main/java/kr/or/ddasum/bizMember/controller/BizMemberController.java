@@ -1,42 +1,66 @@
 package kr.or.ddasum.bizMember.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.or.ddasum.bizMember.model.service.BizMemberService;
+import kr.or.ddasum.bizMember.model.vo.BizGoods;
+import kr.or.ddasum.member.model.vo.BizMember;
 
 @Controller
 public class BizMemberController {
 	
-	@RequestMapping(value="/BizMember/enter.do", method = RequestMethod.GET)
-	public String enterBizMember() {
+	@Autowired
+	private BizMemberService bService;
 		
-		return "bizMember/EnterBizMember";
+	@RequestMapping(value="/bizMember/bizManage.do", method = RequestMethod.GET)
+	public ModelAndView bizManage(@SessionAttribute BizMember bizMember, HttpServletRequest request, ModelAndView mav) {
+		BizMember bm = bService.bizManage(bizMember);
 		
-	}
-	
-	@RequestMapping(value="/BizMember/bizManage.do", method = RequestMethod.GET)
-	public String bizManage() {
-		
-		return "bizMember/bizManage";
+		mav.addObject("bizMember", bm);
+		mav.setViewName("/bizMember/bizManage");
+
+		return mav;
 		
 	}	
 	
 	@RequestMapping(value="/BizMember/goodsManage.do", method = RequestMethod.GET)
-	public String goodsManage() {
+	public ModelAndView goodsManage(@SessionAttribute BizMember bizMember, ModelAndView mav) {
+
+		int bizNo = bizMember.getBizNo();
 		
-		return "bizMember/goodsManage";
+		ArrayList<BizGoods> list = bService.goodsManage(bizNo);
 		
+		System.out.println(list);
+		mav.addObject("list", list);
+		mav.setViewName("/bizMember/goodsManage");
+		
+		return mav;
+
 	}	
 	
 	@RequestMapping(value="/BizMember/bizReserv.do", method = RequestMethod.GET)
-	public String bizReserv() {
+	public String bizReserv(HttpSession session) {
 		
 		return "bizMember/bizReserv";
 		
 	}		
 	
 	@RequestMapping(value="/BizMember/calculateManage.do", method = RequestMethod.GET)
-	public String calculate() {
+	public String calculate(HttpSession session) {
 		
 		return "bizMember/calculateManage";
 		
@@ -48,26 +72,70 @@ public class BizMemberController {
 		return "bizMember/goodDetail";
 		
 	}	
-	
-	@RequestMapping(value="/BizMember/noticeBoard.do", method = RequestMethod.GET)
-	public String noitceBoard() {
+
+	@RequestMapping(value="/BizMember/logout.do", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
 		
-		return "admin/noticeBoard";
-		
+		session.invalidate();
+		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/BizMember/faqBoard.do", method = RequestMethod.GET)
-	public String faqBoard() {
+	@RequestMapping(value="/bizMember/updateBizManage.do", method=RequestMethod.GET)
+	public ModelAndView updateBizMemeber(@SessionAttribute BizMember bizMember, HttpServletRequest request, ModelAndView mav) {
+
+		BizMember bm = bService.bizManage(bizMember);
 		
-		return "admin/faqBoard";
+		mav.addObject("bizMember", bm);
+		mav.setViewName("/bizMember/updateBizManage");
 		
+		return mav;
 	}
 	
-	@RequestMapping(value="/BizMember/noticeDetail.do", method = RequestMethod.GET)
-	public String noticeDetail() {
+	@RequestMapping(value="/bizMember/updateBiz.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateBiz(BizMember bizMemberVo,@SessionAttribute BizMember bizMember, HttpSession session, HttpServletResponse response) throws IOException{
+		String bizId = bizMember.getBizId();
 		
-		return "admin/noticeDetail";
+		BizMember bz = new BizMember();
+		bz.setCeoName(bizMemberVo.getCeoName());
+		bz.setBizName(bizMemberVo.getBizName());
+		bz.setBizEmail(bizMemberVo.getBizEmail());
+		bz.setBizPhone(bizMemberVo.getBizPhone());
+		bz.setRestaurant(bizMemberVo.getRestaurant());
+		bz.setAddress(bizMemberVo.getAddress());
+		bz.setBizTime(bizMemberVo.getBizTime());
+		bz.setBizCount(bizMemberVo.getBizCount());
+		bz.setBizId(bizId); //session
+
+		/*
+		System.out.println(bizMemberVo.getCeoName());
+		System.out.println(bizMemberVo.getBizName());
+		System.out.println(bizMemberVo.getBizEmail());
+		System.out.println(bizMemberVo.getBizPhone());
+		System.out.println(bizMemberVo.getRestaurant());
+		System.out.println(bizMemberVo.getAddress());
+		System.out.println(bizMemberVo.getBizTime());
+		System.out.println(bizMemberVo.getBizCount());
 		
+		System.out.println(bizMember.getBizId());
+		*/
+		System.out.println(bz);
+
+		int result = bService.updateBiz(bz);
+		
+		System.out.println(result);
+		String rst = "";
+		if (result > 0) {
+			rst = "true";
+		} else {
+			rst = "false";
+		}
+		
+		return rst;
 	}
+	
+	
+	
+	
 	
 }

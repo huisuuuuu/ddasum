@@ -22,6 +22,7 @@
 		}
 		.title{
 			font-size: 32pt;
+			border-bottom: 5px solid #FFF2EC;
 		}		
 		.faqArea{
 			width: 100%;
@@ -40,7 +41,9 @@
 	     }
 	     .subject{
 	     	width: 100%;
-	     	height: 40px;
+	     	height: 70px;
+	     	font-size: 24pt;
+	     	padding-top: 20px;
 	     }
 	     .content{
 	     	width: 100%;
@@ -54,15 +57,17 @@
 	     	background-color: #FFF2EC;
 	     	text-align: center;
 	     	padding-top: 50px;
+	     	
 	     }
 	     .comment{
 	     	width:80%;
 	     	height: 100%;
 	     	float: left;
 	     	background-color: #FFF2EC;
-	     	padding-top: 20px;
+	     	padding-top: 35px;
 	     	padding-left: 20px;
-	     	text-align: left;     
+	     	text-align: left;
+	     	font-size: 20pt;
 	     }
 	     .img{
 	     	width: 50px;

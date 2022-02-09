@@ -5,6 +5,9 @@
 	<typeAliases>
 		<typeAlias type="kr.or.ddasum.member.model.vo.Member" alias="member"/>
 		<typeAlias type="kr.or.ddasum.member.model.vo.BizMember" alias="bizMember"/>
+		<typeAlias type="kr.or.ddasum.bizMember.model.vo.BizGoods" alias="BizGoods"/>
+		<typeAlias type="kr.or.ddasum.board.model.vo.Notice" alias="notice"/>
+
 	</typeAliases>
 
 </configuration>
