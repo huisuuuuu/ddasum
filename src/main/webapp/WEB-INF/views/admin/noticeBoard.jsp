@@ -32,43 +32,31 @@ crossorigin="anonymous"></script>
 					<input class="inputdata" type="text"><input class="submitBTN" type="submit">
 				</div>
 				<div class="resultArea">
-					<table class="resultTable">
-						<tr class="Row">
-		                    <th class="rt-th-1">번호</th>
-		                    <th class="rt-th-2">제목</th>
-		                    <th class="rt-th-3">작성일</th>
-		                </tr>
-						<tr>
-		                    <td>1</td>
-		                    <td class="td_left"><a href="/BizMember/noticeDetail.do">꿈나무카드 인증안내</a></td>
-		                    <td>2022-01-27</td>
-		                </tr>
-						<tr>
-		                    <td>2</td>
-		                    <td class="td_left">2021년 베스트 후원 업체 선정</td>
-		                    <td>2022-01-26</td>
-		                </tr>
-						<tr>
-		                    <td>3</td>
-		                    <td class="td_left">2020년 베스트 후원 업체 선정</td>
-		                    <td>2022-01-24</td>
-		                </tr>
-						<tr>
-		                    <td>4</td>
-		                    <td class="td_left">2019년 베스트 후원 업체 선정</td>
-		                    <td>2021-01-24</td>
-		                </tr>
-						<tr>
-		                    <td>5</td>
-		                    <td class="td_left">2018년 베스트 후원 업체 선정</td>
-		                    <td>2021-01-24</td>
-		                </tr>
-						<tr>
-		                    <td>6</td>
-		                    <td class="td_left">2017년 베스트 후원 업체 선정</td>
-		                    <td>2021-01-24</td>
-		                </tr>
-					</table>
+				
+				<c:choose>
+					<c:when test="${!requestScope.list.isEmpty() }">
+						<table class="resultTable">
+							<tr class="Row">
+			                    <th class="rt-th-1">번호</th>
+			                    <th class="rt-th-2">제목</th>
+			                    <th class="rt-th-3">작성일</th>
+			                </tr>
+			                
+			                <c:forEach items="${requestScope.list }" var="m" varStatus="i">
+							<tr>
+			                    <td>${requestScope.iNo }</td>
+			                    <td>${requestScope.iTitle }</td>
+			                    <td>${requestScope.iRegdate }</td>
+			                </tr>
+							</c:forEach>
+						</table>
+					</c:when>
+					
+					<c:otherwise>
+						<H1>현재 저장된 회원이 없습니다.</H1>
+					</c:otherwise>
+				
+				</c:choose>					
 				</div>
 				<div class="pagingArea">
 					페이징처리

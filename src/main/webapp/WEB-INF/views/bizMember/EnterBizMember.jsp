@@ -121,7 +121,7 @@
 		<div id="menuListArea">
 			<div id="menuList">
 				<div class="menu">
-					<a href="/BizMember/bizManage.do">	
+					<a href="/bizMember/bizManage.do">	
 						<div class="menuIcon">
 							<img class="Icons" src="/resources/images/bizMemberEnter_bizManage
 							.png" alt="로고">
@@ -168,7 +168,7 @@
 	</div>
 	<div id="footer">
 		<div id="moveArea">
-			<button id="logOutBTN">로그아웃</button>
+			<a href="/BizMember/logout.do"><button id="logOutBTN">로그아웃</button></a>
 		</div>
 	</div>
 </div>

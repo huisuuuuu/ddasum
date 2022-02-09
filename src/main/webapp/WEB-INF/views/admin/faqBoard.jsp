@@ -40,30 +40,44 @@ crossorigin="anonymous"></script>
 							관리자가 3일 내에 승인 작업을 진행합니다. 상세한 내용은 카카오톡 문의 바랍니다.
 						</span>
 					</div>
+					
 					<div class="subject">
-					후원 증빙 내역 다운로드 안내<br>
+					꿈나무 카드 분실시 대처 방법
 					</div>
 					<div class="content">
-					2011년 베스트 후원 업체 선정<br>
+						<div class="iconArea">
+							<img class="img" src="/resources/images/answer.png">
+						</div>
+						<span class="comment">
+							꿈나무 카드 분실시 해당 내용을 카카오톡으로 문의 바랍니다.<br>
+							승인절차를 거쳐 꿈나무카드 재인증이 필요합니다.
+						</span>
 					</div>
 					<div class="subject">
-					꿈나무 카드 분실 대처
+					후원 증빙 내역 다운로드 안내
 					</div>
 					<div class="content">
-					안내내용 추가<br>
+						<div class="iconArea">
+							<img class="img" src="/resources/images/answer.png">
+						</div>
+						<span class="comment">
+							후원정산관리 > 후원 정산 내역 우측 엑셀 아이콘을 클릭하시면,<br>
+							다운로드가 됩니다. 상세한 내용은 카카오톡 문의 바랍니다.
+						</span>
 					</div>
 					<div class="subject">
-					후원 업체 신청
+					후원 및 할인 업체 신청 방법
 					</div>
 					<div class="content">
-					안내서 배부<br>
+						<div class="iconArea">
+							<img class="img" src="/resources/images/answer.png">
+						</div>
+						<span class="comment">
+							꿈나무들의 식사를 후원해주실 업체는 카카오톡으로 문의 바랍니다.<br>
+							자세한 내용은 개별 응답하여 드리겠습니다.
+						</span>
 					</div>
-					<div class="subject">
-					자원봉사자 모집 공고
-					</div>
-					<div class="content">
-					안내내용 추가<br>
-					</div>										
+	
 				</div>
 			</div>
 		<div id="footer">

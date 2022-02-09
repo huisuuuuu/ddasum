@@ -164,7 +164,7 @@
 		</div>
 		<div id="L-downArea">
 			<div class="submenu"> 
-				<a href="/BizMember/bizManage.do"><br>	
+				<a href="/bizMember/bizManage.do"><br>	
 					<img class="Icons" src="/resources/images/bizSubMenu1.png" alt="로고">
 					<span class="menulist">업체 관리</span><br><br>
 				</a>
@@ -203,7 +203,7 @@
 						<div class="search" style="text-align:right;">
 							<select>
 								<option>상품명</option>
-								<option>예약번호</option>
+								<option>상품번호</option>
 							</select>
 							<input type="text" placeholder="검색어를 입력해주세요">
 							<input type="submit">
@@ -211,6 +211,9 @@
 						</div>
 					</div>
 					<div id="content">
+					
+					<c:choose>
+						<c:when test="${!requestScop.list.isEmpty() }">
 						<table class="goodsTable">
 							<tr>
 			 					<th><input type="checkbox" name="chk" value="all"></th>
@@ -221,18 +224,25 @@
 			 					<th>상품가격</th>
 			 					<th>관리</th>
 			 				</tr>
+
 							<tr>
 								<td><input type="checkbox" name="chk" value="1"></td>
 								<td>1</td>
 								<td>IMG</td>
-								<td>떡볶이</td>
-								<td>둘이먹다가 하나 죽어도 모름</td>
-								<td>7,000원</td>
+								<td>${requestScope.list.menuName } </td>
+								<td>${requestScope.list.menuInfo } </td>
+								<td>${requestScope.list.originalPrice }원</td>
 								<td>
 									<button type="button" class="prdtEdt" name="prdtEdt">수정</button>  
 								</td>
 							</tr>
 						</table>
+						</c:when>
+						<c:otherwise>
+							<H1>현재 저장된 회원이 없습니다.</H1>
+						</c:otherwise>
+			
+					</c:choose>
 						<button type="button" class="prdtDel" name="prdtDel" style="margin: 20px 0;">삭제</button>
 					</div>
 				</div>
