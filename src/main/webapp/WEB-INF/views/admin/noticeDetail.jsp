@@ -24,8 +24,8 @@ crossorigin="anonymous"></script>
 			</div>
 			<div class="tableArea">
 				<div class="searchArea">
-					<input type="button" name="pre" value="이전글"/>
-					<input type="button" name="next" value="다음글"/>
+					<input type="button" class ="moveBTN" name="pre" value="이전글"/>
+					<input type="button" class ="moveBTN" name="next" value="다음글"/>
 				</div>
 				<div class="resultArea">
 					<div class="detailTable">
@@ -41,7 +41,7 @@ crossorigin="anonymous"></script>
 					</div>
 				</div>
 				<div class="listBtn">
-					<a href="/board/noticeBoard.do"><input type="button" name="list" value="목록"/></a>
+					<a href="/board/noticeBoard.do"><input type="button" class ="contentBTN" name="list" value="목록"/></a>
 				</div>
 			</div>
 		</div>

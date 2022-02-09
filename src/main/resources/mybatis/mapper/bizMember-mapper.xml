@@ -134,6 +134,13 @@
 	  		biz_Count = #{bizCount}
   		where
   			biz_Id = #{bizId}
-  	</update>	
-
+  	</update>
+  	
+  	<update id="findBizMemberPwd" parameterType="bizMember">
+  		update biz_member set 
+	  		biz_Pwd = #{bizPwd}
+  		where
+  			biz_Id = #{bizId} and biz_email = #{bizEmail} and biz_del_yn = 'N'
+  	</update>		
+  	
 </mapper>

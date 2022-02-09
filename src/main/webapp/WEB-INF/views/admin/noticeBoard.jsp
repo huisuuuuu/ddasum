@@ -25,11 +25,14 @@ crossorigin="anonymous"></script>
 			</div>
 			<div class="tableArea">
 				<div class="searchArea">
+					<form id="searchForm">
 					<select class="optionBTN">
 						<option>제목</option>
 						<option>작성일</option>
 					</select>
-					<input class="inputdata" type="text"><input class="submitBTN" type="submit">
+					
+					<input class="inputdata" type="text"><button class="submitBTN"><img class="searchImg" src="/resources/images/search.png"></button>
+					</form>
 				</div>
 				<div class="resultArea">
 				
