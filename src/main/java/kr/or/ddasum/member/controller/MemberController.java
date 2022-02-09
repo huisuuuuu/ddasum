@@ -148,7 +148,7 @@ public class MemberController {
 		return "member/reservationCheckPage";
 	}
 
-	
+	// 정두식 추가 코드(끝)
 
 	@RequestMapping(value = "/member/loginPage.do", method = RequestMethod.GET)
 	public String loginPage(HttpServletRequest request, Model model) {
@@ -161,7 +161,7 @@ public class MemberController {
 			return "commons/errorMsg";
 			
 		} else {
-		return "/member/loginPage";
+			return "member/loginPage";
 		}
 	}
 
@@ -177,7 +177,7 @@ public class MemberController {
 			return "commons/errorMsg";
 			
 		} else {
-			return "/member/bizMemberLoginPage";
+			return "member/bizMemberLoginPage";
 		}
 
 	}
@@ -185,16 +185,13 @@ public class MemberController {
 	@RequestMapping(value = "/member/joinPage.do", method = RequestMethod.GET)
 	public String joinPage() {
 
-		return "/member/joinPage";
+		return "member/joinPage";
 
 	}
+	
+	@RequestMapping(value = "/member/memberJoin.do", method = RequestMethod.POST)
+	public String memberJoinus(Member m, Model model) {
 
-<<<<<<< HEAD
-	@RequestMapping(value = "/member/findIdPage.do", method = RequestMethod.GET)
-	public String findIdPage() {
-
-		return "/member/findIdPage";
-=======
 		int result = mService.insertMember(m);
 		
 		if(result>0) {
@@ -223,7 +220,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/member/memberNickCheck.do", method = RequestMethod.GET)
 	public void memberNickCheck(HttpServletResponse response, @RequestParam String nick, Model model) throws IOException{
->>>>>>> 513a5e221cff9b9af05c9158fbad4df4d2b170fa
 
 		Member m = mService.selectNickCheck(nick);
 		
@@ -255,9 +251,6 @@ public class MemberController {
 
 		return "member/findIdPwdPage";
 
-<<<<<<< HEAD
-		return "/member/findPwdPage";
-=======
 	}
 	
 	@RequestMapping(value = "/member/findMemberIdPage.do", method = RequestMethod.GET)
@@ -278,7 +271,6 @@ public class MemberController {
 	public String findBizMemberIdPage() {
 
 		return "member/findBizMemberIdPage";
->>>>>>> 513a5e221cff9b9af05c9158fbad4df4d2b170fa
 
 	}
 	
@@ -432,55 +424,55 @@ public class MemberController {
 	@RequestMapping(value = "/member/saleRestaurantListPage.do", method = RequestMethod.GET)
 	public String saleRestaurantPage() {
 
-		return "/member/saleRestaurantListPage";
+		return "member/saleRestaurantListPage";
 
 	}
 
 	@RequestMapping(value = "/member/memberJoinPage.do", method = RequestMethod.GET)
 	public String memberJoinPage() {
 
-		return "/member/memberJoinPage";
+		return "member/memberJoinPage";
 
 	}
 
 	@RequestMapping(value = "/member/bizMemberChoicePage.do", method = RequestMethod.GET)
 	public String bizMemberChoicePage() {
 
-		return "/member/bizMemberChoicePage";
+		return "member/bizMemberChoicePage";
 
 	}
 
 	@RequestMapping(value = "/member/bizNumVerify.do", method = RequestMethod.GET)
 	public String bizNumVerify() {
 
-		return "/member/bizNumVerify";
+		return "member/bizNumVerify";
 
 	}
 
 	@RequestMapping(value = "/member/bizMemberJoinPage.do", method = RequestMethod.POST)
 	public String bizMemberJoinPage() {
 
-		return "/member/bizMemberJoinPage";
+		return "member/bizMemberJoinPage";
 
 	}
 
 	@RequestMapping(value = "/member/successJoinPage.do", method = RequestMethod.POST)
 	public String successJoinPage() {
 
-		return "/member/successJoinPage";
+		return "member/successJoinPage";
 
 	}
 
 	// 나중에 삭제할 코드
 	@RequestMapping(value = "/member/mainPage.do")
 	public String mainPage() {
-		return "/main";
+		return "main";
 	}
 
 	@RequestMapping(value = "/member/saleRestaurantDetail.do", method = RequestMethod.GET)
 	public String saleRestaurantDetail() {
 
-		return "/member/saleRestaurantDetail";
+		return "member/saleRestaurantDetail";
 
 	}
 
