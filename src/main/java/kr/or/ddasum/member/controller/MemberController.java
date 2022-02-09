@@ -2,11 +2,14 @@ package kr.or.ddasum.member.controller;
 
 import java.io.IOException;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.ddasum.email.TempKey;
 import kr.or.ddasum.member.model.service.MemberService;
 import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
@@ -23,6 +27,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+    private JavaMailSender mailSender;
 
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public String memberLogin(Member member, HttpServletRequest request, Model model) {
@@ -206,7 +213,7 @@ public class MemberController {
 		if(m!=null) {
 			response.getWriter().print(true);//사용중
 		}else {
-			response.getWriter().print(false);//사용중
+			response.getWriter().print(false);//사용 가능
 		}
 		
 	}
@@ -219,7 +226,7 @@ public class MemberController {
 		if(m!=null) {
 			response.getWriter().print(true);//사용중
 		}else {
-			response.getWriter().print(false);//사용중
+			response.getWriter().print(false);//사용 가능
 		}
 		
 	}
@@ -230,10 +237,10 @@ public class MemberController {
 		BizMember bm = mService.selectRegNumCheck(regNum);
 		
 		if(bm!=null) {
-			response.getWriter().print(true);//사용중
+			response.getWriter().print(true);//사용 중
 			System.out.println("true");
 		}else {
-			response.getWriter().print(false);//사용중
+			response.getWriter().print(false);//사용 가능
 			System.out.println("false");
 		}
 		
@@ -318,6 +325,100 @@ public class MemberController {
 			return "commons/errorMsg";
 		}
 		
+	}
+	
+	@RequestMapping(value = "/member/findMemberPwd.do", method = RequestMethod.POST)
+	public void findMemberPwd(@RequestParam String userId, @RequestParam String email, HttpServletResponse response) throws IOException{
+		
+		TempKey tk = new TempKey();
+		Member m = new Member();
+		String checkNum = tk.getKey(8, false);
+		
+		m.setUserId(userId);
+		m.setEmail(email);
+		m.setUserPwd(checkNum);
+		
+		int result = mService.findMemberPwd(m);
+		
+		if(result>0) {
+		
+		/* 이메일 보내기 */
+        String setFrom = "ddasum0@gmail.com";
+        String toMail = m.getEmail();
+        String title = "따숨 임시 비밀번호 발급";
+        String content = 
+                "따숨을 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "<b>"+m.getUserId()+"</b>님의 임시 비밀 번호는 <Strong>" + checkNum + "</Strong>입니다." + 
+                "<br>" + 
+                "발급된 임시번호를 사용하여 로그인해주세요.";
+        
+        try {
+		
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        	response.getWriter().print(true);//비밀번호 변경 완료
+        
+		}else {
+			response.getWriter().print(false);//비밀번호 변경 실패
+		}
+	}
+	
+	@RequestMapping(value = "/member/findBizMemberPwd.do", method = RequestMethod.POST)
+	public void findBizMemberPwd(@RequestParam String bizId, @RequestParam String bizEmail, HttpServletResponse response) throws IOException{
+		
+		TempKey tk = new TempKey();
+		BizMember bm = new BizMember();
+		String checkNum = tk.getKey(8, false);
+		
+		bm.setBizId(bizId);
+		bm.setBizEmail(bizEmail);
+		bm.setBizPwd(checkNum);
+		
+		int result = mService.findBizMemberPwd(bm);
+		
+		if(result>0) {
+		
+		/* 이메일 보내기 */
+        String setFrom = "ddasum0@gmail.com";
+        String toMail = bm.getBizEmail();
+        String title = "따숨 임시 비밀번호 발급";
+        String content = 
+                "따숨을 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "<b>"+bm.getBizId()+"</b>님의 임시 비밀 번호는 <Strong>" + checkNum + "</Strong>입니다." + 
+                "<br>" + 
+                "발급된 임시번호를 사용하여 로그인해주세요.";
+        
+        try {
+		
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        	response.getWriter().print(true);//비밀번호 변경 완료
+        
+		}else {
+			response.getWriter().print(false);//비밀번호 변경 실패
+		}
 	}
 	
 	@RequestMapping(value = "/member/saleRestaurantListPage.do", method = RequestMethod.GET)
