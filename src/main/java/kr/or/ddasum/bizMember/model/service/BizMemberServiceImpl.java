@@ -32,6 +32,16 @@ public class BizMemberServiceImpl implements BizMemberService{
 		
 	}
 
+	@Override
+	public int updateWithdraw(String bizId) {
+		return bDAO.updateWithdraw(bizId);
+	}
+
+	@Override
+	public int supportChange(String bizNo) {
+		return bDAO.supportChange(bizNo);
+	}
+
 	
 
 }

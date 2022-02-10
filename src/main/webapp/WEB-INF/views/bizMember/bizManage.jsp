@@ -269,8 +269,8 @@
 						<li>${requestScope.bizMember.address }</li>
 						<li>${requestScope.bizMember.bizTime }</li>
 						<li>${requestScope.bizMember.bizCount }</li>
-						<li>${requestScope.bizMember.authorityId }<button class="modifyBTN2"><a href="/BizMember/supportModify.do">유형전환</button></a></li>
-						<li>${requestScope.bizMember.bizDelYN }<a href="/board/noticeBoard.do"><button class="modifyBTN3">탈퇴</button></a></li>
+						<li>${requestScope.bizMember.authorityId }</li>
+						<li>${requestScope.bizMember.bizDelYN }</li>
 					</ul>
 					
 					</div>

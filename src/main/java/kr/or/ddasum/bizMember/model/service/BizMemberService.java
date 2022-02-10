@@ -39,6 +39,27 @@ public interface BizMemberService {
 	  */
 	int updateBiz(BizMember bz);
 
+	/**
+	  * @Method Name : updateWithdraw
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :회원탈퇴 로직
+	  * @param bizId
+	 * @return 
+	  */
+	int updateWithdraw(String bizId);
+
+	/**
+	  * @Method Name : supportChange
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 사업자 유형 변환
+	  * @param bizNo
+	  */
+	int supportChange(String bizNo);
+
 
 
 

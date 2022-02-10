@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ public class BizMemberController {
 	@Autowired
 	private BizMemberService bService;
 		
-	@RequestMapping(value="/bizMember/bizManage.do", method = RequestMethod.GET)
+	@RequestMapping(value="/bizMember/bizManage.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView bizManage(@SessionAttribute BizMember bizMember, HttpServletRequest request, ModelAndView mav) {
 		BizMember bm = bService.bizManage(bizMember);
 		
@@ -79,7 +80,7 @@ public class BizMemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/bizMember/updateBizManage.do", method=RequestMethod.GET)
+	@RequestMapping(value="/bizMember/updateBizManage.do", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView updateBizMemeber(@SessionAttribute BizMember bizMember, HttpServletRequest request, ModelAndView mav) {
 
 		BizMember bm = bService.bizManage(bizMember);
@@ -106,20 +107,6 @@ public class BizMemberController {
 		bz.setBizCount(bizMemberVo.getBizCount());
 		bz.setBizId(bizId); //session
 
-		/*
-		System.out.println(bizMemberVo.getCeoName());
-		System.out.println(bizMemberVo.getBizName());
-		System.out.println(bizMemberVo.getBizEmail());
-		System.out.println(bizMemberVo.getBizPhone());
-		System.out.println(bizMemberVo.getRestaurant());
-		System.out.println(bizMemberVo.getAddress());
-		System.out.println(bizMemberVo.getBizTime());
-		System.out.println(bizMemberVo.getBizCount());
-		
-		System.out.println(bizMember.getBizId());
-		*/
-		System.out.println(bz);
-
 		int result = bService.updateBiz(bz);
 		
 		String rst = "";
@@ -132,6 +119,38 @@ public class BizMemberController {
 		return rst;
 	}
 	
-
+	
+	@RequestMapping(value="/bizMember/withDraw.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String withDraw(HttpServletRequest request, Model model, 
+						@SessionAttribute String bizId,
+						HttpSession session) {
+		
+		int result = bService.updateWithdraw(bizId);
+		
+		String rst = "";
+		if (result > 0) {
+			rst = "true";
+		} else {
+			rst = "false";
+		}
+		
+		return rst;
+	}
+	
+	@RequestMapping(value="/bizMember/spChange.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String supportChange(@SessionAttribute String bizId,
+								@SessionAttribute String authorityName) {
+		
+		System.out.println(bizId);
+		System.out.println(authorityName);
+		
+		bService.supportChange(bizId);
+		
+		String rst="";
+		
+		return rst;
+	}
 	
 }

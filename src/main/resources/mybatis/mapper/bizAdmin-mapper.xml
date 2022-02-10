@@ -61,4 +61,20 @@
   			biz_Id = #{bizId}
   	</update>	
   	
+   	<update id="updateWithdraw" parameterType="bizMember">
+  		update biz_member set
+  			biz_del_yn = 'Y'
+  		WHERE
+  			BIZ_ID=#{bizId}
+  	</update> 	
+ 
+   	<update id="supportChange" parameterType="bizMember">
+  		update biz_member set 
+            AUTHORITY_ID = #{restaurant},
+            biz_change_yn = 'Y'
+  		where
+            BIZ_ID=#{bizId} and biz_change_yn = 'N'
+  	</update> 	
+  	
+  	  	
 </mapper>

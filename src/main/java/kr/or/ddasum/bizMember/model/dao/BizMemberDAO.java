@@ -65,14 +65,33 @@ public class BizMemberDAO {
 	}
 
 	/**
-	  * @Method Name : addGood
-	  * @작성일 : 2022. 2. 9.
+	  * @Method Name : updateWithdraw
+	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :
-	  * @param bg
+	  * @Method 설명 :회원탈퇴 로직
+	  * @param bizId
 	  * @return
 	  */
+	public int updateWithdraw(String bizId) {
+
+		return sqlSession.update("bizAdmin.updateWithdraw",bizId);
+
+	}
+
+	/**
+	  * @Method Name : supportChange
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :사업자 유형 변환
+	  * @param bizNo
+	  * @return
+	  */
+	public int supportChange(String bizNo) {
+
+		return sqlSession.update("bizAdmin.supportChange",bizNo);
+	}
 
 	
 	

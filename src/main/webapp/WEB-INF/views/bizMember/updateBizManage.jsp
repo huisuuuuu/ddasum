@@ -104,7 +104,7 @@
 			background-color: white;
 			border-radius: 5px;
 		}
-		#modifyBTN2{
+		#supportBTN{
 			float: right;
 			width: 120px;
 			height: 32px;
@@ -114,7 +114,7 @@
 			background-color: #FFA77E;
 			border-radius: 5px;
 		}
-		#modifyBTN3{
+		#withDraw{
 			float: right;
 			width: 120px;
 			height: 32px;
@@ -124,7 +124,7 @@
 			background-color: #FFA77E;
 			border-radius: 5px;
 		}	
-		#modifyBTN4{
+		#pwdBTN{
 			float: right;
 			width: 120px;
 			height: 32px;
@@ -283,7 +283,7 @@
 						<div id="content-result">
 						<ul>
 							<li>${requestScope.bizMember.bizId }</li>
-							<li>${sessionScope.bizMember.bizPwd }<a href=""><button id="modifyBTN4">변경</button></a></li>
+							<li>${sessionScope.bizMember.bizPwd }<a href=""><button id="pwdBTN">변경</button></a></li>
 							<li><input type='text' class="inputdata" name="ceoName" value="${requestScope.bizMember.ceoName }"/></li>
 							<li><input type='text' class="inputdata" name="bizName" value="${requestScope.bizMember.bizName }"/></li>
 							<li><input type='text' class="inputdata" name="bizEmail" value="${requestScope.bizMember.bizEmail }"/></li>
@@ -322,8 +322,8 @@
 									<option class="inputoption" value="30">30</option>
 									<option class="inputoption" value="50">50</option>
 								</select>
-							<li>${requestScope.bizMember.authorityId }<button id="modifyBTN2"><a href="/BizMember/supportModify.do">유형전환</button></a></li>
-							<li>${requestScope.bizMember.bizDelYN }<a href=""><button id="modifyBTN3">탈퇴</button></a></li>
+							<li>${requestScope.bizMember.authorityId }<button id="supportBTN"><a href="/BizMember/supportChange.do">유형전환</button></a></li>
+							<li>${requestScope.bizMember.bizDelYN }<a href="/BizMember/withDraw.do"><button id="withDraw">탈퇴</button></a></li>
 						</ul>
 						</div>
 					</div>
@@ -377,6 +377,75 @@
     	});
     });
 
+	//사업자 탈퇴 변경 ajax 설정
+
+	$('#withDraw').click(function(){
+		
+		var result1 = confirm("정말 탈퇴하시겠습니까?")
+		var password = ${sessionScope.bizMember.bizPwd }
+
+		if(result1==true)
+		{
+			var result2 = prompt("패스워드를 재입력하여주세요")
+
+			if(result2==password)
+					{ $.ajax({
+			    		url : "/bizMember/withDraw.do",
+			    		type : "POST",
+			    		success : function(rst){
+			    			if(rst == true){
+			    				alert("회원 정보 변경 성공");
+			    				location.replace("/bizMember/bizManage.do");
+			    			}else{
+			    				alert("회원 정보 변경 실패");
+			    				location.replace("/bizMember/bizManage.do");
+			    				}
+			    			},
+			    		error : function(request,status,error){
+			    			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    			console.log('ajax 통신 에러');
+			    		}
+			    	});
+				}else{
+					alert("패스워드를 다시 확인 바랍니다.")
+					location.replace("/bizMember/bizManage.do");
+				}
+			
+		}else{
+			alert("취소하였습니다.")
+			location.replace("/bizMember/bizManage.do");
+		}
+    });
+	
+	//후원형태 변경 ajax 설정
+	$('#supportBTN').click(function(){
+		
+		var result1 = confirm("후원형태를 변경하시겠습니까? 변경은 월 1회 가능합니다.")
+
+		if(result1==true)
+		{
+					 $.ajax({
+			    		url : "/bizMember/spChange.do",
+			    		type : "POST",
+			    		success : function(rst){
+			    			if(rst == true){
+			    				alert("사업자 변경 성공");
+			    				location.replace("/bizMember/bizManage.do");
+			    			}else{
+			    				alert("사업자 변경 실패");
+			    				location.replace("/bizMember/bizManage.do");
+			    				}
+			    			},
+			    		error : function(request,status,error){
+			    			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    			console.log('ajax 통신 에러');
+			    			}
+			    	});
+		}else{
+			alert("취소하였습니다.")
+			location.replace("/bizMember/bizManage.do");
+		}
+    });
 	
 	
 
