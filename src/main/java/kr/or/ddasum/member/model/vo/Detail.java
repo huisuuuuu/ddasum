@@ -12,7 +12,9 @@ public class Detail {
 	private int reNo;
 	private int menuNo;
 	private char reCancle;
+	//sql구문에 의해 불러온 데이터
 	private String bizName;
+	private String menuName;
 	
 	public Detail() {
 		super();
@@ -20,7 +22,7 @@ public class Detail {
 	}
 
 	public Detail(int mReNo, int userNo, Date reservationDate, int bizNo, String authorityId, int reNo, int menuNo,
-			char reCancle, String bizName) {
+			char reCancle, String bizName, String menuName) {
 		super();
 		this.mReNo = mReNo;
 		this.userNo = userNo;
@@ -31,6 +33,15 @@ public class Detail {
 		this.menuNo = menuNo;
 		this.reCancle = reCancle;
 		this.bizName = bizName;
+		this.menuName = menuName;
+	}
+
+	public String getmenuName() {
+		return menuName;
+	}
+
+	public void setmenuName(String menuName) {
+		this.menuName = menuName;
 	}
 
 	public int getmReNo() {

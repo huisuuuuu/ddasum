@@ -383,12 +383,21 @@
 	                    </tr>
 	                    <c:forEach items="${requestScope.map.list }" var="d">
 	                    <tr>
-	                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>순두부찌개</span></div></td>
-	                        <td>${d.authorityId }</td>
+	                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>${d.menuName }</span></div></td>
+	                        <c:choose>
+		                        <c:when test="${d.authorityId eq 'SP'}">
+		                        	<td>후원</td>
+		                        </c:when>
+		                        <c:when test="${d.authorityId eq 'DC'}">
+		                        	<td>할인</td>
+		                        </c:when>
+	                        </c:choose>
 	                        <td>${d.reservationDate }</td>
 	                        <td>${d.reNo }</td>
+	                        
 	                        <td>예약완료</td>
-	                        <td><button>예약취소</button></td>
+	                        	
+	                        <td><button class="cancelBtn" data="${d.reCancle }">예약취소</button></td>
 	                    </tr>
 	                    </c:forEach>
 					<tr align="center">
@@ -406,7 +415,7 @@
 				</c:when>
 				<c:otherwise>
 				
-					<h1>현재 저장된 회원 목록이 없습니다.</h1>
+					<h1 style="margin:0 auto;">현재 저장된 회원 목록이 없습니다.</h1>
 				</c:otherwise>
 		</c:choose>
 			
@@ -445,6 +454,37 @@
         }, function() {
             $('#hover-menu2').css("display", "none");
         });
+        
+        
+        $('.cancelBtn').click(function(){
+        	var reCancle = $(this).attr('data');
+			var text = $(this).closest('tr');
+			
+			var $text2 = text.find('td:eq(4)');
+			
+        	var $this = $(this);
+			$.ajax({
+				url : "/member/reservationCancle.do",
+				data : {"reCancle":reCancle},
+				type : "post",
+				success : function(result){
+					if(result == "true"){
+						alert('변경성공');
+						$this.css("display", "none");
+						$text2.html('예약취소');
+						$text2.css("color","red");
+					}else{
+						alert('변경실패');
+					}
+				},
+				error : function(){
+					console.log('ajax 통신 에러');
+				}
+				
+			});
+			
+		});
+        
     </script>
  
 </body>
