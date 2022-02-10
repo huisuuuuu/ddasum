@@ -225,12 +225,56 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping(value = "/member/bizMemberJoin.do", method = RequestMethod.POST)
+	public String bizMemberJoin(BizMember bm, @RequestParam String bizTimeStart,
+							@RequestParam String bizTimeEnd, @RequestParam String roadAddress,
+							@RequestParam String detailAddress, @RequestParam String area, Model model) {
+		
+		if(area.equals("인천")) {
+			bm.setArea("INCHEON");
+		}else if(area.equals("경기")) {
+			bm.setArea("GYEONGGI");
+		}else if(area.equals("서울")) {
+			bm.setArea("SEOUL");
+		};
+		
+		bm.setBizTime(bizTimeStart+"~"+bizTimeEnd);
+		bm.setAddress(roadAddress+" "+detailAddress);
+		
+		System.out.println(bm);
+		
+		int result = mService.insertBizMember(bm);
+		
+		if(result>0) {
+			return "member/successJoinPage";
+		}else {
+			model.addAttribute("msg1", "회원 가입 실패");
+			model.addAttribute("msg2", "지속적인 문제 발생 시 관리자에게 문의해주세요.");
+			model.addAttribute("location", "/member/joinPage.do");
+			return "commons/errorMsg";
+		}
+		
+	}
+	
 	@RequestMapping(value = "/member/memberIdCheck.do", method = RequestMethod.GET)
 	public void memberIdCheck(HttpServletResponse response, @RequestParam String userId, Model model) throws IOException{
 
 		Member m = mService.selectIdCheck(userId);
 		
 		if(m!=null) {
+			response.getWriter().print(true);//사용중
+		}else {
+			response.getWriter().print(false);//사용 가능
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/bizMemberIdCheck.do", method = RequestMethod.GET)
+	public void bizMemberIdCheck(HttpServletResponse response, @RequestParam String bizId, Model model) throws IOException{
+
+		BizMember bm = mService.selectBizIdCheck(bizId);
+		
+		if(bm!=null) {
 			response.getWriter().print(true);//사용중
 		}else {
 			response.getWriter().print(false);//사용 가능
@@ -249,6 +293,92 @@ public class MemberController {
 			response.getWriter().print(false);//사용 가능
 		}
 		
+	}
+	
+	@RequestMapping(value = "/member/memberEmailCheck.do", method = RequestMethod.POST)
+	public void memberEmailCheck(@RequestParam String email, HttpServletResponse response) throws IOException{
+		
+		TempKey tk = new TempKey();
+		String authKey = tk.getKey(11, false);
+		System.out.println(authKey);
+		
+		Member m = mService.memberEmailCheck(email);
+		
+		if(m!=null) {
+		
+        response.getWriter().print("false");//사용 중인 이메일
+        
+		}else {
+			
+			/* 이메일 보내기 */
+	        String setFrom = "ddasum0@gmail.com";
+	        String toMail = email;
+	        String title = "따숨 메일 인증";
+	        String content = 
+	                "따숨에 오신걸 환영합니다." +
+	                "<br><br>" + 
+	                "이메일 인증 번호는 <Strong>" + authKey + "</Strong>입니다." + 
+	                "<br>" + 
+	                "해당 인증 번호를 인증 번호 확인란에 입력해주세요.";
+	        try {
+			
+	            MimeMessage message = mailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            helper.setFrom(setFrom);
+	            helper.setTo(toMail);
+	            helper.setSubject(title);
+	            helper.setText(content,true);
+	            mailSender.send(message);
+	            
+	        }catch(Exception e) {
+	            e.printStackTrace();
+	        }
+			
+	        response.getWriter().print(authKey);//이메일 인증키 리턴
+		}
+	}
+	
+	@RequestMapping(value = "/member/bizMemberEmailCheck.do", method = RequestMethod.POST)
+	public void bizMemberEmailCheck(@RequestParam String bizEmail, HttpServletResponse response) throws IOException{
+		
+		TempKey tk = new TempKey();
+		String authKey = tk.getKey(11, false);
+		System.out.println(authKey);
+		
+		BizMember bm = mService.bizMemberEmailCheck(bizEmail);
+		
+		if(bm!=null) {
+		
+        response.getWriter().print("false");//사용 중인 이메일
+        
+		}else {
+			
+			/* 이메일 보내기 */
+	        String setFrom = "ddasum0@gmail.com";
+	        String toMail = bizEmail;
+	        String title = "따숨 메일 인증";
+	        String content = 
+	                "따숨에 오신걸 환영합니다." +
+	                "<br><br>" + 
+	                "이메일 인증 번호는 <Strong>" + authKey + "</Strong>입니다." + 
+	                "<br>" + 
+	                "해당 인증 번호를 인증 번호 확인란에 입력해주세요.";
+	        try {
+			
+	            MimeMessage message = mailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            helper.setFrom(setFrom);
+	            helper.setTo(toMail);
+	            helper.setSubject(title);
+	            helper.setText(content,true);
+	            mailSender.send(message);
+	            
+	        }catch(Exception e) {
+	            e.printStackTrace();
+	        }
+			
+	        response.getWriter().print(authKey);//이메일 인증키 리턴
+		}
 	}
 	
 	@RequestMapping(value = "/member/bizMemberRegNumCheck.do", method = RequestMethod.POST)

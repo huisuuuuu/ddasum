@@ -42,16 +42,31 @@
 	width: 60%;
 	height: auto;
 	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
+}
+
+table{
+	width: 100%;
+}
+
+tr{
+	width: 100%;
+}
+
+th{
+	width: 20%;
+	text-align: left;
+	color: #666666;
+    padding: 20px 0 0 20px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    vertical-align: top;
+    text-align: left;
+}
 	
 }
 
-#memberColumnList{
-	width: 20%;
-}
-
-#memberData{
+td{
 	width: 80%;
 }
 
@@ -64,7 +79,7 @@
 }
 
 .dataInput {
-	width: 80%;
+	width: 70%;
 	height: 55px;
 	line-height: nomal;
 	margin-top: 10px;
@@ -76,7 +91,7 @@
 	color: #66666;
 }
 
-#memberData>select{
+table select{
 	width: 25%;
 	height: 55px;
 	line-height: nomal;
@@ -89,8 +104,8 @@
 	color: #66666;
 }
 
-#memberData>button {
-	width: 18%;
+table button {
+	width: 23%;
 	height: 55px;
 	margin-bottom: 5px;
 	border: 1px solid #ddd;
@@ -103,8 +118,8 @@
 	
 }
 
-#memberData>button:hover {
-	width: 18%;
+table button:hover {
+	width: 23%;
 	height: 55px;
 	margin-bottom: 5px;
 	border: none;
@@ -163,7 +178,7 @@
     height: 55px;
     line-height: nomal;
     margin-top: 50px;
-    margin-left: 150px;
+    margin-left: 285px;
     margin-bottom: 15px;
     margin-right: 7px;
     border: none;
@@ -172,4 +187,21 @@
     color: white;
     background-color: #FFA77E;
     cursor: pointer;
+}
+
+.hide{
+	display: none;
+}
+
+.bizTime{
+	width: 25%;
+	height: 55px;
+	line-height: nomal;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-right: 7px;
+	border: 1px solid #ddd;
+	font-size: 15px;
+	padding: 2%;
+	color: #66666;
 }

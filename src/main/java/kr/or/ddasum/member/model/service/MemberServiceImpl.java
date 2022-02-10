@@ -100,4 +100,28 @@ public class MemberServiceImpl implements MemberService{
 		return map;
 	}
 
+	@Override
+	public Member memberEmailCheck(String email) {
+		
+		return mDAO.memberEmailCheck(email);
+	}
+
+	@Override
+	public BizMember selectBizIdCheck(String bizId) {
+		
+		return mDAO.selectBizIdCheck(bizId);
+	}
+
+	@Override
+	public BizMember bizMemberEmailCheck(String bizEmail) {
+		
+		return mDAO.bizMemberEmailCheck(bizEmail);
+	}
+
+	@Override
+	public int insertBizMember(BizMember bm) {
+		
+		return mDAO.insertBizMember(bm);
+	}
+
 }

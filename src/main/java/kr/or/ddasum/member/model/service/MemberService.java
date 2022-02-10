@@ -28,6 +28,16 @@ public interface MemberService {
 	int findMemberPwd(Member m);
 
 	int findBizMemberPwd(BizMember bm);
-	
+
+	Member memberEmailCheck(String email);
+
+	BizMember selectBizIdCheck(String bizId);
+
+	BizMember bizMemberEmailCheck(String bizEmail);
+
+	int insertBizMember(BizMember bm);
+
 	HashMap<String, Object> detailMemberList(int currentPage, int userNo);
+	
+	
 }
