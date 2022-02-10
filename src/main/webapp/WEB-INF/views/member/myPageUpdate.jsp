@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <style>
     * div {
@@ -191,6 +192,14 @@
         font-size: 22px;
         font-weight: bolder;
     }
+    #under {
+        width: 80px;
+        height: 5px;
+        margin-bottom: 30px;
+        background: #FFA77E;
+        position: relative;
+        display: inline-block;
+    }
 
     #content-center-empty-top-area2 {
         width: 100%;
@@ -249,6 +258,16 @@
         border-radius: 75px;
         margin-left: 160px;
 
+    }
+    
+    #info-img-update-button{
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+        
     }
 
     #info-info-area {
@@ -436,6 +455,18 @@
         font-weight: 400;
         font-size: 14px;
     }
+    
+    
+    
+    
+    #profileImg{
+        width: 160px;
+        height: 160px;
+        border-radius: 100px;
+        margin-left: -10px;
+        margin-top: -10px;
+       
+    }
 </style>
 <body>
 <div id=header>
@@ -478,8 +509,8 @@
         <div id="content-center">
             <div id="content-center-empty-top-area1"></div>
             <div id="myPage-title_area">
-                <span>마이페이지</span>
-                <hr style="width: 60px; border: 0px; height: 3px;background-color: #FFA77E; margin-left: 760px">
+                <h1>마이페이지</h1>
+                <div id="under"></div>
             </div>
             <div id="content-center-empty-top-area2"></div>
             <div id="content-center-info-area">
@@ -490,8 +521,11 @@
 
                 <div id="info-img-area">
                     <span>프로필 사진</span><br><br>
-                    <div id="img-area"> </div><br><br>
-                    <input type="file" id="" value="변경하기" />
+                    <div id="img-area"><img id="profileImg"> </div><br><br>
+                    <form method="POST" id="uploadForm">
+                    <input type="file" class="inp-img" name="uploadFile" id="img" accept=".jpg" style="display:none;"/>
+                    </form>
+                    <button id="info-img-update-button"><label for="img">변경하기</label></button>
                 </div>
                 <div id="info-info-area">
                     <div class="data-title">아이디</div>
@@ -515,7 +549,7 @@
                     <br><br>
                     <hr>
                     <div class="data-title">주소</div>
-                    <div class="info-data"><input type="text" name="address" value="${sessionScope.member.address }"/> <button id="info-addr-update-button">주소검색</button></div>
+                    <div class="info-data"><input type="text" name="address" id="address_area" value="${sessionScope.member.address }" readonly/> <button onclick="address()" id="info-addr-update-button">주소검색</button></div>
                     <br><br>
                     <hr>
                     <div class="data-title">휴대전화</div>
@@ -590,6 +624,35 @@
             $('#hover-menu2').css("display", "none");
         });
         
+        function address() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    var addr = data.sido + " " + data.sigungu; 
+                    
+                    document.getElementById("address_area").value = addr;
+                    
+                }
+            }).open();
+        }
+        
+        function readInputFile(input) {
+            if(input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#profileImg').attr('src', e.target.result);
+                    
+                    
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".inp-img").on('change', function(){
+            readInputFile(this);
+        });
+        
+        
+        
         
         $('#info-update-button').click(function(){
         	
@@ -600,31 +663,73 @@
         	var address = $('input[name=address]').val();
         	var phone = $('input[name=phone]').val();
         	
+        	var formData = new FormData();
+        	formData.append("uploadFile", $("input[name=uploadFile]")[0].files[0]);
+        	
         	$.ajax({
-        		
-        		url : "/member/memberInfoUpdate.do",
-        		data : {"userPwd":userPwd, 
-        				"userName":userName, 
-        				"nick":nick, 
-        				"email":email, 
-        				"address":address, 
-        				"phone":phone},
+        		url : "/file/fileUpload.do",
+        		data : formData,
         		type : "POST",
+        		processData: false,
+        		contentType: false,
         		success : function(result){
         			if(result == "true"){
-        				alert('회원 정보 변경 성공');
-        				location.replace("/member/myPage.do");
+        			$.ajax({
+                		url : "/member/memberInfoUpdate.do",
+                		data : {"userPwd":userPwd, 
+                				"userName":userName, 
+                				"nick":nick, 
+                				"email":email, 
+                				"address":address, 
+                				"phone":phone},
+                		type : "POST",
+                		success : function(result){
+                			if(result == "true"){
+                				alert('회원 정보 변경 성공');
+                				location.replace("/member/myPage.do");
+                			}else{
+                				alert(' 회원 정보 변경 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. - ');
+                				location.replace("/member/myPage.do");
+                			}
+                		},
+                		error : function(){
+                			console.log('ajax 통신 에러');
+                		}
+                	});
         			}else{
-        				alert(' 회원 정보 변경 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. - ');
-        				location.replace("/member/login.do");
+        				alert('정보수정실패 - 지속적인 문제 발생시 관리자에게 문의 바랍니다 -');
+        				location.replace("/member/myPage.do");
         			}
         		},
         		error : function(){
         			console.log('ajax 통신 에러');
         		}
         	});
-        	
         });
+        
+        $('#delete-user-button').click(function(){
+    		
+        	if(window.confirm('탈퇴하시겠습니까? \n -탈퇴시 데이터 복구 불가능입니다.-') == true){
+        	$.ajax({
+        		
+        		url : "/member/withdraw.do",
+        		type : "get",
+        		success : function(result){
+        			if(result == "true"){
+        				alert('회원 탈퇴 성공 \n -감사합니다 -');
+        				location.replace('/');
+        			}else{
+        				alert('회원 탈퇴 실패 \n - 지속적인 문제발생시 관리자에게 문의바랍니다.');
+        				location.replace('/member/myPage.do');
+        			}
+        		},
+        		error : function(){
+        			
+        		}
+        	});
+        	}
+        	
+    	});
     </script>
 
 </body>

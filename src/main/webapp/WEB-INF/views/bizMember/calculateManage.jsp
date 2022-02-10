@@ -125,6 +125,24 @@
 			background-color: #FFA77E;
 			border-radius: 5px;
 		}
+		h1{
+		float: left;
+		}
+		.bizSmallImage{
+				float: right;
+		}
+		.bizId{
+			float: right;
+			font-size: 18pt;
+			text-align: center;		
+			padding-right: 20px;
+			padding-top: 20px;
+		}
+		.logout{
+			float: right;
+			font-size: 18pt;
+			padding-top: 20px;
+		}
 	</style>
 </head>
 <body>
@@ -139,7 +157,7 @@
 		</div>
 		<div id="L-downArea">
 			<div class="submenu"> 
-				<a href="/BizMember/bizManage.do"><br>	
+				<a href="/bizMember/bizManage.do"><br>	
 					<img class="Icons" src="/resources/images/bizSubMenu1.png" alt="로고">
 					<span class="menulist">업체 관리</span><br><br>
 				</a>
@@ -168,6 +186,12 @@
 		<div id="R-upArea">
 			<div id="calculateManage">
 				<h1>후원 정산 관리</h1>
+					<span class="logout">
+						<a href="/BizMember/logout.do">로그아웃</a>
+					</span>
+					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
+					<span class="bizSmallImage">
+					</span>	
 			</div>
 		</div>
 		<div id="R-downArea">

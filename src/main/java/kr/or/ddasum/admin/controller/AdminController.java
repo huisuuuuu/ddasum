@@ -1,11 +1,15 @@
 package kr.or.ddasum.admin.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.admin.model.service.AdminService;
+import kr.or.ddasum.admin.model.vo.AdminMember;
 
 @Controller
 public class AdminController {
@@ -19,10 +23,16 @@ public class AdminController {
 		return "/admin/adminMain";
 		
 	}
-
+	
 	@RequestMapping(value="/admin/adminMemberManageList.do", method = RequestMethod.GET)
-	public String adminMemberManageList() {
-		return "/admin/adminMemberManageList";
+	public ModelAndView adminMemberManageList(ModelAndView mav) {
+		
+		ArrayList<AdminMember> list = admService.adminMemberManageList();
+		
+		mav.addObject("list",list);
+		mav.setViewName("/admin/adminMemberManageList");
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="/admin/adminBizManageList.do", method = RequestMethod.GET)

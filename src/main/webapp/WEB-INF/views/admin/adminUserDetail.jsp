@@ -11,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/commons/adminCommon.css">
-<link rel="stylesheet" href="/resources/commons/adminNavigation.css">
 <link rel="stylesheet" href="/resources/commons/adminNoticeBoard.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
@@ -23,10 +22,9 @@
 }
 	
 .pop-wrap {
-	width : 100%;
-	height : 800px;
-	border-radius : 20px;
-}	
+    width: 100%;
+    border-radius: 20px;
+}
 
 .pop-header {
 	width : 100%;
@@ -36,12 +34,12 @@
 	line-height : 60px;
 	margin : 0px auto;
 	border-top-left-radius : 20px;
+	border-top-right-radius : 20px;
 }
 
 .pop-content {
-	width : 100%;
-	height : 730px;
-	text-align : center;
+    width: 100%;
+    text-align: center;
 }
 
 .pop-content table {

@@ -1,19 +1,25 @@
 package kr.or.ddasum.member.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.ddasum.email.TempKey;
 import kr.or.ddasum.member.model.service.MemberService;
 import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
@@ -23,6 +29,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+    private JavaMailSender mailSender;
 
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public String memberLogin(Member member, HttpServletRequest request, Model model) {
@@ -41,7 +50,7 @@ public class MemberController {
 				model.addAttribute("msg1", "로그인 실패");
 				model.addAttribute("msg2", "아이디와 비밀번호를 확인해주세요.");
 				model.addAttribute("location", "/member/loginPage.do");
-				return "commons/msg";
+				return "commons/errorMsg";
 			}
 	}
 
@@ -60,7 +69,7 @@ public class MemberController {
 			model.addAttribute("msg1", "로그인 실패");
 			model.addAttribute("msg2", "아이디와 비밀번호를 확인해주세요.");
 			model.addAttribute("location", "/member/bizMemberLoginPage.do");
-			return "commons/msg";
+			return "commons/errorMsg";
 		}
 	}
 
@@ -136,9 +145,27 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/reservationPage.do")
-	public String reservationPage() {
-
-		return "member/reservationCheckPage";
+	public ModelAndView reservationPage(HttpServletRequest request, @SessionAttribute Member member, ModelAndView mav) {
+		
+		int currentPage;
+		
+		if(request.getParameter("currentPage") == null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int userNo = member.getUserNo();
+		
+		HashMap<String, Object> map = mService.detailMemberList(currentPage, userNo);
+		
+		map.put("currentPage", currentPage);
+		
+		
+		mav.addObject("map", map);
+		mav.setViewName("member/reservationCheckPage");
+		
+		return mav;
 	}
 
 	// 정두식 추가 코드(끝)
@@ -151,7 +178,7 @@ public class MemberController {
 			model.addAttribute("msg1", "알림메세지");
 			model.addAttribute("msg2", "비정상적인 접근입니다.");
 			model.addAttribute("location", "/");
-			return "commons/msg";
+			return "commons/errorMsg";
 			
 		} else {
 			return "member/loginPage";
@@ -167,7 +194,7 @@ public class MemberController {
 			model.addAttribute("msg1", "알림메세지");
 			model.addAttribute("msg2", "비정상적인 접근입니다.");
 			model.addAttribute("location", "/");
-			return "commons/msg";
+			return "commons/errorMsg";
 			
 		} else {
 			return "member/bizMemberLoginPage";
@@ -193,25 +220,357 @@ public class MemberController {
 			model.addAttribute("msg1", "회원 가입 실패");
 			model.addAttribute("msg2", "지속적인 문제 발생 시 관리자에게 문의해주세요.");
 			model.addAttribute("location", "/member/joinPage.do");
-			return "commons/msg";
+			return "commons/errorMsg";
 		}
 		
 	}
 	
-	@RequestMapping(value = "/member/findIdPage.do", method = RequestMethod.GET)
-	public String findIdPage() {
+	@RequestMapping(value = "/member/bizMemberJoin.do", method = RequestMethod.POST)
+	public String bizMemberJoin(BizMember bm, @RequestParam String bizTimeStart,
+							@RequestParam String bizTimeEnd, @RequestParam String roadAddress,
+							@RequestParam String detailAddress, @RequestParam String area, Model model) {
+		
+		if(area.equals("인천")) {
+			bm.setArea("INCHEON");
+		}else if(area.equals("경기")) {
+			bm.setArea("GYEONGGI");
+		}else if(area.equals("서울")) {
+			bm.setArea("SEOUL");
+		};
+		
+		bm.setBizTime(bizTimeStart+"~"+bizTimeEnd);
+		bm.setAddress(roadAddress+" "+detailAddress);
+		
+		System.out.println(bm);
+		
+		int result = mService.insertBizMember(bm);
+		
+		if(result>0) {
+			return "member/successJoinPage";
+		}else {
+			model.addAttribute("msg1", "회원 가입 실패");
+			model.addAttribute("msg2", "지속적인 문제 발생 시 관리자에게 문의해주세요.");
+			model.addAttribute("location", "/member/joinPage.do");
+			return "commons/errorMsg";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/memberIdCheck.do", method = RequestMethod.GET)
+	public void memberIdCheck(HttpServletResponse response, @RequestParam String userId, Model model) throws IOException{
 
-		return "member/findIdPage";
+		Member m = mService.selectIdCheck(userId);
+		
+		if(m!=null) {
+			response.getWriter().print(true);//사용중
+		}else {
+			response.getWriter().print(false);//사용 가능
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/bizMemberIdCheck.do", method = RequestMethod.GET)
+	public void bizMemberIdCheck(HttpServletResponse response, @RequestParam String bizId, Model model) throws IOException{
+
+		BizMember bm = mService.selectBizIdCheck(bizId);
+		
+		if(bm!=null) {
+			response.getWriter().print(true);//사용중
+		}else {
+			response.getWriter().print(false);//사용 가능
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/memberNickCheck.do", method = RequestMethod.GET)
+	public void memberNickCheck(HttpServletResponse response, @RequestParam String nick, Model model) throws IOException{
+
+		Member m = mService.selectNickCheck(nick);
+		
+		if(m!=null) {
+			response.getWriter().print(true);//사용중
+		}else {
+			response.getWriter().print(false);//사용 가능
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/memberEmailCheck.do", method = RequestMethod.POST)
+	public void memberEmailCheck(@RequestParam String email, HttpServletResponse response) throws IOException{
+		
+		TempKey tk = new TempKey();
+		String authKey = tk.getKey(11, false);
+		System.out.println(authKey);
+		
+		Member m = mService.memberEmailCheck(email);
+		
+		if(m!=null) {
+		
+        response.getWriter().print("false");//사용 중인 이메일
+        
+		}else {
+			
+			/* 이메일 보내기 */
+	        String setFrom = "ddasum0@gmail.com";
+	        String toMail = email;
+	        String title = "따숨 메일 인증";
+	        String content = 
+	                "따숨에 오신걸 환영합니다." +
+	                "<br><br>" + 
+	                "이메일 인증 번호는 <Strong>" + authKey + "</Strong>입니다." + 
+	                "<br>" + 
+	                "해당 인증 번호를 인증 번호 확인란에 입력해주세요.";
+	        try {
+			
+	            MimeMessage message = mailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            helper.setFrom(setFrom);
+	            helper.setTo(toMail);
+	            helper.setSubject(title);
+	            helper.setText(content,true);
+	            mailSender.send(message);
+	            
+	        }catch(Exception e) {
+	            e.printStackTrace();
+	        }
+			
+	        response.getWriter().print(authKey);//이메일 인증키 리턴
+		}
+	}
+	
+	@RequestMapping(value = "/member/bizMemberEmailCheck.do", method = RequestMethod.POST)
+	public void bizMemberEmailCheck(@RequestParam String bizEmail, HttpServletResponse response) throws IOException{
+		
+		TempKey tk = new TempKey();
+		String authKey = tk.getKey(11, false);
+		System.out.println(authKey);
+		
+		BizMember bm = mService.bizMemberEmailCheck(bizEmail);
+		
+		if(bm!=null) {
+		
+        response.getWriter().print("false");//사용 중인 이메일
+        
+		}else {
+			
+			/* 이메일 보내기 */
+	        String setFrom = "ddasum0@gmail.com";
+	        String toMail = bizEmail;
+	        String title = "따숨 메일 인증";
+	        String content = 
+	                "따숨에 오신걸 환영합니다." +
+	                "<br><br>" + 
+	                "이메일 인증 번호는 <Strong>" + authKey + "</Strong>입니다." + 
+	                "<br>" + 
+	                "해당 인증 번호를 인증 번호 확인란에 입력해주세요.";
+	        try {
+			
+	            MimeMessage message = mailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            helper.setFrom(setFrom);
+	            helper.setTo(toMail);
+	            helper.setSubject(title);
+	            helper.setText(content,true);
+	            mailSender.send(message);
+	            
+	        }catch(Exception e) {
+	            e.printStackTrace();
+	        }
+			
+	        response.getWriter().print(authKey);//이메일 인증키 리턴
+		}
+	}
+	
+	@RequestMapping(value = "/member/bizMemberRegNumCheck.do", method = RequestMethod.POST)
+	public void bizMemberRegNumCheck(HttpServletResponse response, @RequestParam String regNum, Model model) throws IOException{
+		
+		BizMember bm = mService.selectRegNumCheck(regNum);
+		
+		if(bm!=null) {
+			response.getWriter().print(true);//사용 중
+			System.out.println("true");
+		}else {
+			response.getWriter().print(false);//사용 가능
+			System.out.println("false");
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/findIdPwdPage.do", method = RequestMethod.GET)
+	public String findIdPwdPage() {
+
+		return "member/findIdPwdPage";
 
 	}
+	
+	@RequestMapping(value = "/member/findMemberIdPage.do", method = RequestMethod.GET)
+	public String findMemberIdPage() {
 
-	@RequestMapping(value = "/member/findPwdPage.do", method = RequestMethod.GET)
-	public String findPwdPage() {
-
-		return "member/findPwdPage";
+		return "member/findMemberIdPage";
 
 	}
+	
+	@RequestMapping(value = "/member/findMemberPwdPage.do", method = RequestMethod.GET)
+	public String findMemberPwdPage() {
 
+		return "member/findMemberPwdPage";
+
+	}
+	
+	@RequestMapping(value = "/member/findBizMemberIdPage.do", method = RequestMethod.GET)
+	public String findBizMemberIdPage() {
+
+		return "member/findBizMemberIdPage";
+
+	}
+	
+	@RequestMapping(value = "/member/findBizMemberPwdPage.do", method = RequestMethod.GET)
+	public String findBizMemberPwdPage() {
+
+		return "member/findBizMemberPwdPage";
+
+	}
+	
+	@RequestMapping(value = "/member/findMemberId.do", method = RequestMethod.POST)
+	public String findMemberId(@RequestParam String userName, @RequestParam String email, Model model) {
+		
+		Member m = new Member();
+		
+		m.setUserName(userName);
+		m.setEmail(email);
+		
+		Member member = mService.findMemberId(m);
+		
+		if(member != null) {
+			model.addAttribute("msg1", member.getUserName()+"님의 아이디는 "+member.getUserId()+" 입니다.");
+			model.addAttribute("location", "/member/findMemberIdPage.do");
+			return "commons/successMsg";
+		}else {
+			model.addAttribute("msg1", "등록되지 않은 이메일입니다.");
+			model.addAttribute("msg2", "다시 시도해주세요.");
+			model.addAttribute("location", "/member/findMemberIdPage.do");
+			return "commons/errorMsg";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/findBizMemberId.do", method = RequestMethod.POST)
+	public String findBizMemberId(@RequestParam String ceoName, @RequestParam String bizEmail, Model model) {
+		
+		BizMember bm = new BizMember();
+		
+		bm.setCeoName(ceoName);
+		bm.setBizEmail(bizEmail);
+		
+		BizMember bizMember = mService.findBizMemberId(bm);
+		
+		if(bizMember != null) {
+			model.addAttribute("msg1", bizMember.getCeoName()+"님의 아이디는 "+bizMember.getBizId()+" 입니다.");
+			model.addAttribute("location", "/member/findBizMemberIdPage.do");
+			return "commons/successMsg";
+		}else {
+			model.addAttribute("msg1", "등록되지 않은 이메일입니다.");
+			model.addAttribute("msg2", "다시 시도해주세요.");
+			model.addAttribute("location", "/member/findBizMemberIdPage.do");
+			return "commons/errorMsg";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/member/findMemberPwd.do", method = RequestMethod.POST)
+	public void findMemberPwd(@RequestParam String userId, @RequestParam String email, HttpServletResponse response) throws IOException{
+		
+		TempKey tk = new TempKey();
+		Member m = new Member();
+		String checkNum = tk.getKey(8, false);
+		
+		m.setUserId(userId);
+		m.setEmail(email);
+		m.setUserPwd(checkNum);
+		
+		int result = mService.findMemberPwd(m);
+		
+		if(result>0) {
+		
+		/* 이메일 보내기 */
+        String setFrom = "ddasum0@gmail.com";
+        String toMail = m.getEmail();
+        String title = "따숨 임시 비밀번호 발급";
+        String content = 
+                "따숨을 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "<b>"+m.getUserId()+"</b>님의 임시 비밀 번호는 <Strong>" + checkNum + "</Strong>입니다." + 
+                "<br>" + 
+                "발급된 임시번호를 사용하여 로그인해주세요.";
+        
+        try {
+		
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        	response.getWriter().print(true);//비밀번호 변경 완료
+        
+		}else {
+			response.getWriter().print(false);//비밀번호 변경 실패
+		}
+	}
+	
+	@RequestMapping(value = "/member/findBizMemberPwd.do", method = RequestMethod.POST)
+	public void findBizMemberPwd(@RequestParam String bizId, @RequestParam String bizEmail, HttpServletResponse response) throws IOException{
+		
+		TempKey tk = new TempKey();
+		BizMember bm = new BizMember();
+		String checkNum = tk.getKey(8, false);
+		
+		bm.setBizId(bizId);
+		bm.setBizEmail(bizEmail);
+		bm.setBizPwd(checkNum);
+		
+		int result = mService.findBizMemberPwd(bm);
+		
+		if(result>0) {
+		
+		/* 이메일 보내기 */
+        String setFrom = "ddasum0@gmail.com";
+        String toMail = bm.getBizEmail();
+        String title = "따숨 임시 비밀번호 발급";
+        String content = 
+                "따숨을 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "<b>"+bm.getBizId()+"</b>님의 임시 비밀 번호는 <Strong>" + checkNum + "</Strong>입니다." + 
+                "<br>" + 
+                "발급된 임시번호를 사용하여 로그인해주세요.";
+        
+        try {
+		
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        	response.getWriter().print(true);//비밀번호 변경 완료
+        
+		}else {
+			response.getWriter().print(false);//비밀번호 변경 실패
+		}
+	}
+	
 	@RequestMapping(value = "/member/saleRestaurantListPage.do", method = RequestMethod.GET)
 	public String saleRestaurantPage() {
 
@@ -265,6 +624,40 @@ public class MemberController {
 
 		return "member/saleRestaurantDetail";
 
+	}
+	
+	@RequestMapping(value = "/member/reservationCancle.do", method = RequestMethod.POST)
+	public void reservationCancle(@RequestParam char reCancle,@SessionAttribute Member member,HttpServletResponse response) throws IOException {
+		
+		reCancle = reCancle=='N'?'Y':'N';
+		
+		int userNo = member.getUserNo();
+		
+		int result = mService.reservationCancle(reCancle, userNo);
+		
+		if(result >0) {
+			response.getWriter().print("true");
+		}else {
+			response.getWriter().print("false");
+		}
+	}
+	
+	
+	@RequestMapping(value = "/member/withdraw.do")
+	public void memberWithdraw(@SessionAttribute Member member, HttpSession session,HttpServletResponse response) throws IOException {
+		
+		String userId = member.getUserId();
+		
+		int result = mService.memberWithdraw(userId);
+		
+		if(result > 0) {
+			session.invalidate();
+			
+			response.getWriter().print("true");
+		}else {
+			response.getWriter().print("false");
+		}
+		
 	}
 
 }

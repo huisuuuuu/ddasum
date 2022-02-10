@@ -1,53 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
-  	<select id="memberLogin" parameterType="member" resultType="member">
+	<select id="memberLogin" parameterType="member" resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where userId = #{userId} and userPwd = #{userPwd} and del_YN =
+		'N'
+	</select>
+
+	<select id="selectIdCheck" parameterType="String" resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where userId = #{userId} and del_YN = 'N'
+	</select>
+
+	<select id="selectNickCheck" parameterType="String" resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where nick = #{nick} and del_YN = 'N'
+	</select>
+	
+	<select id="findMemberId" parameterType="member" resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where userName = #{userName} and email = #{email} and del_YN = 'N'
+	</select>
+	
+	<select id="memberEmailCheck" parameterType="String" resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where email = #{email} and del_YN = 'N'
+	</select>
+	
+	<update id="memberInfoUpdate" parameterType="member">
+		update member set
+		userPwd = #{userPwd},
+		userName = #{userName},
+		nick = #{nick},
+		email = #{email},
+		address = #{address},
+		phone = #{phone}
+		where
+		userId = #{userId}
+	</update>
+	
+	<update id="findeMemberPwd" parameterType="member">
+		update member set
+		userPwd = #{userPwd}
+		where
+		userId = #{userId} and email = #{email} and del_YN = 'N'
+	</update>
+	
+	<insert id="memberJoin" parameterType="member">
+		INSERT INTO MEMBER VALUES(
+		MEMBER_SEQ.NEXTVAL,
+		'USER',
+		#{userId},
+		#{userPwd},
+		#{userName},
+		#{nick},
+		#{email},
+		#{phone},
+		#{address},
+		'N',
+		NULL,
+		SYSDATE,
+		NULL,
+		'N'
+		)
+	</insert>
+	
+	<select id="detailMemberList" parameterType="int" resultType="detail">
   		select 
-  			userNo as userNo,
-  			authority_ID as authorityId, 
-  			userId as userId, 
-  			userPwd as userPwd, 
-  			userName as userName, 
-  			nick as nick, 
-  			email as email, 
-  			detail as detail, 
-  			phone as phone, 
-  			address as address, 
-  			p_image as pImage, 
-  			enrollDate as enrollDate, 
-  			card_No as cardNo, 
-  			del_YN as delYN 
-  		from member where userId = #{userId} and userPwd = #{userPwd} and del_YN = 'N'
+			reservation_date as reservationDate,
+  			authority.AUTHORITY_ID as authorityId,
+  			re_No as reNo,
+  			menu_no as menuNo,
+  			re_cancle as reCancle,
+  			authority_Info as authorityInfo,
+  			biz_name as bizName,
+            biz_image as bizImage,
+  			address as address
+  		from
+  			authority
+  			inner join detail on(authority.AUTHORITY_ID = detail.AUTHORITY_ID)
+            inner join Biz_Member on (authority.AUTHORITY_ID = biz_member.AUTHORITY_ID)
+            where userNo = #{_params} and detail.biz_No = biz_member.biz_no
+            ORDER BY
+			m_re_no DESC
   	</select>
   	
-  	<update id="memberInfoUpdate" parameterType="member">
-  		update member set 
-	  		userPwd = #{userPwd},
-	  		userName = #{userName},
-	  		nick = #{nick},
-	  		email = #{email},
-	  		address = #{address},
-	  		phone = #{phone}
-  		where
-  			userId = #{userId}
+  	<select id="selectDetailTotalCount" parameterType="int" resultType="int">
+  		select count(*) from detail where userNo = #{_params}
+  	</select>
+  	
+  	<update id="reservationCancleBtn" parameterType="hashmap">
+  		update detail set re_cancle = #{reCancle} where userNo = #{userNo}
   	</update>
   	
-  	<insert id="memberJoin" parameterType="member">
-  		INSERT INTO MEMBER VALUES(
-  								MEMBER_SEQ.NEXTVAL,
-  								'USER',
-  								#{userId},
-  								#{userPwd},
-  								#{userName},
-  								#{nick},
-  								#{email},
-  								#{phone},
-  								#{address},
-  								'N',
-  								NULL,
-  								SYSDATE,
-  								NULL,
-  								'N'
-  		)
-  	</insert>
+  	<update id="withdraw" parameterType="string">
+  		update member set del_YN = 'Y' where userId = #{_param}
+  	</update>
 </mapper>

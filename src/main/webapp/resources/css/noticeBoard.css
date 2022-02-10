@@ -5,6 +5,10 @@
             box-sizing: border-box;
             font-family: 'Noto Sans KR', sans-serif; 
         }
+		* a{
+        text-decoration: none;
+        color: inherit;
+    	}
 		#wrapper{
 			width: 1920px;
 			height: 1080px;
@@ -40,21 +44,33 @@
 		}
 		.title{
 			font-size: 32pt;
+			border-bottom: 6px solid #FFD3BE;
+		}
+		.searchForm{
+			float: right;
+			
 		}
 		.optionBTN{
 			width: 100px;
 			height: 30px;
-			font-size: 14pt;	
+			font-size: 14pt;
+			border-radius: 5px;
 		}
 		.inputdata{
 			width: 200px;
 			height: 30px;
 			font-size: 14pt;
+			padding-right: 5px;
+			border-bottom-left-radius: 5px;
+			border-top-left-radius: 5px;
 		} 
 		.submitBTN{
-			width: 80px;
+			width: 50px;
 			height: 30px;
-			font-size: 14pt;		
+			font-size: 14pt;
+			background-color: #FFD3BE;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;			
 		}
 		.resultTable{
 			width: 80%;
@@ -77,6 +93,7 @@
 		} 
 		td {
 			height: 60px;
+			color: black;
 		}
 		.td_left{
 			text-align: left;
@@ -91,14 +108,11 @@
 		}
 		p{
 			border-bottom: 1px solid #707070;
-		}
-		.subject{
-			display: block;
-			text-align: left;
+			height: 130px;
 		}
 		.detailTable{
 			width: 80%;
-			height: 780px;
+			height: 100%;
 			margin: 0 auto;
  			border: 1px solid #666666;
  			border-radius: 20px;
@@ -110,3 +124,35 @@
 			text-align: center;
 			padding-top: 10px;
 		}
+		.subject{
+			display: block;
+			text-align: left;
+			padding-top: 10px;		
+			font-size: 22pt;
+			word-break:break-all;
+		}
+		.regdate{
+			font-size: 18pt;
+		}
+		.noticeContent{
+			padding-top: 10px;		
+			font-size: 18pt;
+			word-break:break-all;
+		}
+		.moveBTN{
+			width: 75px;
+			height: 35px;
+			border: 1px solid #707070;
+			background-color: white;
+		}
+		.contentBTN{
+			width: 70px;
+			height: 35px;
+			border: 1px solid #707070;
+			background-color: white;		
+		}
+		.searchImg{
+			width: 15px;
+		}
+		
+		

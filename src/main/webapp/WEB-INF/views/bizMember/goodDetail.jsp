@@ -140,6 +140,28 @@
 			font-size: 16pt;
 			border: none;
 		}
+		h1{
+		float: left;
+		}
+		.bizSmallImage{
+				float: right;
+		}
+		.bizId{
+			float: right;
+			font-size: 18pt;
+			text-align: center;		
+			padding-right: 20px;
+			padding-top: 20px;
+		}
+		.logout{
+			float: right;
+			font-size: 18pt;
+			padding-top: 20px;
+		}	
+		
+		
+		
+		
 	</style>
 
 </head>
@@ -156,7 +178,7 @@
 		</div>
 		<div id="L-downArea">
 			<div class="submenu"> 
-				<a href="/BizMember/bizManage.do"><br>	
+				<a href="/bizMember/bizManage.do"><br>	
 					<img class="Icons" src="/resources/images/bizSubMenu1.png" alt="로고">
 					<span class="menulist">업체 관리</span><br><br>
 				</a>
@@ -185,6 +207,12 @@
 		<div id="R-upArea">
 			<div id="goodManage">
 				<h1>후원 상품 관리>상품등록</h1>
+					<span class="logout">
+						<a href="/BizMember/logout.do">로그아웃</a>
+					</span>
+					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
+					<span class="bizSmallImage">
+					</span>
 			</div>
 		</div>
 		<div id="R-downArea">
@@ -192,6 +220,7 @@
 				<div id="content-title">
 					후원 상품 등록
 				</div>
+				<form action="/bizMember/addGood.do" method="post" id="addForm">
 				<div id="content">
 					<div id="itemImgArea">
 						<div id="itemInfoImg">
@@ -211,7 +240,7 @@
 							<span>상품명</span>
 						</div>
 						<div class="infoWriter">
-							<input class="entertext" type="text">
+							<input class="entertext" name="menuName" type="text">
 						</div>					
 					</div>
 					<div class="iteminfo">
@@ -219,7 +248,7 @@
 							<span>상품 설명</span>
 						</div>
 						<div class="infoWriter">
-							<input class="entertext" type="text">
+							<input class="entertext" name="menuInfo" type="text">
 						</div>					
 					</div>
 					<div class="iteminfo">
@@ -227,14 +256,15 @@
 							<span>상품가격</span>
 						</div>
 						<div class="infoWriter">
-							<input class="entertext" type="text">
+							<input class="entertext" name="originalPrice" type="text">
 						</div>					
 					</div>
 					<div class="confirmArea">
-						<input class="confirmstyle" type="submit" value="상품 등록">
-						<input class="confirmstyle" type="button" value="취소">
+						<input class="confirmstyle" type="submit" value="상품 등록"/>
+						<a href="/BizMember/goodsManage.do"><input class="confirmstyle" type="button" value="취소"></a>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
