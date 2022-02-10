@@ -76,12 +76,86 @@
 			biz_member
 		WHERE ceo_name = #{ceoName} and biz_email = #{bizEmail} and biz_del_yn = 'N'
 	</select>
-
+	
+	<select id="selectBizIdCheck" parameterType="String" resultType="bizMember">
+		SELECT
+			biz_no as bizNo,
+			authority_id as authorityId,
+			biz_id as bizId,
+			biz_pwd as bizPwd,
+			ceo_name as ceoName,
+			biz_name as bizName,
+			biz_email as bizEmail,
+			biz_phone as bizPhone,
+			restaurant as restaurant,
+			area as area,
+			address as address,
+			biz_time as bizTime,
+			reg_no as regNo,
+			biz_image as bizImage,
+			biz_enrolldate as bizEnrollDate,
+			biz_count as bizCount,
+			biz_change_yn as bizChangeYN,
+			biz_del_yn as bizDelYN
+		FROM
+			biz_member
+		WHERE biz_id = #{bizId} and biz_del_yn = 'N'
+	</select>
+	
+	<select id="bizMemberEmailCheck" parameterType="String" resultType="bizMember">
+		SELECT
+			biz_no as bizNo,
+			authority_id as authorityId,
+			biz_id as bizId,
+			biz_pwd as bizPwd,
+			ceo_name as ceoName,
+			biz_name as bizName,
+			biz_email as bizEmail,
+			biz_phone as bizPhone,
+			restaurant as restaurant,
+			area as area,
+			address as address,
+			biz_time as bizTime,
+			reg_no as regNo,
+			biz_image as bizImage,
+			biz_enrolldate as bizEnrollDate,
+			biz_count as bizCount,
+			biz_change_yn as bizChangeYN,
+			biz_del_yn as bizDelYN
+		FROM
+			biz_member
+		WHERE biz_email = #{bizEmail} and biz_del_yn = 'N'
+	</select>
+	
   	<update id="findBizMemberPwd" parameterType="bizMember">
   		update biz_member set 
 	  		biz_Pwd = #{bizPwd}
   		where
   			biz_Id = #{bizId} and biz_email = #{bizEmail} and biz_del_yn = 'N'
-  	</update>		
+  	</update>
+  	
+  	<insert id="insertBizMember" parameterType="bizMember">
+  		
+  		INSERT INTO BIZ_MEMBER VALUES(
+  		BIZ_MEMBER_SEQ.NEXTVAL,
+  		#{authorityId},
+  		#{bizId},
+  		#{bizPwd},
+  		#{ceoName},
+  		#{bizName},
+  		#{bizEmail},
+  		#{bizPhone},
+  		#{restaurant},
+  		#{area},
+  		#{address},
+  		#{bizTime},
+  		#{regNo},
+  		NULL,
+  		SYSDATE,
+  		'0',
+  		'N',
+  		'N'					
+  		)
+  	</insert>		
   	
 </mapper>

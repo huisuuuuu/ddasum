@@ -71,4 +71,24 @@ public class MemberDAO {
 		return sqlSession.update("bizMember.findBizMemberPwd", bm);
 	}
 
+	public Member memberEmailCheck(String email) {
+		
+		return sqlSession.selectOne("member.memberEmailCheck", email);
+	}
+
+	public BizMember selectBizIdCheck(String bizId) {
+		return sqlSession.selectOne("bizMember.selectBizIdCheck", bizId);
+	}
+
+	public BizMember bizMemberEmailCheck(String bizEmail) {
+		
+		return sqlSession.selectOne("bizMember.bizMemberEmailCheck", bizEmail);
+	}
+
+	public int insertBizMember(BizMember bm) {
+		
+		return sqlSession.insert("bizMember.insertBizMember", bm);
+		
+	}
+
 }
