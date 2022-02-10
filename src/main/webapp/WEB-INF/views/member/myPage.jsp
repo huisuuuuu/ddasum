@@ -336,7 +336,9 @@
          text-align: center;
          
      }
-     #delete-user-button{
+    
+    
+    /*  #delete-user-button{
          background-color: #E6510B; 
          color: white;
          border-radius: 3px;
@@ -345,7 +347,7 @@
          height: 30px;
          margin-left: 10px;
          font-family: 'Noto Sans KR';
-     }
+     } */
          
      
      
@@ -487,7 +489,9 @@
             </div>
             <div id="content-center-empty-bottom-area"></div>
             <div id="delete-user-button-area">
-            <button id="delete-user-button">회원 탈퇴</button>
+           
+           
+            <!-- <button id="delete-user-button">회원 탈퇴</button> -->
         </div>
         </div>
         

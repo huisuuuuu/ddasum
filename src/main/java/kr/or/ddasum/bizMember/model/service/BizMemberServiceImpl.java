@@ -16,6 +16,7 @@ public class BizMemberServiceImpl implements BizMemberService{
 	@Autowired
 	private BizMemberDAO bDAO;
 
+	
 	@Override
 	public BizMember bizManage(BizMember bizMember) {
 		return bDAO.bizManage(bizMember);
@@ -38,9 +39,26 @@ public class BizMemberServiceImpl implements BizMemberService{
 	}
 
 	@Override
-	public int supportChange(String bizNo) {
-		return bDAO.supportChange(bizNo);
+	public int suportChange(String bizId) {
+		return bDAO.suportChange(bizId);
 	}
+
+	@Override
+	public int addGood(BizGoods bg) {
+		return bDAO.addGood(bg);
+	}
+
+	@Override
+	public BizGoods goodModify(int menuNo) {
+		return bDAO.goodModify(menuNo);
+		
+	}
+
+	@Override
+	public int GoodMo(BizGoods bg) {
+		return bDAO.GoodMo(bg);
+	}
+
 
 	
 

@@ -80,7 +80,7 @@ public class BizMemberDAO {
 	}
 
 	/**
-	  * @Method Name : supportChange
+	  * @Method Name : suportChange
 	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee
 	  * @변경이력 : 
@@ -88,9 +88,52 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-	public int supportChange(String bizNo) {
+	public int suportChange(String bizId) {
 
-		return sqlSession.update("bizAdmin.supportChange",bizNo);
+		return sqlSession.update("bizAdmin.suportChange",bizId);
+	}
+
+	/**
+	  * @Method Name : addGood
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :상품추가
+	  * @param bg
+	  * @return
+	  */
+	public int addGood(BizGoods bg) {
+
+		return sqlSession.insert("bizAdmin.addGood",bg);
+
+	}
+
+	/**
+	  * @Method Name : goodModify
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :메뉴수정 페이지 데이터 요청
+	  * @param menuNo
+	  * @return
+	  */
+	public BizGoods goodModify(int menuNo) {
+
+		return sqlSession.selectOne("bizAdmin.goodModify", menuNo);
+	}
+
+	/**
+	  * @Method Name : GoodMo
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :상품수정
+	  * @param bg
+	  * @return
+	  */
+	public int GoodMo(BizGoods bg) {
+
+		return sqlSession.update("bizAdmin.GoodMo",bg);
 	}
 
 	

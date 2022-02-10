@@ -1,6 +1,7 @@
 package kr.or.ddasum.member.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -124,6 +125,41 @@ public class MemberDAO {
 
 	private int totalCount(int userNo) {
 		return sqlSession.selectOne("member.selectDetailTotalCount",userNo);
+		
+	}
+	
+	public int reservationCancle(char reCancle, int userNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("reCancle", reCancle);
+		map.put("userNo", userNo);
+
+		return sqlSession.update("member.reservationCancleBtn", map);
+		
+	}
+
+	public int memberWithdraw(String userId) {
+		return sqlSession.update("member.withdraw",userId);
+		
+	}
+
+	public Member memberEmailCheck(String email) {
+		
+		return sqlSession.selectOne("member.memberEmailCheck", email);
+	}
+
+	public BizMember selectBizIdCheck(String bizId) {
+		return sqlSession.selectOne("bizMember.selectBizIdCheck", bizId);
+	}
+
+	public BizMember bizMemberEmailCheck(String bizEmail) {
+		
+		return sqlSession.selectOne("bizMember.bizMemberEmailCheck", bizEmail);
+	}
+
+	public int insertBizMember(BizMember bm) {
+		
+		return sqlSession.insert("bizMember.insertBizMember", bm);
 		
 	}
 

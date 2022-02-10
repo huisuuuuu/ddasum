@@ -36,13 +36,13 @@
 				</div>
 				<div id="choiceJoin">
 					<div id="memberJoin">
-						<a href="/member/bizNumVerify.do"> <img id="memberJoinImg"
+						<a href="/member/bizNumVerify.do?regCode=SP&regWord=후원"> <img id="memberJoinImg"
 							src="/resources/images/spBizMember.png"> <span
 							id="memberJoinWord">후원 사업자</span>
 						</a>
 					</div>
 					<div id="bizMemberJoin">
-						<a href="/member/bizNumVerify.do"> <img id="bizMemberJoinImg"
+						<a href="/member/bizNumVerify.do?regCode=DC&regWord=할인"> <img id="bizMemberJoinImg"
 							src="/resources/images/dcBizMember.png"> <span
 							id="bizMemberJoinWord">할인 사업자</span>
 						</a>

@@ -104,7 +104,7 @@
 			background-color: white;
 			border-radius: 5px;
 		}
-		#supportBTN{
+		#suportBTN{
 			float: right;
 			width: 120px;
 			height: 32px;
@@ -322,8 +322,8 @@
 									<option class="inputoption" value="30">30</option>
 									<option class="inputoption" value="50">50</option>
 								</select>
-							<li>${requestScope.bizMember.authorityId }<button id="supportBTN"><a href="/BizMember/supportChange.do">유형전환</button></a></li>
-							<li>${requestScope.bizMember.bizDelYN }<a href="/BizMember/withDraw.do"><button id="withDraw">탈퇴</button></a></li>
+							<li>${requestScope.bizMember.authorityId }<button id="suportBTN">유형전환</button></li>
+							<li>${requestScope.bizMember.bizDelYN }<button id="withDraw">탈퇴</button></li>
 						</ul>
 						</div>
 					</div>
@@ -418,14 +418,14 @@
     });
 	
 	//후원형태 변경 ajax 설정
-	$('#supportBTN').click(function(){
+	$('#suportBTN').click(function(){
 		
-		var result1 = confirm("후원형태를 변경하시겠습니까? 변경은 월 1회 가능합니다.")
-
-		if(result1==true)
+		var result = confirm("후원형태를 변경하시겠습니까? 변경은 1회만 가능합니다.")
+		
+		if(result==true)
 		{
 					 $.ajax({
-			    		url : "/bizMember/spChange.do",
+			    		url : "/bizMember/suportChange.do",
 			    		type : "POST",
 			    		success : function(rst){
 			    			if(rst == true){

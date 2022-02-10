@@ -68,13 +68,58 @@
   			BIZ_ID=#{bizId}
   	</update> 	
  
-   	<update id="supportChange" parameterType="bizMember">
+   	<update id="suportChange" parameterType="bizMember">
   		update biz_member set 
             AUTHORITY_ID = #{restaurant},
             biz_change_yn = 'Y'
   		where
             BIZ_ID=#{bizId} and biz_change_yn = 'N'
   	</update> 	
+  	
+	<insert id="addGood" parameterType="bizGoods">
+		INSERT INTO MENU VALUES(
+		MENU_SEQ.NEXTVAL,
+		#{bizNo},
+		#{authorityId},
+		#{restaurant},
+		#{menuName},
+		#{menuInfo},
+		#{originalPrice},
+		NULL,
+		NULL,
+		'N'
+		)
+	</insert>  	
+
+	<select id="goodModify" parameterType="bizGoods" resultType="BizGoods">
+		SELECT
+			menu_no as menuNo,
+			biz_no as bizNo,
+			c.AUTHORITY_INFO as authorityId,
+			t.RESTAURANT_TYPE as restaurant,
+			menu_name as menuName,
+			menu_info as menuInfo,
+			original_price as originalPrice,
+			dc_price as dcPrice,
+			menu_image as menuImage,
+			menu_del_YN as menuDelYN
+		FROM
+			MENU m, TYPE_GROUP t, AUTHORITY c
+        WHERE m.restaurant = t.restaurant AND m.authority_id = c.AUTHORITY_ID
+        	AND menu_no = #{menuNo}
+	</select>
+
+
+
+   	<update id="GoodMo" parameterType="bizGoods">
+  		update MENU set 
+			MENU_NAME = #{menuName},
+			MENU_INFO = #{menuInfo},
+			ORIGINAL_PRICE = #{originalPrice}
+  		where
+            MENU_NO = #{menuNo} and MENU_DEL_YN = 'N'
+  	</update> 	  	
+  	
   	
   	  	
 </mapper>

@@ -140,6 +140,15 @@
 			font-size: 16pt;
 			border: none;
 		}
+		#addGood{
+			width: 120px;
+			height: 50px;
+			background-color: #FFA77E;
+			color: white;
+			border-radius: 10px;
+			font-size: 16pt;
+			border: none;
+		}
 		h1{
 		float: left;
 		}
@@ -260,7 +269,7 @@
 						</div>					
 					</div>
 					<div class="confirmArea">
-						<input class="confirmstyle" type="submit" value="상품 등록"/>
+						<input type='button' id="addGood" value='상품 등록'/>
 						<a href="/BizMember/goodsManage.do"><input class="confirmstyle" type="button" value="취소"></a>
 					</div>
 				</div>
@@ -269,6 +278,11 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+
 <script>
 	$(function(){
         $('.submenu').hover(function() {
@@ -277,6 +291,40 @@
             $(this).removeClass('submenu_hover');
         });
     });
+	
+	
+	//신규 상품 등록 ajax
+
+    $('#addGood').click(function(){
+    	var form = {
+    			menuName : $('input[name=menuName]').val(),
+    			menuInfo : $('input[name=menuInfo]').val(),
+    			originalPrice : $('input[name=originalPrice]').val()
+    	}
+    	
+	  	$.ajax({
+    		url : "/bizMember/addGood.do",
+			dataType : "json",
+			data : form, 
+    		type : "POST",
+    		success : function(rst){
+    			if(rst == true){
+    				alert("상품 등록 완료");
+    				location.replace("/BizMember/goodsManage.do");
+    			}else{
+    				alert("상품 등록 실패");
+    				location.replace("/BizMember/goodsManage.do");
+    			}
+    		},
+    		error : function(){
+    			console.log('ajax 통신 에러');
+    		}
+    	});
+    });
+	
+	
+	
+	
 </script>
 </body>
 </html>

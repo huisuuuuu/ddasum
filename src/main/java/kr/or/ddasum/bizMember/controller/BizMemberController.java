@@ -38,7 +38,7 @@ public class BizMemberController {
 		
 	}	
 	
-	@RequestMapping(value="/BizMember/goodsManage.do", method = RequestMethod.GET)
+	@RequestMapping(value="/BizMember/goodsManage.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView goodsManage(@SessionAttribute BizMember bizMember, ModelAndView mav) {
 
 		int bizNo = bizMember.getBizNo();
@@ -52,28 +52,43 @@ public class BizMemberController {
 
 	}	
 	
-	@RequestMapping(value="/BizMember/bizReserv.do", method = RequestMethod.GET)
+	@RequestMapping(value="/BizMember/bizReserv.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String bizReserv(HttpSession session) {
 		
 		return "bizMember/bizReserv";
 		
 	}		
 	
-	@RequestMapping(value="/BizMember/calculateManage.do", method = RequestMethod.GET)
+	@RequestMapping(value="/BizMember/calculateManage.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String calculate(HttpSession session) {
 		
 		return "bizMember/calculateManage";
 		
 	}		
 	
-	@RequestMapping(value="/BizMember/goodDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value="/BizMember/goodDetail.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String goodDetail() {
 		
 		return "bizMember/goodDetail";
 		
 	}	
 
-	@RequestMapping(value="/BizMember/logout.do", method = RequestMethod.GET)
+	@RequestMapping(value="/bizMember/goodModify.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView goodModify(@RequestParam int menuNo, 
+								ModelAndView mav) {
+		
+		BizGoods bg = bService.goodModify(menuNo);
+		
+		
+		mav.addObject("BizGoods", bg);
+		mav.setViewName("/bizMember/goodModify");
+		
+		return mav;
+		
+	}
+	
+	
+	@RequestMapping(value="/BizMember/logout.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
@@ -91,7 +106,7 @@ public class BizMemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/bizMember/updateBiz.do", method=RequestMethod.POST)
+	@RequestMapping(value="/bizMember/updateBiz.do", method={RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public String updateBiz(BizMember bizMemberVo,@SessionAttribute BizMember bizMember, HttpSession session, HttpServletResponse response) throws IOException{
 		String bizId = bizMember.getBizId();
@@ -138,19 +153,88 @@ public class BizMemberController {
 		return rst;
 	}
 	
-	@RequestMapping(value="/bizMember/spChange.do", method = RequestMethod.POST)
+	@RequestMapping(value="/bizMember/suportChange.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String supportChange(@SessionAttribute String bizId,
+	public String suportChange(@SessionAttribute String bizId,
 								@SessionAttribute String authorityName) {
 		
 		System.out.println(bizId);
 		System.out.println(authorityName);
 		
-		bService.supportChange(bizId);
+		bService.suportChange(bizId);
 		
 		String rst="";
 		
 		return rst;
+	}
+	
+	
+	@RequestMapping(value="/bizMember/addGood.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String addGood(BizGoods bizGoodsVo,
+						@SessionAttribute BizMember bizMember, 
+						HttpServletResponse response,
+						@RequestParam String menuName,
+						@RequestParam String menuInfo,
+						@RequestParam int originalPrice
+						) throws IOException{
+
+		int bizNo = bizMember.getBizNo();
+		String authorityId = bizMember.getAuthorityId();
+		String restaurant = bizMember.getRestaurant();
+		
+		
+		BizGoods bg = new BizGoods();
+		bg.setMenuName(bizGoodsVo.getMenuName());
+		bg.setMenuInfo(bizGoodsVo.getMenuInfo());
+		bg.setOriginalPrice(bizGoodsVo.getOriginalPrice());
+		
+		bg.setBizNo(bizNo);
+		bg.setAuthorityId(authorityId);
+		bg.setRestaurant(restaurant);
+		; //session
+		
+		
+		int result = bService.addGood(bg);
+		
+		String rst = "";
+		if (result > 0) {
+			rst = "true";
+		} else {
+			rst = "false";
+		}
+		return rst;
+	}	
+	
+	
+	@RequestMapping(value="/bizMember/GoodMo.do", method = {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public String GoodMo(HttpSession session, 
+							@RequestParam int menuNo,
+							@RequestParam String menuName,
+							@RequestParam String menuInfo,
+							@RequestParam int originalPrice){
+		
+		BizGoods bg = new BizGoods();
+		bg.setMenuNo(menuNo);
+		bg.setMenuName(menuName);
+		bg.setMenuInfo(menuInfo);
+		bg.setOriginalPrice(originalPrice);
+		
+		System.out.println(bg);
+		
+		int result = bService.GoodMo(bg);
+		
+		String rst = "";
+		
+		if (result > 0) {
+			rst = "true";
+		} else {
+			rst = "false";
+		}
+		
+		return rst;
+		
 	}
 	
 }

@@ -58,7 +58,41 @@ public interface BizMemberService {
 	  * @Method 설명 : 사업자 유형 변환
 	  * @param bizNo
 	  */
-	int supportChange(String bizNo);
+	int suportChange(String bizId);
+
+	/**
+	  * @Method Name : addGood
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 상품추가
+	  * @param bg
+	  * @return
+	  */
+	int addGood(BizGoods bg);
+
+	/**
+	  * @Method Name : goodModify
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :메뉴수정 페이지 데이터 요청
+	  * @param menuNo
+	 * @return 
+	  */
+	BizGoods goodModify(int menuNo);
+
+	/**
+	  * @Method Name : GoodMo
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 메뉴 수정
+	  * @param bg
+	  * @return
+	  */
+	int GoodMo(BizGoods bg);
+
 
 
 
