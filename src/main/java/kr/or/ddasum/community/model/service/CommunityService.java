@@ -10,7 +10,7 @@ public interface CommunityService {
 
 	HashMap<String, Object> selectAllCommunity(int currentPage);
 
-	ArrayList<Community> searchCommunity(String type, String keyword, int currentPage);
+	HashMap<String, Object> searchCommunity(String type, String keyword, int currentPage);
 
 	HashMap<String, Object> detailOneCommunity(int cNo);
 
@@ -23,5 +23,11 @@ public interface CommunityService {
 	int insertCommunity(Community c);
 
 	int insertComment(CommunityComment cc);
+
+	Community selectCommunity(int cNo);
+
+	int updateCommunity(Community c);
+
+	int updateComment(CommunityComment cc);
 
 }
