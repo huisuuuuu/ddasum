@@ -12,6 +12,7 @@
 	crossorigin="anonymous"></script>
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/communityList.css">
+	
 </head>
 <body>
 	<!-- header -->
@@ -24,11 +25,11 @@
         <br><br><br>
         <div id="board_wrapper">
             <div class="table_tr">
-                <button type="button" class="color_button" id="board_write">글쓰기</button>
+            	<c:if test="${sessionScope.member !=null }">
+                	<button type="button" class="color_button" id="board_write">글쓰기</button>
+                </c:if>
 				<script>
 					$("#board_write").click(function(){
-						// 로그인 확인코드 추가예정
-						
 						location.replace("/community/communityWrite.do");
 					})
 				</script>
@@ -62,19 +63,26 @@
 						<tr class="table_tr_body">
 		                    <td class="td_no">${c.cNo}</td>
 		                    <td class="td_area">${c.area } > ${c.sigu } </td>
-		                    <td class="td_title"><a href="/community/communityDetail.do?cNo=${c.cNo }&currentPage=${requestScope.map['currentPage']}">${c.cTitle }</a></td>
+		                    <td class="td_title"><a href="/community/communityDetail.do?cNo=${c.cNo }&currentPage=${requestScope.map['currentPage']}">${c.cTitle } </a>
+		                    	<c:if test="${c.comCount !=null }"><sup>[${c.comCount }]</sup></c:if>
+		                    	<c:if test="${c.cRegDate == requestScope.map['nowDate']}"><img src="/resources/images/newIcon.png" alt="" /></c:if>
+		                    </td>
 		                    <td class="td_writer">${c.nick }</td>
 		                    <td class="td_date">${c.cRegDate }</td>
 		                    <td class="td_count">${c.cCount }</td>
 	                	</tr>
 	                	
 					</c:forEach>
+<%-- 						<tr>
+							<td colspan="6">${requestScope.map['navi'] }</td>
+						</tr>	
+					 --%>
 				</c:when>
 				<c:otherwise>
 						<tr class="table_tr_body">
 		                    <td class="td_no"></td>
 		                    <td class="td_area"></td>
-		                    <td class="td_title">게시물이 없습니다.</td>
+		                    <td class="td_title" style="text-align:center;">게시물이 없습니다.</td>
 		                    <td class="td_writer"></td>
 		                    <td class="td_date"></td>
 		                    <td class="td_count"></td>
@@ -82,7 +90,11 @@
 				</c:otherwise>
 			</c:choose>				
             </table>
-
+			<div id="page_wrap">
+			    <ul class="page_ul">
+			       ${requestScope.map['navi'] }
+			    </ul>
+			</div>
         </div>
     </div>
     <br /><br /><br />

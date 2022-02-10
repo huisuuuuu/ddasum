@@ -13,6 +13,9 @@ public class Community {
 	private String cContent;
 	private Date cRegDate;
 	private String pImage;
+	private int preNo;
+	private int nextNo;
+	private int comCount;
 	private int cCount;
 	private char cDelYN;
 
@@ -22,7 +25,7 @@ public class Community {
 	}
 
 	public Community(int cNo, int userNo, String nick, String area, String sigu, String cTitle, String cContent,
-			Date cRegDate, String pImage, int cCount, char cDelYN) {
+			Date cRegDate, String pImage, int preNo, int nextNo, int comCount, int cCount, char cDelYN) {
 		super();
 		this.cNo = cNo;
 		this.userNo = userNo;
@@ -33,6 +36,9 @@ public class Community {
 		this.cContent = cContent;
 		this.cRegDate = cRegDate;
 		this.pImage = pImage;
+		this.preNo = preNo;
+		this.nextNo = nextNo;
+		this.comCount = comCount;
 		this.cCount = cCount;
 		this.cDelYN = cDelYN;
 	}
@@ -109,6 +115,30 @@ public class Community {
 		this.pImage = pImage;
 	}
 
+	public int getPreNo() {
+		return preNo;
+	}
+
+	public void setPreNo(int preNo) {
+		this.preNo = preNo;
+	}
+
+	public int getNextNo() {
+		return nextNo;
+	}
+
+	public void setNextNo(int nextNo) {
+		this.nextNo = nextNo;
+	}
+
+	public int getComCount() {
+		return comCount;
+	}
+
+	public void setComCount(int comCount) {
+		this.comCount = comCount;
+	}
+
 	public int getcCount() {
 		return cCount;
 	}
@@ -124,5 +154,4 @@ public class Community {
 	public void setcDelYN(char cDelYN) {
 		this.cDelYN = cDelYN;
 	}
-	
 }

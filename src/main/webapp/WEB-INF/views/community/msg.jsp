@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/communityMsg.css">
 </head>
 <body>
-        <div class="modal hidden">
+        <div class="modal hidden" id="modal">
             <div class="modal_overlay"></div>
             <div class="modal_body">
                 <div class="modal_header">
@@ -29,7 +29,14 @@
             </div>
         </div>
     <script>
-        const openButton = $("#open");
+    $(function(){
+    	$("#modal").removeClass("hidden");
+    })
+    
+    $("button").click(function(){
+    	location.replace("${requestScope.view }");
+    })
+ /*        const openButton = $("#open");
         const modal = $(".modal:first");
         const overlay = $(".modal_overlay:first");
         const modalContent = $(".modal_content:first");
@@ -54,7 +61,7 @@
         
         openButton.click(function(){
             modal.removeClass("hidden");  
-        });
+        }); */
     </script>    
 </body>
 </html>

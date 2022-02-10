@@ -25,27 +25,27 @@
 	
     <div id="content_wrapper">
         <div id="page_title">
-            후원식당 > <strong>상세페이지</strong>
+            <a style="all:unset;" href="/spRestaurant/spRestaurantList.do">후원식당</a> > <strong>상세페이지</strong>
         </div>
         <div id="item_image">
-            <img src="/resources/images/lock_Checked.png" alt="">
+            <img src="${requestScope.map['sr'].bizImage }" alt="">
         </div>
         <div id="item_info">
             <div id="name">
                 <img src="/resources/images/unlock_Checked.png" alt="">
-                <div>식당이름</div>
+                <div>${requestScope.map['sr'].bizName }</div>
             </div>
             <div class="item_info">
                 <img src="/resources/images/phone-call.png" alt="">
-                <div>01012345678</div>
+                <div>${requestScope.map['sr'].bizPhone }</div>
             </div>
             <div class="item_info">
                 <img src="/resources/images/location.png" alt="">
-                <div> 서울시 양천구</div>
+                <div>${requestScope.map['sr'].address }</div>
             </div>
             <div class="item_info">
                 <img src="/resources/images/operationHour.png" alt="">
-                <div>11:00~20:00</div>
+                <div>${requestScope.map['sr'].bizTime }</div>
             </div>
         </div>
         <div id="menu">
@@ -57,17 +57,19 @@
             
             <div id="tab1" class="tab_content current">
             <br>
+            <choose>
+              <when test="${!requestScope.map['mList'].isEmpty() }">
                 <div class="msg">※ 당일 예약만 가능한 점 유의하시기 바랍니다.</div>
                 <div class="menu">
                     <div>
-                    <img src="/resources/images/lock_Checked.png" alt="">
+                    <img src="${requestScope.map['mList'].menuImage }" alt="">
                     </div>
                     <div class="menu_info">
                         <div class="menu_name">
-                            매뉴이름
+                            ${requestScope.map['mList'].menuName }
                         </div>
                         <div class="menu_detail">
-                            매뉴설명
+                            ${requestScope.map['mList'].menuInfo }
                         </div>
                     </div>
                     <div class="reservation">
@@ -75,12 +77,17 @@
                     </div>
                 </div>
                 <br>
+                </when>
+                <otherwise>
+                	매뉴가 없습니다.
+                </otherwise>
+            </choose>    
             </div>
             <div id="tab2" class="tab_content">
             <br>
                 <img src="/resources/images/location.png" alt="">
                 <div id="address">
-                    서울 중구 명동10길 29
+                    ${requestScope.map['sr'].address }
                 </div>
                 <div id="map">
                     
@@ -102,7 +109,7 @@
 
 
         <script> // map
-            Kakao.init('783ccfa0bb53c6324959cef647098759');
+/*             Kakao.init('783ccfa0bb53c6324959cef647098759');
 Kakao.isInitialized();
         var mapContainer = $("#map"), // 지도를 표시할 div 
             mapOption = {
@@ -139,7 +146,7 @@ Kakao.isInitialized();
                 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                 map.setCenter(coords);
             } 
-        });    
+        });     */
         </script>        
     </div>
 	<!-- footer -->
