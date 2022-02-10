@@ -83,4 +83,5 @@
   		where
   			biz_Id = #{bizId} and biz_email = #{bizEmail} and biz_del_yn = 'N'
   	</update>		
-</mapper>
+
+  	</mapper>
