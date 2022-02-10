@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
-	<select id="memberLogin" parameterType="member"
-		resultType="member">
+	<select id="memberLogin" parameterType="member" resultType="member">
 		select
 		userNo as userNo,
 		authority_ID as authorityId,
@@ -22,8 +21,7 @@
 		'N'
 	</select>
 
-	<select id="selectIdCheck" parameterType="String"
-		resultType="member">
+	<select id="selectIdCheck" parameterType="String" resultType="member">
 		select
 		userNo as userNo,
 		authority_ID as authorityId,
@@ -61,7 +59,7 @@
 		from member where nick = #{nick} and del_YN = 'N'
 	</select>
 	
-		<select id="findMemberId" parameterType="member" resultType="member">
+	<select id="findMemberId" parameterType="member" resultType="member">
 		select
 		userNo as userNo,
 		authority_ID as authorityId,
@@ -78,6 +76,25 @@
 		card_No as cardNo,
 		del_YN as delYN
 		from member where userName = #{userName} and email = #{email} and del_YN = 'N'
+	</select>
+	
+	<select id="memberEmailCheck" parameterType="String" resultType="member">
+		select
+		userNo as userNo,
+		authority_ID as authorityId,
+		userId as userId,
+		userPwd as userPwd,
+		userName as userName,
+		nick as nick,
+		email as email,
+		detail as detail,
+		phone as phone,
+		address as address,
+		p_image as pImage,
+		enrollDate as enrollDate,
+		card_No as cardNo,
+		del_YN as delYN
+		from member where email = #{email} and del_YN = 'N'
 	</select>
 	
 	<update id="memberInfoUpdate" parameterType="member">

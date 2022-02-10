@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
 				</div>
 				<div id="verifyBizNum">
 					<p>사업자 등록번호를 입력하세요.</p>
-					<form id="verifyBizNumForm" action="/member/bizMemberJoinPage.do"
+					<form id="verifyBizNumForm" action="/member/bizMemberJoinPage.do?regCode=${param.regCode }&regWord=${param.regWord }"
 						method="post" onsubmit="return false">
 						<input id="verifyNum" type="text" maxlength="10" name="regNum"
 							placeholder="- 제외한 숫자 10자리 입력"><br />
@@ -71,8 +72,6 @@
 			data: {"regNum":regNum},
 			type: "post",
 			success: function(result){
-				
-				console.log(result)
 				
 				if(result=="true")
 				{
