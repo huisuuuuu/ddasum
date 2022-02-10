@@ -281,6 +281,46 @@
     }
 
     
+    
+    
+    
+    
+    
+    
+    
+    
+    #page_wrap {
+    width: 100%;
+}
+#page_wrap .page_ul {
+    display: table;
+    margin : 0 auto;
+}
+#page_wrap .page_ul li {
+    display: block;
+    width: 35px;
+    height: 35px;
+    float: left;
+    text-align: center;
+    margin: 0 5px;
+    line-height: 15.5px;
+    font-size: 16px;
+    color: #2A2A2A;
+}
+#page_wrap .page_ul li a {
+    display: block;
+    font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	color: #2A2A2A;
+    padding: 10px;
+    border-radius: 50%;
+/*     transition: ease 0.3s; */
+}
+#page_wrap .page_ul li a.page_active {
+    background-color: #FFA77E;
+    border-radius: 50%;
+    color: #fff;
+}
     </style>
 <body>
 <div id=header>
@@ -330,61 +370,49 @@
             <div id="content-center-empty-top-area2"></div>
             <div id="all-resolvation-count"><span>전체 100건</span></div><br>
             <div id="resolvation-list-area">
-                <table id="list-table">
-                   <tr>
-                        <th style="width: 240px;">예약 상품</th>
-                        <th>예약 유형</th>
-                        <th>예약 일자</th>
-                        <th>예약 번호</th>
-                        <th >예약 상태</th>
-                        <th style="width: 100px;">예약 취소</th>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>두꺼비집</span></b><br><span>순두부찌개</span></div></td>
-                        <td>후원</td>
-                        <td>2022-02-26</td>
-                        <td>16534684312</td>
-                        <td>예약완료</td>
-                        <td><button>예약취소</button></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>두꺼비집</span></b><br><span>순두부찌개</span></div></td>
-                        <td>후원</td>
-                        <td>2022-02-26</td>
-                        <td>16534684312</td>
-                        <td>예약완료</td>
-                        <td><button>예약취소</button></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>두꺼비집</span></b><br><span>순두부찌개</span></div></td>
-                        <td>후원</td>
-                        <td>2022-02-26</td>
-                        <td>16534684312</td>
-                        <td>예약완료</td>
-                        <td><button>예약취소</button></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>두꺼비집</span></b><br><span>순두부찌개</span></div></td>
-                        <td>후원</td>
-                        <td>2022-02-26</td>
-                        <td>16534684312</td>
-                        <td>예약완료</td>
-                        <td><button>예약취소</button></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>두꺼비집</span></b><br><span>순두부찌개</span></div></td>
-                        <td>후원</td>
-                        <td>2022-02-26</td>
-                        <td>16534684312</td>
-                        <td>예약완료</td>
-                        <td><button>예약취소</button></td>
-                    </tr>  
-                </table>
+            <c:choose>
+				<c:when test="${!requestScope.map.list.isEmpty() }">
+	                <table id="list-table">
+	                   <tr>
+	                        <th style="width: 240px;">예약 상품</th>
+	                        <th>예약 유형</th>
+	                        <th>예약 일자</th>
+	                        <th>예약 번호</th>
+	                        <th >예약 상태</th>
+	                        <th style="width: 100px;">예약 취소</th>
+	                    </tr>
+	                    <c:forEach items="${requestScope.map.list }" var="d">
+	                    <tr>
+	                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>순두부찌개</span></div></td>
+	                        <td>${d.authorityId }</td>
+	                        <td>${d.reservationDate }</td>
+	                        <td>${d.reNo }</td>
+	                        <td>예약완료</td>
+	                        <td><button>예약취소</button></td>
+	                    </tr>
+	                    </c:forEach>
+					<tr align="center">
+					<td colspan="6">
+					<div id="page_wrap">
+					    <ul class="page_ul">
+					    	<li>
+					        ${requestScope.map.pageNavi }
+					        </li>
+					    </ul>
+					</div>
+					</td>
+					</tr>
+				</table>
+				</c:when>
+				<c:otherwise>
+				
+					<h1>현재 저장된 회원 목록이 없습니다.</h1>
+				</c:otherwise>
+		</c:choose>
+			
             </div>
             <div id="content-center-empty-center-area"></div>
-            <div id="shop-list-page-navi">
-                <span>- 1 2 3 4 5 -</span>
-            </div>
+            	
             <div id="content-center-empty-bottom-area"></div>
         </div>
         <div class="content-side-back"></div>

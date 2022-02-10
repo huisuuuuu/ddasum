@@ -1,6 +1,7 @@
 package kr.or.ddasum.member.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.email.TempKey;
 import kr.or.ddasum.member.model.service.MemberService;
@@ -143,9 +145,27 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/reservationPage.do")
-	public String reservationPage() {
-
-		return "member/reservationCheckPage";
+	public ModelAndView reservationPage(HttpServletRequest request, @SessionAttribute Member member, ModelAndView mav) {
+		
+		int currentPage;
+		
+		if(request.getParameter("currentPage") == null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int userNo = member.getUserNo();
+		
+		HashMap<String, Object> map = mService.detailMemberList(currentPage, userNo);
+		
+		map.put("currentPage", currentPage);
+		
+		
+		mav.addObject("map", map);
+		mav.setViewName("member/reservationCheckPage");
+		
+		return mav;
 	}
 
 	// 정두식 추가 코드(끝)

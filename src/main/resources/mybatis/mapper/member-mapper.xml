@@ -134,4 +134,28 @@
 		'N'
 		)
 	</insert>
+	
+	<select id="detailMemberList" parameterType="int" resultType="detail">
+  		select 
+			reservation_date as reservationDate,
+  			authority.AUTHORITY_ID as authorityId,
+  			re_No as reNo,
+  			menu_no as menuNo,
+  			re_cancle as reCancle,
+  			authority_Info as authorityInfo,
+  			biz_name as bizName,
+            biz_image as bizImage,
+  			address as address
+  		from
+  			authority
+  			inner join detail on(authority.AUTHORITY_ID = detail.AUTHORITY_ID)
+            inner join Biz_Member on (authority.AUTHORITY_ID = biz_member.AUTHORITY_ID)
+            where userNo = #{_params} and detail.biz_No = biz_member.biz_no
+            ORDER BY
+			m_re_no DESC
+  	</select>
+  	
+  	<select id="selectDetailTotalCount" parameterType="int" resultType="int">
+  		select count(*) from detail where userNo = #{_params}
+  	</select>
 </mapper>

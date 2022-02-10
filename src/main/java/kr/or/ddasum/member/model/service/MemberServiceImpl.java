@@ -1,11 +1,14 @@
 package kr.or.ddasum.member.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.ddasum.common.SHA256Util;
 import kr.or.ddasum.member.model.dao.MemberDAO;
 import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.member.model.vo.Detail;
 import kr.or.ddasum.member.model.vo.Member;
 
 @Service
@@ -76,6 +79,25 @@ public class MemberServiceImpl implements MemberService{
 	public int findBizMemberPwd(BizMember bm) {
 		
 		return mDAO.findBizMemberPwd(bm);
+	}
+	
+	@Override
+	public HashMap<String, Object> detailMemberList(int currentPage,int userNo) {
+		
+		int recordCountPerPage = 4;
+		
+		ArrayList<Detail> list = mDAO.detailMemberList(currentPage, recordCountPerPage, userNo);
+		
+		int naviCountPerPage = 5;
+		
+		String pageNavi = mDAO.getPageNavi(currentPage, recordCountPerPage,naviCountPerPage, userNo);
+		
+		HashMap <String, Object> map = new HashMap <String, Object>();
+		
+		map.put("list", list);
+		map.put("pageNavi", pageNavi);
+		
+		return map;
 	}
 
 	@Override

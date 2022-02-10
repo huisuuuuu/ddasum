@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <style>
     * div {
@@ -191,6 +192,14 @@
         font-size: 22px;
         font-weight: bolder;
     }
+    #under {
+        width: 80px;
+        height: 5px;
+        margin-bottom: 30px;
+        background: #FFA77E;
+        position: relative;
+        display: inline-block;
+    }
 
     #content-center-empty-top-area2 {
         width: 100%;
@@ -249,6 +258,16 @@
         border-radius: 75px;
         margin-left: 160px;
 
+    }
+    
+    #info-img-update-button{
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+        
     }
 
     #info-info-area {
@@ -436,6 +455,18 @@
         font-weight: 400;
         font-size: 14px;
     }
+    
+    
+    
+    
+    #profileImg{
+        width: 160px;
+        height: 160px;
+        border-radius: 100px;
+        margin-left: -10px;
+        margin-top: -10px;
+       
+    }
 </style>
 <body>
 <div id=header>
@@ -478,8 +509,8 @@
         <div id="content-center">
             <div id="content-center-empty-top-area1"></div>
             <div id="myPage-title_area">
-                <span>마이페이지</span>
-                <hr style="width: 60px; border: 0px; height: 3px;background-color: #FFA77E; margin-left: 760px">
+                <h1>마이페이지</h1>
+                <div id="under"></div>
             </div>
             <div id="content-center-empty-top-area2"></div>
             <div id="content-center-info-area">
@@ -490,8 +521,9 @@
 
                 <div id="info-img-area">
                     <span>프로필 사진</span><br><br>
-                    <div id="img-area"> </div><br><br>
-                    <input type="file" id="" value="변경하기" />
+                    <div id="img-area"><img id="profileImg"> </div><br><br>
+                    <input type="file" class="inp-img" name="uploadfile" id="img" accept=".jpg" style="display:none;"/>
+                    <button id="info-img-update-button"><label for="img">변경하기</label></button>
                 </div>
                 <div id="info-info-area">
                     <div class="data-title">아이디</div>
@@ -515,7 +547,7 @@
                     <br><br>
                     <hr>
                     <div class="data-title">주소</div>
-                    <div class="info-data"><input type="text" name="address" value="${sessionScope.member.address }"/> <button id="info-addr-update-button">주소검색</button></div>
+                    <div class="info-data"><input type="text" name="address" id="address_area" value="${sessionScope.member.address }" readonly/> <button onclick="address()" id="info-addr-update-button">주소검색</button></div>
                     <br><br>
                     <hr>
                     <div class="data-title">휴대전화</div>
@@ -590,6 +622,38 @@
             $('#hover-menu2').css("display", "none");
         });
         
+        function address() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    var addr = data.sido + " " + data.sigungu; // 최종 주소 변수
+                   /* var addr2 = data.sigungu;
+                   
+                    var address = addr1 + addr2;*/
+                    
+                    document.getElementById("address_area").value = addr;
+                    
+                }
+            }).open();
+        }
+        
+        function readInputFile(input) {
+            if(input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#profileImg').attr('src', e.target.result);
+                    
+                    
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".inp-img").on('change', function(){
+            readInputFile(this);
+        });
+        
+        
+        
         
         $('#info-update-button').click(function(){
         	
@@ -599,6 +663,20 @@
         	var email = $('input[name=email]').val();
         	var address = $('input[name=address]').val();
         	var phone = $('input[name=phone]').val();
+        	var uploadFile = $('input[name=uploadFile]').val();
+        	
+        	$.ajax({
+        		url : "/file/fileUpload.do",
+        		data : {"uploadFile":uploadFile},
+        		type : "POST",
+        		success : function(){
+        			
+        		},
+        		error : function(){
+        			console.log('ajax 통신 에러');
+        		}
+        	});
+        	
         	
         	$.ajax({
         		
