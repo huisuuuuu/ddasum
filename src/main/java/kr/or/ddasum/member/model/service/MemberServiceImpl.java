@@ -99,5 +99,17 @@ public class MemberServiceImpl implements MemberService{
 		
 		return map;
 	}
+	
+	@Override
+	public int reservationCancle(char reCancle, int userNo) {
+		return mDAO.reservationCancle(reCancle, userNo);
+		
+	}
+
+	@Override
+	public int memberWithdraw(String userId) {
+		return mDAO.memberWithdraw(userId);
+		
+	}
 
 }

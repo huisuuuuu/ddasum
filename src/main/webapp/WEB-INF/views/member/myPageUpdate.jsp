@@ -522,7 +522,9 @@
                 <div id="info-img-area">
                     <span>프로필 사진</span><br><br>
                     <div id="img-area"><img id="profileImg"> </div><br><br>
-                    <input type="file" class="inp-img" name="uploadfile" id="img" accept=".jpg" style="display:none;"/>
+                    <form method="POST" id="uploadForm">
+                    <input type="file" class="inp-img" name="uploadFile" id="img" accept=".jpg" style="display:none;"/>
+                    </form>
                     <button id="info-img-update-button"><label for="img">변경하기</label></button>
                 </div>
                 <div id="info-info-area">
@@ -625,10 +627,7 @@
         function address() {
             new daum.Postcode({
                 oncomplete: function(data) {
-                    var addr = data.sido + " " + data.sigungu; // 최종 주소 변수
-                   /* var addr2 = data.sigungu;
-                   
-                    var address = addr1 + addr2;*/
+                    var addr = data.sido + " " + data.sigungu; 
                     
                     document.getElementById("address_area").value = addr;
                     
@@ -663,46 +662,74 @@
         	var email = $('input[name=email]').val();
         	var address = $('input[name=address]').val();
         	var phone = $('input[name=phone]').val();
-        	var uploadFile = $('input[name=uploadFile]').val();
+        	
+        	var formData = new FormData();
+        	formData.append("uploadFile", $("input[name=uploadFile]")[0].files[0]);
         	
         	$.ajax({
         		url : "/file/fileUpload.do",
-        		data : {"uploadFile":uploadFile},
+        		data : formData,
         		type : "POST",
-        		success : function(){
-        			
-        		},
-        		error : function(){
-        			console.log('ajax 통신 에러');
-        		}
-        	});
-        	
-        	
-        	$.ajax({
-        		
-        		url : "/member/memberInfoUpdate.do",
-        		data : {"userPwd":userPwd, 
-        				"userName":userName, 
-        				"nick":nick, 
-        				"email":email, 
-        				"address":address, 
-        				"phone":phone},
-        		type : "POST",
+        		processData: false,
+        		contentType: false,
         		success : function(result){
         			if(result == "true"){
-        				alert('회원 정보 변경 성공');
-        				location.replace("/member/myPage.do");
+        			$.ajax({
+                		url : "/member/memberInfoUpdate.do",
+                		data : {"userPwd":userPwd, 
+                				"userName":userName, 
+                				"nick":nick, 
+                				"email":email, 
+                				"address":address, 
+                				"phone":phone},
+                		type : "POST",
+                		success : function(result){
+                			if(result == "true"){
+                				alert('회원 정보 변경 성공');
+                				location.replace("/member/myPage.do");
+                			}else{
+                				alert(' 회원 정보 변경 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. - ');
+                				location.replace("/member/myPage.do");
+                			}
+                		},
+                		error : function(){
+                			console.log('ajax 통신 에러');
+                		}
+                	});
         			}else{
-        				alert(' 회원 정보 변경 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. - ');
-        				location.replace("/member/login.do");
+        				alert('정보수정실패 - 지속적인 문제 발생시 관리자에게 문의 바랍니다 -');
+        				location.replace("/member/myPage.do");
         			}
         		},
         		error : function(){
         			console.log('ajax 통신 에러');
         		}
         	});
-        	
         });
+        
+        $('#delete-user-button').click(function(){
+    		
+        	if(window.confirm('탈퇴하시겠습니까? \n -탈퇴시 데이터 복구 불가능입니다.-') == true){
+        	$.ajax({
+        		
+        		url : "/member/withdraw.do",
+        		type : "get",
+        		success : function(result){
+        			if(result == "true"){
+        				alert('회원 탈퇴 성공 \n -감사합니다 -');
+        				location.replace('/');
+        			}else{
+        				alert('회원 탈퇴 실패 \n - 지속적인 문제발생시 관리자에게 문의바랍니다.');
+        				location.replace('/member/myPage.do');
+        			}
+        		},
+        		error : function(){
+        			
+        		}
+        	});
+        	}
+        	
+    	});
     </script>
 
 </body>

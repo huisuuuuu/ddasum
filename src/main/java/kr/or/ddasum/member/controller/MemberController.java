@@ -495,5 +495,39 @@ public class MemberController {
 		return "member/saleRestaurantDetail";
 
 	}
+	
+	@RequestMapping(value = "/member/reservationCancle.do", method = RequestMethod.POST)
+	public void reservationCancle(@RequestParam char reCancle,@SessionAttribute Member member,HttpServletResponse response) throws IOException {
+		
+		reCancle = reCancle=='N'?'Y':'N';
+		
+		int userNo = member.getUserNo();
+		
+		int result = mService.reservationCancle(reCancle, userNo);
+		
+		if(result >0) {
+			response.getWriter().print("true");
+		}else {
+			response.getWriter().print("false");
+		}
+	}
+	
+	
+	@RequestMapping(value = "/member/withdraw.do")
+	public void memberWithdraw(@SessionAttribute Member member, HttpSession session,HttpServletResponse response) throws IOException {
+		
+		String userId = member.getUserId();
+		
+		int result = mService.memberWithdraw(userId);
+		
+		if(result > 0) {
+			session.invalidate();
+			
+			response.getWriter().print("true");
+		}else {
+			response.getWriter().print("false");
+		}
+		
+	}
 
 }

@@ -30,4 +30,8 @@ public interface MemberService {
 	int findBizMemberPwd(BizMember bm);
 	
 	HashMap<String, Object> detailMemberList(int currentPage, int userNo);
+	
+	int reservationCancle(char reCancle, int userNo);
+
+	int memberWithdraw(String userId);
 }

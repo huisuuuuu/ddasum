@@ -141,4 +141,12 @@
   	<select id="selectDetailTotalCount" parameterType="int" resultType="int">
   		select count(*) from detail where userNo = #{_params}
   	</select>
+  	
+  	<update id="reservationCancleBtn" parameterType="hashmap">
+  		update detail set re_cancle = #{reCancle} where userNo = #{userNo}
+  	</update>
+  	
+  	<update id="withdraw" parameterType="string">
+  		update member set del_YN = 'Y' where userId = #{_param}
+  	</update>
 </mapper>
