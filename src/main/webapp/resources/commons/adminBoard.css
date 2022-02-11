@@ -244,12 +244,12 @@ a {
   width: 100%;
 }
 
-#page_wrap .page_ul {
+#page_wrap>ul {
   display: table;
   margin: 0 auto;
 }
 
-#page_wrap .page_ul li {
+#page_wrap>ul>li {
   display: block;
   width: 35px;
   height: 35px;
@@ -261,7 +261,7 @@ a {
   color: #2a2a2a;
 }
 
-#page_wrap .page_ul li a {
+#page_inactive {
   display: block;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
@@ -270,8 +270,14 @@ a {
   border-radius: 50%;
   transition: ease 0.3s;
 }
-#page_wrap .page_ul li a.page_active {
+
+#page_active {
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  padding: 10px;
+  transition: ease 0.3s;   
   background-color: #ffa77e;
   border-radius: 50%;
-  color: #fff;
+  color: white;
 }

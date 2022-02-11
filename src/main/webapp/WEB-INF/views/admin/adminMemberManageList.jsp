@@ -127,24 +127,26 @@ td:nth-of-type(1) {
                         
                     </table>
             
-                    <div id="page_wrap">
-                        <ul class="page_ul">
-            				<c:if test="${ preNavi > 0}">
-            					<li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
-            				</c:if>
-            				<c:forEach items="${ navi }" var="i">
-            					<li><a href='/admin/adminMemberManageList.do?currentPage=${i}'>${i}</a></li>
-            				</c:forEach>
-            				<c:if test="${ nextNavi } != 0">
-            					<li><a href='/dmin/adminMemberManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
-            				</c:if>
+					  <div id="page_wrap">
+                        <ul id="page_ul">
+                        <c:if test="${ preNavi > 0}">
+                           <li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                        </c:if>
+                        <c:forEach items="${ navi }" var="i">
+                           <c:choose>
+                              <c:when test="${i==currentPage}">
+                                 <li><a id="page_active" href='/admin/adminMemberManageList.do?currentPage=${i}'>${i}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a id="page_inactive" href='/admin/adminMemberManageList.do?currentPage=${i}'>${i}</a></li>
+                              </c:otherwise>
+                              </c:choose>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+                           <li><a href='/admin/adminMemberManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                        </c:if>
                         </ul>
                     </div>
-
-                </div>
-            </div>
-          </div>
-         </div>
           
 </body>
 </html>

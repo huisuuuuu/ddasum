@@ -18,7 +18,7 @@
 
 	<div id="header">
 		<div id="logo">
-		<img src="/resources/images/ddasum_header_logo.png" alt="로고" width="300px" height="300px">
+		<a href="/"><img src="/resources/images/ddasum_header_logo.png" alt="로고" width="300px" height="300px"></a>
 		</div>
 	</div>
 	
@@ -65,7 +65,7 @@
 	<div id="footer">
 		<div id="logbtn">
 			<a href="/">	
-				<button type="button" class="admin_main_btn">로그아웃</button>
+				<button type="button" class="admin_main_btn"><a href="/">로그아웃</a></button>
 			</a>
 		</div>
 	</div>
