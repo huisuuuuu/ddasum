@@ -66,6 +66,14 @@ span {
 	display : inline;
 }
 
+th:nth-of-type(1) {
+	display : none;
+}
+
+td:nth-of-type(1) {
+	display : none;
+}
+
 </style>
 </head>
 <body>
@@ -78,6 +86,7 @@ span {
 			<table>
 				<thead>
 					<tr>
+						<th>예약번호</th>
 						<th>예약일</th>
 						<th>이용식당</th>
 						<th>이용품목</th>
@@ -86,66 +95,19 @@ span {
 				</thead>
 				
 				<tbody>
+				<c:choose>
+				<c:when test="${!requestScope.list.isEmpty() }">
+				<c:forEach items="${requestScope.list }" var="d">
 					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
-					<tr>
-						<td>2022-01-20</td>
-						<td>의정부 5뎅식당</td>
-						<td>부대찌개</td>
-						<td>할인</td>
-					</tr>
+						<td>${d.mReNo }</td>
+						<td>${d.reservationDate }</td>
+						<td>${d.bizName }</td>
+						<td>${d.menuName }</td>
+						<td>${d.authorityInfo }</td>
+					</tr>				
+				</c:forEach>
+				</c:when>
+				</c:choose>
 				</tbody>
 			</table>
 				<hr>

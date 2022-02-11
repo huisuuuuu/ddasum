@@ -15,6 +15,16 @@
 <link rel="stylesheet" type="text/css" href="/resources/commons/styles.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
+<style>
+th:nth-of-type(1) {
+	display : none;
+}
+
+td:nth-of-type(1) {
+	display : none;
+}
+
+</style>
 </head>
 <body>
 
@@ -31,7 +41,7 @@
             </div>
            
             <div class="box-user">
-                <span>관리자님</span>
+                <span>${sessionScope.member.nick }님</span>
                 <a href="/">로그아웃</a>
             </div>
             </div>
@@ -70,6 +80,7 @@
                     <table>
                         <thead>
                             <tr>
+                            	<th width="100">회원번호</th>
                                 <th width="200">회원등급</th>
                                 <th width="200">아이디</th>
                                 <th width="200">닉네임</th>
@@ -79,106 +90,38 @@
                                 <th width="150">상세정보</th>
                             </tr>
                         </thead>
-                        
-                        <c:choose>
-                        <c:when test="${!requestScope.map['list'].isEmpty() }">
-                        	<c:forEach items="${requestScope.map['list'] }" var="m">
-                        
+						
                         <tbody>
+                        <c:choose>
+						<c:when test="${!requestScope.list.isEmpty()}">
+						<c:forEach items="${requestScope.list}" var="m">                                                
+                        
                             <tr>
-                                <td>${m.userNo }</td>
-                                <td>${m.userId }user11</td>
+                            	<td>${m.userNo }</td>
+                                <td>${m.authorityId }</td>
+                                <td>${m.userId }</td>
                                 <td>${m.nick }</td>
                                 <td>${m.email }</td>
                                 <td>${m.enrollDate }</td>
-                                <td><a href="/admin/adminUserDetail.do"><button type="button" class="ok_btn">있음</button></a></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
+                                <td>
+ 	                                <c:if test="${m.userId ne 'ADMIN' }">
+		                                <c:if test="${m.detailYN eq 'Y'.charAt(0)}">
+		                                	<button type="button" class="ok_btn"><a href="/admin/adminUserDetail.do?userNo=${m.userNo }">확인</a></button>
+		                                </c:if>
+		                                <c:if test="${m.detailYN eq 'N'.charAt(0)}">	                                
+		                                	<button type="button" class="none_btn">확인</button>
+	                               		</c:if>
+                               		</c:if>
+                               </td> 
+                                <td>
+                                	<c:if test="${m.userId ne 'ADMIN' }">
+   		                            <button type="button" class="ok_btn">상세보기</button>
+                                	</c:if>
+                                </td>
                             </tr>
-                            </c:forEach>
+                        </c:forEach>
                         </c:when>
                         </c:choose>
-                        
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="none_btn">없음</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
-                            <tr>
-                                <td>꿈나무</td>
-                                <td>user11</td>
-                                <td>닉네임1</td>
-                                <td>user11@naver.com</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
-                            </tr>
                             
                         </tbody> 
                         
@@ -186,7 +129,15 @@
             
                     <div id="page_wrap">
                         <ul class="page_ul">
-            
+            				<c:if test="${ preNavi > 0}">
+            					<li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+            				</c:if>
+            				<c:forEach items="${ navi }" var="i">
+            					<li><a href='/admin/adminMemberManageList.do?currentPage=${i}'>${i}</a></li>
+            				</c:forEach>
+            				<c:if test="${ nextNavi } != 0">
+            					<li><a href='/dmin/adminMemberManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+            				</c:if>
                         </ul>
                     </div>
 
