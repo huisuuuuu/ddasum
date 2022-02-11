@@ -4,7 +4,7 @@
 
 	<select id="selectAllSpRestaurant" parameterType="hashmap" resultType="kr.or.ddasum.spRestaurant.model.vo.SpRestaurant">
 		SELECT
-			BIZ_NO AS bizNo,
+			M.BIZ_NO AS bizNo,
 			AUTHORITY_ID AS authorityId,
 			BIZ_ID AS bizId,
 			CEO_NAME AS ceoName,
@@ -18,11 +18,14 @@
 			REG_NO AS regNo,
 			BIZ_IMAGE AS bizImage,
 			BIZ_ENROLLDATE AS enrollDate,
-			BIZ_COUNT AS bizCount,
+			BIZ_COUNT  - NVL(todayCount,0) AS bizCount,
 			BIZ_CHANGE_YN AS bizChangeYN,
 			BIZ_DEL_YN AS bizDelYN
 		FROM
-			BIZ_MEMBER
+			BIZ_MEMBER M
+			 LEFT JOIN (SELECT BIZ_NO, COUNT(*) AS allCount FROM DETAIL WHERE RE_CANCLE = 'N' GROUP BY BIZ_NO) DCOUNT ON (M.BIZ_NO = DCount.biz_NO)
+		     LEFT JOIN (SELECT BIZ_NO, COUNT(*) AS todayCount FROM DETAIL WHERE RE_CANCLE = 'N' AND RESERVATION_DATE = SYSDATE GROUP BY BIZ_NO) TCOUNT ON (M.BIZ_NO = TCOUNT.BIZ_NO)
+			
 <trim prefix="WHERE" prefixOverrides="AND|OR">
 	<if test="!area.equals('all')">
 		AREA = #{area}
@@ -33,11 +36,11 @@
 		AND BIZ_DEL_YN = 'N' AND AUTHORITY_ID = 'SP'
 </trim>				
 <choose>
-	<when test="order.equals('desc')">
-		ORDER BY BIZ_ENROLLDATE DESC
+	<when test="order.equals('best')">
+		ORDER BY allCount DESC NULLS LAST
 	</when>
 	<when test="order.equals('count')">
-		ORDER BY BIZ_COUNT DESC
+		ORDER BY BIZ_COUNT DESC 
 	</when>			
 	<otherwise>
 		ORDER BY BIZ_ENROLLDATE DESC	
@@ -77,7 +80,11 @@
 			REG_NO AS regNo,
 			BIZ_IMAGE AS bizImage,
 			BIZ_ENROLLDATE AS enrollDate,
-			BIZ_COUNT AS bizCount,
+			BIZ_COUNT - NVL((SELECT count(*) 
+							FROM detail 
+							WHERE biz_no = #{_parameter} 
+								AND reservation_date = SYSDATE 
+							GROUP BY re_no),0) AS bizCount, 
 			BIZ_CHANGE_YN AS bizChangeYN,
 			BIZ_DEL_YN AS bizDelYN
 		FROM

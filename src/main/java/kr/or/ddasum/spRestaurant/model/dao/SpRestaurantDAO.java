@@ -14,6 +14,7 @@ import kr.or.ddasum.spRestaurant.model.vo.SpRestaurant;
 public class SpRestaurantDAO {
 
 	public ArrayList<SpRestaurant> selectAllSpRestaurant(SqlSession sqlSession, HashMap<String, Object> terms, int recordCountPerPage) {
+		
 		int currentPage = (int) terms.get("currentPage");
 		int offset = ((currentPage-1)*recordCountPerPage);
 		int limit = recordCountPerPage;
