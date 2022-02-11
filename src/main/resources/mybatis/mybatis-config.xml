@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
-
+    <!-- Settings -->
+    <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+        <setting name="callSettersOnNulls" value="true" />
+    </settings>
+	
 	<typeAliases>
 		<typeAlias type="kr.or.ddasum.member.model.vo.Member" alias="member"/>
 		<typeAlias type="kr.or.ddasum.member.model.vo.BizMember" alias="bizMember"/>
