@@ -35,10 +35,12 @@ public class FileController {
 	@RequestMapping(value = "/file/fileUpload.do",method = RequestMethod.POST )
 	public void fileUpload(HttpServletRequest request, HttpServletResponse response, @SessionAttribute Member member) throws IOException{
 		
-		String uploadPath = "/WEB-INF/upload/userProfile";
+		/* String uploadPath = "/WEB-INF/upload/userProfile"; */
+		 String uploadPath = "/resources/images/userProfile"; 
+		
 		
 		String uploadFilePath = context.getRealPath(uploadPath);
-		
+		System.out.println(uploadFilePath);
 		int uploadFileSize = 20*1024*1024;
 		
 		String encType = "UTF-8";
@@ -55,13 +57,20 @@ public class FileController {
 		
 		long currentTime = Calendar.getInstance().getTimeInMillis();
 		
-		File file = new File(uploadFilePath +"\\"+ originalFileName);
-		file.renameTo(new File(uploadFilePath+"\\"+currentTime+"_ddasum"));
 		
-		String changeFileName = currentTime + "_ddasum";
+		/*
+		 * File file = new File(uploadFilePath +"\\"+originalFileName);
+		 * file.renameTo(new File(uploadFilePath+"\\"+currentTime));
+		 */
 		
-		File reNameFile = new File(uploadFilePath+"\\"+changeFileName);
+		
+		String changeFileName = currentTime + "_ddasum"; 
+		
+		
+		File reNameFile = new File("/resources/images/userProfile/"+originalFileName); 
+		/* File reNameFile = new File(uploadFilePath+"\\"+originalFileName); */
 		String filePath = reNameFile.getPath();
+		 
 		
 		long fileSize = reNameFile.length();
 		
@@ -84,4 +93,5 @@ public class FileController {
 			response.getWriter().print("false");
 		}
 	}
+	
 }
