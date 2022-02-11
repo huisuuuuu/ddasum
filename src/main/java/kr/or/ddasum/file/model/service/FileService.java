@@ -6,4 +6,5 @@ public interface FileService {
 
 	int insertUploadFile(FileData fd);
 
+
 }

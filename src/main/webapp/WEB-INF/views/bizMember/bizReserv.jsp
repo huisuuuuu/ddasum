@@ -135,6 +135,11 @@
 			padding-right: 20px;
 			padding-top: 20px;
 		}
+		.smaillimg{
+					padding-top: 20px;
+					padding-right: 10px;
+					width:30px;
+		}
 		.logout{
 			float: right;
 			font-size: 18pt;
@@ -187,7 +192,7 @@
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
-					<span class="bizSmallImage">
+					<span class="bizSmallImage"> <img class="smaillimg" src="${sessionScope.bizMember.bizImage }">
 					</span>				
 				
 			</div>
@@ -207,24 +212,35 @@
 						</div>
 					</div>
 					<div id="content">
+					
+					<c:choose>
+						<c:when test="${!requestScop.list.isEmpty() }">					
 						<table class="reservTable">
 							<tr>
 			 					<th>번호</th>
-			 					<th>회원면</th>
+			 					<th>회원명</th>
 			 					<th>예약상품</th>
 			 					<th>예약일</th>
 			 					<th>예약번호</th>
 			 					<th>예약상태</th>
 			 				</tr>
+						<c:forEach items="${requestScope.list }" var="m" varStatus="i">
 							<tr>
-								<td>1</td>
-								<td>홍길동</td>
-								<td>김치찌개</td>
-								<td>2022.01.31</td>
-								<td>20220131001</td>
-								<td>예약완료</td>
+								<td>${i.count }</td>
+								<td>${m.userName } </td>
+								<td>${m.menuName } </td>
+								<td>${m.reservationDate } </td>
+								<td>${m.reNo } </td>
+								<td>${m.reCancle }</td>
 							</tr>
+						</c:forEach>
 						</table>
+						</c:when>
+						<c:otherwise>
+							<H1>현재 저장된 회원이 없습니다.</H1>
+						</c:otherwise>
+			
+					</c:choose>
 					</div>
 				</div>
 			</div>
