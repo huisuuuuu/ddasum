@@ -104,7 +104,10 @@
 		nick = #{nick},
 		email = #{email},
 		address = #{address},
-		phone = #{phone}
+		phone = #{phone},
+		p_image = (SELECT p_filepath
+                    FROM PROFILE_IMG
+                    WHERE member.userNo = PROFILE_IMG.userNo)
 		where
 		userId = #{userId}
 	</update>
