@@ -391,6 +391,17 @@
         font-weight: 400;
         font-size: 14px;
     }
+    
+    
+    
+    #profileImg{
+        width: 160px;
+        height: 160px;
+        border-radius: 100px;
+        margin-left: -10px;
+        margin-top: -10px;
+       
+    }
  </style>
 <body>
 <div id=header>
@@ -441,7 +452,7 @@
                 
                 <div id="info-img-area">
                     <span>프로필 사진</span><br><br>
-                    <div id="img-area"> </div><br><br>
+                    <div id="img-area"> <img id="profileImg" src="${sessionScope.member.pImage }"></div><br><br>
                     
                 </div>
                 <div id="info-info-area">
