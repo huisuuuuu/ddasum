@@ -521,7 +521,7 @@
 
                 <div id="info-img-area">
                     <span>프로필 사진</span><br><br>
-                    <div id="img-area"><img id="profileImg"> </div><br><br>
+                    <div id="img-area"><img id="profileImg" src="${sessionScope.member.pImage }"> </div><br><br>
                     <form method="POST" id="uploadForm">
                     <input type="file" class="inp-img" name="uploadFile" id="img" accept=".jpg" style="display:none;"/>
                     </form>
