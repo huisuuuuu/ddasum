@@ -12,7 +12,7 @@
 			email as email,
 			phone as phone,
 			address as address,
-			detail as detail,
+			detail as detailYN,
 			enrolldate as enrollDate,
 			card_no as cardNo,
 			del_yn as delYN
@@ -22,6 +22,22 @@
 	<select id="selectAllMemberTotalCount" resultType="int">
 		SELECT COUNT(*) AS AllCount FROM MEMBER
 	</select>
+
+  	<select id="userDetail" parameterType="int" resultType="detail">
   
+  		SELECT
+  			M_RE_NO AS mReNo,
+  			RESERVATION_DATE AS reservationDate,
+  			AUTHORITY_INFO AS authorityInfo,
+  			MENU_NO AS menuNo,
+  			BIZ_NAME AS bizName
+  		FROM
+  			AUTHORITY
+  			INNER JOIN DETAIL ON (AUTHORIRTY.AUTHORITY_ID = DETAIL.AUTHORITY_ID)
+  			INNER JOIN BIZ_MEMBER ON (AUTHORITY.AUTHORITY_ID = BIZ_MEMBER.AUTHORITY_ID)
+  			WHERE userNo = #{_params} AND DETAIL.BIZ_NO = BIZ_MEMBER.BIZ_NO
+  		ORDER BY
+  		M_RE_NO DESC
+  	</select>
   
 </mapper>

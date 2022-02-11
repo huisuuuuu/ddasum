@@ -1,6 +1,7 @@
 package kr.or.ddasum.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.admin.model.service.AdminService;
@@ -62,6 +62,35 @@ public class AdminController {
 //		
 //		return "/admin/adminMemberManageList";
 //	}
+
+	//이용내역 확인
+	@RequestMapping(value="/admin/adminUserDetail.do", method = RequestMethod.GET)
+	public ModelAndView adminUserDetail(HttpServletRequest request, ModelAndView mav, @RequestParam int userNo) {
+		
+		int currentPage;
+		if(request.getParameter("currentPage") == null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int recordCountPerPage = 10;
+		
+		int start = currentPage * recordCountPerPage - (recordCountPerPage - 1);
+		int end = currentPage * recordCountPerPage;
+				
+		HashMap<String,Object> map = admService.userDetail(currentPage, userNo);
+		
+		
+		map.put("currentPage", currentPage);
+		map.put("userNo", userNo);
+		
+		mav.addObject("map", map);
+		mav.setViewName("admin/adminUserDetail");
+
+		return mav;
+				
+	}
 	
 	@RequestMapping(value="/admin/adminBizManageList.do", method = RequestMethod.GET)
 	public String adminBizManageList() {
@@ -72,6 +101,7 @@ public class AdminController {
 	public String adminNoticeManageList() {
 		return "/admin/adminNoticeManageList";
 	}
+	
 	
 	@RequestMapping(value="/admin/adminSupport.do", method = RequestMethod.GET)
 	public String adminSupport() {
@@ -91,12 +121,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/adminNoticeWrite.do", method = RequestMethod.GET)
 	public String adminNoticeWrite() {
 		return "/admin/adminNoticeWrite";
-	}
-	
-	@RequestMapping(value="/admin/adminUserDetail.do", method = RequestMethod.GET)
-	public String adminUserDetail() {
-		return "/admin/adminUserDetail";
-	}
+	}	
 	
 	@RequestMapping(value="/admin/adminCardConfirm.do", method = RequestMethod.GET)
 	public String adminCardConfirm() {

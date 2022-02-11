@@ -14,4 +14,6 @@ public interface AdminService {
 	int memberTotalCount();
 
 
+	HashMap<String, Object> userDetail(int currentPage, int userNo);
+	
 }

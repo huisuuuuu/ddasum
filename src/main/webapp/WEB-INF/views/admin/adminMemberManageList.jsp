@@ -24,9 +24,6 @@ td:nth-of-type(1) {
 	display : none;
 }
 
-.adminNick {
-	color : #000000;
-}
 </style>
 </head>
 <body>
@@ -44,7 +41,7 @@ td:nth-of-type(1) {
             </div>
            
             <div class="box-user">
-                <span class="adminNick">${sessionScope.member.nick }님</span>
+                <span>${sessionScope.member.nick }님</span>
                 <a href="/">로그아웃</a>
             </div>
             </div>
@@ -94,10 +91,11 @@ td:nth-of-type(1) {
                             </tr>
                         </thead>
 						
-						<c:choose>
-						<c:when test="${!requestScope.list.isEmpty()}">
-						<c:forEach items="${ requestScope.list }" var="m">                                                
                         <tbody>
+                        <c:choose>
+						<c:when test="${!requestScope.list.isEmpty()}">
+						<c:forEach items="${requestScope.list}" var="m">                                                
+                        
                             <tr>
                             	<td>${m.userNo }</td>
                                 <td>${m.authorityId }</td>
@@ -106,8 +104,20 @@ td:nth-of-type(1) {
                                 <td>${m.email }</td>
                                 <td>${m.enrollDate }</td>
                                 <td>
-                                	<a href="/admin/adminUserDetail.do"><button type="button" class="ok_btn">있음</button></a></td>
-                                <td><button type="button" class="ok_btn">상세보기</button></td>
+ 	                                <c:if test="${m.userId ne 'ADMIN' }">
+		                                <c:if test="${m.detailYN eq 'Y'.charAt(0)}">
+		                                	<button type="button" class="ok_btn"><a href="/admin/adminUserDetail.do?userNo=${m.userNo }">확인</a></button>
+		                                </c:if>
+		                                <c:if test="${m.detailYN eq 'N'.charAt(0)}">	                                
+		                                	<button type="button" class="none_btn">확인</button>
+	                               		</c:if>
+                               		</c:if>
+                               </td> 
+                                <td>
+                                	<c:if test="${m.userId ne 'ADMIN' }">
+   		                            <button type="button" class="ok_btn">상세보기</button>
+                                	</c:if>
+                                </td>
                             </tr>
                         </c:forEach>
                         </c:when>

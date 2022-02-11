@@ -12,25 +12,24 @@ public class AdminMember {
 	private String nick;
 	private String email;
 	private String address;
-	private char detail;
+	private char detailYN;
 	private Date enrollDate;
 	private long cardNo;
 	private char delYN;
-	
 	
 	@Override
 	public String toString() {
 		return "AdminMember [userNo=" + userNo + ", authorityId=" + authorityId + ", userId=" + userId + ", userPwd="
 				+ userPwd + ", userName=" + userName + ", nick=" + nick + ", email=" + email + ", address=" + address
-				+ ", detail=" + detail + ", enrollDate=" + enrollDate + ", cardNo=" + cardNo + ", delYN=" + delYN + "]";
+				+ ", detailYN=" + detailYN + ", enrollDate=" + enrollDate + ", cardNo=" + cardNo + ", delYN=" + delYN
+				+ "]";
 	}
-	
 	public AdminMember() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public AdminMember(int userNo, String authorityId, String userId, String userPwd, String userName, String nick,
-			String email, String address, char detail, Date enrollDate, long cardNo, char delYN) {
+			String email, String address, char detailYN, Date enrollDate, long cardNo, char delYN) {
 		super();
 		this.userNo = userNo;
 		this.authorityId = authorityId;
@@ -40,7 +39,7 @@ public class AdminMember {
 		this.nick = nick;
 		this.email = email;
 		this.address = address;
-		this.detail = detail;
+		this.detailYN = detailYN;
 		this.enrollDate = enrollDate;
 		this.cardNo = cardNo;
 		this.delYN = delYN;
@@ -69,10 +68,10 @@ public class AdminMember {
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
-	public String getuserName() {
+	public String getUserName() {
 		return userName;
 	}
-	public void setName(String userName) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 	public String getNick() {
@@ -93,11 +92,11 @@ public class AdminMember {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public char getDetail() {
-		return detail;
+	public char getDetailYN() {
+		return detailYN;
 	}
-	public void setDetail(char detail) {
-		this.detail = detail;
+	public void setDetailYN(char detailYN) {
+		this.detailYN = detailYN;
 	}
 	public Date getEnrollDate() {
 		return enrollDate;
@@ -117,5 +116,6 @@ public class AdminMember {
 	public void setDelYN(char delYN) {
 		this.delYN = delYN;
 	}
+	
 	
 }

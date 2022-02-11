@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddasum.admin.model.vo.AdminMember;
+import kr.or.ddasum.member.model.vo.Detail;
  
 @Repository
 public class AdminDAO {
@@ -67,6 +68,11 @@ public class AdminDAO {
 	
 	public int recordTotalCount() {
 		return sqlSession.selectOne("admin.selectAllMemberTotalCount");
+	}
+
+	public Detail detailOneMember(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (Detail)sqlSession.selectList("admin.userDetail", userNo);
 	}
 		
 }
