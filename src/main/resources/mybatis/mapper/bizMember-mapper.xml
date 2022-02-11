@@ -150,7 +150,7 @@
   		#{address},
   		#{bizTime},
   		#{regNo},
-  		NULL,
+  		DEFAULT,
   		SYSDATE,
   		'0',
   		'N',
