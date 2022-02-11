@@ -52,9 +52,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public BizMember selectRegNumCheck(String regNo) {
+	public BizMember selectRegNoCheck(String regNo) {
 		
-		return mDAO.selectRegNumCheck(regNo);
+		return mDAO.selectRegNoCheck(regNo);
 	}
 
 	@Override

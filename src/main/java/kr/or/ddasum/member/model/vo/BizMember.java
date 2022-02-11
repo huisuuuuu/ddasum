@@ -16,7 +16,7 @@ public class BizMember {
 	private String area;		//지역
 	private String address;		//주소
 	private String bizTime;		//운영시간
-	private int regNo;			//사업자번호
+	private String regNo;		//사업자번호
 	private String bizImage;	//프로필이미지
 	private Date bizEnrollDate;	//가입일
 	private int bizCount;		//사용수량
@@ -40,7 +40,7 @@ public class BizMember {
 	}
 
 	public BizMember(int bizNo, String authorityId, String bizId, String bizPwd, String ceoName, String bizName,
-			String bizEmail, String bizPhone, String restaurant, String area, String address, String bizTime, int regNo,
+			String bizEmail, String bizPhone, String restaurant, String area, String address, String bizTime, String regNo,
 			String bizImage, Date bizEnrollDate, int bizCount, char bizChangeYN, char bizDelYN) {
 		super();
 		this.bizNo = bizNo;
@@ -159,11 +159,11 @@ public class BizMember {
 		this.bizTime = bizTime;
 	}
 
-	public int getRegNo() {
+	public String getRegNo() {
 		return regNo;
 	}
 
-	public void setRegNo(int regNo) {
+	public void setRegNo(String regNo) {
 		this.regNo = regNo;
 	}
 

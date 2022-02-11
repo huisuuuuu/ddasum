@@ -19,11 +19,11 @@
         <div id="navigation">
             <ul id="gnb_list">
                 <li><a href="/member/storyBoard.do">스토리</a></li>
-                <li><a href="">후원식당</a></li>
+                <li><a href="/spRestaurant/spRestaurantList.do">후원식당</a></li>
                 <li><a href="/member/saleRestaurantListPage.do">할인식당</a></li>
-                <li><a href="">커뮤니티</a></li>
+                <li><a href="/community/communityList.do">커뮤니티</a></li>
                 <li id="customercenter"><a href="">고객센터</a>
-                <div id="submenu"><a href="/BizMember/noticeBoard.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="/BizMember/faqBoard.do">자주 묻는 질문</a></div>
+                <div id="submenu"><a href="/board/noticeBoard.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="/board/faqBoard.do">자주 묻는 질문</a></div>
                 </li>
             </ul>
         </div>
