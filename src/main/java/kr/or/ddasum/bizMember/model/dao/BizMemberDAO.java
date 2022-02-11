@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
 import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.member.model.vo.Detail;
 
 @Repository
 public class BizMemberDAO {
@@ -134,6 +135,33 @@ public class BizMemberDAO {
 	public int GoodMo(BizGoods bg) {
 
 		return sqlSession.update("bizAdmin.GoodMo",bg);
+	}
+
+	/**
+	  * @Method Name : bizReserv
+	  * @작성일 : 2022. 2. 11.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :예약 리스트 조회
+	  * @param bizNo
+	  * @return
+	  */
+	public ArrayList<Detail> bizReserv(int bizNo) {
+		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.bizReserv", bizNo));
+	}
+
+	/**
+	  * @Method Name : calculate
+	  * @작성일 : 2022. 2. 11.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :정산 리스트 조회
+	  * @param bizNo
+	  * @return
+	  */
+	public ArrayList<Detail> calculate(int bizNo) {
+		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.calculate", bizNo));
+
 	}
 
 	

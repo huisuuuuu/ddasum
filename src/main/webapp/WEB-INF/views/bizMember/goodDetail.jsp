@@ -155,6 +155,11 @@
 		.bizSmallImage{
 				float: right;
 		}
+		.smaillimg{
+					padding-top: 20px;
+					padding-right: 10px;
+					width:30px;
+		}
 		.bizId{
 			float: right;
 			font-size: 18pt;
@@ -220,7 +225,7 @@
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
-					<span class="bizSmallImage">
+					<span class="bizSmallImage"> <img class="smaillimg" src="${sessionScope.bizMember.bizImage }">
 					</span>
 			</div>
 		</div>

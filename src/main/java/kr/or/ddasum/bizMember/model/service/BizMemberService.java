@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
 import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.member.model.vo.Detail;
 
 public interface BizMemberService {
 
@@ -92,6 +93,28 @@ public interface BizMemberService {
 	  * @return
 	  */
 	int GoodMo(BizGoods bg);
+
+	/**
+	  * @Method Name : bizReserv
+	  * @작성일 : 2022. 2. 11.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 예약 리스트 조회
+	  * @param bizNo
+	  * @return
+	  */
+	ArrayList<Detail> bizReserv(int bizNo);
+
+	/**
+	  * @Method Name : calculate
+	  * @작성일 : 2022. 2. 11.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :정산 리스트 조회
+	  * @param bizNo
+	  * @return
+	  */
+	ArrayList<Detail> calculate(int bizNo);
 
 
 

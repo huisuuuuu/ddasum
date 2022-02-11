@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.or.ddasum.bizMember.model.service.BizMemberService;
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
 import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.member.model.vo.Detail;
+import kr.or.ddasum.member.model.vo.Member;
 
 @Controller
 public class BizMemberController {
@@ -53,16 +55,35 @@ public class BizMemberController {
 	}	
 	
 	@RequestMapping(value="/BizMember/bizReserv.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public String bizReserv(HttpSession session) {
+	public ModelAndView bizReserv(@SessionAttribute BizMember bizMember,
+									Detail detail,
+									ModelAndView mav) {
 		
-		return "bizMember/bizReserv";
+		
+		int bizNo = bizMember.getBizNo();
+		
+		ArrayList<Detail> list = bService.bizReserv(bizNo);
+		
+		mav.addObject("list", list);
+		mav.setViewName("/bizMember/bizReserv");
+		
+		return mav;
 		
 	}		
 	
 	@RequestMapping(value="/BizMember/calculateManage.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public String calculate(HttpSession session) {
+	public ModelAndView calculate(@SessionAttribute BizMember bizMember,
+							Detail detail,
+							ModelAndView mav) {
 		
-		return "bizMember/calculateManage";
+		int bizNo = bizMember.getBizNo();
+		
+		ArrayList<Detail> list = bService.calculate(bizNo);
+		
+		mav.addObject("list", list);
+		mav.setViewName("/bizMember/bizReserv");
+		
+		return mav;
 		
 	}		
 	
@@ -108,7 +129,10 @@ public class BizMemberController {
 	
 	@RequestMapping(value="/bizMember/updateBiz.do", method={RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public String updateBiz(BizMember bizMemberVo,@SessionAttribute BizMember bizMember, HttpSession session, HttpServletResponse response) throws IOException{
+	public String updateBiz(BizMember bizMemberVo,
+							@SessionAttribute BizMember bizMember, 
+							HttpSession session, 
+							HttpServletResponse response) throws IOException{
 		String bizId = bizMember.getBizId();
 		
 		BizMember bz = new BizMember();
@@ -209,11 +233,17 @@ public class BizMemberController {
 	
 	@RequestMapping(value="/bizMember/GoodMo.do", method = {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public String GoodMo(HttpSession session, 
-							@RequestParam int menuNo,
-							@RequestParam String menuName,
-							@RequestParam String menuInfo,
-							@RequestParam int originalPrice){
+	public String GoodMo(@RequestParam int menuNo,
+						@RequestParam String menuName,
+						@RequestParam String menuInfo,
+						@RequestParam int originalPrice){
+		
+		System.out.println(menuNo);
+		System.out.println(menuName);
+		System.out.println(menuInfo);
+		System.out.println(originalPrice);
+		
+		
 		
 		BizGoods bg = new BizGoods();
 		bg.setMenuNo(menuNo);

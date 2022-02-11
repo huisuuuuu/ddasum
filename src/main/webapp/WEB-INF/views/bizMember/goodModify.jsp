@@ -155,6 +155,11 @@
 		.bizSmallImage{
 				float: right;
 		}
+		.smaillimg{
+					padding-top: 20px;
+					padding-right: 10px;
+					width:30px;
+		}
 		.bizId{
 			float: right;
 			font-size: 18pt;
@@ -220,7 +225,7 @@
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
-					<span class="bizSmallImage">
+					<span class="bizSmallImage"> <img class="smaillimg" src="${sessionScope.bizMember.bizImage }">
 					</span>
 			</div>
 		</div>
@@ -271,7 +276,6 @@
 					<div class="confirmArea">
 						<input type='button' id="GoodMo" value='상품 수정'/>
 						<a href="/BizMember/goodsManage.do"><input class="confirmstyle" type="button" value="취소"></a>
-						<input type='hidden' id='menuNo' value=${requestScope.BizGoods.menuNo }>
 					</div>
 				</div>
 				</form>
@@ -297,18 +301,16 @@
 	//상품 수정 ajax
 
     $('#GoodMo').click(function(){
-
-    	   var form = {
-    	   		menuName : $('input[name=menuName]').val(),
+    	var form = {
+    			menuName : $('input[name=menuName]').val(),
     	  		menuInfo : $('input[name=menuInfo]').val(),
-    	   		originalPrice : $('input[name=originalPrice]').val(),
-    	   		originalPrice : $('input[name=menuNo]').val()
-    	   }
+    	   		originalPrice : $('input[name=originalPrice]').val()
+    	}
     	   
 	  	$.ajax({
     		url : "/bizMember/GoodMo.do",
 			dataType : "json",
-			data : form, 
+			data : {"form" : form, "menuNo" : menuNo},
     		type : "POST",
     		success : function(rst){
     			if(rst == true){

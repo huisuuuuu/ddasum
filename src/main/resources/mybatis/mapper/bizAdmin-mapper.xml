@@ -119,7 +119,40 @@
   		where
             MENU_NO = #{menuNo} and MENU_DEL_YN = 'N'
   	</update> 	  	
-  	
+ 
+ 	<select id="bizReserv" resultType="Detail">
+		SELECT
+			d.M_RE_NO as mReNo,
+			a.USERNAME as userName,
+			d.RESERVATION_DATE as reservationDate,
+			d.BIZ_NO as bizNo,
+			d.AUTHORITY_ID as authorityId,
+			d.RE_NO as reNo,
+			m.MENU_NAME as menuName,
+			d.RE_CANCLE as reCancle
+		FROM
+			detail d, member a, menu m
+        WHERE d.USERNO = a.USERNO AND d.MENU_NO = m.MENU_NO
+			AND d.biz_No = #{bizNo}
+	</select>	
+ 
+  	<select id="calculate" resultType="Detail">
+		SELECT
+			d.M_RE_NO as mReNo,
+			d.RESERVATION_DATE as reservationDate,
+			d.BIZ_NO as bizNo,
+            b.BIZ_NAME as bizName,
+			c.AUTHORITY_INFO as authorityId,
+			d.RE_NO as reNo,
+			m.MENU_NAME as menuName,
+			d.RE_CANCLE as reCancle
+		FROM
+			detail d, menu m, AUTHORITY c, BIZ_MEMBER b
+        where
+        d.MENU_NO = m.MENU_NO AND d.authority_id = c.AUTHORITY_ID AND d.BIZ_NO = b.BIZ_NO
+			AND d.biz_No = #{bizNo}
+	</select>
+ 
   	
   	  	
 </mapper>

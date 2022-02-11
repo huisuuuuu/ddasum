@@ -150,13 +150,18 @@
 		}
 		.imgsize{
 			width:100px;
-			padding-top: 70px;
+			padding-top: 60px;
 		}
 		h1{
 		float: left;
 		}
 		.bizSmallImage{
 				float: right;
+		}
+		.smaillimg{
+					padding-top: 20px;
+					padding-right: 10px;
+					width:30px;
 		}
 		.bizId{
 			float: right;
@@ -220,7 +225,7 @@
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
-					<span class="bizSmallImage">
+					<span class="bizSmallImage"> <img class="smaillimg" src="${requestScope.bizMember.bizImage }">
 					</span>
 					
 
@@ -236,15 +241,14 @@
 					<div id="content-L">
 						<br><br>
 						<div id="bizImg">
-							<img class="imgsize" src="/resources/images/bizImgAdd.png">
+							<img class="imgsize" src="${requestScope.bizMember.bizImage }">
 						</div>
 						<br>
-						<span>업체 사진을 등록해 주세요</span>
+						<span></span>
 					</div>
 					<div id="content-R">
 					<ul>
 						<li>아이디 </li>
-						<li>비밀번호 </li>
 						<li>대표명 </li>
 						<li>업체명 </li>
 						<li>이메일 </li>
@@ -260,7 +264,6 @@
 					<div id="content-result">
 					<ul>
 						<li>${requestScope.bizMember.bizId }</li>
-						<li>${requestScope.bizMember.bizPwd }</li>
 						<li>${requestScope.bizMember.ceoName }</li>
 						<li>${requestScope.bizMember.bizName }</li>
 						<li>${requestScope.bizMember.bizEmail }</li>

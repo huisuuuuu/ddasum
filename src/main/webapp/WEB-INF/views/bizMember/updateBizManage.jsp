@@ -125,8 +125,7 @@
 			border-radius: 5px;
 		}	
 		#pwdBTN{
-			float: right;
-			width: 120px;
+			width: 200px;
 			height: 32px;
 			font-size: 14pt;
 			color: white;
@@ -167,6 +166,11 @@
 		}
 		.bizSmallImage{
 				float: right;
+		}
+		.smaillimg{
+					padding-top: 20px;
+					padding-right: 10px;
+					width:30px;
 		}
 		.bizId{
 			float: right;
@@ -242,7 +246,7 @@
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
-					<span class="bizSmallImage">
+					<span class="bizSmallImage"> <img class="smaillimg" src="${sessionScope.bizMember.bizImage }">
 					</span>
 					
 
@@ -258,11 +262,13 @@
 					<div id="content">
 						<div id="content-L">
 							<br><br>
-							<div id="bizImg">
-								<a href=""><img class="imgsize" src="/resources/images/bizImgAdd.png"></a>
-							</div>
-							<br>
-							<span>업체 사진을 등록해 주세요</span>
+								<div id="bizImg">
+								<form action="/file/BizUpload.do" method="post" enctype="multipart/form-data" >
+									<input type="file" name="uploadFile" id="img" accept=".jpg, .gif, .png" onchange="loadFile(this);"/>
+                   					<input type='submit' value='변경'/>
+                    			</form>
+                   				</div>	
+
 						</div>
 						<div id="content-R">
 						<ul>
@@ -283,7 +289,7 @@
 						<div id="content-result">
 						<ul>
 							<li>${requestScope.bizMember.bizId }</li>
-							<li>${sessionScope.bizMember.bizPwd }<a href=""><button id="pwdBTN">변경</button></a></li>
+							<li><button id="pwdBTN"><a href="">변경</a></button></li>
 							<li><input type='text' class="inputdata" name="ceoName" value="${requestScope.bizMember.ceoName }"/></li>
 							<li><input type='text' class="inputdata" name="bizName" value="${requestScope.bizMember.bizName }"/></li>
 							<li><input type='text' class="inputdata" name="bizEmail" value="${requestScope.bizMember.bizEmail }"/></li>
@@ -355,6 +361,7 @@
     			address : $('input[name=address]').val(),
     			bizTime : $("#bizTime option:selected").val(),
     			bizCount : $("#bizCount option:selected").val()
+				
     	}
     	
 	  	$.ajax({

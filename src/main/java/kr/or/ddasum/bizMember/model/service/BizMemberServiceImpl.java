@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.or.ddasum.bizMember.model.dao.BizMemberDAO;
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
 import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.member.model.vo.Detail;
 
 
 @Service
@@ -57,6 +58,16 @@ public class BizMemberServiceImpl implements BizMemberService{
 	@Override
 	public int GoodMo(BizGoods bg) {
 		return bDAO.GoodMo(bg);
+	}
+
+	@Override
+	public ArrayList<Detail> bizReserv(int bizNo) {
+		return bDAO.bizReserv(bizNo);
+	}
+
+	@Override
+	public ArrayList<Detail> calculate(int bizNo) {
+		return bDAO.calculate(bizNo);
 	}
 
 
