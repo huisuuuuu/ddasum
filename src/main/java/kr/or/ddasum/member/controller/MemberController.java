@@ -381,10 +381,10 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value = "/member/bizMemberRegNumCheck.do", method = RequestMethod.POST)
-	public void bizMemberRegNumCheck(HttpServletResponse response, @RequestParam String regNum, Model model) throws IOException{
+	@RequestMapping(value = "/member/bizMemberRegNoCheck.do", method = RequestMethod.GET)
+	public void bizMemberRegNumCheck(HttpServletResponse response, @RequestParam String regNo, Model model) throws IOException{
 		
-		BizMember bm = mService.selectRegNumCheck(regNum);
+		BizMember bm = mService.selectRegNoCheck(regNo);
 		
 		if(bm!=null) {
 			response.getWriter().print(true);//사용 중
@@ -599,7 +599,7 @@ public class MemberController {
 
 	}
 
-	@RequestMapping(value = "/member/bizMemberJoinPage.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/bizMemberJoinPage.do", method = RequestMethod.GET)
 	public String bizMemberJoinPage() {
 
 		return "member/bizMemberJoinPage";

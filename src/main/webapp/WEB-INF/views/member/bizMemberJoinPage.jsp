@@ -93,7 +93,7 @@
 						<tr>
 							<th>사업자 등록번호</th>
 							<td>
-								<p id="regNo">${param.regNum }</p>
+								<p id="regNo">${param.regNo }</p>
 								<input type="hidden" name="regNo" value="${param.regNum }">
 							</td>
 						</tr>
@@ -114,16 +114,16 @@
 							<td>
 								<input type="text" class="dataInput check" id="roadAddress" name="roadAddress" placeholder="도로명 주소" dataType="도로명 주소">
 								<button type="button" id="nickCheckBtn" onclick="sample6_execDaumPostcode()">주소 검색</button>
-								<input type="text" class="dataInput check" id="detailAddress" name="detailAddress" placeholder="상세 주소" dataType="상세 주소">
-								<input type="hidden"  id="sido" name="area">
+								<input type="text" class="dataInput check" id="detailAddress" name="detailAddress" value="" placeholder="상세 주소" dataType="상세 주소">
+								<input type="hidden"  id="sido" name="area" value="">
 								<span class="hide"></span>
 							</td>
 						</tr>
 						<tr>
 							<th>운영 시간</th>
 							<td>
-								<input type="time" class="check bizTime" name="bizTimeStart" dataType="운영 시간">
-								<input type="time" class="check bizTime" name="bizTimeEnd" dataType="운영 시간">
+								<input type="time" class="check bizTime" name="bizTimeStart" value="" dataType="운영 시간">
+								<input type="time" class="check bizTime" name="bizTimeEnd" value="" dataType="운영 시간">
 								<span class="hide"></span>
 							</td>
 						</tr>
