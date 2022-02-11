@@ -51,7 +51,7 @@ td:nth-of-type(1) {
             <div class="container">
                 <div class="container_top">
                     <div class="count-all">
-                        <p>전체 <span>${requestScope. }</span> 건</p>
+                        <p>전체 <span>${requestScope.memberTotalCount }</span> 건</p>
                     </div>
                     
                     <div class="box-search">
