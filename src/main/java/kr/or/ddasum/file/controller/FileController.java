@@ -21,7 +21,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.or.ddasum.file.model.service.FileService;
 import kr.or.ddasum.file.model.vo.FileData;
-import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
 
 @Controller
@@ -95,8 +94,4 @@ public class FileController {
 		}
 	}
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> 86d728e73ff2a0c38015a46825c788f294862e0e
 }

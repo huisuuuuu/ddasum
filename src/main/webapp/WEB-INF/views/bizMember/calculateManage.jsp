@@ -176,7 +176,7 @@
 			<div class="submenu"> 
 				<a href="/BizMember/bizReserv.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu3.png" alt="로고">
-					<span class="menulist">예약 관리</span><br><br>
+					<span class="menulist">정산 관리</span><br><br>
 				</a>
 			</div>
 			<div class="submenu"> 

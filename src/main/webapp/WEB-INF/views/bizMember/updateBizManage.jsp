@@ -338,6 +338,40 @@
 		</div>
 	</div>
 </div>
+
+</body>
+
+<div class="modal">
+	  <div class="modal_content">
+  		<div class="mUpside">
+  			<a href="javascript:void(0);" class="layerpop_close" id="layerbox_close"></a> 
+			<div class="mAreaInfo">
+				<div class="mTitle">
+		            <span id="modalCpNm" style="background-color: white; color:#3e4a56;"></span>
+				</div>
+				<form action="/reservation/reservationJoin.do" method="post" style="font-size : 16pt;">
+					<!-- 모달창 입력내용 ajax -->
+					<div class="summary" id="summary"></div>
+					<input type="hidden" id="reservSta" name="reservSta" />
+					<input type="hidden" id="reservEnd" name="reservEnd" />
+					<input type="submit" class="confirm" value="예약"></input>
+						
+				</form>
+			</div>
+		</div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <script>
 //좌측 메뉴바 후버 효과
 
@@ -457,5 +491,4 @@
 	
 
 </script>
-</body>
 </html>

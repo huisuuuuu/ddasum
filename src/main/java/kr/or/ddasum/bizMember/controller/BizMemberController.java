@@ -81,7 +81,7 @@ public class BizMemberController {
 		ArrayList<Detail> list = bService.calculate(bizNo);
 		
 		mav.addObject("list", list);
-		mav.setViewName("/bizMember/bizReserv");
+		mav.setViewName("/bizMember/calculateManage");
 		
 		return mav;
 		
