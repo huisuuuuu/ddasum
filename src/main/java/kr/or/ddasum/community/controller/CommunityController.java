@@ -1,9 +1,11 @@
 package kr.or.ddasum.community.controller;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.or.ddasum.community.model.service.CommunityService;
 import kr.or.ddasum.community.model.vo.Community;
 import kr.or.ddasum.community.model.vo.CommunityComment;
+import kr.or.ddasum.member.model.vo.Member;
 
 @Controller
 public class CommunityController {
@@ -28,45 +31,71 @@ public class CommunityController {
 	
 	@RequestMapping(value="/community/communityList.do", method=RequestMethod.GET)
 	public ModelAndView selectAllCommunity(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, ModelAndView mav, HttpServletResponse response) {
-		
-		Cookie cookie =new Cookie("view",null); 	//view라는 이름의 쿠키 생성
-		cookie.setComment("게시글 조회 확인");		//해당 쿠키가 어떤 용도인지 커멘트
-		cookie.setMaxAge(60*60*24);			//해당 쿠키의 유효시간을 설정 (초 기준)
-		response.addCookie(cookie);				//사용자에게 해당 쿠키를 추가
+
+		SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		String nowDate = format.format(cal.getTime());
 		
 		HashMap<String, Object> map = cService.selectAllCommunity(currentPage);
 		map.put("currentPage", currentPage);
+		map.put("nowDate", nowDate);
 		mav.addObject("map", map);
 		mav.setViewName("community/communityList");
-		
+
 		return mav;
 	}
 	
 	@RequestMapping(value="/community/communitySearch.do", method=RequestMethod.GET)
 	public ModelAndView searchCommunity(@RequestParam String type, @RequestParam String keyword, ModelAndView mav, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 				
-		ArrayList<Community> list = cService.searchCommunity(type, keyword, currentPage);
+		System.out.println(type);
+		System.out.println(keyword);
+		System.out.println(currentPage);
 		
-		mav.addObject("list", list);
+		HashMap<String, Object> map = cService.searchCommunity(type, keyword, currentPage);
+		
+		mav.addObject("map", map);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("type", type);
+		mav.addObject("keyword", keyword);
 		mav.setViewName("community/communityList");
-
+		
 		return mav;
 	}
 	
 	@RequestMapping(value="/community/communityDetail.do", method=RequestMethod.GET)
-	public ModelAndView detailOneCommunity(@RequestParam int cNo, @RequestParam int currentPage, ModelAndView mav,
-			@CookieValue(name="view") String cookie) {
-			
-		if (!(cookie.contains(String.valueOf(cNo)))) {
-			cookie += cNo + "/";
+	public ModelAndView detailOneCommunity(@RequestParam int cNo, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, ModelAndView mav,
+			@CookieValue(value="communityView", required=false) Cookie viewCookie, HttpServletResponse response, HttpServletRequest request) {
+
+		// 조회수 중복방지를 위한 쿠키 생성 및 중복방지 코드
+		// @CookieValue(value="viewCookie", required=false) Cookie viewCookie 으로 쿠기 받기
+
+		if(viewCookie != null) {
+			// 쿠키 확인 후 조회수 증가
+			if(!viewCookie.getValue().contains("["+cNo+"]")) {
+				cService.hitCommunity(cNo);
+				viewCookie.setValue(viewCookie.getValue()+"_["+cNo+"]");
+				viewCookie.setPath("/");
+				viewCookie.setMaxAge(60*60*24);
+				response.addCookie(viewCookie);
+			}
+		}else {
+			// 쿠키가 없을 경우 새로 생성하고 조회수 증가
 			cService.hitCommunity(cNo);
+			Cookie newCookie = new Cookie("communityView", "["+cNo+"]");
+			newCookie.setPath("/");
+			newCookie.setMaxAge(60*60*24);
+			response.addCookie(newCookie);
+
 		}
+
 	
 		HashMap<String, Object> map = cService.detailOneCommunity(cNo); 
+		map.put("currentPage", currentPage);
 		
 		mav.addObject("map", map);
 		mav.setViewName("/community/communityDetail");
-		
+
 		return mav;
 	}
 	
@@ -84,8 +113,8 @@ public class CommunityController {
 		mav.setViewName("/community/msg");
 	}
 	
-	
 	@RequestMapping(value="/community/communityCommentDelete.do", method=RequestMethod.POST)
+	@ResponseBody
 	public void deleteComment(@RequestParam int comNo) {
 		int result = cService.deleteComment(comNo);
 	}
@@ -96,34 +125,85 @@ public class CommunityController {
 	}
 						   
 	@RequestMapping(value="/community/communityInsert.do", method=RequestMethod.POST)
-	public void insertCommunity(Community c , ModelAndView mav) {
-		System.out.println(c.getcContent());
+	public ModelAndView insertCommunity(Community c , ModelAndView mav, HttpSession session) {
+		
+		int userNo = ((Member)session.getAttribute("member")).getUserNo();
+
+		c.setUserNo(userNo);
 		
 		int result = cService.insertCommunity(c);
 		
+		if(result>0) {
+			mav.addObject("msg", "게시물이 등록되었습니다.");
+			mav.addObject("view", "/community/communityList.do");
+		}
+		mav.setViewName("/community/msg");
+		
+		return mav;
 	}
 
 	@RequestMapping(value="/community/commentInsert.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertComment(CommunityComment cc, HttpSession session) {
-							
-//		int userNo = ((Member)session.getAttribute("member")).getUserNo();
-		int userNo = 22;
+	public void insertComment(CommunityComment cc, HttpSession session) {
+					
+		int userNo = ((Member)session.getAttribute("member")).getUserNo();
 		
 		cc.setUserNo(userNo);
-		System.out.println("controller " + cc.getpComNo());
+		
+		int depth = cc.getComDepth();
+		
+		// 댓글 뎁스 초기화
+		int quotient = depth/7;
+		depth = depth-(7*quotient);
+		int comDepth = depth==0?7:depth;
+		
+		cc.setComDepth(comDepth);
+		
 		int result = cService.insertComment(cc);
 		
-		return "fff";
+	}
+	
+	@RequestMapping(value="/community/communityUpdatePage.do", method=RequestMethod.POST)
+	public ModelAndView communityUpdate(@RequestParam int cNo, @RequestParam int currentPage, ModelAndView mav) {
+		
+		Community c = cService.selectCommunity(cNo);
+		
+		mav.addObject("community", c);
+		mav.addObject("currentPage", currentPage);
+		mav.setViewName("/community/communityUpdate");
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="/community/communityUpdate.do", method=RequestMethod.POST)
-	public void updateCommunity() {
+	public ModelAndView UpdateCommunity(Community c, HttpSession session, ModelAndView mav, @RequestParam int currentPage) {
+
+		int userNo = ((Member)session.getAttribute("member")).getUserNo();
 		
-	}
+		c.setUserNo(userNo);
+		
+		int result = cService.updateCommunity(c);
+		
 	
-	@RequestMapping(value="/community/commentUpdate.do", method=RequestMethod.POST)
-	public void updateComment() {
+			HashMap<String, Object> map = cService.detailOneCommunity(c.getcNo()); 
+			map.put("currentPage", currentPage);
+			
+			mav.addObject("map", map);
+			mav.setViewName("/community/communityDetail");
 		
+		
+		mav.setViewName("/community/communityDetail");
+		return mav;
+	}
+						   
+	@RequestMapping(value="/community/commentUpdate.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void updateComment(@RequestParam int comNo, @RequestParam String comment) {
+		
+		CommunityComment cc = new CommunityComment();
+		cc.setComNo(comNo);
+		cc.setComContent(comment);
+		
+		int result = cService.updateComment(cc);
 	}
 }

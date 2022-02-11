@@ -39,10 +39,10 @@
 				</div>
 				<div id="verifyBizNum">
 					<p>사업자 등록번호를 입력하세요.</p>
-					<form id="verifyBizNumForm" action="/member/bizMemberJoinPage.do?regCode=${param.regCode }&regWord=${param.regWord }"
-						method="post" onsubmit="return false">
-						<input id="verifyNum" type="text" maxlength="10" name="regNum"
-							placeholder="- 제외한 숫자 10자리 입력"><br />
+					<form id="verifyBizNumForm" action="/member/bizMemberJoinPage.do" method="get" onsubmit="return false">
+						<input id="verifyNum" type="text" maxlength="12" name="regNo" placeholder="- 제외한 숫자 10자리 입력"><br/>
+						<input type="hidden" id="regCode" name="regCode" value="${param.regCode }">
+						<input type="hidden" id="regWord" name="regWord" value="${param.regWord }">
 						<input id="verifyBtn" type="button" value="인증">
 					</form>
 				</div>
@@ -56,9 +56,11 @@
 	<script>
 	$('#verifyBtn').click(function(){
 	
-		var regNum = $('input[name=regNum]').val();
+		var regNo = $('input[name=regNo]').val();
 		
-		if($('input[name=regNum]').val() ==''){
+		console.log(regNo);
+		
+		if($('input[name=regNo]').val() ==''){
 			Swal.fire({
 				  icon: 'error',
 				  title: '사업자 등록번호를 입력해주세요.',
@@ -68,15 +70,15 @@
 		}else{
 		
 		$.ajax({
-			url: "/member/bizMemberRegNumCheck.do",
-			data: {"regNum":regNum},
-			type: "post",
+			url: "/member/bizMemberRegNoCheck.do",
+			data: {"regNo":regNo},
+			type: "get",
 			success: function(result){
 				
 				if(result=="true")
 				{
-					$('input[name=regNum]').val('');
-					$('input[name=regNum]').focus();
+					$('input[name=regNo]').val('');
+					$('input[name=regNo]').focus();
 					
 					Swal.fire({
 						  icon: 'error',
@@ -84,10 +86,13 @@
 						  showConfirmButton: false,
 						  timer: 1500
 						});
+					
+						$('.swal2-popup').css('width','45em');
+						
 				}else
 				{
 					var data = {
-						    "b_no": [regNum] // 사업자번호 "xxxxxxx" 로 조회 시,
+						    "b_no": [regNo] // 사업자번호 "xxxxxxx" 로 조회 시,
 						   }; 
 						   
 						$.ajax({

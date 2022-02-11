@@ -23,38 +23,48 @@
 	<%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>	
 
     <div id="content_wrapper">
-        <div id="page_title">혼밥시러 <br>
+        <div id="page_title"><a href="/community/communityList.do" style="all:unset;">혼밥시러</a><br>
             <hr id="title_underbar">
         </div><br><br><br><br>
-        	<form action="/community/communityInsert.do" method="post" id="writeForm">
-            <select id="area" name="area" class="area_select" onchange="categoryChange(this)" data-name="시도">
-                <option value="" selected disabled hidden>시도 선택</option>
-                <option value="SEOUL">서울</option>
-                <option value="GYEONGGI">경기</option>
-                <option value="INCHEON">인천</option>
-            </select>
-            <select name="sigu" id="sigu" class="area_select" data-name="시구">
-                <option value="" selected disabled hidden>지역구 선택</option>
-            </select>
-            <input type="text" class="c_title" id="board_title" name="cTitle" placeholder="제목을 입력해주세요." data-name="제목">
-            <div id="editor"></div>
-            <input type="text" id="board_content" name="cContent" data-name="내용" hidden>
-            
-            <br><br><br>
-            <div style="text-align:center">
-                <button class="basic_button" type="button" id="regBtn">등록</button>
-                <button class="basic_button" type="reset">취소</button>
-            </form>    
-            </div>
-    </div>
+        				  
+        	<form action="/community/communityUpdate.do" method="post" id="updateForm">
+	            <select id="area" name="area" class="area_select" onchange="categoryChange(this)" data-name="시도">
+	                <option value="" disabled selected hidden>시도 선택</option>
+	                <option value="SEOUL">서울</option>
+	                <option value="GYEONGGI">경기</option>
+	                <option value="INCHEON">인천</option>
+	            </select>
+	            <select name="sigu" id="sigu" class="area_select" data-name="시구">
+	                <option value="" disabled selected hidden>지역구 선택</option>
+	            </select>
+	            <input type="text" class="c_title" id="board_title" name="cTitle" placeholder="제목을 입력해주세요." data-name="제목" value="${requestScope.community.cTitle }">
+	            <div id="editor"></div>
+	            <input type="text" id="board_content" name="cContent" data-name="내용" hidden>
+	            <input type="text" name="cNo" value="${requestScope.community.cNo }" hidden />
+	            <input type="text" name="currentPage" value="${requestScope.currentPage }" hidden />
+	            <br><br><br>
+	            <div style="text-align:center">
+            </form>
+            <button class="basic_button" type="button" id="regBtn">등록</button>
+	        <a href="/community/communityDetail.do?cNo=${requestScope.community.cNo }" style="all:unset;"><button class="basic_button" type="reset">취소</button></a>    
+       </div>
+    
     <br /><br />
+    <script>
+	    $(function(){
+/* 	    	$("#area").html("${requestScope.community.area}").prop("selected", true);
+	    	$("#sigu").html("${requestScope.community.sigu}").prop("selected", true); */
+	    })
+    </script>
+    
+    
     <script> // editor
         const editor = new toastui.Editor({
             el: document.querySelector('#editor'),
             previewStyle: 'tab', // or vertical 마크다운 미리보기
             height: '500px', // 편집기 높이
             initialEditType: 'wysiwyg', // or markdown 초기에디트타입
-            initialValue: '', // 초기 값
+            initialValue: '${requestScope.community.cContent}', // 초기 값
             hideModeSwitch: 'false', // 에디트 변경 탭 숨김
         });
         // 사용하지 않을 도구 제거     
@@ -137,7 +147,7 @@
 			}
 			$("#board_content").val(editor.getHTML()); //입력값 가져오기
 			
-			$("#writeForm").submit();
+			$("#updateForm").submit();
 		})
 	</script>
 	<!-- footer -->

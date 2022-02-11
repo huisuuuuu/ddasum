@@ -16,7 +16,7 @@ public class CommunityDAO {
 
 	public ArrayList<Community> selectAllCommunity(SqlSessionTemplate sqlSession, int currentPage, int recordCountPerPage) {
 		
-		int offset = ((currentPage-1));
+		int offset = ((currentPage-1)*recordCountPerPage);
 		int limit = recordCountPerPage;
 		
 		RowBounds rb = new RowBounds(offset, limit);
@@ -51,27 +51,24 @@ public class CommunityDAO {
 	}
 
 	public int deleteCommunity(SqlSessionTemplate sqlSession, int cNo) {
-		System.out.println("dao");
 		
 		return sqlSession.update("community.deleteCommunity", cNo);
 	}
 
 	public int deleteComment(SqlSessionTemplate sqlSession, int comNo) {
 		
-		
-		return 0;//sqlSession.update("community.deleteComment", comNo);
+		return sqlSession.update("community.deleteComment", comNo);
 	}
 	
-	public String getPageNavi(SqlSession sqlSession, int recordCountPerPage, int currentPage, int naviCountPerPage) {
+	public String getPageNavi(SqlSession sqlSession, int currentPage, int recordCountPerPage, int naviCountPerPage) {
 		int communityAllCount = communityAllCount(sqlSession);
 		
-		int pageTotalCount;
+		int pageTotalCount = (int)Math.ceil(communityAllCount/(double)recordCountPerPage);
 		
-		pageTotalCount = (int)Math.ceil(communityAllCount/(double)recordCountPerPage);
 		
-		int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		int startNavi = (((currentPage - 1) / naviCountPerPage) * naviCountPerPage) + 1;
 		
-		int endNavi = startNavi + naviCountPerPage - 1;
+		int endNavi = startNavi + (naviCountPerPage - 1);
 		
 		if(endNavi>pageTotalCount) {
 			endNavi = pageTotalCount;
@@ -100,8 +97,8 @@ public class CommunityDAO {
 	}
 	
 	public int communityAllCount(SqlSession sqlSession) {
-		int communityAllCount = sqlSession.selectOne("community.selectCommunityAllCount");
-		return communityAllCount;
+		
+		return sqlSession.selectOne("community.selectCommunityAllCount");
 	}
 
 	public void hitCommunity(SqlSessionTemplate sqlSession, int cNo) {
@@ -110,19 +107,27 @@ public class CommunityDAO {
 	}
 
 	public int insertComment(SqlSessionTemplate sqlSession, CommunityComment cc) {
-		int comOrder = sqlSession.selectOne("community.countPCom", cc.getcNo());
-		System.out.println("order" + comOrder);
-		cc.setComOrder(comOrder);
-		
-		System.out.println(cc.getcNo());
-		System.out.println(cc.getUserNo());
-		System.out.println(cc.getpComNo());
-		System.out.println(cc.getComDepth());
-		System.out.println(cc.getComOrder());
-		System.out.println(cc.getComContent());
-		System.out.println(cc.getComSecretYN());
-		
 		
 		return sqlSession.insert("community.insertComment", cc);
+	}
+
+	public int insertCommunity(SqlSessionTemplate sqlSession, Community c) {
+		
+		return sqlSession.insert("community.insertCommunity", c);
+	}
+
+	public int updateCommunity(SqlSessionTemplate sqlSession, Community c) {
+		
+		return sqlSession.update("community.updateCommunity", c);
+	}
+
+	public int updateComment(SqlSessionTemplate sqlSession, CommunityComment cc) {
+		
+		return sqlSession.update("community.updateComment", cc);
+	}
+
+	public int getOrder(SqlSessionTemplate sqlSession, int cNo) {
+		
+		return sqlSession.selectOne("community.countPCom", cNo);
 	}
 }
