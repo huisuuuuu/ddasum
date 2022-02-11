@@ -21,15 +21,16 @@ public class CommunityServiceImpl implements CommunityService{
 	SqlSessionTemplate sqlSession;
 
 	int recordCountPerPage = 10;
-	int pageCountPerNavi = 6;
+	int naviCountPerPage = 6;
 	
 	@Override
 	public HashMap<String, Object> selectAllCommunity(int currentPage) {
 	
 		ArrayList<Community> list = cDAO.selectAllCommunity(sqlSession, currentPage, recordCountPerPage);
 		
+		String navi = cDAO.getPageNavi(sqlSession, currentPage, recordCountPerPage, naviCountPerPage);
 		
-		String navi = cDAO.getPageNavi(sqlSession, currentPage, recordCountPerPage, pageCountPerNavi);
+		
 		
 		HashMap<String, Object> map = new HashMap<String, Object> ();
 		
@@ -39,11 +40,17 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 
 	@Override
-	public ArrayList<Community> searchCommunity(String type, String keyword, int currentPage) {
-		cDAO.searchCommunity(sqlSession, type, keyword, currentPage, recordCountPerPage);
+	public HashMap<String, Object> searchCommunity(String type, String keyword, int currentPage) {
+		ArrayList<Community> list = cDAO.searchCommunity(sqlSession, type, keyword, currentPage, recordCountPerPage);
 		
-		String navi = cDAO.getPageNavi(sqlSession, currentPage, recordCountPerPage, pageCountPerNavi);
-		return null;
+		String navi = cDAO.getPageNavi(sqlSession, currentPage, recordCountPerPage, naviCountPerPage);
+		
+		HashMap<String, Object> map = new HashMap<String, Object> ();
+		
+		map.put("list", list);
+		map.put("navi", navi);
+		
+		return map;
 	}
 
 	@Override
@@ -70,7 +77,7 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public int deleteComment(int comNo) {
 		int result = cDAO.deleteComment(sqlSession, comNo);
-		return 0;
+		return result;
 	}
 
 	@Override
@@ -82,13 +89,36 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public int insertCommunity(Community c) {
 		
-		return 0;
+		return cDAO.insertCommunity(sqlSession, c);
 	}
 
 	@Override
 	public int insertComment(CommunityComment cc) {
-		cDAO.insertComment(sqlSession, cc);
-		return 0;
+		
+		int cNo = cc.getcNo();
+		int comOrder = cDAO.getOrder(sqlSession, cNo);
+		
+		cc.setComOrder(comOrder);
+
+		return cDAO.insertComment(sqlSession, cc);
+	}
+
+	@Override
+	public Community selectCommunity(int cNo) {
+		
+		return cDAO.detailOneCommunity(sqlSession, cNo);
+	}
+
+	@Override
+	public int updateCommunity(Community c) {
+		
+		return cDAO.updateCommunity(sqlSession, c);
+	}
+
+	@Override
+	public int updateComment(CommunityComment cc) {
+		
+		return cDAO.updateComment(sqlSession, cc);
 	}
 	
 	
