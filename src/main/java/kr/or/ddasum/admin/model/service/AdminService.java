@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.or.ddasum.admin.model.vo.AdminMember;
+import kr.or.ddasum.member.model.vo.Detail;
 
 public interface AdminService {
 

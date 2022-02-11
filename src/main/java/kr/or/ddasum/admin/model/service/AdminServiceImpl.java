@@ -44,7 +44,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Detail userDetail(int currentPage, int userNo) {
+	public HashMap<String, Object> userDetail(int currentPage, int userNo) {
 		
 		return admDAO.detailOneMember(sqlSession, userNo);
 		

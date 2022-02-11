@@ -35,7 +35,7 @@
         </div>
 
         <div class="box-user">
-          <a href="/">관리자</a>
+          <a href="#">${sessionScope.member.nick }님</a>
           <a href="/">로그아웃</a>
         </div>
       </div>

@@ -1,6 +1,7 @@
 package kr.or.ddasum.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -70,9 +71,10 @@ public class AdminDAO {
 		return sqlSession.selectOne("admin.selectAllMemberTotalCount");
 	}
 
-	public Detail detailOneMember(SqlSessionTemplate sqlSession, int userNo) {
+	@SuppressWarnings("unchecked")
+	public HashMap<String, Object> detailOneMember(SqlSessionTemplate sqlSession, int userNo) {
 		
-		return (Detail)sqlSession.selectList("admin.userDetail", userNo);
+		return (HashMap<String, Object>)sqlSession.selectList("admin.userDetail", userNo);
 	}
 		
 }

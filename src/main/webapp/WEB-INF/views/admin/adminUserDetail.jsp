@@ -103,7 +103,7 @@ td:nth-of-type(1) {
 						<td>${d.reservationDate }</td>
 						<td>${d.bizName }</td>
 						<td>${d.menuName }</td>
-						<td>${authorityId }</td>
+						<td>${d.authorityInfo }</td>
 					</tr>				
 				</c:forEach>
 				</c:when>
