@@ -128,7 +128,7 @@
 		#{phone},
 		#{address},
 		'N',
-		NULL,
+		DEFAULT,
 		SYSDATE,
 		NULL,
 		'N'
