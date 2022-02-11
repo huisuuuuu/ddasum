@@ -129,7 +129,6 @@ td:nth-of-type(1) {
             
                     <div id="page_wrap">
                         <ul id="page_ul">
-<<<<<<< HEAD
             				<c:if test="${ preNavi > 0}">
             					<li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
             				</c:if>
@@ -146,7 +145,6 @@ td:nth-of-type(1) {
             				<c:if test="${ nextNavi } != 0">
             					<li><a href='/admin/adminMemberManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
             				</c:if>
-=======
                         <c:if test="${ preNavi > 0}">
                            <li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
                         </c:if>
@@ -163,7 +161,6 @@ td:nth-of-type(1) {
                         <c:if test="${ nextNavi } != 0">
                            <li><a href='/admin/adminMemberManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
                         </c:if>
->>>>>>> 684a188d0c3d4d793b596dc8a83aa04a1c1b149c
                         </ul>
                     </div>
 
