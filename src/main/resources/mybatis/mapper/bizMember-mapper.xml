@@ -27,7 +27,7 @@
 		WHERE biz_id = #{bizId} and biz_pwd = #{bizPwd}	and biz_del_yn = 'N'
 	</select>
 
-	<select id="selectRegNumCheck" parameterType="String" resultType="bizMember">
+	<select id="selectRegNoCheck" parameterType="String" resultType="bizMember">
 		SELECT
 			biz_no as bizNo,
 			authority_id as authorityId,
@@ -49,7 +49,7 @@
 			biz_del_yn as bizDelYN
 		FROM
 			biz_member
-		WHERE reg_no = #{regNo} and biz_del_yn = 'N'
+		WHERE reg_no=#{regNo} and biz_del_yn='N'
 	</select>
 
 	<select id="findBizMemberId" parameterType="bizMember" resultType="bizMember">
