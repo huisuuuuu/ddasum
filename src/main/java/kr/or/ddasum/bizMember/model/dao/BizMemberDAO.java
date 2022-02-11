@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
 import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.member.model.vo.Detail;
 
 @Repository
 public class BizMemberDAO {
@@ -65,14 +66,103 @@ public class BizMemberDAO {
 	}
 
 	/**
-	  * @Method Name : addGood
-	  * @작성일 : 2022. 2. 9.
+	  * @Method Name : updateWithdraw
+	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :
+	  * @Method 설명 :회원탈퇴 로직
+	  * @param bizId
+	  * @return
+	  */
+	public int updateWithdraw(String bizId) {
+
+		return sqlSession.update("bizAdmin.updateWithdraw",bizId);
+
+	}
+
+	/**
+	  * @Method Name : suportChange
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :사업자 유형 변환
+	  * @param bizNo
+	  * @return
+	  */
+	public int suportChange(String bizId) {
+
+		return sqlSession.update("bizAdmin.suportChange",bizId);
+	}
+
+	/**
+	  * @Method Name : addGood
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :상품추가
 	  * @param bg
 	  * @return
 	  */
+	public int addGood(BizGoods bg) {
+
+		return sqlSession.insert("bizAdmin.addGood",bg);
+
+	}
+
+	/**
+	  * @Method Name : goodModify
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :메뉴수정 페이지 데이터 요청
+	  * @param menuNo
+	  * @return
+	  */
+	public BizGoods goodModify(int menuNo) {
+
+		return sqlSession.selectOne("bizAdmin.goodModify", menuNo);
+	}
+
+	/**
+	  * @Method Name : GoodMo
+	  * @작성일 : 2022. 2. 10.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :상품수정
+	  * @param bg
+	  * @return
+	  */
+	public int GoodMo(BizGoods bg) {
+
+		return sqlSession.update("bizAdmin.GoodMo",bg);
+	}
+
+	/**
+	  * @Method Name : bizReserv
+	  * @작성일 : 2022. 2. 11.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :예약 리스트 조회
+	  * @param bizNo
+	  * @return
+	  */
+	public ArrayList<Detail> bizReserv(int bizNo) {
+		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.bizReserv", bizNo));
+	}
+
+	/**
+	  * @Method Name : calculate
+	  * @작성일 : 2022. 2. 11.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :정산 리스트 조회
+	  * @param bizNo
+	  * @return
+	  */
+	public ArrayList<Detail> calculate(int bizNo) {
+		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.calculate", bizNo));
+
+	}
 
 	
 	

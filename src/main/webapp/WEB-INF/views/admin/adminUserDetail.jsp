@@ -77,9 +77,10 @@ td:nth-of-type(1) {
 </style>
 </head>
 <body>
+	<c:choose>
 	<div class="pop-wrap">
 		<div class="pop-header">
-			ㅇㅇㅇ님 이용내역
+			${requestScope.member.nick}님 이용내역
 		</div>
 		
 		<div class="pop-content">
@@ -95,7 +96,6 @@ td:nth-of-type(1) {
 				</thead>
 				
 				<tbody>
-				<c:choose>
 				<c:when test="${!requestScope.list.isEmpty() }">
 				<c:forEach items="${requestScope.list }" var="d">
 					<tr>

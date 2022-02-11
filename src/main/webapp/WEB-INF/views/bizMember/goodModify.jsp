@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,9 +48,8 @@
 			width: 100%;
 			height:972px;
 			background-color: rgba(255, 211, 190, 0.2);
-			float: left;
 		}
-		#goodsManage{
+		#goodManage{
 			width: 95%;
 			height: 85%;
 			background-color: white;
@@ -74,80 +74,80 @@
 		#content{
 			width: 100%;
 			height: 90%;
-		}
-		#content-L{
-			width: 30%;
-			height: 100%;
-			float: left;
 			border-bottom-left-radius: 20px;
-		}
-		#content-R{
-			width: 15%;
-			height: 100%;
-			float: left;
-		}
-		#content-result{
-			width: 55%;
-			height: 100%;
-			float: left;
 			border-bottom-right-radius: 20px;
 		}
-		.modifyBTN{
-			float: right;
-			width: 120px;
-			height: 40px;
-			font-size: 18pt;
-		}
-		#bizImg{
-			width: 250px;
-			height: 250px;
-			border-radius: 250px;
-			background-color: white;
-			margin: 0 auto;
-		}
-		ul{
-			list-style: none;
-			font-size: 18pt;
-			padding: 0;
-		}
-		li{
-			list-style: none;
-			font-size: 18pt;
-			padding: 10px;
-			border-bottom: 1px solid #A5A5A5;
-		}
-		#typeOption{
-			width: 120px;
-			height: 30px;	
-			font-size: 18pt;
-		}
-		
-		.goodsTable{
+		#itemImgArea{
 			width: 100%;
+			height: 30%;
+		}
+		#itemInfoImg{
+			width: 25%;
+			height: 100%;
+			float: left;
+			padding-left: 150px;
+		}
+		#itemImg{
+			width: 75%;
+			height: 100%;		
+			float: left;
+		}
+		.itemInfo{
+			width: 100%;
+			height: 20%;
+		}
+		.iteminfodiv{
+			width: 25%;
+			height: 100%;
+			float: left;
+			padding-left: 150px;
+		}
+		.infoWriter{
+			width: 75%;
+			height: 100%;
+			float: left;
+		}
+		.confirmArea{
+			width: 100%;
+			height: 10%;
 			text-align: center;
-		    border-collapse: collapse;
 		}
-		th, td {
-		  border: 1px solid #A5A5A5;
+		span{
+			font-size: 16pt;
 		}
-		th{
-			height: 30px;
+		.entertext{
+			width: 300px;
+			height: 35px;
+			font-size: 16pt;
+			border-color: gray;
 		}
-		td{
-			height: 70px;
+		.imgsize{
+			width:100px;
+			padding-top: 40px;
 		}
-		button{
-			padding: 10px;
-		    border: none;
-    		border-radius: 8px;
-			background-color: #E6510B;
-    		color: white;
+		#itemImgInput{
+			width: 300px;
+			height: 220px;
+			border: 1px solid gray;
+			text-align: center;
 		}
-		.prdtEdt{
-			border: none;
+		.confirmstyle{
+			width: 120px;
+			height: 50px;
 			background-color: #FFA77E;
-			border-radius: 23px;
 			color: white;
+			border-radius: 10px;
+			font-size: 16pt;
+			border: none;
+		}
+		#GoodMo{
+			width: 120px;
+			height: 50px;
+			background-color: #FFA77E;
+			color: white;
+			border-radius: 10px;
+			font-size: 16pt;
+			border: none;
 		}
 		h1{
 		float: left;
@@ -171,8 +171,13 @@
 			float: right;
 			font-size: 18pt;
 			padding-top: 20px;
-		}
+		}	
+		
+		
+		
+		
 	</style>
+
 </head>
 <body>
 
@@ -214,75 +219,75 @@
 	</div>
 	<div id="rightArea">
 		<div id="R-upArea">
-			<div id="goodsManage">
-				<h1>후원 상품 관리</h1>
+			<div id="goodManage">
+				<h1>후원 상품 관리>상품수정</h1>
 					<span class="logout">
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
 					<span class="bizSmallImage"> <img class="smaillimg" src="${sessionScope.bizMember.bizImage }">
 					</span>
-				
 			</div>
 		</div>
 		<div id="R-downArea">
 			<div id="R-content">
+				<div id="content-title">
+					후원 상품 수정
+				</div>
+				<form action="/bizMember/addGood.do" method="post" id="addForm">
 				<div id="content">
-					<div id="content-title">
-						<span style="text-align:left; float:left;">전체 10건</span>
-						<div class="search" style="text-align:right;">
-							<select>
-								<option>상품명</option>
-								<option>상품번호</option>
-							</select>
-							<input type="text" placeholder="검색어를 입력해주세요">
-							<input type="submit">
-							<a href="/BizMember/goodDetail.do"><button type="button" class="prdtReg" name="prdtReg">상품등록</button></a>
+					<div id="itemImgArea">
+						<div id="itemInfoImg">
+							<span>상품 이미지</span>
+						</div>
+						<div id="itemImg">
+							<div id="itemImgInput">
+								<img class="imgsize" src="/resources/images/bizImgAdd.png">
+							<div><br>
+							상품 사진을 추가해 주세요
+							</div>
+							</div>
 						</div>
 					</div>
-					<div id="content">
-					
-					<c:choose>
-						<c:when test="${!requestScop.list.isEmpty() }">
-						<table class="goodsTable">
-							<tr>
-			 					<th><input type="checkbox" name="chk" value="all"></th>
-			 					<th>상품번호</th>
-			 					<th>상품 이미지</th>
-			 					<th>상품명</th>
-			 					<th>상품 설명</th>
-			 					<th>상품가격</th>
-			 					<th>관리</th>
-			 				</tr>
-						<c:forEach items="${requestScope.list }" var="m" varStatus="i">
-							<tr>
-								<td><input type="checkbox" name="chk" value="1"></td>
-								<td>${i.count }</td>
-								<td>IMG</td>
-								<td>${m.menuName } </td>
-								<td>${m.menuInfo } </td>
-								<td>${m.originalPrice }</td>
-								<td>
-									<button type="button" class="prdtEdt" name="prdtEdt">
-										<a href="/bizMember/goodModify.do?menuNo=${m.menuNo }">수정</a>
-									</button>  
-								</td>
-							</tr>
-						</c:forEach>
-						</table>
-						</c:when>
-						<c:otherwise>
-							<H1>현재 저장된 회원이 없습니다.</H1>
-						</c:otherwise>
-			
-					</c:choose>
-						<button type="button" class="prdtDel" name="prdtDel" style="margin: 20px 0;">삭제</button>
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>상품명</span>
+						</div>
+						<div class="infoWriter">
+							<input type='text' class="entertext" name="menuName" value=${requestScope.BizGoods.menuName }>
+						</div>					
+					</div>
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>상품 설명</span>
+						</div>
+						<div class="infoWriter">
+							<input type='text' class="entertext" name="menuInfo" value=${requestScope.BizGoods.menuInfo }>
+						</div>					
+					</div>
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>상품가격</span>
+						</div>
+						<div class="infoWriter">
+							<input type='text' class="entertext" name="originalPrice" value=${requestScope.BizGoods.originalPrice }>
+						</div>					
+					</div>
+					<div class="confirmArea">
+						<input type='button' id="GoodMo" value='상품 수정'/>
+						<a href="/BizMember/goodsManage.do"><input class="confirmstyle" type="button" value="취소"></a>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+
+
+
 <script>
 	$(function(){
         $('.submenu').hover(function() {
@@ -291,6 +296,40 @@
             $(this).removeClass('submenu_hover');
         });
     });
+	
+	
+	//상품 수정 ajax
+
+    $('#GoodMo').click(function(){
+    	var form = {
+    			menuName : $('input[name=menuName]').val(),
+    	  		menuInfo : $('input[name=menuInfo]').val(),
+    	   		originalPrice : $('input[name=originalPrice]').val()
+    	}
+    	   
+	  	$.ajax({
+    		url : "/bizMember/GoodMo.do",
+			dataType : "json",
+			data : {"form" : form, "menuNo" : menuNo},
+    		type : "POST",
+    		success : function(rst){
+    			if(rst == true){
+    				alert("상품 수정 완료");
+    				location.replace("/BizMember/goodsManage.do");
+    			}else{
+    				alert("상품 수정 실패");
+    				location.replace("/BizMember/goodsManage.do");
+    			}
+    		},
+    		error : function(){
+    			console.log('ajax 통신 에러');
+    		}
+    	});
+    });
+	
+	
+	
+	
 </script>
 </body>
 </html>

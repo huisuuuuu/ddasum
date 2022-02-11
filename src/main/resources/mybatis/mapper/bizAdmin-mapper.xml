@@ -61,4 +61,98 @@
   			biz_Id = #{bizId}
   	</update>	
   	
+   	<update id="updateWithdraw" parameterType="bizMember">
+  		update biz_member set
+  			biz_del_yn = 'Y'
+  		WHERE
+  			BIZ_ID=#{bizId}
+  	</update> 	
+ 
+   	<update id="suportChange" parameterType="bizMember">
+  		update biz_member set 
+            AUTHORITY_ID = #{restaurant},
+            biz_change_yn = 'Y'
+  		where
+            BIZ_ID=#{bizId} and biz_change_yn = 'N'
+  	</update> 	
+  	
+	<insert id="addGood" parameterType="bizGoods">
+		INSERT INTO MENU VALUES(
+		MENU_SEQ.NEXTVAL,
+		#{bizNo},
+		#{authorityId},
+		#{restaurant},
+		#{menuName},
+		#{menuInfo},
+		#{originalPrice},
+		NULL,
+		NULL,
+		'N'
+		)
+	</insert>  	
+
+	<select id="goodModify" parameterType="bizGoods" resultType="BizGoods">
+		SELECT
+			menu_no as menuNo,
+			biz_no as bizNo,
+			c.AUTHORITY_INFO as authorityId,
+			t.RESTAURANT_TYPE as restaurant,
+			menu_name as menuName,
+			menu_info as menuInfo,
+			original_price as originalPrice,
+			dc_price as dcPrice,
+			menu_image as menuImage,
+			menu_del_YN as menuDelYN
+		FROM
+			MENU m, TYPE_GROUP t, AUTHORITY c
+        WHERE m.restaurant = t.restaurant AND m.authority_id = c.AUTHORITY_ID
+        	AND menu_no = #{menuNo}
+	</select>
+
+
+
+   	<update id="GoodMo" parameterType="bizGoods">
+  		update MENU set 
+			MENU_NAME = #{menuName},
+			MENU_INFO = #{menuInfo},
+			ORIGINAL_PRICE = #{originalPrice}
+  		where
+            MENU_NO = #{menuNo} and MENU_DEL_YN = 'N'
+  	</update> 	  	
+ 
+ 	<select id="bizReserv" resultType="Detail">
+		SELECT
+			d.M_RE_NO as mReNo,
+			a.USERNAME as userName,
+			d.RESERVATION_DATE as reservationDate,
+			d.BIZ_NO as bizNo,
+			d.AUTHORITY_ID as authorityId,
+			d.RE_NO as reNo,
+			m.MENU_NAME as menuName,
+			d.RE_CANCLE as reCancle
+		FROM
+			detail d, member a, menu m
+        WHERE d.USERNO = a.USERNO AND d.MENU_NO = m.MENU_NO
+			AND d.biz_No = #{bizNo}
+	</select>	
+ 
+  	<select id="calculate" resultType="Detail">
+		SELECT
+			d.M_RE_NO as mReNo,
+			d.RESERVATION_DATE as reservationDate,
+			d.BIZ_NO as bizNo,
+            b.BIZ_NAME as bizName,
+			c.AUTHORITY_INFO as authorityId,
+			d.RE_NO as reNo,
+			m.MENU_NAME as menuName,
+			d.RE_CANCLE as reCancle
+		FROM
+			detail d, menu m, AUTHORITY c, BIZ_MEMBER b
+        where
+        d.MENU_NO = m.MENU_NO AND d.authority_id = c.AUTHORITY_ID AND d.BIZ_NO = b.BIZ_NO
+			AND d.biz_No = #{bizNo}
+	</select>
+ 
+  	
+  	  	
 </mapper>

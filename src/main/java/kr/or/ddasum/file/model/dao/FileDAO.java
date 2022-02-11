@@ -18,4 +18,6 @@ public class FileDAO {
 		return sqlSession.insert("fileData.fileUpload",fd);
 		
 	}
+
+
 }

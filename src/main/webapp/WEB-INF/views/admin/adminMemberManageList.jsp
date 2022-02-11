@@ -17,11 +17,11 @@
 <script src="/resources/js/ui.js"></script>
 <style>
 th:nth-of-type(1) {
-	display : none;
+   display : none;
 }
 
 td:nth-of-type(1) {
-	display : none;
+   display : none;
 }
 
 </style>
@@ -34,7 +34,7 @@ td:nth-of-type(1) {
         <%@ include file="/WEB-INF/views/commons/header/adminNavigation.jsp"%>
         
         <div id="header">
-        	<div id="header-box">
+           <div id="header-box">
             <div class="admin-path">
                 <p>회원 관리</p>
                 <p>회원 정보 관리</p>
@@ -55,32 +55,32 @@ td:nth-of-type(1) {
                     </div>
                     
                     <div class="box-search">
-						<form action="">
-							<div class="select-search">
-								<select>
-									<option>검색필터</option>
-									<option value="userId">아이디</option>
-	                                <option value="nick">닉네임</option>
-	                                <option value="userName">이름</option>
-								</select>
-								<i class="fas fa-chevron-down icon-arrow"></i>
-							</div>
-							
-							<div class="input-search">
-								<input type="text" name="search" placeholder="검색어를 입력해주세요" />
-									<div class="search-btn"><button type="button" class="search">
-										<i class="fas fa-search icon-search"></i></button>							
-									</div>								
-							</div>
-						</form>
-					</div>
+                  <form action="">
+                     <div class="select-search">
+                        <select>
+                           <option>검색필터</option>
+                           <option value="userId">아이디</option>
+                                   <option value="nick">닉네임</option>
+                                   <option value="userName">이름</option>
+                        </select>
+                        <i class="fas fa-chevron-down icon-arrow"></i>
+                     </div>
+                     
+                     <div class="input-search">
+                        <input type="text" name="search" placeholder="검색어를 입력해주세요" />
+                           <div class="search-btn"><button type="button" class="search">
+                              <i class="fas fa-search icon-search"></i></button>                     
+                           </div>                        
+                     </div>
+                  </form>
+               </div>
                 </div>
       
                 <div class="table_wrap">
                     <table>
                         <thead>
                             <tr>
-                            	<th width="100">회원번호</th>
+                               <th width="100">회원번호</th>
                                 <th width="200">회원등급</th>
                                 <th width="200">아이디</th>
                                 <th width="200">닉네임</th>
@@ -90,33 +90,33 @@ td:nth-of-type(1) {
                                 <th width="150">상세정보</th>
                             </tr>
                         </thead>
-						
+                  
                         <tbody>
                         <c:choose>
-						<c:when test="${!requestScope.list.isEmpty()}">
-						<c:forEach items="${requestScope.list}" var="m">                                                
+                  <c:when test="${!requestScope.list.isEmpty()}">
+                  <c:forEach items="${requestScope.list}" var="m">                                                
                         
                             <tr>
-                            	<td>${m.userNo }</td>
+                               <td>${m.userNo }</td>
                                 <td>${m.authorityId }</td>
                                 <td>${m.userId }</td>
                                 <td>${m.nick }</td>
                                 <td>${m.email }</td>
                                 <td>${m.enrollDate }</td>
                                 <td>
- 	                                <c:if test="${m.userId ne 'ADMIN' }">
-		                                <c:if test="${m.detailYN eq 'Y'.charAt(0)}">
-		                                	<button type="button" class="ok_btn"><a href="/admin/adminUserDetail.do?userNo=${m.userNo }">확인</a></button>
-		                                </c:if>
-		                                <c:if test="${m.detailYN eq 'N'.charAt(0)}">	                                
-		                                	<button type="button" class="none_btn">확인</button>
-	                               		</c:if>
-                               		</c:if>
+                                    <c:if test="${m.userId ne 'ADMIN' }">
+                                      <c:if test="${m.detailYN eq 'Y'.charAt(0)}">
+                                         <button type="button" class="ok_btn"><a href="/admin/adminUserDetail.do?userNo=${m.userNo }">확인</a></button>
+                                      </c:if>
+                                      <c:if test="${m.detailYN eq 'N'.charAt(0)}">                                   
+                                         <button type="button" class="none_btn">확인</button>
+                                        </c:if>
+                                     </c:if>
                                </td> 
                                 <td>
-                                	<c:if test="${m.userId ne 'ADMIN' }">
-   		                            <button type="button" class="ok_btn">상세보기</button>
-                                	</c:if>
+                                   <c:if test="${m.userId ne 'ADMIN' }">
+                                     <button type="button" class="ok_btn">상세보기</button>
+                                   </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -129,6 +129,7 @@ td:nth-of-type(1) {
             
                     <div id="page_wrap">
                         <ul id="page_ul">
+<<<<<<< HEAD
             				<c:if test="${ preNavi > 0}">
             					<li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
             				</c:if>
@@ -145,6 +146,24 @@ td:nth-of-type(1) {
             				<c:if test="${ nextNavi } != 0">
             					<li><a href='/admin/adminMemberManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
             				</c:if>
+=======
+                        <c:if test="${ preNavi > 0}">
+                           <li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                        </c:if>
+                        <c:forEach items="${ navi }" var="i">
+                           <c:choose>
+                              <c:when test="${i==currentPage}">
+                                 <li><a id="page_active" href='/admin/adminMemberManageList.do?currentPage=${i}'>${i}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a id="page_inactive" href='/admin/adminMemberManageList.do?currentPage=${i}'>${i}</a></li>
+                              </c:otherwise>
+                              </c:choose>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+                           <li><a href='/admin/adminMemberManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                        </c:if>
+>>>>>>> 684a188d0c3d4d793b596dc8a83aa04a1c1b149c
                         </ul>
                     </div>
 

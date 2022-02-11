@@ -131,6 +131,11 @@
 		.bizSmallImage{
 				float: right;
 		}
+		.smaillimg{
+					padding-top: 20px;
+					padding-right: 10px;
+					width:30px;
+		}
 		.bizId{
 			float: right;
 			font-size: 18pt;
@@ -171,7 +176,7 @@
 			<div class="submenu"> 
 				<a href="/BizMember/bizReserv.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu3.png" alt="로고">
-					<span class="menulist">예약 관리</span><br><br>
+					<span class="menulist">정산 관리</span><br><br>
 				</a>
 			</div>
 			<div class="submenu"> 
@@ -190,7 +195,7 @@
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
-					<span class="bizSmallImage">
+					<span class="bizSmallImage"> <img class="smaillimg" src="${sessionScope.bizMember.bizImage }">
 					</span>	
 			</div>
 		</div>
@@ -249,6 +254,9 @@
 						</div>
 					</div>
 					<div id="content">
+					
+					<c:choose>
+						<c:when test="${!requestScop.list.isEmpty() }">					
 						<table class="calculateTable">
 							<tr id="tableContetns">
 			 					<th>번호</th>
@@ -259,16 +267,24 @@
 			 					<th>상품명</th>
 			 					<th>후원금액</th>
 			 				</tr>
+						<c:forEach items="${requestScope.list }" var="m" varStatus="i">
 							<tr>
-								<td>1</td>
-								<td>2021-01-31</td>
-								<td>할인</td>
-								<td>20220131001</td>
-								<td>가나식당</td>
-								<td>김치찌개</td>
+								<td>${i.count }</td>
+								<td>${m.reservationDate }</td>
+								<td>${m.authorityId }</td>
+								<td>${m.reNo }</td>
+								<td>${m.bizName } </td>
+								<td>${m.menuName } </td>
 								<td>6000</td>
 							</tr>
+						</c:forEach>
 						</table>
+						</c:when>
+						<c:otherwise>
+							<H1>현재 저장된 회원이 없습니다.</H1>
+						</c:otherwise>
+
+					</c:choose>
 					</div>
 				</div>
 			</div>

@@ -104,7 +104,7 @@
 			background-color: white;
 			border-radius: 5px;
 		}
-		#modifyBTN2{
+		#suportBTN{
 			float: right;
 			width: 120px;
 			height: 32px;
@@ -114,7 +114,7 @@
 			background-color: #FFA77E;
 			border-radius: 5px;
 		}
-		#modifyBTN3{
+		#withDraw{
 			float: right;
 			width: 120px;
 			height: 32px;
@@ -124,9 +124,8 @@
 			background-color: #FFA77E;
 			border-radius: 5px;
 		}	
-		#modifyBTN4{
-			float: right;
-			width: 120px;
+		#pwdBTN{
+			width: 200px;
 			height: 32px;
 			font-size: 14pt;
 			color: white;
@@ -167,6 +166,11 @@
 		}
 		.bizSmallImage{
 				float: right;
+		}
+		.smaillimg{
+					padding-top: 20px;
+					padding-right: 10px;
+					width:30px;
 		}
 		.bizId{
 			float: right;
@@ -242,7 +246,7 @@
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
-					<span class="bizSmallImage">
+					<span class="bizSmallImage"> <img class="smaillimg" src="${sessionScope.bizMember.bizImage }">
 					</span>
 					
 
@@ -258,11 +262,13 @@
 					<div id="content">
 						<div id="content-L">
 							<br><br>
-							<div id="bizImg">
-								<a href=""><img class="imgsize" src="/resources/images/bizImgAdd.png"></a>
-							</div>
-							<br>
-							<span>업체 사진을 등록해 주세요</span>
+								<div id="bizImg">
+								<form action="/file/BizUpload.do" method="post" enctype="multipart/form-data" >
+									<input type="file" name="uploadFile" id="img" accept=".jpg, .gif, .png" onchange="loadFile(this);"/>
+                   					<input type='submit' value='변경'/>
+                    			</form>
+                   				</div>	
+
 						</div>
 						<div id="content-R">
 						<ul>
@@ -283,7 +289,7 @@
 						<div id="content-result">
 						<ul>
 							<li>${requestScope.bizMember.bizId }</li>
-							<li>${sessionScope.bizMember.bizPwd }<a href=""><button id="modifyBTN4">변경</button></a></li>
+							<li><button id="pwdBTN"><a href="">변경</a></button></li>
 							<li><input type='text' class="inputdata" name="ceoName" value="${requestScope.bizMember.ceoName }"/></li>
 							<li><input type='text' class="inputdata" name="bizName" value="${requestScope.bizMember.bizName }"/></li>
 							<li><input type='text' class="inputdata" name="bizEmail" value="${requestScope.bizMember.bizEmail }"/></li>
@@ -322,8 +328,8 @@
 									<option class="inputoption" value="30">30</option>
 									<option class="inputoption" value="50">50</option>
 								</select>
-							<li>${requestScope.bizMember.authorityId }<button id="modifyBTN2"><a href="/BizMember/supportModify.do">유형전환</button></a></li>
-							<li>${requestScope.bizMember.bizDelYN }<a href=""><button id="modifyBTN3">탈퇴</button></a></li>
+							<li>${requestScope.bizMember.authorityId }<button id="suportBTN">유형전환</button></li>
+							<li>${requestScope.bizMember.bizDelYN }<button id="withDraw">탈퇴</button></li>
 						</ul>
 						</div>
 					</div>
@@ -332,6 +338,40 @@
 		</div>
 	</div>
 </div>
+
+</body>
+
+<div class="modal">
+	  <div class="modal_content">
+  		<div class="mUpside">
+  			<a href="javascript:void(0);" class="layerpop_close" id="layerbox_close"></a> 
+			<div class="mAreaInfo">
+				<div class="mTitle">
+		            <span id="modalCpNm" style="background-color: white; color:#3e4a56;"></span>
+				</div>
+				<form action="/reservation/reservationJoin.do" method="post" style="font-size : 16pt;">
+					<!-- 모달창 입력내용 ajax -->
+					<div class="summary" id="summary"></div>
+					<input type="hidden" id="reservSta" name="reservSta" />
+					<input type="hidden" id="reservEnd" name="reservEnd" />
+					<input type="submit" class="confirm" value="예약"></input>
+						
+				</form>
+			</div>
+		</div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <script>
 //좌측 메뉴바 후버 효과
 
@@ -355,6 +395,7 @@
     			address : $('input[name=address]').val(),
     			bizTime : $("#bizTime option:selected").val(),
     			bizCount : $("#bizCount option:selected").val()
+				
     	}
     	
 	  	$.ajax({
@@ -377,9 +418,77 @@
     	});
     });
 
+	//사업자 탈퇴 변경 ajax 설정
+
+	$('#withDraw').click(function(){
+		
+		var result1 = confirm("정말 탈퇴하시겠습니까?")
+		var password = ${sessionScope.bizMember.bizPwd }
+
+		if(result1==true)
+		{
+			var result2 = prompt("패스워드를 재입력하여주세요")
+
+			if(result2==password)
+					{ $.ajax({
+			    		url : "/bizMember/withDraw.do",
+			    		type : "POST",
+			    		success : function(rst){
+			    			if(rst == true){
+			    				alert("회원 정보 변경 성공");
+			    				location.replace("/bizMember/bizManage.do");
+			    			}else{
+			    				alert("회원 정보 변경 실패");
+			    				location.replace("/bizMember/bizManage.do");
+			    				}
+			    			},
+			    		error : function(request,status,error){
+			    			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    			console.log('ajax 통신 에러');
+			    		}
+			    	});
+				}else{
+					alert("패스워드를 다시 확인 바랍니다.")
+					location.replace("/bizMember/bizManage.do");
+				}
+			
+		}else{
+			alert("취소하였습니다.")
+			location.replace("/bizMember/bizManage.do");
+		}
+    });
+	
+	//후원형태 변경 ajax 설정
+	$('#suportBTN').click(function(){
+		
+		var result = confirm("후원형태를 변경하시겠습니까? 변경은 1회만 가능합니다.")
+		
+		if(result==true)
+		{
+					 $.ajax({
+			    		url : "/bizMember/suportChange.do",
+			    		type : "POST",
+			    		success : function(rst){
+			    			if(rst == true){
+			    				alert("사업자 변경 성공");
+			    				location.replace("/bizMember/bizManage.do");
+			    			}else{
+			    				alert("사업자 변경 실패");
+			    				location.replace("/bizMember/bizManage.do");
+			    				}
+			    			},
+			    		error : function(request,status,error){
+			    			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    			console.log('ajax 통신 에러');
+			    			}
+			    	});
+		}else{
+			alert("취소하였습니다.")
+			location.replace("/bizMember/bizManage.do");
+		}
+    });
 	
 	
 
 </script>
-</body>
 </html>

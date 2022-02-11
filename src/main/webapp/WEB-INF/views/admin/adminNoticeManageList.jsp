@@ -26,21 +26,6 @@
     <!-- navigation -->
     <%@ include file="/WEB-INF/views/commons/header/adminNavigation.jsp"%>
 
-    <!-- 표준 예시 -->
-    <!-- <div class="cont-head">
-      <div class="cont-box">
-        <ul>
-          <li>고객센터 관리</li>
-          <li>공지사항 관리</li>
-        </ul>
-        <ul>
-          <li><a href="#">관리자</a></li>
-          <li><a href="#">로그아웃</a></li>
-        </ul>
-      </div>
-    </div> -->
-
-
     <div id="header">
       <div id="header-box">
         <div class="admin-path">
@@ -81,11 +66,9 @@
                 </div>
               </div>
 
-              <!-- <div class="notice-write"> -->
                 <button class="wri_btn">
                   <a href="/admin/adminNoticeWrite.do">글쓰기</a>
                 </button>
-              <!-- </div> -->
         
             </form>
         

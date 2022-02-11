@@ -68,16 +68,12 @@ public class AdminController {
 	public ModelAndView adminUserDetail(HttpServletRequest request, ModelAndView mav, @RequestParam int userNo) {
 		
 		int currentPage;
+		
 		if(request.getParameter("currentPage") == null) {
 			currentPage = 1;
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
-		int recordCountPerPage = 10;
-		
-		int start = currentPage * recordCountPerPage - (recordCountPerPage - 1);
-		int end = currentPage * recordCountPerPage;
 				
 		HashMap<String,Object> map = admService.userDetail(currentPage, userNo);
 		

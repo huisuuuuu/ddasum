@@ -80,9 +80,10 @@
                         </thead>
                         
                         <tbody>
+
                             <tr>
-                                <td>1</td>
-                                <td>user11</td>
+                                <td>${cm.cmNo }</td>
+                                <td>${cm. }</td>
                                 <td>김가가</td>
                                 <td>2022-02-02</td>
                                 <td><button type="button" class="ok_btn">있음</button></td>
