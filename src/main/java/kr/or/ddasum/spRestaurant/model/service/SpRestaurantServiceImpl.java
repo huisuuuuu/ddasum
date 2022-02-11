@@ -45,6 +45,7 @@ public class SpRestaurantServiceImpl implements SpRestaurantService{
 		HashMap <String, Object> map = new HashMap <String, Object>();
 		map.put("sr", sr);
 		map.put("mList", mList);
+		
 		return map;
 	}
 }

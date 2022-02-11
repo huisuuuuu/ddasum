@@ -15,7 +15,7 @@
 
     <div id="content_wrapper">
         <div id="page_title">
-            후원식당
+            <a href="/spRestaurant/spRestaurantList.do" style="all:unset;">후원식당</a>
         </div>
         <div id="area_select">
 			<div class="area" data-area="all"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=all&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }" >전체</a></div>        
@@ -35,7 +35,8 @@
             <form action="/spRestaurant/spRestaurantList.do" id="orderForm">
                 <select name="order" id="order_select" style="border:none;">
                     <option value="desc">최신순</option>
-                    <option value="count">수량순</option>
+                    <option value="best">예약많은순</option>
+                    <option value="count">예약가능순</option>
                 </select>
                 	<input type="text" name="area" value="${requestScope.terms['area'] }"  hidden/>
                 	<input type="text" name="type" value="${requestScope.terms['type'] }"  hidden/>
@@ -51,7 +52,7 @@
                 <li class="item">
                     <a href="/spRestaurant/spRestaurantDetail.do?bizNo=${list.bizNo }" class="item_link">
                         <div class="item_image">
-                        	<img src="${list.bizImage}" alt="" />
+                        	<img src="${list.bizImage}" alt="" style="width:100%;height:100%"/>
                         </div>
                         <div class="item_name">
                      		${list.bizName }
