@@ -19,7 +19,7 @@ public interface MemberService {
 
 	Member selectNickCheck(String nick);
 
-	BizMember selectRegNumCheck(String regNo);
+	BizMember selectRegNoCheck(String regNo);
 
 	Member findMemberId(Member m);
 

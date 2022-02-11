@@ -52,9 +52,9 @@ public class MemberDAO {
 		return sqlSession.selectOne("member.selectNickCheck", nick);
 	}
 
-	public BizMember selectRegNumCheck(String regNo) {
+	public BizMember selectRegNoCheck(String regNo) {
 
-		return sqlSession.selectOne("bizMember.selectRegNumCheck", regNo);
+		return sqlSession.selectOne("bizMember.selectRegNoCheck", regNo);
 	}
 
 	public Member findMemberId(Member m) {
