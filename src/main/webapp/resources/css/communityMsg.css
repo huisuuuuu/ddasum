@@ -1,4 +1,8 @@
 @charset "UTF-8";
+	    * {
+	        box-sizing: border-box;
+	        font-family: 'Noto Sans KR', sans-serif;
+	    }
         #open{
             all: unset;
             background-color: steelblue;
@@ -62,4 +66,5 @@
         }
         button>a{
         	all: unset;
+        	cursor: pointer;
         }

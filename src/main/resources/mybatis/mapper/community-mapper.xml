@@ -10,19 +10,25 @@
 		    AREA_NAME AS area,
 		    SIGU_NAME AS sigu,
 		    C_TITLE AS cTitle,
-		    C_CONTENT AS cContent,
 		    C_REGDATE AS cRegDate,
 		    C_COUNT AS cCount,
-		    C_DEL_YN AS cDelYN
+		    C_DEL_YN AS cDelYN,
+		    (SELECT
+		    	COUNT(*) 
+		     FROM 
+		     	COM_COMMENT 
+		     WHERE 
+		     	COMMUNITY.C_NO = COM_COMMENT.C_NO 
+		     GROUP BY C_NO) AS comCount
 		FROM
 		    COMMUNITY 
 		        LEFT JOIN MEMBER ON (COMMUNITY.USERNO = MEMBER.USERNO)
 		        LEFT JOIN AREA_GROUP ON (COMMUNITY.AREA = AREA_GROUP.AREA)
 		        LEFT JOIN SIGU_GROUP ON (COMMUNITY.SIGU = SIGU_GROUP.SIGU)
 		WHERE
-			C_DEL_YN = 'N'        
+		    C_DEL_YN = 'N'        
 		ORDER BY
-			C_NO DESC	
+		    C_NO DESC
 	</select>
 	
 	<select id="selectCommunityAllCount" resultType="int">
@@ -31,7 +37,7 @@
 		FROM
 			COMMUNITY
 		WHERE
-			C_DEL_YN = 'N'	
+			C_DEL_YN = 'N'
 	</select>
 
 	<select id="searchCommunity" parameterType="hashmap" resultType="kr.or.ddasum.community.model.vo.Community">
@@ -50,7 +56,7 @@
 		    COMMUNITY 
 		        LEFT JOIN MEMBER ON (COMMUNITY.USERNO = MEMBER.USERNO)
 		        LEFT JOIN AREA_GROUP ON (COMMUNITY.AREA = AREA_GROUP.AREA)
-		        LEFT JOIN SIGU_GROUP ON (COMMUNITY.SIGU = SIGU_GROUP.SIGU)		        
+		        LEFT JOIN SIGU_GROUP ON (COMMUNITY.SIGU = SIGU_GROUP.SIGU)
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="type.equals('title') or type.equals('all')">
 				C_TITLE LIKE '%'||#{keyword}||'%'
@@ -66,23 +72,46 @@
 	
 	<select id="detailOneCommunity" parameterType="int" resultType="kr.or.ddasum.community.model.vo.Community">
 		SELECT
-		    C_NO AS cNO,
-		    COMMUNITY.USERNO AS userNo,
-		    NICK AS nick,
-		    AREA_NAME AS area,
-		    SIGU_NAME AS sigu,
-		    C_TITLE AS cTitle,
-		    C_CONTENT AS cContent,
-		    C_REGDATE AS cRegDate,
-		    C_COUNT AS cCount,
-		    C_DEL_YN AS cDelYN
+		    cNO,
+		    userNo,
+		    nick,
+		    area,
+		    sigu,
+		    cTitle,
+		    cContent,
+		    cRegDate,
+		    cCount,
+		    cDelYN,
+		    preNo,
+		    nextNo,
+		    pImage
 		FROM
-		    COMMUNITY 
-		        LEFT JOIN MEMBER ON (COMMUNITY.USERNO = MEMBER.USERNO)
-		        LEFT JOIN AREA_GROUP ON (COMMUNITY.AREA = AREA_GROUP.AREA)
-		        LEFT JOIN SIGU_GROUP ON (COMMUNITY.SIGU = SIGU_GROUP.SIGU)		        
+		    (SELECT
+		        C_NO AS cNO,
+		        COMMUNITY.USERNO AS userNo,
+		        NICK AS nick,
+		        AREA_NAME AS area,
+		        SIGU_NAME AS sigu,
+		        C_TITLE AS cTitle,
+		        C_CONTENT AS cContent,
+		        C_REGDATE AS cRegDate,
+		        C_COUNT AS cCount,
+		        C_DEL_YN AS cDelYN,
+		        LAG(C_NO, 1, 0) OVER(ORDER BY C_NO DESC) AS preNo,
+		        LEAD(C_NO, 1, 0) OVER(ORDER BY C_NO DESC) AS nextNo,
+		        P_FILEPATH AS pImage
+		    FROM
+		        COMMUNITY 
+		            LEFT JOIN MEMBER ON (COMMUNITY.USERNO = MEMBER.USERNO)
+		            LEFT JOIN AREA_GROUP ON (COMMUNITY.AREA = AREA_GROUP.AREA)
+		            LEFT JOIN SIGU_GROUP ON (COMMUNITY.SIGU = SIGU_GROUP.SIGU)
+		        	LEFT JOIN PROFILE_IMG ON (COMMUNITY.USERNO = PROFILE_IMG.USERNO)
+		    WHERE
+		        C_DEL_YN = 'N'        
+		    ORDER BY
+		        C_NO DESC) c	        
 		WHERE
-			C_NO = #{cNO} AND C_DEL_YN = 'N'        
+		    cNO = #{cNo}    
 	</select>
 	
 	<select id="detailComment" parameterType="int" resultType="kr.or.ddasum.community.model.vo.CommunityComment">
@@ -97,11 +126,13 @@
 		    COM_CONTENT AS comContent,
 		    COM_REGDATE AS comRegDate,
 		    COM_SECRET_YN AS comSecretYN,
-		    COM_DEL_YN AS comDelYN
+		    COM_DEL_YN AS comDelYN,
+		    P_FILEPATH AS pImage
 		FROM
 		    COM_COMMENT
 		        LEFT JOIN MEMBER ON (COM_COMMENT.USERNO = MEMBER.USERNO)
-		WHERE C_NO = #{_parameter}        	
+		        LEFT JOIN PROFILE_IMG ON (COM_COMMENT.USERNO = PROFILE_IMG.USERNO)
+		WHERE C_NO = #{_parameter} AND COM_DEL_YN = 'N'       	
 		START WITH P_COM_NO IS NULL
 		CONNECT BY NOCYCLE PRIOR COM_NO = P_COM_NO
 	</select>
@@ -147,4 +178,38 @@
 			#{comSecretYN},
 			'N')
 	</insert>
+	
+	<insert id="insertCommunity" parameterType="kr.or.ddasum.community.model.vo.Community">
+		INSERT INTO
+		    COMMUNITY
+		VALUES(
+		    COM_SEQ.NEXTVAL, 
+		    #{userNo}, 
+		    #{area}, 
+		    #{sigu}, 
+		    #{cTitle}, 
+		    #{cContent}, 
+		    SYSDATE, 
+		    DEFAULT, 
+		    'N')		
+	</insert>
+	
+	<update id="updateCommunity" parameterType="kr.or.ddasum.community.model.vo.Community">
+		UPDATE 
+			COMMUNITY
+		SET
+			C_TITLE = #{cTitle},
+			C_CONTENT = #{cContent},
+			AREA = #{area},
+			SIGU = #{sigu}
+		WHERE C_NO = #{cNo} AND USERNO = #{userNo}	
+	</update>
+	
+	<update id="updateComment" parameterType="kr.or.ddasum.community.model.vo.CommunityComment">
+		UPDATE 
+			COM_COMMENT
+		SET
+			COM_CONTENT = #{comContent}
+		WHERE COM_NO = #{comNo}	
+	</update>
 </mapper>

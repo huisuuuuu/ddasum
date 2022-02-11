@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="spRestaurant">
+
+	<select id="selectAllSpRestaurant" parameterType="hashmap" resultType="kr.or.ddasum.spRestaurant.model.vo.SpRestaurant">
+		SELECT
+			BIZ_NO AS bizNo,
+			AUTHORITY_ID AS authorityId,
+			BIZ_ID AS bizId,
+			CEO_NAME AS ceoName,
+			BIZ_NAME AS bizName,
+			BIZ_EMAIL AS bizEmail,
+			BIZ_PHONE AS bizPhone,
+			RESTAURANT AS restaurant,
+			AREA AS area,
+			ADDRESS AS address,
+			BIZ_TIME AS bizTime,
+			REG_NO AS regNo,
+			BIZ_IMAGE AS bizImage,
+			BIZ_ENROLLDATE AS enrollDate,
+			BIZ_COUNT AS bizCount,
+			BIZ_CHANGE_YN AS bizChangeYN,
+			BIZ_DEL_YN AS bizDelYN
+		FROM
+			BIZ_MEMBER
+<trim prefix="WHERE" prefixOverrides="AND|OR">
+	<if test="!area.equals('all')">
+		AREA = #{area}
+	</if>
+	<if test="!type.equals('all')">
+		AND RESTAURANT = #{type}
+	</if>
+		AND BIZ_DEL_YN = 'N' AND AUTHORITY_ID = 'SP'
+</trim>				
+<choose>
+	<when test="order.equals('desc')">
+		ORDER BY BIZ_ENROLLDATE DESC
+	</when>
+	<when test="order.equals('count')">
+		ORDER BY BIZ_COUNT DESC
+	</when>			
+	<otherwise>
+		ORDER BY BIZ_ENROLLDATE DESC	
+	</otherwise>		
+</choose>
+	</select>
+
+	<select id="spRestaurantAllCount" parameterType="hashmap" resultType="int">
+		SELECT
+			COUNT(*)
+		FROm
+			BIZ_MEMBER
+<trim prefix="WHERE" prefixOverrides="AND|OR">
+	<if test="!area.equals('all')">
+		AREA = #{area}
+	</if>
+	<if test="!type.equals('all')">
+		AND RESTAURANT = #{type}
+	</if>
+		AND BIZ_DEL_YN = 'N' AND AUTHORITY_ID = 'SP'
+</trim>	
+	</select>
+	
+	<select id="selectOneSpRestaurant" parameterType="int" resultType="kr.or.ddasum.spRestaurant.model.vo.SpRestaurant">
+		SELECT
+			BIZ_NO AS bizNo,
+			AUTHORITY_ID AS authorityId,
+			BIZ_ID AS bizId,
+			CEO_NAME AS ceoName,
+			BIZ_NAME AS bizName,
+			BIZ_EMAIL AS bizEmail,
+			BIZ_PHONE AS bizPhone,
+			RESTAURANT AS restaurant,
+			AREA AS area,
+			ADDRESS AS address,
+			BIZ_TIME AS bizTime,
+			REG_NO AS regNo,
+			BIZ_IMAGE AS bizImage,
+			BIZ_ENROLLDATE AS enrollDate,
+			BIZ_COUNT AS bizCount,
+			BIZ_CHANGE_YN AS bizChangeYN,
+			BIZ_DEL_YN AS bizDelYN
+		FROM
+			BIZ_MEMBER
+		WHERE
+			BIZ_NO = #{_parameter}
+	</select>
+	
+	<select id="selectAllBizMenu" parameterType="int" resultType="kr.or.ddasum.spRestaurant.model.vo.SpMenu">
+		SELECT
+			MENU_NO AS menuNo,
+			BIZ_NO AS bizNo,
+			AUTHORITY_ID AS authorityId,
+			RESTAURANT AS restaurant,
+			MENU_NAME AS menuName,
+			MENU_INFO AS menuInfo,
+			ORIGINAL_PRICE AS originalPrice,
+			MENU_IMAGE AS menuImage,
+			MENU_DEL_YN AS menuDelYN
+		FROM
+			MENU
+		WHERE
+			BIZ_NO = #{_parameter}		
+	</select>
+</mapper>
