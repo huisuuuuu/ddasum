@@ -80,17 +80,23 @@
                         </thead>
                         
                         <tbody>
-
+						<c:choose>
+							<c:when test="${!requestScope.list.isEmpty() }">
+							<c:forEach items="${requestScope.list }" var="cm">
                             <tr>
                                 <td>${cm.cmNo }</td>
-                                <td>${cm. }</td>
-                                <td>김가가</td>
-                                <td>2022-02-02</td>
+                                <td>${cm.userId }</td>
+                                <td>${cm.userName }</td>
+                                <td>${cm.enrollDate }</td>
                                 <td><button type="button" class="ok_btn">있음</button></td>
                                 <td><button type="button" class="pass_btn">
                                 	<a href="/admin/adminCardConfirm.do">확인</button></a></td>
                                 <td><button type="button" class="success_btn">승인</button></td>
                             </tr>
+
+							</c:forEach>
+							</c:when>
+						</c:choose>
                             <tr>
                                 <td>2</td>
                                 <td>user22</td>

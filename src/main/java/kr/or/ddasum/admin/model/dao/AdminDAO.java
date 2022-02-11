@@ -30,10 +30,20 @@ public class AdminDAO {
 	public int recordTotalCount() {
 		return sqlSession.selectOne("admin.selectAllMemberTotalCount");
 	}
-
-	public HashMap<String, Object> detailOneMember(SqlSessionTemplate sqlSession, int userNo) {
+	
+	public ArrayList<AdminMember> adminSearchMember(int currentPage, int recordCountPerPage) {
 		
-		return (HashMap<String, Object>)sqlSession.selectList("admin.userDetail", userNo);
 	}
-		
+
+	public ArrayList<Detail> adminMemberDetail(int currentPage, int recordCountPerPage, int userNo) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<Detail> (sqlSession.selectList("admin.adminMemberDetail", null, rb));
+	}
+
+	public int memberRecordTotalCount() {
+		return sqlSession.selectOne("admin.memberDetailTotalCount");
+	}
+
 }

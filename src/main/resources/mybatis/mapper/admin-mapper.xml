@@ -23,7 +23,7 @@
 		SELECT COUNT(*) AS AllCount FROM MEMBER
 	</select>
 
-  	<select id="userDetail" parameterType="int" resultType="detail">
+  	<select id="adminMemberDetail" parameterType="int" resultType="detail">
   
   		SELECT
   			M_RE_NO AS mReNo,
@@ -37,7 +37,15 @@
   			INNER JOIN BIZ_MEMBER ON (authority.AUTHORITY_ID = BIZ_MEMBER.AUTHORITY_ID)
   			WHERE userNo = #{_params} AND DETAIL.BIZ_NO = BIZ_MEMBER.BIZ_NO
   		ORDER BY
-  		M_RE_NO DESC
+  		M_RE_NO DESC  		
   	</select>
+  	
+  	<select id="memberDetailTotalCount" resultType="int">
+	
+		SELECT COUNT(*) AS AllCount FROM DETAIL
+		WHERE USERNO = #{_params}
+
+	</select>
+  	
   
 </mapper>

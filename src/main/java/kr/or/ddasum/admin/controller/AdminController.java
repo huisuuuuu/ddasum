@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.admin.model.service.AdminService;
 import kr.or.ddasum.admin.model.vo.AdminMember;
+import kr.or.ddasum.member.model.vo.Detail;
 
 @Controller
 public class AdminController {
@@ -57,6 +58,46 @@ public class AdminController {
 		
 	}
 	
+	//회원정보관리 검색처리
+	@RequestMapping(value="/admin/adminMemberSearch.do", method = RequestMethod.GET)
+	public ModelAndView adminSearchMember(@RequestParam(defaultValue="1") int currentPage, @RequestParam String type, @RequestParam String keyword, ModelAndView mav) {
+
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int pageTotalCount = (int)Math.ceil(admService.memberTotalCount()/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+		
+		ArrayList<AdminMember> list = admService.adminSelectAllMember(currentPage, recordCountPerPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}
+
+		System.out.println(type);
+		System.out.println(keyword);
+		System.out.println(currentPage);
+
+		HashMap<String, Object> map = admService.adminSearchMember(type, keyword, currentPage);
+
+		mav.addObject("map", map);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("type", type);
+		mav.addObject("keyword", keyword);
+		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		mav.setViewName("admin/adminMemberManageList");
+		
+		return mav;
+		
+		
+	}
+	
+	
 //	@RequestMapping(value="/admin/adminMemberManageList.do", method = RequestMethod.GET)
 //	public String adminMemberManageList() {
 //		
@@ -64,28 +105,60 @@ public class AdminController {
 //	}
 
 	//이용내역 확인
-	@RequestMapping(value="/admin/adminUserDetail.do", method = RequestMethod.GET)
-	public ModelAndView adminUserDetail(HttpServletRequest request, ModelAndView mav, @RequestParam int userNo) {
+//	@RequestMapping(value="/admin/adminUserDetail.do", method = RequestMethod.GET)
+//	public ModelAndView adminUserDetail(HttpServletRequest request, ModelAndView mav, @RequestParam int userNo) {
+//		
+//		int currentPage;
+//		
+//		if(request.getParameter("currentPage") == null) {
+//			currentPage = 1;
+//		}else {
+//			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+//		}
+//				
+//		HashMap<String,Object> map = admService.userDetail(currentPage, userNo);
+//		
+//		
+//		map.put("currentPage", currentPage);
+//		map.put("userNo", userNo);
+//		
+//		mav.addObject("map", map);
+//		mav.setViewName("admin/adminUserDetail");
+//
+//		return mav;
+//				
+//	}
+	
+	//이용내역 확인
+	@RequestMapping(value="/admin/adminMemberDetail.do", method = RequestMethod.GET)
+	public ModelAndView adminMemberDetail(@RequestParam(defaultValue ="1") int currentPage, HttpServletRequest request, ModelAndView mav, @RequestParam int userNo)
+	{
+		int recordCountPerPage = 5;
+		int naviCountPerPage = 6;
+		int pageTotalCount = (int)Math.ceil(admService.detailTotalCount()/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
 		
-		int currentPage;
-		
-		if(request.getParameter("currentPage") == null) {
-			currentPage = 1;
-		}else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		ArrayList<Detail> list = admService.adminMemberDetail(currentPage, recordCountPerPage, userNo);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
 		}
-				
-		HashMap<String,Object> map = admService.userDetail(currentPage, userNo);
 		
+		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		mav.setViewName("admin/adminMemberDetail");
 		
-		map.put("currentPage", currentPage);
-		map.put("userNo", userNo);
-		
-		mav.addObject("map", map);
-		mav.setViewName("admin/adminUserDetail");
-
-		return mav;
-				
+		return mav;				
+	}
+	
+	@RequestMapping(value="/admin/adminMemberInfo.do", method = RequestMethod.GET)
+	public String adminMemberInfo() {
+		return "/admin/adminMemberInfo";
 	}
 	
 	@RequestMapping(value="/admin/adminBizManageList.do", method = RequestMethod.GET)

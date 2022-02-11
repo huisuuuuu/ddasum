@@ -24,6 +24,8 @@ td:nth-of-type(1) {
    display : none;
 }
 
+
+
 </style>
 </head>
 <body>
@@ -55,9 +57,9 @@ td:nth-of-type(1) {
                     </div>
                     
                     <div class="box-search">
-                  <form action="">
+                  <form action="/admin/adminMemberSearch.do" method="get">
                      <div class="select-search">
-                        <select>
+                        <select name="type" id="search-type">
                            <option>검색필터</option>
                            <option value="userId">아이디</option>
                                    <option value="nick">닉네임</option>
@@ -67,7 +69,7 @@ td:nth-of-type(1) {
                      </div>
                      
                      <div class="input-search">
-                        <input type="text" name="search" placeholder="검색어를 입력해주세요" />
+                        <input type="search-keyword" name="keyword" placeholder="검색어를 입력해주세요" />
                            <div class="search-btn"><button type="button" class="search">
                               <i class="fas fa-search icon-search"></i></button>                     
                            </div>                        
@@ -106,7 +108,7 @@ td:nth-of-type(1) {
                                 <td>
                                     <c:if test="${m.userId ne 'ADMIN' }">
                                       <c:if test="${m.detailYN eq 'Y'.charAt(0)}">
-                                         <button type="button" class="ok_btn"><a href="/admin/adminUserDetail.do?userNo=${m.userNo }">확인</a></button>
+                                         <button type="button" class="ok_btn"><a href="/admin/adminMemberDetail.do?userNo=${m.userNo }">확인</a></button>
                                       </c:if>
                                       <c:if test="${m.detailYN eq 'N'.charAt(0)}">                                   
                                          <button type="button" class="none_btn">확인</button>
@@ -115,7 +117,7 @@ td:nth-of-type(1) {
                                </td> 
                                 <td>
                                    <c:if test="${m.userId ne 'ADMIN' }">
-                                     <button type="button" class="ok_btn">상세보기</button>
+                                     <button type="button" class="ok_btn"><a href="/admin/adminMemberInfo.do?userNo=${m.userNo }">상세보기</a></button>
                                    </c:if>
                                 </td>
                             </tr>
@@ -126,25 +128,9 @@ td:nth-of-type(1) {
                         </tbody> 
                         
                     </table>
-            
+                    
                     <div id="page_wrap">
                         <ul id="page_ul">
-            				<c:if test="${ preNavi > 0}">
-            					<li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
-            				</c:if>
-            				<c:forEach items="${ navi }" var="i">
-            					<c:choose>
-            						<c:when test="${i==currentPage}">
-            							<li><a id="page_active" href='/admin/adminMemberManageList.do?currentPage=${i}'>${i}</a></li>
-            						</c:when>
-            						<c:otherwise>
-            							<li><a id="page_inactive" href='/admin/adminMemberManageList.do?currentPage=${i}'>${i}</a></li>
-            						</c:otherwise>
-            						</c:choose>
-            				</c:forEach>
-            				<c:if test="${ nextNavi } != 0">
-            					<li><a href='/admin/adminMemberManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
-            				</c:if>
                         <c:if test="${ preNavi > 0}">
                            <li><a href='/admin/adminMemberManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
                         </c:if>
@@ -168,6 +154,7 @@ td:nth-of-type(1) {
             </div>
           </div>
          </div>
-          
+                    
+           
 </body>
 </html>
