@@ -12,18 +12,20 @@
 	crossorigin="anonymous"></script>
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/communityList.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/layout.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/mainTitle.css">
 	
 </head>
 <body>
 	<!-- header -->
 	<%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>	
-
-    <div id="content_wrapper">
-        <div id="page_title">혼밥시러 <br>
-            <hr id="title_underbar">
-        </div>
-        <br><br><br>
-        <div id="board_wrapper">
+      <div id="content">
+         <div class="main_tit">
+            <h1>혼밥시러</h1>
+            <div class="under"></div>
+         </div>
+         <div class="contents_wrap">
+         	        <div id="board_wrapper">
             <div class="table_tr">
             	<c:if test="${sessionScope.member !=null }">
                 	<button type="button" class="color_button" id="board_write">글쓰기</button>
@@ -73,10 +75,7 @@
 	                	</tr>
 	                	
 					</c:forEach>
-<%-- 						<tr>
-							<td colspan="6">${requestScope.map['navi'] }</td>
-						</tr>	
-					 --%>
+
 				</c:when>
 				<c:otherwise>
 						<tr class="table_tr_body">
@@ -96,8 +95,16 @@
 			    </ul>
 			</div>
         </div>
-    </div>
-    <br /><br /><br />
+         
+         </div>
+      </div>
+ <!--    <div id="content_wrapper"> -->
+<!--         <div id="page_title">혼밥시러 <br>
+            <hr id="title_underbar">
+        </div> -->
+
+    <!-- </div> -->
+
  	<!-- footer -->
 	<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>     
 </body>
