@@ -571,13 +571,6 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value = "/member/saleRestaurantListPage.do", method = RequestMethod.GET)
-	public String saleRestaurantPage() {
-
-		return "member/saleRestaurantListPage";
-
-	}
-
 	@RequestMapping(value = "/member/memberJoinPage.do", method = RequestMethod.GET)
 	public String memberJoinPage() {
 
@@ -619,13 +612,6 @@ public class MemberController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/member/saleRestaurantDetail.do", method = RequestMethod.GET)
-	public String saleRestaurantDetail() {
-
-		return "member/saleRestaurantDetail";
-
-	}
-	
 	@RequestMapping(value = "/member/reservationCancle.do", method = RequestMethod.POST)
 	public void reservationCancle(@RequestParam char reCancle,@SessionAttribute Member member,HttpServletResponse response) throws IOException {
 		

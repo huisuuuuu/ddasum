@@ -24,6 +24,142 @@ td:nth-of-type(1) {
    display : none;
 }
 
+* {
+	box-sizing : border-box;
+	margin : 0px;
+}
+	
+.wrap {
+    width: 100%;
+}
+
+.detail-wrap {
+	border : 1px solid #c8c8c8;
+	width : 800px;
+	height : 600px;
+	border-radius : 20px;
+	margin : 0px auto;
+	display : none;
+}
+
+.detail-header {
+	border-top-left-radius : 20px;
+	border-top-right-radius : 20px;
+	width : 100%;
+	height : 15%;
+	background-color : #FFA77E;
+	text-align : center;
+}
+
+.detail-content {
+    width: 100%;
+    text-align: center;
+}
+
+.detail-content table {
+    width: 100%;
+    border-top: 0.5px solid #D8D8D8;
+}
+
+.detail-content table tr {
+	height: 80px;
+	line-height: 80px;
+    border-bottom: 0.5px solid #D8D8D8;
+}
+
+.detail-content table th {
+    border-bottom: 0.5px solid #D8D8D8;
+}
+
+.reset_area {
+	width : 30%;
+	height : 40px;
+	border : 1px solid black;
+	margin : 0px auto;
+	text-align : center;
+}
+
+.reset-text-area {
+	width : 50%;
+	height : 100%;
+	border : 1px solid blue;
+	float : left;
+	margin : 0px auto;
+}
+
+
+.reset-btn {
+	width : 50%;
+	height : 100%;
+	border : 1px solid red;
+	float : right;
+	margin : 0px auto;
+}
+
+
+span {
+	display : inline;
+}
+
+/*
+th:nth-of-type(1) {
+	display : none;
+}
+
+td:nth-of-type(1) {
+	display : none;
+}
+*/
+
+/* Page */
+
+#page_wrap {
+  width: 100%;
+  margin : 0px auto;
+}
+
+#page_wrap>ul {
+  display: table;
+  margin: 0 auto;
+}
+
+#page_wrap>ul>li {
+  display: block;
+  width: 35px;
+  height: 35px;
+  float: left;
+  text-align: center;
+  margin: 0 5px;
+  line-height: 15.5px;
+  font-size: 16px;
+  color: #2a2a2a;
+}
+
+#page_inactive {
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: #2a2a2a;
+  padding: 10px;
+  border-radius: 50%;
+  transition: ease 0.3s;
+}
+
+#page_active {
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  padding: 10px;
+  transition: ease 0.3s;   
+  background-color: #ffa77e;
+  border-radius: 50%;
+  color: white;
+}
+
+.detail-wrap .close-btn {
+	position : absolute;
+}
+
 
 
 </style>
@@ -53,7 +189,7 @@ td:nth-of-type(1) {
             <div class="container">
                 <div class="container_top">
                     <div class="count-all">
-                        <p>전체 <span>${requestScope.memberTotalCount }</span> 건</p>
+                        <p>전체 <span>10</span> 건</p>
                     </div>
                     
                     <div class="box-search">
@@ -77,7 +213,7 @@ td:nth-of-type(1) {
                   </form>
                </div>
                 </div>
-      
+
                 <div class="table_wrap">
                     <table>
                         <thead>
@@ -108,7 +244,7 @@ td:nth-of-type(1) {
                                 <td>
                                     <c:if test="${m.userId ne 'ADMIN' }">
                                       <c:if test="${m.detailYN eq 'Y'.charAt(0)}">
-                                         <button type="button" class="ok_btn"><a href="/admin/adminMemberDetail.do?userNo=${m.userNo }">확인</a></button>
+                                         <button type="button" class="ok_btn" id="popup-detail"><a href="/admin/adminMemberDetail.do?userNo=${m.userNo }">확인</a></button>
                                       </c:if>
                                       <c:if test="${m.detailYN eq 'N'.charAt(0)}">                                   
                                          <button type="button" class="none_btn">확인</button>
@@ -154,7 +290,87 @@ td:nth-of-type(1) {
             </div>
           </div>
          </div>
+
+
+	<div class="detail-wrap">
+		<div class="detail-header">
+			ㅇㅇㅇ님 이용내역
+		</div>
+		
+		<div class="detail-content">
+			<table>
+				<thead>
+					<tr>
+						<th>예약번호</th>
+						<th>예약일</th>
+						<th>이용식당</th>
+						<th>이용품목</th>
+						<th>이용금액</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+				<c:choose>
+				<c:when test="${!requestScope.list.isEmpty()}">
+				<c:forEach items="${requestScope.list }" var="d">
+					<tr>
+						<td>${d.mReNo }</td>
+						<td>${d.reservationDate }</td>
+						<td>${d.bizName }</td>
+						<td>${d.menuName }</td>
+						<td>${d.authorityInfo }</td>
+					</tr>				
+				</c:forEach>
+				</c:when>
+				</c:choose>
+				</tbody>
+			</table>
+				<hr>
+		</div>
+
+                    <div id="page_wrap">
+                        <ul id="page_ul">
+                        <c:if test="${ preNavi > 0}">
+                           <li><a href='/admin/adminMemberDetail.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                        </c:if>
+                        <c:forEach items="${ navi }" var="i">
+                           <c:choose>
+                              <c:when test="${i==currentPage}">
+                                 <li><a id="page_active" href='/admin/adminMemberDetail.do?currentPage=${i}'>${i}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a id="page_inactive" href='/admin/adminMemberDetail.do?currentPage=${i}'>${i}</a></li>
+                              </c:otherwise>
+                              </c:choose>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+                           <li><a href='/admin/adminMemberDetail.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                        </c:if>
+                        </ul>
+                    </div>
+
+				<div class="reset_area">
+					<div class="reset-text-area">
+						<p>이용횟수 <span>18/30건</span></p>
+					</div>
+					<div class="reset-btn">
+						<a href=""><button type="button" class="ok_btn">초기화</button></a>
+					</div>
+				</div>
+				
+				<div class="close-btn">
+					<button type="button" class="ok_btn"><a href="/admin/adminMemberManageList">닫기</a></button>
+				</div>
                     
+
+                </div>
+
+
+<script>
+	document.getElementById('popup-detail').addEventListener('click', fuction() {
+		modal('detail-wrap');
+	});
+</script>                    
            
 </body>
 </html>

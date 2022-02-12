@@ -47,18 +47,18 @@
     text-align: center;
 }
 
-.pop-content table {
+.detail-content table {
     width: 100%;
     border-top: 0.5px solid #D8D8D8;
 }
 
-.pop-content table tr {
+.detail-content table tr {
 	height: 80px;
 	line-height: 80px;
     border-bottom: 0.5px solid #D8D8D8;
 }
 
-.pop-content table th {
+.detail-content table th {
     border-bottom: 0.5px solid #D8D8D8;
 }
 
@@ -92,6 +92,7 @@ span {
 	display : inline;
 }
 
+/*
 th:nth-of-type(1) {
 	display : none;
 }
@@ -99,6 +100,7 @@ th:nth-of-type(1) {
 td:nth-of-type(1) {
 	display : none;
 }
+*/
 
 /* Page */
 
@@ -148,12 +150,12 @@ td:nth-of-type(1) {
 </style>
 </head>
 <body>
-	<div class="pop-wrap">
-		<div class="pop-header">
-			${requestScope.member.nick}님 이용내역
+	<div class="detail-wrap">
+		<div class="detail-header">
+			ㅇㅇㅇ님 이용내역
 		</div>
 		
-		<div class="pop-content">
+		<div class="detail-content">
 			<table>
 				<thead>
 					<tr>
@@ -212,6 +214,10 @@ td:nth-of-type(1) {
 					<div class="reset-btn">
 						<a href=""><button type="button" class="ok_btn">초기화</button></a>
 					</div>
+				</div>
+				
+				<div class="close-btn">
+					<button type="button" class="ok_btn"><a href="/admin/adminMemberManageList">닫기</a></button>
 				</div>
                     
 

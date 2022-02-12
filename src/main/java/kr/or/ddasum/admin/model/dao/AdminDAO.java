@@ -1,10 +1,8 @@
 package kr.or.ddasum.admin.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,21 +29,30 @@ public class AdminDAO {
 		return sqlSession.selectOne("admin.selectAllMemberTotalCount");
 	}
 	
-	/*
-	 * public ArrayList<AdminMember> adminSearchMember(int currentPage, int
-	 * recordCountPerPage) {
-	 * 
-	 * }
-	 */
 	public ArrayList<Detail> adminMemberDetail(int currentPage, int recordCountPerPage, int userNo) {
 		int start = (currentPage - 1) * recordCountPerPage;
 		int end = recordCountPerPage;
 		RowBounds rb = new RowBounds(start, end);
-		return new ArrayList<Detail> (sqlSession.selectList("admin.adminMemberDetail", null, rb));
+		return new ArrayList<Detail> (sqlSession.selectList("admin.adminMemberDetail", userNo, rb));
 	}
 
-	public int memberRecordTotalCount() {
+	public int memberDetailTotalCount() {
 		return sqlSession.selectOne("admin.memberDetailTotalCount");
 	}
+
+//	public ArrayList<Card> adminSelectAllCardList(int currentPage, int recordCountPerPage) {
+//		int start = (currentPage - 1) * recordCountPerPage;
+//		int end = recordCountPerPage;
+//		RowBounds rb = new RowBounds(start, end);
+//		return new ArrayList<Detail> (sqlSession.selectList("admin.adminCardManage", null, rb));
+//		
+//		return null;
+//	}
+//	
+//	public int selectAllCardMemberTotalCount() {
+//		// TODO Auto-generated method stub
+//		return sqlSession.selectOne("admin.selectAllCardMemberTotalCount");
+//	}
+
 
 }
