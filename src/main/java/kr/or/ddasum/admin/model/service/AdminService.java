@@ -8,13 +8,18 @@ import kr.or.ddasum.member.model.vo.Detail;
 
 public interface AdminService {
 
-
+	//회원정보관리
 	ArrayList<AdminMember> adminSelectAllMember(int currentPage, int recordCountPerPage);
 
-
+	//회원수
 	int memberTotalCount();
 
-
-	HashMap<String, Object> userDetail(int currentPage, int userNo);
+	//회원이용내역
+	ArrayList<Detail> adminMemberDetail(int currentPage, int recordCountPerPage, int userNo);
 	
+	//회원이용내역수
+	int detailTotalCount();
+
+	//회원정보관리-검색
+	HashMap<String, Object> adminSearchMember(String type, String keyword, int currentPage);
 }

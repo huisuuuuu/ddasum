@@ -23,6 +23,7 @@
       SELECT COUNT(*) AS AllCount FROM MEMBER
    </select>
 
+<<<<<<< HEAD
      <select id="adminMemberDetail" parameterType="int" resultType="detail">
   
         SELECT
@@ -47,5 +48,31 @@
 
    </select>
      
+=======
+  	<select id="adminMemberDetail" parameterType="int" resultType="detail">
+  
+  		SELECT
+  			M_RE_NO AS mReNo,
+  			RESERVATION_DATE AS reservationDate,
+  			AUTHORITY_INFO AS authorityInfo,
+  			MENU_NO AS menuNo,
+  			BIZ_NAME AS bizName
+  		FROM
+  			AUTHORITY
+  			INNER JOIN DETAIL ON (authority.AUTHORITY_ID = DETAIL.AUTHORITY_ID)
+  			INNER JOIN BIZ_MEMBER ON (authority.AUTHORITY_ID = BIZ_MEMBER.AUTHORITY_ID)
+  			WHERE userNo = #{_params} AND DETAIL.BIZ_NO = BIZ_MEMBER.BIZ_NO
+  		ORDER BY
+  		M_RE_NO DESC  		
+  	</select>
+  	
+  	<select id="memberDetailTotalCount" resultType="int">
+	
+		SELECT COUNT(*) AS AllCount FROM DETAIL
+		WHERE USERNO = #{_params}
+
+	</select>
+  	
+>>>>>>> 1c01d867932d41e12666359eaf71b3fdd34c2deb
   
 </mapper>

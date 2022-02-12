@@ -20,40 +20,38 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
-		
-//	int recordCountPerPage = 10;
-//	int naviCountPerPage = 5;
-	
+			
 	@Override
 	public ArrayList<AdminMember> adminSelectAllMember(int currentPage, int recordCountPerPage) {
 
 		return admDAO.adminSelectAllMember(currentPage, recordCountPerPage);
-		
-//		String pageNavi = admDAO.getPageNavi( currentPage, recordCountPerPage, naviCountPerPage);
-//		
-//		HashMap<String, Object> map = new HashMap<String, Object> ();
-		
-//		map.put("list", list);
-//		map.put("pageNavi", pageNavi);
-//		
-//		return map;
 	}
 
+	@Override
 	public int memberTotalCount() {
 		return admDAO.recordTotalCount();
 	}
 
 	@Override
-	public HashMap<String, Object> userDetail(int currentPage, int userNo) {
+	public ArrayList<Detail> adminMemberDetail(int currentPage, int recordCountPerPage, int userNo) {
 		
-		
-		return admDAO.detailOneMember(sqlSession, userNo);
-		
-		//HashMap<String, Object> map = new HashMap<String, Object> ();
-		
-		//map.put("Detail", );
+		return admDAO.adminMemberDetail(currentPage, recordCountPerPage, userNo);
 		
 	}
+
+	@Override
+	public int detailTotalCount() {
+		return admDAO.memberRecordTotalCount();
+	}
+
+	@Override
+	public HashMap<String, Object> adminSearchMember(String type, String keyword, int currentPage) {
+		ArrayList<AdminMember> list = admDAO.adminSearchMember(sqlSession, type, keyword, currentPage, recordCountPerPage);
+		
+		return admDAO.adminSearchMember(currentPage, recordCountPerPage);
+	}
+
+
 
 	
 
