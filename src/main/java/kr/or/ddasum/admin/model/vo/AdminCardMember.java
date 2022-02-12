@@ -1,5 +1,7 @@
 package kr.or.ddasum.admin.model.vo;
 
+import java.sql.Date;
+
 public class AdminCardMember {
 	
 	private int cmNo;
@@ -9,17 +11,16 @@ public class AdminCardMember {
 	private String reply;
 	private char checkYN;
 	private char joinYN;
+	private String userName;
+	private Date enrollDate;
+	private char detailYN;
 	
-	@Override
-	public String toString() {
-		return "AdminCardMember [cmNo=" + cmNo + ", userNo=" + userNo + ", cFileNo=" + cFileNo + ", cardNo=" + cardNo
-				+ ", reply=" + reply + ", checkYN=" + checkYN + ", joinYN=" + joinYN + "]";
-	}
 	public AdminCardMember() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public AdminCardMember(int cmNo, int userNo, int cFileNo, int cardNo, String reply, char checkYN, char joinYN) {
+	public AdminCardMember(int cmNo, int userNo, int cFileNo, int cardNo, String reply, char checkYN, char joinYN,
+			String userName, Date enrollDate, char detailYN) {
 		super();
 		this.cmNo = cmNo;
 		this.userNo = userNo;
@@ -28,6 +29,9 @@ public class AdminCardMember {
 		this.reply = reply;
 		this.checkYN = checkYN;
 		this.joinYN = joinYN;
+		this.userName = userName;
+		this.enrollDate = enrollDate;
+		this.detailYN = detailYN;
 	}
 	public int getCmNo() {
 		return cmNo;
@@ -70,6 +74,24 @@ public class AdminCardMember {
 	}
 	public void setJoinYN(char joinYN) {
 		this.joinYN = joinYN;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+	public char getDetailYN() {
+		return detailYN;
+	}
+	public void setDetailYN(char detailYN) {
+		this.detailYN = detailYN;
 	}
 
 }

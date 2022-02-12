@@ -189,7 +189,7 @@ td:nth-of-type(1) {
             <div class="container">
                 <div class="container_top">
                     <div class="count-all">
-                        <p>전체 <span>10</span> 건</p>
+                        <p>전체 <span>${recordTotalCount }</span> 건</p>
                     </div>
                     
                     <div class="box-search">
@@ -231,8 +231,8 @@ td:nth-of-type(1) {
                   
                         <tbody>
                         <c:choose>
-                  <c:when test="${!requestScope.list.isEmpty()}">
-                  <c:forEach items="${requestScope.list}" var="m">                                                
+            		      <c:when test="${!requestScope.list.isEmpty()}">
+           			      <c:forEach items="${requestScope.list}" var="m">                                                
                         
                             <tr>
                                <td>${m.userNo }</td>
@@ -256,9 +256,9 @@ td:nth-of-type(1) {
                                      <button type="button" class="ok_btn"><a href="/admin/adminMemberInfo.do?userNo=${m.userNo }">상세보기</a></button>
                                    </c:if>
                                 </td>
-                            </tr>
-                        </c:forEach>
-                        </c:when>
+           	                 </tr>
+                  		     </c:forEach>
+       		                 </c:when>
                         </c:choose>
                             
                         </tbody> 
@@ -290,87 +290,6 @@ td:nth-of-type(1) {
             </div>
           </div>
          </div>
-
-
-	<div class="detail-wrap">
-		<div class="detail-header">
-			ㅇㅇㅇ님 이용내역
-		</div>
-		
-		<div class="detail-content">
-			<table>
-				<thead>
-					<tr>
-						<th>예약번호</th>
-						<th>예약일</th>
-						<th>이용식당</th>
-						<th>이용품목</th>
-						<th>이용금액</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-				<c:choose>
-				<c:when test="${!requestScope.list.isEmpty()}">
-				<c:forEach items="${requestScope.list }" var="d">
-					<tr>
-						<td>${d.mReNo }</td>
-						<td>${d.reservationDate }</td>
-						<td>${d.bizName }</td>
-						<td>${d.menuName }</td>
-						<td>${d.authorityInfo }</td>
-					</tr>				
-				</c:forEach>
-				</c:when>
-				</c:choose>
-				</tbody>
-			</table>
-				<hr>
-		</div>
-
-                    <div id="page_wrap">
-                        <ul id="page_ul">
-                        <c:if test="${ preNavi > 0}">
-                           <li><a href='/admin/adminMemberDetail.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
-                        </c:if>
-                        <c:forEach items="${ navi }" var="i">
-                           <c:choose>
-                              <c:when test="${i==currentPage}">
-                                 <li><a id="page_active" href='/admin/adminMemberDetail.do?currentPage=${i}'>${i}</a></li>
-                              </c:when>
-                              <c:otherwise>
-                                 <li><a id="page_inactive" href='/admin/adminMemberDetail.do?currentPage=${i}'>${i}</a></li>
-                              </c:otherwise>
-                              </c:choose>
-                        </c:forEach>
-                        <c:if test="${ nextNavi } != 0">
-                           <li><a href='/admin/adminMemberDetail.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
-                        </c:if>
-                        </ul>
-                    </div>
-
-				<div class="reset_area">
-					<div class="reset-text-area">
-						<p>이용횟수 <span>18/30건</span></p>
-					</div>
-					<div class="reset-btn">
-						<a href=""><button type="button" class="ok_btn">초기화</button></a>
-					</div>
-				</div>
-				
-				<div class="close-btn">
-					<button type="button" class="ok_btn"><a href="/admin/adminMemberManageList">닫기</a></button>
-				</div>
-                    
-
-                </div>
-
-
-<script>
-	document.getElementById('popup-detail').addEventListener('click', fuction() {
-		modal('detail-wrap');
-	});
-</script>                    
-           
+   
 </body>
 </html>

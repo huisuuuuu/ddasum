@@ -34,7 +34,7 @@
         </div>
 
         <div class="box-user">
-          <a href="/">관리자</a>
+          <a href="/">${sessionScope.member.nick }님</a>
           <a href="/">로그아웃</a>
         </div>
       </div>
@@ -70,29 +70,43 @@
                   <a href="/admin/adminNoticeWrite.do">글쓰기</a>
                 </button>
         
-            </form>
-        
-
+            </form>        
           </div>
-
         </div>
 
         <div class="table_wrap">
           <table>
             <thead>
               <tr>
-                <th width="200"><input type="checkbox"></th>
-                <th width="200">글번호</th>
+                <th width="100"><input type="checkbox" value='selecctall' name='selectall' onclick='selectAll(this)'></th>
+                <th width="100">글번호</th>
                 <th width="200">글제목</th>
-                <th width="200">글내용</th>
-                <th width="200">상단 고정</th>
+                <th width="300">글내용</th>
+                <th width="150">상단 고정</th>
                 <th width="200">수정</th>
               </tr>
             </thead>
 
             <tbody>
+            <c:choose>
+            <c:when test="${!requestScope.list.isEmpty()} }">
+            <c:forEach items="${requestScope.list }" var="notice">
+
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
+                <td>${notice.iNo}</td>
+                <td>${notice.iTitle }</td>
+                <td>${notice.iContent }</td>
+                <td><button type="button" class="ok_btn">고정</button></td>
+                <td><button type="button" class="ok_btn">수정</button></td>
+              </tr>
+
+            
+            </c:forEach>
+            </c:when>
+            </c:choose>
+              <tr>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -100,7 +114,7 @@
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -108,7 +122,7 @@
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -116,7 +130,7 @@
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -124,7 +138,7 @@
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -132,7 +146,7 @@
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -140,7 +154,7 @@
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -148,7 +162,7 @@
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -156,15 +170,7 @@
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>10</td>
                 <td>꿈나무 카드 인증 안내</td>
                 <td>글내용입니다길어져라얍얍얍</td>
@@ -186,5 +192,25 @@
     </div>
 
 </body>
+
+<script>
+function checkSelectAll(checkbox)  {
+	  const selectall 
+	    = document.querySelector('input[name="selectall"]');
+	  
+	  if(checkbox.checked === false)  {
+	    selectall.checked = false;
+	  }
+	}
+
+	function selectAll(selectAll)  {
+	  const checkboxes 
+	     = document.getElementsByName('notice');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = selectAll.checked
+	  })
+	}
+</script>
 
 </html>
