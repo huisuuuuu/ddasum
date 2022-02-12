@@ -57,47 +57,8 @@ public class AdminController {
 		return mav;		
 		
 	}
-	
-	//회원정보관리 검색처리
-	@RequestMapping(value="/admin/adminMemberSearch.do", method = RequestMethod.GET)
-	public ModelAndView adminSearchMember(@RequestParam(defaultValue="1") int currentPage, @RequestParam String type, @RequestParam String keyword, ModelAndView mav) {
-
-		int recordCountPerPage = 10;
-		int naviCountPerPage = 5;
-		int pageTotalCount = (int)Math.ceil(admService.memberTotalCount()/(double)recordCountPerPage);
-		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
-		int endNavi = startNavi + naviCountPerPage - 1;
-		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
 		
-		ArrayList<AdminMember> list = admService.adminSelectAllMember(currentPage, recordCountPerPage);
-		ArrayList<Integer> navi = new ArrayList<>();
-		for (int i = startNavi; i <= endNavi; i++) {
-			navi.add(i);
-		}
 
-		System.out.println(type);
-		System.out.println(keyword);
-		System.out.println(currentPage);
-
-		HashMap<String, Object> map = admService.adminSearchMember(type, keyword, currentPage);
-
-		mav.addObject("map", map);
-		mav.addObject("currentPage", currentPage);
-		mav.addObject("type", type);
-		mav.addObject("keyword", keyword);
-		mav.addObject("list", list);
-		mav.addObject("currentPage", currentPage);
-		mav.addObject("navi", navi);
-		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
-		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
-		mav.setViewName("admin/adminMemberManageList");
-		
-		return mav;
-		
-		
-	}
-	
-	
 //	@RequestMapping(value="/admin/adminMemberManageList.do", method = RequestMethod.GET)
 //	public String adminMemberManageList() {
 //		
