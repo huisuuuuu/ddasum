@@ -17,13 +17,14 @@ public class Member {
 	private Date enrollDate;
 	private long cardNo;
 	private char delYN;
+	private String mJoinStatus;
 	
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", authorityId=" + authorityId + ", userId=" + userId + ", userPwd="
 				+ userPwd + ", userName=" + userName + ", nick=" + nick + ", phone=" + phone + ", email=" + email
 				+ ", detail=" + detail + ", address=" + address + ", pImage=" + pImage + ", enrollDate=" + enrollDate
-				+ ", cardNo=" + cardNo + ", delYN=" + delYN + "]";
+				+ ", cardNo=" + cardNo + ", delYN=" + delYN + ", mJoinStatus=" + mJoinStatus + "]";
 	}
 
 	public Member() {
@@ -33,7 +34,7 @@ public class Member {
 
 	public Member(int userNo, String authorityId, String userId, String userPwd, String userName, String nick,
 			String phone, String email, char detail, String address, String pImage, Date enrollDate, long cardNo,
-			char delYN) {
+			char delYN, String mJoinStatus) {
 		super();
 		this.userNo = userNo;
 		this.authorityId = authorityId;
@@ -49,6 +50,7 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.cardNo = cardNo;
 		this.delYN = delYN;
+		this.mJoinStatus = mJoinStatus;
 	}
 
 	public int getUserNo() {
@@ -162,4 +164,13 @@ public class Member {
 	public void setDelYN(char delYN) {
 		this.delYN = delYN;
 	}
+
+	public String getmJoinStatus() {
+		return mJoinStatus;
+	}
+
+	public void setmJoinStatus(String mJoinStatus) {
+		this.mJoinStatus = mJoinStatus;
+	}
+	
 }

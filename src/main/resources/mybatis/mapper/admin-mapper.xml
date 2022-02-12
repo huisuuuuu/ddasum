@@ -2,27 +2,53 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
 
-	<select id="adminSelectAllMember" resultType="admin">
-		SELECT 
-			userno as userNo,
-			authority_id as authorityId,
-			userid as userId,
-			username as userName,
-			nick as nick,
-			email as email,
-			phone as phone,
-			address as address,
-			detail as detailYN,
-			enrolldate as enrollDate,
-			card_no as cardNo,
-			del_yn as delYN
-		FROM MEMBER 
-	</select>
-	
-	<select id="selectAllMemberTotalCount" resultType="int">
-		SELECT COUNT(*) AS AllCount FROM MEMBER
-	</select>
+   <select id="adminSelectAllMember" resultType="admin">
+      SELECT 
+         userno as userNo,
+         authority_id as authorityId,
+         userid as userId,
+         username as userName,
+         nick as nick,
+         email as email,
+         phone as phone,
+         address as address,
+         detail as detailYN,
+         enrolldate as enrollDate,
+         card_no as cardNo,
+         del_yn as delYN
+      FROM MEMBER 
+   </select>
+   
+   <select id="selectAllMemberTotalCount" resultType="int">
+      SELECT COUNT(*) AS AllCount FROM MEMBER
+   </select>
 
+<<<<<<< HEAD
+     <select id="adminMemberDetail" parameterType="int" resultType="detail">
+  
+        SELECT
+           M_RE_NO AS mReNo,
+           RESERVATION_DATE AS reservationDate,
+           AUTHORITY_INFO AS authorityInfo,
+           MENU_NO AS menuNo,
+           BIZ_NAME AS bizName
+        FROM
+           AUTHORITY
+           INNER JOIN DETAIL ON (authority.AUTHORITY_ID = DETAIL.AUTHORITY_ID)
+           INNER JOIN BIZ_MEMBER ON (authority.AUTHORITY_ID = BIZ_MEMBER.AUTHORITY_ID)
+           WHERE userNo = #{_params} AND DETAIL.BIZ_NO = BIZ_MEMBER.BIZ_NO
+        ORDER BY
+        M_RE_NO DESC        
+     </select>
+     
+     <select id="memberDetailTotalCount" resultType="int">
+   
+      SELECT COUNT(*) AS AllCount FROM DETAIL
+      WHERE USERNO = #{_params}
+
+   </select>
+     
+=======
   	<select id="adminMemberDetail" parameterType="int" resultType="detail">
   
   		SELECT
@@ -47,5 +73,6 @@
 
 	</select>
   	
+>>>>>>> 1c01d867932d41e12666359eaf71b3fdd34c2deb
   
 </mapper>
