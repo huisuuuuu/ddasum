@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/resources/commons/adminCommon.css">
 <link rel="stylesheet" href="/resources/commons/adminNoticeBoard.css">
 <link rel="stylesheet" href="/resources/commons/adminWrite.css">
+  <link rel="stylesheet" type="text/css" href="/resources/commons/styles.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
 </head>

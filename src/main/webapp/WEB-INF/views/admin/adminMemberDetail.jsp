@@ -92,7 +92,7 @@ span {
 	display : inline;
 }
 
-/*
+
 th:nth-of-type(1) {
 	display : none;
 }
@@ -100,7 +100,7 @@ th:nth-of-type(1) {
 td:nth-of-type(1) {
 	display : none;
 }
-*/
+
 
 /* Page */
 
@@ -152,7 +152,7 @@ td:nth-of-type(1) {
 <body>
 	<div class="detail-wrap">
 		<div class="detail-header">
-			ㅇㅇㅇ님 이용내역
+			${d.userName }님 이용내역 
 		</div>
 		
 		<div class="detail-content">
@@ -166,11 +166,9 @@ td:nth-of-type(1) {
 						<th>이용금액</th>
 					</tr>
 				</thead>
-				
 				<tbody>
-				<c:choose>
-				<c:when test="${!requestScope.list.isEmpty()}">
 				<c:forEach items="${requestScope.list }" var="d">
+
 					<tr>
 						<td>${d.mReNo }</td>
 						<td>${d.reservationDate }</td>
@@ -179,8 +177,6 @@ td:nth-of-type(1) {
 						<td>${d.authorityInfo }</td>
 					</tr>				
 				</c:forEach>
-				</c:when>
-				</c:choose>
 				</tbody>
 			</table>
 				<hr>
@@ -209,7 +205,7 @@ td:nth-of-type(1) {
 
 				<div class="reset_area">
 					<div class="reset-text-area">
-						<p>이용횟수 <span>18/30건</span></p>
+						<p>이용횟수 <span>${detailTotalCount }/30건</span></p>
 					</div>
 					<div class="reset-btn">
 						<a href=""><button type="button" class="ok_btn">초기화</button></a>

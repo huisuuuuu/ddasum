@@ -80,23 +80,39 @@
                         </thead>
                         
                         <tbody>
-						<c:choose>
-							<c:when test="${!requestScope.list.isEmpty() }">
-							<c:forEach items="${requestScope.list }" var="cm">
                             <tr>
                                 <td>${cm.cmNo }</td>
                                 <td>${cm.userId }</td>
                                 <td>${cm.userName }</td>
                                 <td>${cm.enrollDate }</td>
-                                <td><button type="button" class="ok_btn">있음</button></td>
-                                <td><button type="button" class="pass_btn">
-                                	<a href="/admin/adminCardConfirm.do">확인</button></a></td>
-                                <td><button type="button" class="success_btn">승인</button></td>
+                                <td>
+                                <c:if test="${cm.detailYN eq 'Y'.charAt(0) }">
+                                <button type="button" class="ok_btn">있음</button>
+                                </c:if>
+                                <c:if test="${cm.detailYN eq 'N'.charAt(0) }">
+                                <button type="button" class="none_btn">없음</button>
+                                </c:if>
+                                </td>
+                                <td>
+                                <c:if test="${cm.checkYN eq 'Y'. charAt(0) }">
+                                <button type="button" class="pass_btn">
+                                <a href="/admin/adminCardConfirm.do">확인</a></button>
+                                </c:if>
+                                <c:if test="${cm.checkYN eq 'N'. chatAt(0) }">
+                                <button type="button" class="wait_btn">
+                                <a href="/admin/adminCardConfirm.do">확인</a></button>
+                                </c:if>
+                                </td>
+                                <td>
+                                <c:if test="${cm.joinYN eq 'Y'.charAt(0) }">
+                                <button type="button" class="success_btn">승인</button>
+                                </c:if>
+                                <c:if test="${cm.joinYN eq 'N'.charAt(0) }">
+                                <button type="button" class="reject_btn">반려</button>
+                                </c:if>
+                                </td>
                             </tr>
 
-							</c:forEach>
-							</c:when>
-						</c:choose>
                             <tr>
                                 <td>2</td>
                                 <td>user22</td>
@@ -192,11 +208,6 @@
             </div>
           </div>
           
-          <script>
-          $(".mdl_nav>li").click(function(){
-        		$(this).find(".sub_nav").slideToggle();
-        	});
-        	</script>
 
 </body>
 </html>
