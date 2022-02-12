@@ -1,7 +1,6 @@
 package kr.or.ddasum.bizMember.model.dao;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
-import kr.or.ddasum.board.model.vo.Notice;
+import kr.or.ddasum.bizMember.model.vo.Calculater;
 import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Detail;
 
@@ -89,9 +88,9 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-	public int suportChange(String bizId) {
+	public int suportChange(BizMember bg) {
 
-		return sqlSession.update("bizAdmin.suportChange",bizId);
+		return sqlSession.update("bizAdmin.suportChange",bg);
 	}
 
 	/**
@@ -159,8 +158,8 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-	public ArrayList<Detail> calculate(int bizNo) {
-		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.calculate", bizNo));
+	public ArrayList<Calculater> calculate(int bizNo) {
+		return new ArrayList<Calculater> (sqlSession.selectList("bizAdmin.calculate", bizNo));
 
 	}
 

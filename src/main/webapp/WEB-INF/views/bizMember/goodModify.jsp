@@ -234,7 +234,7 @@
 				<div id="content-title">
 					후원 상품 수정
 				</div>
-				<form action="/bizMember/addGood.do" method="post" id="addForm">
+				<form action="/bizMember/GoodMo.do" method="post" id="addForm">
 				<div id="content">
 					<div id="itemImgArea">
 						<div id="itemInfoImg">
@@ -274,9 +274,10 @@
 						</div>					
 					</div>
 					<div class="confirmArea">
-						<input type='button' id="GoodMo" value='상품 수정'/>
+						<input type='submit' id="GoodMo" value='상품 수정'/>
 						<a href="/BizMember/goodsManage.do"><input class="confirmstyle" type="button" value="취소"></a>
 					</div>
+					<input type='hidden' name="menuNo" value="${requestScope.BizGoods.menuNo }"/>
 				</div>
 				</form>
 			</div>
@@ -300,7 +301,7 @@
 	
 	//상품 수정 ajax
 
-    $('#GoodMo').click(function(){
+    $('#').click(function(){
     	var form = {
     			menuName : $('input[name=menuName]').val(),
     	  		menuInfo : $('input[name=menuInfo]').val(),
@@ -310,10 +311,10 @@
 	  	$.ajax({
     		url : "/bizMember/GoodMo.do",
 			dataType : "json",
-			data : {"form" : form, "menuNo" : menuNo},
+			data : form,
     		type : "POST",
     		success : function(rst){
-    			if(rst == true){
+    			if(rst == "true"){
     				alert("상품 수정 완료");
     				location.replace("/BizMember/goodsManage.do");
     			}else{

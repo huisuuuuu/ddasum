@@ -31,10 +31,12 @@ public class AdminDAO {
 		return sqlSession.selectOne("admin.selectAllMemberTotalCount");
 	}
 	
-	public ArrayList<AdminMember> adminSearchMember(int currentPage, int recordCountPerPage) {
-		
-	}
-
+	/*
+	 * public ArrayList<AdminMember> adminSearchMember(int currentPage, int
+	 * recordCountPerPage) {
+	 * 
+	 * }
+	 */
 	public ArrayList<Detail> adminMemberDetail(int currentPage, int recordCountPerPage, int userNo) {
 		int start = (currentPage - 1) * recordCountPerPage;
 		int end = recordCountPerPage;

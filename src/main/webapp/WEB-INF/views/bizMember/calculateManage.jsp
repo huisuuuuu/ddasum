@@ -250,7 +250,7 @@
 					<div id="content-title">
 						<span style="text-align:left; float:left;">기간별 후원 정산 내역 검색 결과 10건</span>
 						<div class="search" style="text-align:right;">
-							 <img width=30px; src="/resources/images/bizExcel.png"/>
+							 <button id='excelConverBtn' name="excelConverBtn" style="cursor:hand;" ><img width=30px; src="/resources/images/bizExcel.png"/></button>
 						</div>
 					</div>
 					<div id="content">
@@ -275,7 +275,7 @@
 								<td>${m.reNo }</td>
 								<td>${m.bizName } </td>
 								<td>${m.menuName } </td>
-								<td>6000</td>
+								<td>${m.originalPrice }</td>
 							</tr>
 						</c:forEach>
 						</table>
@@ -299,6 +299,16 @@
             $(this).removeClass('submenu_hover');
         });
     });
+	
+	
+	
+	 $(document).ready(function(){
+		 $("#excelConverBtn").on('click',function(){
+				alert("엑셀다운");
+			 location.href="/excelConvert";
+		 });
+	 });	
+	
 </script>
 </body>
 </html>

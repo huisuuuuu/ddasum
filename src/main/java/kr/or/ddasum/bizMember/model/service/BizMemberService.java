@@ -3,6 +3,7 @@ package kr.or.ddasum.bizMember.model.service;
 import java.util.ArrayList;
 
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
+import kr.or.ddasum.bizMember.model.vo.Calculater;
 import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Detail;
 
@@ -59,7 +60,7 @@ public interface BizMemberService {
 	  * @Method 설명 : 사업자 유형 변환
 	  * @param bizNo
 	  */
-	int suportChange(String bizId);
+	int suportChange(BizMember bg);
 
 	/**
 	  * @Method Name : addGood
@@ -114,7 +115,7 @@ public interface BizMemberService {
 	  * @param bizNo
 	  * @return
 	  */
-	ArrayList<Detail> calculate(int bizNo);
+	ArrayList<Calculater> calculate(int bizNo);
 
 
 

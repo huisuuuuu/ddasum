@@ -70,7 +70,7 @@
  
    	<update id="suportChange" parameterType="bizMember">
   		update biz_member set 
-            AUTHORITY_ID = #{restaurant},
+            AUTHORITY_ID = #{authorityId},
             biz_change_yn = 'Y'
   		where
             BIZ_ID=#{bizId} and biz_change_yn = 'N'
@@ -136,13 +136,14 @@
 			AND d.biz_No = #{bizNo}
 	</select>	
  
-  	<select id="calculate" resultType="Detail">
+  	<select id="calculate" resultType="calculater">
 		SELECT
 			d.M_RE_NO as mReNo,
 			d.RESERVATION_DATE as reservationDate,
 			d.BIZ_NO as bizNo,
             b.BIZ_NAME as bizName,
 			c.AUTHORITY_INFO as authorityId,
+			m.original_price as originalPrice,
 			d.RE_NO as reNo,
 			m.MENU_NAME as menuName,
 			d.RE_CANCLE as reCancle

@@ -21,5 +21,5 @@ public interface AdminService {
 	int detailTotalCount();
 
 	//회원정보관리-검색
-	HashMap<String, Object> adminSearchMember(String type, String keyword, int currentPage);
+//	HashMap<String, Object> adminSearchMember(String type, String keyword, int currentPage);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.ddasum.bizMember.model.dao.BizMemberDAO;
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
+import kr.or.ddasum.bizMember.model.vo.Calculater;
 import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Detail;
 
@@ -40,8 +41,8 @@ public class BizMemberServiceImpl implements BizMemberService{
 	}
 
 	@Override
-	public int suportChange(String bizId) {
-		return bDAO.suportChange(bizId);
+	public int suportChange(BizMember bg) {
+		return bDAO.suportChange(bg);
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public class BizMemberServiceImpl implements BizMemberService{
 	}
 
 	@Override
-	public ArrayList<Detail> calculate(int bizNo) {
+	public ArrayList<Calculater> calculate(int bizNo) {
 		return bDAO.calculate(bizNo);
 	}
 

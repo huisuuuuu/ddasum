@@ -58,7 +58,7 @@ public class AdminController {
 		
 	}
 	
-	//회원정보관리 검색처리
+/*	//회원정보관리 검색처리
 	@RequestMapping(value="/admin/adminMemberSearch.do", method = RequestMethod.GET)
 	public ModelAndView adminSearchMember(@RequestParam(defaultValue="1") int currentPage, @RequestParam String type, @RequestParam String keyword, ModelAndView mav) {
 
@@ -96,7 +96,7 @@ public class AdminController {
 		
 		
 	}
-	
+*/	
 	
 //	@RequestMapping(value="/admin/adminMemberManageList.do", method = RequestMethod.GET)
 //	public String adminMemberManageList() {

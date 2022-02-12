@@ -124,7 +124,7 @@
 			background-color: #FFA77E;
 			border-radius: 5px;
 		}	
-		#pwdBTN{
+		.pwdBTN{
 			width: 200px;
 			height: 32px;
 			font-size: 14pt;
@@ -194,8 +194,42 @@
 			height: 32px;
 			font-size: 16pt;
 			text-align: center;
-			}
-		
+		}
+		.modal { 
+			position: absolute; 
+			top: 0; 
+			left: 0; 
+			width: 100%; 
+			height: 100%; 
+			display: none; 
+			background-color: rgba(0, 0, 0, 0.4); 
+		}
+		.modal.show { 
+			display: block; 
+		} 
+		.modal_body { 
+			  width:500px; height:900px;
+			  background:#fff; border-radius:10px;
+			  position:relative; top:20%; left:50%;
+			  margin-top:-100px; margin-left:-200px;
+			  text-align:center;
+			  box-sizing:border-box; padding:74px 0;
+			  line-height:23px; cursor:pointer;
+		}
+		.modal_content .layerpop_close {
+		    width: 30px;
+		    height: 30px;
+		    display: block;
+		    position: absolute;
+		    top: 16px;
+		    right: 16px;
+		    background: transparent url('./image/btn_exit.png') no-repeat;
+		}
+		.modal_content .layerpop_close:hover {
+		    background: transparent url('./image/btn_exit.png') no-repeat;
+		    cursor: pointer;
+		}
+
 		
 	</style>
 
@@ -263,11 +297,13 @@
 						<div id="content-L">
 							<br><br>
 								<div id="bizImg">
-								<form action="/file/BizUpload.do" method="post" enctype="multipart/form-data" >
-									<input type="file" name="uploadFile" id="img" accept=".jpg, .gif, .png" onchange="loadFile(this);"/>
-                   					<input type='submit' value='변경'/>
+                                <span>프로필 사진</span><br><br>
+               					<div id="img-area"><img id="profileImg" src="${sessionScope.bizMember.pImage }"> </div><br><br>
+                   				<form method="POST" id="uploadForm">
+                   				<input type="file" class="inp-img" name="uploadFile" id="img" accept=".jpg, .gif, png" style="display:none;"/>
                     			</form>
-                   				</div>	
+                    			<button id="info-img-update-button"><label for="img">변경하기</label></button>                    		
+                    		</div>	
 
 						</div>
 						<div id="content-R">
@@ -289,7 +325,7 @@
 						<div id="content-result">
 						<ul>
 							<li>${requestScope.bizMember.bizId }</li>
-							<li><button id="pwdBTN"><a href="">변경</a></button></li>
+							<li><button class="pwdBTN">변경</button></li>
 							<li><input type='text' class="inputdata" name="ceoName" value="${requestScope.bizMember.ceoName }"/></li>
 							<li><input type='text' class="inputdata" name="bizName" value="${requestScope.bizMember.bizName }"/></li>
 							<li><input type='text' class="inputdata" name="bizEmail" value="${requestScope.bizMember.bizEmail }"/></li>
@@ -341,25 +377,9 @@
 
 </body>
 
-<div class="modal">
-	  <div class="modal_content">
-  		<div class="mUpside">
-  			<a href="javascript:void(0);" class="layerpop_close" id="layerbox_close"></a> 
-			<div class="mAreaInfo">
-				<div class="mTitle">
-		            <span id="modalCpNm" style="background-color: white; color:#3e4a56;"></span>
-				</div>
-				<form action="/reservation/reservationJoin.do" method="post" style="font-size : 16pt;">
-					<!-- 모달창 입력내용 ajax -->
-					<div class="summary" id="summary"></div>
-					<input type="hidden" id="reservSta" name="reservSta" />
-					<input type="hidden" id="reservEnd" name="reservEnd" />
-					<input type="submit" class="confirm" value="예약"></input>
-						
-				</form>
-			</div>
-		</div>
-  </div>
+
+<div class="modal"> 
+	<div class="modal_body">Modal</div> 
 </div>
 
 
@@ -372,7 +392,17 @@
 
 
 
+
 <script>
+//패스워드변경 모달창
+const modal = document.querySelector('.modal'); 
+const btnOpenPopup = document.querySelector('.pwdBTN'); 
+
+
+
+
+
+
 //좌측 메뉴바 후버 효과
 
 	$(function(){
@@ -423,8 +453,6 @@
 	$('#withDraw').click(function(){
 		
 		var result1 = confirm("정말 탈퇴하시겠습니까?")
-		var password = ${sessionScope.bizMember.bizPwd }
-
 		if(result1==true)
 		{
 			var result2 = prompt("패스워드를 재입력하여주세요")
@@ -460,7 +488,6 @@
 	
 	//후원형태 변경 ajax 설정
 	$('#suportBTN').click(function(){
-		
 		var result = confirm("후원형태를 변경하시겠습니까? 변경은 1회만 가능합니다.")
 		
 		if(result==true)
@@ -469,7 +496,7 @@
 			    		url : "/bizMember/suportChange.do",
 			    		type : "POST",
 			    		success : function(rst){
-			    			if(rst == true){
+			    			if(rst == "true"){
 			    				alert("사업자 변경 성공");
 			    				location.replace("/bizMember/bizManage.do");
 			    			}else{
@@ -488,7 +515,21 @@
 		}
     });
 	
-	
+    function readInputFile(input) {
+        if(input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#profileImg').attr('src', e.target.result);
+                
+                
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".inp-img").on('change', function(){
+        readInputFile(this);
+    });	
 
 </script>
 </html>

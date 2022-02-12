@@ -2,6 +2,7 @@ package kr.or.ddasum.bizMember.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.bizMember.model.service.BizMemberService;
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
+import kr.or.ddasum.bizMember.model.vo.Calculater;
 import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Detail;
-import kr.or.ddasum.member.model.vo.Member;
 
 @Controller
 public class BizMemberController {
@@ -73,12 +74,12 @@ public class BizMemberController {
 	
 	@RequestMapping(value="/BizMember/calculateManage.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView calculate(@SessionAttribute BizMember bizMember,
-							Detail detail,
+			Calculater calculater,
 							ModelAndView mav) {
 		
 		int bizNo = bizMember.getBizNo();
 		
-		ArrayList<Detail> list = bService.calculate(bizNo);
+		ArrayList<Calculater> list = bService.calculate(bizNo);
 		
 		mav.addObject("list", list);
 		mav.setViewName("/bizMember/calculateManage");
@@ -95,9 +96,11 @@ public class BizMemberController {
 	}	
 
 	@RequestMapping(value="/bizMember/goodModify.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView goodModify(@RequestParam int menuNo, 
+	public ModelAndView goodModify(@SessionAttribute BizMember bizMember, 
+								@RequestParam int menuNo,
 								ModelAndView mav) {
 		
+
 		BizGoods bg = bService.goodModify(menuNo);
 		
 		
@@ -179,15 +182,32 @@ public class BizMemberController {
 	
 	@RequestMapping(value="/bizMember/suportChange.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String suportChange(@SessionAttribute String bizId,
-								@SessionAttribute String authorityName) {
+	public String suportChange(	@SessionAttribute BizMember bizMember) {
 		
-		System.out.println(bizId);
-		System.out.println(authorityName);
+		String authorityId = bizMember.getAuthorityId();
 		
-		bService.suportChange(bizId);
+		if("SP".contentEquals(authorityId))
+		{
+			authorityId = "DC";
+		} 
+		else if("DC".equals(authorityId))
+		{
+			authorityId = "SP";
+		}
+
+		BizMember bg = new BizMember();
+		bg.setBizId(bizMember.getBizId());
+		bg.setAuthorityId(authorityId);
 		
-		String rst="";
+		int result = bService.suportChange(bg);
+		
+		
+		String rst = "";
+		if (result > 0) {
+			rst = "true";
+		} else {
+			rst = "false";
+		}
 		
 		return rst;
 	}
@@ -232,18 +252,12 @@ public class BizMemberController {
 	
 	
 	@RequestMapping(value="/bizMember/GoodMo.do", method = {RequestMethod.POST, RequestMethod.GET})
-	@ResponseBody
-	public String GoodMo(@RequestParam int menuNo,
+	public ModelAndView GoodMo(
+						@RequestParam int menuNo,
 						@RequestParam String menuName,
 						@RequestParam String menuInfo,
-						@RequestParam int originalPrice){
-		
-		System.out.println(menuNo);
-		System.out.println(menuName);
-		System.out.println(menuInfo);
-		System.out.println(originalPrice);
-		
-		
+						@RequestParam int originalPrice,
+						ModelAndView mav){
 		
 		BizGoods bg = new BizGoods();
 		bg.setMenuNo(menuNo);
@@ -251,20 +265,29 @@ public class BizMemberController {
 		bg.setMenuInfo(menuInfo);
 		bg.setOriginalPrice(originalPrice);
 		
-		System.out.println(bg);
-		
 		int result = bService.GoodMo(bg);
 		
-		String rst = "";
-		
 		if (result > 0) {
-			rst = "true";
+			mav.addObject("msg", "상품 수정 성공");
+			mav.addObject("/bizMember/goodsManage.do");
 		} else {
-			rst = "false";
+			mav.addObject("msg", "상품 수정 실패");
+			mav.addObject("/bizMember/goodModify.do");
 		}
-		
-		return rst;
-		
+		mav.setViewName("commons/msg");
+		return mav;
+
 	}
-	
+
+	@RequestMapping(value = "/excelConvert", method = RequestMethod.GET)
+	public ModelAndView excelConvert(Locale locale, @SessionAttribute BizMember bizMember, Calculater calculater, Model model) {
+		
+		int bizNo = bizMember.getBizNo();
+		ArrayList<Calculater> list = bService.calculate(bizNo);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("/bizMember/excelConvert");
+		return mv;
+	}
 }

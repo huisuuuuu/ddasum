@@ -44,14 +44,15 @@ public class AdminServiceImpl implements AdminService{
 		return admDAO.memberRecordTotalCount();
 	}
 
-	@Override
-	public HashMap<String, Object> adminSearchMember(String type, String keyword, int currentPage) {
-		ArrayList<AdminMember> list = admDAO.adminSearchMember(sqlSession, type, keyword, currentPage, recordCountPerPage);
-		
-		return admDAO.adminSearchMember(currentPage, recordCountPerPage);
-	}
-
-
+	/*
+	 * @Override public HashMap<String, Object> adminSearchMember(String type,
+	 * String keyword, int currentPage) { ArrayList<AdminMember> list =
+	 * admDAO.adminSearchMember(sqlSession, type, keyword, currentPage,
+	 * recordCountPerPage);
+	 * 
+	 * return admDAO.adminSearchMember(currentPage, recordCountPerPage); }
+	 * 
+	 */
 
 	
 

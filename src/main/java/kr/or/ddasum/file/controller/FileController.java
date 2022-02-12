@@ -15,12 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.or.ddasum.file.model.service.FileService;
 import kr.or.ddasum.file.model.vo.FileData;
+import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Member;
 
 @Controller
@@ -93,5 +95,18 @@ public class FileController {
 			response.getWriter().print("false");
 		}
 	}
+	
+	@RequestMapping(value = "/file/bizFileUpload.do", method = RequestMethod.POST)
+	public void bizFileUpload() throws IOException {
+	
+		String uploadPath = "/resoruces/file/bizProfile/";
+		String uploadFielPath = context.getRealPath(uploadPath);
+		
+		System.out.println(uploadFielPath);
+				
+				
+				
+	}
+
 	
 }
