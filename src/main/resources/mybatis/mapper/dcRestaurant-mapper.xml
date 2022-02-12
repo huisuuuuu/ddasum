@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dcRestaurant">
+
+	<select id="selectAllListTotalCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) AS TotalCount
+		FROM BIZ_MEMBER
+		WHERE AREA=#{area}
+	</select>
+	
+	<select id="selectAllDcRestaurantList">
+		SELECT
+			biz_no as bizNo,
+			authority_id as authorityId,
+			biz_id as bizId,
+			biz_pwd as bizPwd,
+			ceo_name as ceoName,
+			biz_name as bizName,
+			biz_email as bizEmail,
+			biz_phone as bizPhone,
+			restaurant as restaurant,
+			area as area,
+			address as address,
+			biz_time as bizTime,
+			reg_no as regNo,
+			biz_image as bizImage,
+			biz_enrolldate as bizEnrollDate,
+			biz_count as bizCount,
+			biz_change_yn as bizChangeYN,
+			biz_del_yn as bizDelYN
+		FROM
+			biz_member
+		WHERE biz_id = #{bizId} and biz_pwd = #{bizPwd}	and biz_del_yn = 'N'
+	</select>
+	
+</mapper>

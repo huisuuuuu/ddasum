@@ -43,15 +43,15 @@
 						<li class="bar" id="chi"><a class="foodGroup" href="">중식</a></li>
 						<li id="jap"><a class="foodGroup" href="">일식</a></li>
 					</ul>
-					<select>
-						<option>최신순</option>
-						<option>예약 많은순</option>
-						<option>예약 가능순</option>
+					<select name="filter">
+						<option value="newest">최신순</option>
+						<option value="best">예약 많은순</option>
+						<option value="available">예약 가능순</option>
 					</select>
 				</div>
 				<div id="saleRestaurant">
 					<div>
-						<a href="/member/saleRestaurantDetail.do"><img src="/resources/images/식당외관1.jpg"></a> <span>할인식당</span>
+						<a href="/dcRestaurant/dcRestaurantDetail.do"><img src="/resources/images/식당외관1.jpg"></a> <span>할인식당</span>
 					</div>
 					<div>
 						<a href=""><img src="/resources/images/식당외관2.PNG"></a> <span>할인식당</span>

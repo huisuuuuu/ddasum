@@ -32,7 +32,7 @@
 
    <a href="/member/mainPage.do">메인페이지</a>
    
-   <a href="/member/saleRestaurantListPage.do">할인식당</a>
+   <a href="/dcRestaurant/dcRestaurantList.do">할인식당</a>
    
 </body>
 </html>
