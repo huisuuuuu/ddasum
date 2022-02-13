@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Calculater {
 	private int mReNo;
 	private int reNo;       		//메뉴예약번호(detail)(pk)
-	private String bizName; 			//사업자명(biz_member)
+	private String bizName; 		//사업자명(biz_member)
 	private String authorityId; 	//사업자등급(authority)(pk)
 	private String menuName;		//메뉴명(menu)
 	private int originalPrice;		//상품가격(menu)
@@ -89,6 +89,7 @@ public class Calculater {
 	public void setReCancle(char reCancle) {
 		this.reCancle = reCancle;
 	}
+	
 	public Calculater(int mReNo,int reNo, String bizName, String authorityId, String menuName, int originalPrice, int dcPrice,
 			char menuDelYN, Date reservationDate, int bizNo, int menuNo, char reCancle) {
 		super();
@@ -104,16 +105,18 @@ public class Calculater {
 		this.bizNo = bizNo;
 		this.menuNo = menuNo;
 		this.reCancle = reCancle;
+
 	}
+	
 	public Calculater() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public String toString() {
 		return "calculater [mReNo" + mReNo + ", reNo=" + reNo + ", bizName=" + bizName + ", authorityId=" + authorityId + ", menuName="
 				+ menuName + ", originalPrice=" + originalPrice + ", dcPrice=" + dcPrice + ", menuDelYN=" + menuDelYN
-				+ ", reservationDate=" + reservationDate + ", bizNo=" + bizNo + ", menuNo=" + menuNo + ", reCancle="
-				+ reCancle + "]";
+				+ ", reservationDate=" + reservationDate + ", bizNo=" + bizNo + ", menuNo=" + menuNo + ", reCancle=" + reCancle+ "]";
 	}
 }

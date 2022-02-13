@@ -56,13 +56,31 @@ crossorigin="anonymous"></script>
 					</c:when>
 					
 					<c:otherwise>
-						<H1>현재 저장된 회원이 없습니다.</H1>
+						<H1>현재 저장된 공지사항이 없습니다.</H1>
 					</c:otherwise>
 				
 				</c:choose>					
 				</div>
 				<div class="pagingArea">
-					페이징처리
+					<!-- paging -->
+					<div style="display: block; text-align: center;">		
+						<c:if test="${paging.startPage != 1 }">
+							<a href="/board/noticeBoard.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+							<c:choose>
+								<c:when test="${p == paging.nowPage }">
+									<b>${p }</b>
+								</c:when>
+								<c:when test="${p != paging.nowPage }">
+									<a href="/board/noticeBoard.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${paging.endPage != paging.lastPage}">
+							<a href="/board/noticeBoard.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+						</c:if>
+					</div>
 				</div>
 			</div>
 		</div>

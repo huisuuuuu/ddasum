@@ -1,7 +1,9 @@
 package kr.or.ddasum.bizMember.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
 import kr.or.ddasum.bizMember.model.vo.Calculater;
+import kr.or.ddasum.community.model.vo.Community;
 import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Detail;
 
@@ -42,10 +45,13 @@ public class BizMemberDAO {
 	  * @Method 설명 :상품 정보 리스트
 	  * @param bizNo
 	  */
-	public ArrayList<BizGoods> goodsManage(int bizNo) {
-
-		return new ArrayList<BizGoods> (sqlSession.selectList("bizAdmin.goodsManage", bizNo));
-
+	public ArrayList<BizGoods> goodsManage(int bizNo, int start, int end) {
+		HashMap<String, Integer> hashmap;
+		hashmap = new HashMap<>();
+		hashmap.put("bizNo", bizNo);
+		hashmap.put("start", start);
+		hashmap.put("end", end);
+		return new ArrayList<BizGoods> (sqlSession.selectList("bizAdmin.goodsManage", hashmap));
 		
 	}
 
@@ -143,10 +149,17 @@ public class BizMemberDAO {
 	  * @변경이력 : 
 	  * @Method 설명 :예약 리스트 조회
 	  * @param bizNo
+	 * @param end 
+	 * @param start 
 	  * @return
 	  */
-	public ArrayList<Detail> bizReserv(int bizNo) {
-		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.bizReserv", bizNo));
+	public ArrayList<Detail> bizReserv(int bizNo, int start, int end) {
+		HashMap<String, Integer> hashmap;
+		hashmap = new HashMap<>();
+		hashmap.put("bizNo", bizNo);
+		hashmap.put("start", start);
+		hashmap.put("end", end);
+		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.bizReserv", hashmap));
 	}
 
 	/**
@@ -158,12 +171,150 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-	public ArrayList<Calculater> calculate(int bizNo) {
-		return new ArrayList<Calculater> (sqlSession.selectList("bizAdmin.calculate", bizNo));
-
+	public ArrayList<Calculater> calculate(int bizNo, int start, int end) {
+		HashMap<String, Integer> hashmap;
+		hashmap = new HashMap<>();
+		hashmap.put("bizNo", bizNo);
+		hashmap.put("start", start);
+		hashmap.put("end", end);
+		
+		return new ArrayList<Calculater> (sqlSession.selectList("bizAdmin.calculate", hashmap));
 	}
 
-	
-	
+	/**
+	  * @Method Name : countGood
+	  * @작성일 : 2022. 2. 12.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :상품 총 수량
+	  * @param bizNo
+	  * @return
+	  */
+	public int countGood(int bizNo) {
+		return sqlSession.selectOne("bizAdmin.countGood", bizNo);
+	}
+
+	/**
+	  * @Method Name : countreserv
+	  * @작성일 : 2022. 2. 12.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :예약 총 수량
+	  * @param bizNo
+	  * @return
+	  */
+	public int countreserv(int bizNo) {
+		return sqlSession.selectOne("bizAdmin.countreserv", bizNo);
+	}
+
+	/**
+	  * @Method Name : countcalculate
+	  * @작성일 : 2022. 2. 12.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :정산 총 수량
+	  * @param bizNo
+	  * @return
+	  */
+	public int countcalculate(int bizNo) {
+		return sqlSession.selectOne("bizAdmin.countcalculate", bizNo);
+	}
+
+	/**
+	  * @Method Name : searchReserv
+	  * @작성일 : 2022. 2. 13.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @return
+	  */
+/*	public ArrayList<Community> searchReserv(SqlSessionTemplate sqlSession, String type, String keyword, int currentPage, int recordCountPerPage) {
+		
+		int offset = ((currentPage-1));
+		int limit = recordCountPerPage;
+		
+		RowBounds rb = new RowBounds(offset, limit);		
+		
+		HashMap<String, String> map = new HashMap<String, String> ();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		return new ArrayList<Community> (sqlSession.selectList("community.searchReserv", map, rb));
+	}
+
+	/**
+	  * @Method Name : calculate
+	  * @작성일 : 2022. 2. 13.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @param bizNo
+	  * @return
+	  */
+/*	public ArrayList<Detail> calculate(int currentPage, int recordCountPerPage, int bizNo) {
+		
+		RowBounds rb = new RowBounds(((currentPage-1)*recordCountPerPage),recordCountPerPage);
+		
+		
+		ArrayList<Detail> list = new ArrayList<Detail>(sqlSession.selectList("bizMember.calculate",bizNo, rb));
+		
+		return list;
+	}
+*/
+
+	/**
+	  * @Method Name : getPageNavi
+	  * @작성일 : 2022. 2. 13.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @param naviCountPerPage
+	  * @param bizNo
+	  * @return
+	  */
+	public String getPageNavi(int currentPage, int recordCountPerPage, int naviCountPerPage, int bizNo) {
+		int recordTotalCount = countcalculate(bizNo);
+		
+		int pageTotalCount;
+		
+		pageTotalCount =(int)Math.ceil(recordTotalCount/(double)recordCountPerPage);
+		
+		int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+
+		if(startNavi!=1) {
+			sb.append("<li><a href='/BizMember/calculateManage.do?currentPage="+(startNavi-1)+"'><i class='fas fa-chevron-left'></i></a></li>");
+		}
+
+		for(int i=startNavi; i<=endNavi; i++) {
+			
+			if(i==currentPage) {
+				sb.append("<li><a href='/BizMember/calculateManage.do?currentPage="+i+"' class='page_active'>"+i+"</a></li>");
+			}else {
+				sb.append("<li><a href='/BizMember/calculateManage.do?currentPage="+i+"'>"+i+"</a></li>");
+			}
+		}
+
+		if(endNavi!=pageTotalCount) {
+			sb.append("<li><a href='/BizMember/calculateManage.do?currentPage="+(endNavi+1)+"'><i class='fas fa-chevron-right'></i></a></li>");
+		}
+		
+		return sb.toString();
+		}
+
 	
 }
+
+	
+

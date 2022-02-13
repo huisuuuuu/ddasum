@@ -1,7 +1,10 @@
 package kr.or.ddasum.bizMember.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,8 @@ public class BizMemberServiceImpl implements BizMemberService{
 	@Autowired
 	private BizMemberDAO bDAO;
 
+	@Autowired
+	SqlSessionTemplate sqlSession;	
 	
 	@Override
 	public BizMember bizManage(BizMember bizMember) {
@@ -25,8 +30,12 @@ public class BizMemberServiceImpl implements BizMemberService{
 	}
 
 	@Override
-	public ArrayList<BizGoods> goodsManage(int bizNo) {
-		return bDAO.goodsManage(bizNo);
+	public ArrayList<BizGoods> goodsManage(int bizNo, int nowPage, int cntPerPage) {
+
+		int end = nowPage * cntPerPage;
+		int start = end - cntPerPage + 1;
+		
+		return bDAO.goodsManage(bizNo, start, end);
 	}
 
 	@Override
@@ -62,17 +71,40 @@ public class BizMemberServiceImpl implements BizMemberService{
 	}
 
 	@Override
-	public ArrayList<Detail> bizReserv(int bizNo) {
-		return bDAO.bizReserv(bizNo);
+	public ArrayList<Detail> bizReserv(int bizNo, int nowPage, int cntPerPage) {
+
+		int end = nowPage * cntPerPage;
+		int start = end - cntPerPage + 1;
+		
+		return bDAO.bizReserv(bizNo, start, end);
 	}
 
 	@Override
-	public ArrayList<Calculater> calculate(int bizNo) {
-		return bDAO.calculate(bizNo);
+	public ArrayList<Calculater> calculate(int bizNo, int nowPage, int cntPerPage) {
+
+		int end = nowPage * cntPerPage;
+		int start = end - cntPerPage + 1;
+		
+		return bDAO.calculate(bizNo, start, end);
+	}
+	
+	@Override
+	public int countGood(int bizNo) {
+		return bDAO.countGood(bizNo);
+	}
+
+	@Override
+	public int countreserv(int bizNo) {
+		return bDAO.countreserv(bizNo);
+
+	}
+
+	@Override
+	public int countcalculate(int bizNo) {
+		return bDAO.countcalculate(bizNo);
 	}
 
 
-	
 
 }
 

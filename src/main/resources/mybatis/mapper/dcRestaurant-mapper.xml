@@ -2,13 +2,62 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dcRestaurant">
 
-	<select id="selectAllListTotalCount" parameterType="String" resultType="int">
+	<select id="dcRestaurantTotalCount" parameterType="String" resultType="int">
 		SELECT COUNT(*) AS TotalCount
 		FROM BIZ_MEMBER
-		WHERE AREA=#{area}
+		WHERE area=#{area} and biz_del_yn = 'N'
 	</select>
 	
-	<select id="selectAllDcRestaurantList">
+	<select id="selectAllDcRestaurantList" parameterType="hashmap" resultType="dcRestaurant">
+		SELECT
+			BM.biz_no as bizNo,
+			authority_id as authorityId,
+			biz_id as bizId,
+			biz_pwd as bizPwd,
+			ceo_name as ceoName,
+			biz_name as bizName,
+			biz_email as bizEmail,
+			biz_phone as bizPhone,
+			restaurant as restaurant,
+			area as area,
+			address as address,
+			biz_time as bizTime,
+			reg_no as regNo,
+			biz_image as bizImage,
+			biz_enrolldate as bizEnrollDate,
+			biz_count as bizCount,
+			biz_change_yn as bizChangeYN,
+			biz_del_yn as bizDelYN,
+			NVL(ARC.AllRSVNCount ,'0') as allRSVNCount,
+			NVL(TRC.TodayRSVNCount ,'0') as todayRSVNCount
+		FROM BIZ_MEMBER BM
+			LEFT JOIN (SELECT biz_no, COUNT(*) AS AllRSVNCount FROM DETAIL WHERE RE_CANCLE = 'N' GROUP BY biz_no) ARC ON (BM.biz_no = ARC.biz_no)
+			LEFT JOIN (SELECT biz_no, COUNT(*) AS TodayRSVNCount FROM DETAIL WHERE RE_CANCLE = 'N' AND RESERVATION_DATE = SYSDATE GROUP BY biz_no) TRC ON (BM.biz_no = TRC.biz_no)
+		where
+			<choose>
+				<when test="restaurant.equals('ALL')">
+		 			authority_id ='DC' AND area = #{area} AND biz_del_yn='N'
+		 		</when>
+		 		<otherwise>
+		 			authority_id ='DC' AND area = #{area} AND restaurant = #{restaurant} AND biz_del_yn='N'
+		 		</otherwise>
+		 	</choose>
+		ORDER BY 
+			<choose>
+				<when test="filter.equals('newest')">
+		 			biz_enrolldate DESC
+		 		</when>
+		 		<when test="filter.equals('best')">
+		 			NVL(ARC.AllRSVNCount ,'0') DESC
+		 		</when>
+		 		<when test="filter.equals('available')">
+		 			NVL(TRC.TodayRSVNCount ,'0') ASC
+		 		</when>
+		 	</choose>
+	</select>
+	
+	<select id="selectoneDcRestaurant" parameterType="int" resultType="bizMember">
+	
 		SELECT
 			biz_no as bizNo,
 			authority_id as authorityId,
@@ -30,7 +79,40 @@
 			biz_del_yn as bizDelYN
 		FROM
 			biz_member
-		WHERE biz_id = #{bizId} and biz_pwd = #{bizPwd}	and biz_del_yn = 'N'
+		WHERE authority_Id ='DC' and biz_No = #{bizNo} and biz_del_yn = 'N'
 	</select>
+	
+	<select id="selectAllDcMenu" parameterType="int" resultType="kr.or.ddasum.dcRestaurant.model.vo.DcRestaurantMenu">
+		
+		select
+			menu_no as menuNo,
+			biz_no as bizNo,
+			authority_id as authorityId,
+			restaurant as restaurant,
+			menu_name as menuName,
+			menu_info as menuInfo,
+			original_price as originalPrice,
+			dc_price as dc_price,
+			menu_image as menuImage,
+			menu_del_yn as menuDelYN
+		from menu
+		where biz_no = #{bizNo} and authority_id = 'DC' and menu_del_yn = 'N'
+	
+	</select>
+	
+	<insert id="reservation" parameterType="hashmap">
+		INSERT ALL
+    	WHEN Rest > 0 THEN
+		INTO DETAIL VALUES(
+    		M_RE_SEQ.NEXTVAL,#{userNo},SYSDATE,#{bizNo},'DC',#{menuNo},'N',#{reNo})
+		INTO BIZ_RESERVATION VALUES(
+    		#{bizNo},'DC',#{reNo})
+		SELECT
+			no as no,
+			userNo as userNo,
+			Rest as rest
+		FROM m_reservation
+		WHERE userNo=#{userNo};
+	</insert>
 	
 </mapper>

@@ -145,6 +145,11 @@
 			font-size: 18pt;
 			padding-top: 20px;
 		}
+		#searchBTN{
+			width: 20px;
+		}
+		
+		
 	</style>
 </head>
 <body>
@@ -201,14 +206,17 @@
 			<div id="R-content">
 				<div id="content">
 					<div id="content-title">
-						<span style="text-align:left; float:left;">전체 1000건</span>
+						<span style="text-align:left; float:left;">전체 ${requestScope.result }건</span>
 						<div class="search" style="text-align:right;">
-							<select>
-								<option>회원명</option>
-								<option>예약번호</option>
+							<form action="/bizMember/searchReserv.do" method="get" id="addForm">
+							<select name='type' id='searchType'>
+								<option value='userName'>회원명</option>
+								<option value='reNo'>예약번호</option>
 							</select>
-							<input type="text" placeholder="검색어를 입력해주세요">
-							<input type="submit" value="아이콘">
+							<input type="text" id= searchKeyword name='keyword' placeholder="검색어를 입력해주세요">
+   							<input type="image" id="searchBTN" src="/resources/images/search.png" alt="제출버튼">
+							</form>
+
 						</div>
 					</div>
 					<div id="content">
@@ -222,7 +230,7 @@
 			 					<th>예약상품</th>
 			 					<th>예약일</th>
 			 					<th>예약번호</th>
-			 					<th>예약상태</th>
+			 					<th>예약취소</th>
 			 				</tr>
 						<c:forEach items="${requestScope.list }" var="m" varStatus="i">
 							<tr>
@@ -242,6 +250,26 @@
 			
 					</c:choose>
 					</div>
+					<!-- paging -->
+					<div style="display: block; text-align: center;">		
+						<c:if test="${paging.startPage != 1 }">
+							<a href="/BizMember/calculateManage.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+							<c:choose>
+								<c:when test="${p == paging.nowPage }">
+									<b>${p }</b>
+								</c:when>
+								<c:when test="${p != paging.nowPage }">
+									<a href="/BizMember/calculateManage.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${paging.endPage != paging.lastPage}">
+							<a href="/BizMember/calculateManage.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+						</c:if>
+					</div>
+					
 				</div>
 			</div>
 		</div>

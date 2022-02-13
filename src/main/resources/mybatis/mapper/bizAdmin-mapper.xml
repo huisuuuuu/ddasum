@@ -29,21 +29,28 @@
 	</select>
 
 	<select id="goodsManage" resultType="BizGoods">
-		SELECT
-			menu_no as menuNo,
-			biz_no as bizNo,
-			authority_id as authorityId,
-			restaurant as restaurant,
-			menu_name as menuName,
-			menu_info as menuInfo,
-			original_price as originalPrice,
-			dc_price as dcPrice,
-			menu_image as menuImage,
-			menu_del_yn as menuDelYN
-		FROM
-			MENU
-        WHERE
-            biz_No = #{bizNo}
+
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, cc.* 
+				FROM (SELECT
+						menu_no as menuNo,
+						biz_no as bizNo,
+						authority_id as authorityId,
+						restaurant as restaurant,
+						menu_name as menuName,
+						menu_info as menuInfo,
+						original_price as originalPrice,
+						dc_price as dcPrice,
+						menu_image as menuImage,
+						menu_del_yn as menuDelYN
+					FROM
+						MENU
+			        WHERE
+			            biz_No = #{bizNo}
+				)cc
+			)
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>	
 
 
@@ -121,39 +128,76 @@
   	</update> 	  	
  
  	<select id="bizReserv" resultType="Detail">
-		SELECT
-			d.M_RE_NO as mReNo,
-			a.USERNAME as userName,
-			d.RESERVATION_DATE as reservationDate,
-			d.BIZ_NO as bizNo,
-			d.AUTHORITY_ID as authorityId,
-			d.RE_NO as reNo,
-			m.MENU_NAME as menuName,
-			d.RE_CANCLE as reCancle
-		FROM
-			detail d, member a, menu m
-        WHERE d.USERNO = a.USERNO AND d.MENU_NO = m.MENU_NO
-			AND d.biz_No = #{bizNo}
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, cc.* 
+				FROM (SELECT
+						d.M_RE_NO as mReNo,
+						a.USERNAME as userName,
+						d.RESERVATION_DATE as reservationDate,
+						d.BIZ_NO as bizNo,
+						d.AUTHORITY_ID as authorityId,
+						d.RE_NO as reNo,
+						m.MENU_NAME as menuName,
+						d.RE_CANCLE as reCancle
+					FROM
+						detail d, member a, menu m
+			        WHERE d.USERNO = a.USERNO AND d.MENU_NO = m.MENU_NO
+						AND d.biz_No = #{bizNo}
+				)cc
+			)
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>	
  
-  	<select id="calculate" resultType="calculater">
-		SELECT
-			d.M_RE_NO as mReNo,
-			d.RESERVATION_DATE as reservationDate,
-			d.BIZ_NO as bizNo,
-            b.BIZ_NAME as bizName,
-			c.AUTHORITY_INFO as authorityId,
-			m.original_price as originalPrice,
-			d.RE_NO as reNo,
-			m.MENU_NAME as menuName,
-			d.RE_CANCLE as reCancle
-		FROM
-			detail d, menu m, AUTHORITY c, BIZ_MEMBER b
-        where
-        d.MENU_NO = m.MENU_NO AND d.authority_id = c.AUTHORITY_ID AND d.BIZ_NO = b.BIZ_NO
-			AND d.biz_No = #{bizNo}
+  	<select id="calculate" resultType="calculater" parameterType="java.util.HashMap">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, cc.* 
+				FROM (SELECT
+						d.M_RE_NO as mReNo,
+						d.RESERVATION_DATE as reservationDate,
+						d.BIZ_NO as bizNo,
+			            b.BIZ_NAME as bizName,
+						c.AUTHORITY_INFO as authorityId,
+						m.original_price as originalPrice,
+						d.RE_NO as reNo,
+						m.MENU_NAME as menuName,
+						d.RE_CANCLE as reCancle
+					FROM
+						detail d, menu m, AUTHORITY c, BIZ_MEMBER b
+			        where
+			        d.MENU_NO = m.MENU_NO AND d.authority_id = c.AUTHORITY_ID AND d.BIZ_NO = b.BIZ_NO
+						AND d.biz_No = #{bizNo}
+				)cc
+			)
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+
+	<select id="countGood" resultType="int">
+		SELECT
+			COUNT(*) as cnt
+		FROM
+			MENU
+        WHERE
+            biz_No = #{bizNo}
+	</select>	 
  
-  	
+ 	<select id="countreserv" resultType="int">
+		SELECT
+			COUNT(*) as cnt
+		FROM
+			detail
+        WHERE
+            biz_No = #{bizNo}
+	</select>	
+ 
+  	<select id="countcalculate" resultType="int">
+		SELECT
+			COUNT(*) as cnt
+		FROM
+			detail
+        WHERE
+            biz_No = #{bizNo}
+	</select>	
   	  	
 </mapper>

@@ -11,7 +11,7 @@
 	width: 966px;
 	height: 1000px;
 	float: right;
-	margin-bottom: 150px;
+	margin-bottom: 250px;
 }
 
 .main_tit {
@@ -45,8 +45,8 @@
 	cursor: pointer;
 }
 
-#locationList li:first-child {
-	font-weight: bold;
+.area {
+	color: black;
 }
 
 #foodNavigation {
@@ -80,13 +80,15 @@
 
 #foodNavigation li>a {
 	text-decoration: none;
-	color: black;
+	color: #666666;
 }
 
 #foodNavigation>select {
 	border: none;
 	border-left: 0.3px solid #A5A5A5;
 	padding: 5px;
+	color: #666666;
+	font-weight: 500;
 }
 
 #saleRestaurant {
@@ -94,11 +96,12 @@
 	height: auto;
 	margin: 0 auto;
 	margin-top: 60px;
+	margin-bottom: 100px;
 	display: grid;
 	grid-template-columns: auto auto auto auto;
 	grid-column-gap: 20px;
 	grid-row-gap: 150px;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 #saleRestaurant>div {
@@ -107,7 +110,7 @@
 	border-radius: 50%;
 }
 
-#saleRestaurant>div>a>img{
+#defaultImg{
 	width: 100%;
 	height: 100%;
 	border-radius: 50%;
@@ -124,8 +127,49 @@
 	letter-spacing: 0.5px;
 }
 
-#all{
-	font-weight: bold;
-	
+#ALL{
+	font-weight: bolder;
+}
+	/* Page */
+
+#page_wrap {
+  width: 100%;
 }
 
+#page_wrap>ul {
+  display: table;
+  margin: 0 auto;
+}
+
+#page_wrap>ul>li {
+  display: block;
+  width: 35px;
+  height: 35px;
+  float: left;
+  text-align: center;
+  margin: 0 5px;
+  line-height: 15.5px;
+  font-size: 16px;
+  color: #2a2a2a;
+}
+
+#page_inactive {
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: #2a2a2a;
+  padding: 10px;
+  border-radius: 50%;
+  transition: ease 0.3s;
+}
+
+#page_active {
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  padding: 10px;
+  transition: ease 0.3s;   
+  background-color: #ffa77e;
+  border-radius: 50%;
+  color: white;
+}

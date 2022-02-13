@@ -1,6 +1,8 @@
 package kr.or.ddasum.bizMember.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import kr.or.ddasum.bizMember.model.vo.BizGoods;
 import kr.or.ddasum.bizMember.model.vo.Calculater;
@@ -26,9 +28,11 @@ public interface BizMemberService {
 	  * @변경이력 : 
 	  * @Method 설명 :상품 정보 리스트
 	  * @param bizNo
+	 * @param cntPerPageInt 
+	 * @param nowPageInt 
 	 * @return 
 	  */
-	ArrayList<BizGoods> goodsManage(int bizNo);
+	ArrayList<BizGoods> goodsManage(int bizNo, int nowPageInt, int cntPerPageInt);
 
 	/**
 	  * @Method Name : updateBiz
@@ -96,16 +100,16 @@ public interface BizMemberService {
 	int GoodMo(BizGoods bg);
 
 	/**
-	  * @Method Name : bizReserv
-	  * @작성일 : 2022. 2. 11.
+	  * @Method Name : countcalculate
+	  * @작성일 : 2022. 2. 12.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 : 예약 리스트 조회
+	  * @Method 설명 : 정산 총 수량
 	  * @param bizNo
 	  * @return
 	  */
-	ArrayList<Detail> bizReserv(int bizNo);
-
+	int countcalculate(int bizNo);
+	
 	/**
 	  * @Method Name : calculate
 	  * @작성일 : 2022. 2. 11.
@@ -115,10 +119,45 @@ public interface BizMemberService {
 	  * @param bizNo
 	  * @return
 	  */
-	ArrayList<Calculater> calculate(int bizNo);
+	
+	public ArrayList<Calculater> calculate(int bizNo, int nowPage, int cntPerPage);
+	/**
+	  * @Method Name : countgood
+	  * @작성일 : 2022. 2. 12.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 상품 총 수량
+	  * @param bizNo
+	  * @return
+	  */
+	int countGood(int bizNo);
+
+	/**
+	  * @Method Name : countreserv
+	  * @작성일 : 2022. 2. 12.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 상품 총 수량
+	  * @param bizNo
+	  * @return
+	  */
+	int countreserv(int bizNo);
+
+	/**
+	  * @Method Name : bizReserv
+	  * @작성일 : 2022. 2. 13.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param bizNo
+	  * @param nowPageInt
+	  * @param cntPerPageInt
+	  * @return
+	  */
+	ArrayList<Detail> bizReserv(int bizNo, int nowPageInt, int cntPerPageInt);
 
 
 
-
+	
 
 }

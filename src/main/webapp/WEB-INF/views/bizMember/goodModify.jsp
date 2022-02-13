@@ -242,10 +242,7 @@
 						</div>
 						<div id="itemImg">
 							<div id="itemImgInput">
-								<img class="imgsize" src="/resources/images/bizImgAdd.png">
-							<div><br>
-							상품 사진을 추가해 주세요
-							</div>
+								<img style="height:100%;" src="${requestScope.BizGoods.menuImage }">	
 							</div>
 						</div>
 					</div>

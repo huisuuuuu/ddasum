@@ -158,8 +158,7 @@
 			font-size: 16pt;
 		}
 		.imgsize{
-			width:100px;
-			padding-top: 70px;
+			width:100%;
 		}
 		h1{
 		float: left;
@@ -229,6 +228,9 @@
 		    background: transparent url('./image/btn_exit.png') no-repeat;
 		    cursor: pointer;
 		}
+		.change{
+		
+		}
 
 		
 	</style>
@@ -297,14 +299,17 @@
 						<div id="content-L">
 							<br><br>
 								<div id="bizImg">
-                                <span>프로필 사진</span><br><br>
-               					<div id="img-area"><img id="profileImg" src="${sessionScope.bizMember.pImage }"> </div><br><br>
-                   				<form method="POST" id="uploadForm">
-                   				<input type="file" class="inp-img" name="uploadFile" id="img" accept=".jpg, .gif, png" style="display:none;"/>
-                    			</form>
-                    			<button id="info-img-update-button"><label for="img">변경하기</label></button>                    		
+                                	<div>
+										<img class="imgsize" id=bizImg src="${requestScope.bizMember.bizImage }">
+                                	</div>
+								
+								<div style="display:block;margin: 20px 0;align-items: left;">
+									<form action="fileupload" method="post" enctype="multipart/form-data">
+									    <input id="fileSelect" class="change" type="file" name="uploadfile" placeholder="파일 선택" /><br/>
+									    <input class="change"  type="submit" value="업로드">
+									</form>
+								</div>
                     		</div>	
-
 						</div>
 						<div id="content-R">
 						<ul>

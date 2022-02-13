@@ -151,6 +151,10 @@
 		#excelConverBtn{
 			border: none;
 		}
+		#pagingArea{
+			text-align: center;
+		}
+
 		
 	</style>
 </head>
@@ -180,13 +184,13 @@
 			<div class="submenu"> 
 				<a href="/BizMember/bizReserv.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu3.png" alt="로고">
-					<span class="menulist">정산 관리</span><br><br>
+					<span class="menulist">예약 관리</span><br><br>
 				</a>
 			</div>
 			<div class="submenu"> 
 				<a href="/BizMember/calculateManage.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu4.png" alt="로고">
-					<span class="menulist">후원 정산 관리</span><br><br>
+					<span class="menulist">정산 관리</span><br><br>
 				</a>
 			</div>
 		</div>
@@ -252,7 +256,7 @@
 			<div id="R-content">
 				<div id="content">
 					<div id="content-title">
-						<span style="text-align:left; float:left;">기간별 후원 정산 내역 검색 결과 10건</span>
+						<span style="text-align:left; float:left;">전체 ${requestScope.result }건</span>
 						<div class="search" style="text-align:right;">
 							 <button id='excelConverBtn' name="excelConverBtn" style="cursor:hand;" ><img width=30px; src="/resources/images/bizExcel.png"/></button>
 						</div>
@@ -260,7 +264,7 @@
 					<div id="content">
 					
 					<c:choose>
-						<c:when test="${!requestScop.list.isEmpty() }">					
+						<c:when test="${!requestScope.list.isEmpty() }">					
 						<table class="calculateTable">
 							<tr id="tableContetns">
 			 					<th>번호</th>
@@ -289,6 +293,26 @@
 						</c:otherwise>
 
 					</c:choose>
+
+					</div>
+					<!-- paging -->
+					<div style="display: block; text-align: center;">		
+						<c:if test="${paging.startPage != 1 }">
+							<a href="/BizMember/calculateManage.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+							<c:choose>
+								<c:when test="${p == paging.nowPage }">
+									<b>${p }</b>
+								</c:when>
+								<c:when test="${p != paging.nowPage }">
+									<a href="/BizMember/calculateManage.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${paging.endPage != paging.lastPage}">
+							<a href="/BizMember/calculateManage.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+						</c:if>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<!--  jQuery 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<!-- SweetAlert2 CDN -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 <title>따숨, 마음을 나누다.</title>
 </head>
 <body>
@@ -27,64 +34,112 @@
 				</ul>
 			</div>
 			<div id="imgAndTitle">
-				<img src="/resources/images/식당외관1.jpg">
+				<img src="${dcInfo.bizImage }">
 				<div id="mainInfo">
 					<div id="restaurantName">
+					<c:choose>
+					<c:when test="${dcInfo.restaurant eq 'KOR'}">
 						<div>한식</div>
-						<span>할인 식당</span>
+					</c:when>
+					<c:when test="${dcInfo.restaurant eq 'SCH'}">
+						<div>분식</div>
+					</c:when>
+					<c:when test="${dcInfo.restaurant eq 'WES'}">
+						<div>양식</div>
+					</c:when>
+					<c:when test="${dcInfo.restaurant eq 'CHI'}">
+						<div>중식</div>
+					</c:when>
+					<c:when test="${dcInfo.restaurant eq 'JAP'}">
+						<div>일식</div>
+					</c:when>	
+					</c:choose>
+						<span>${dcInfo.bizName }</span>
 					</div>
 					<div id="call">
 						<img src="/resources/images/callIcon.png">
-						<p>02)776-5348</p>
+						<p>${dcInfo.bizPhone }</p>
 					</div>
 					<div id="location">
-						<img src="/resources/images/locationIcon.png"><span>서울
-							중구 명동 10길 29</span>
+						<img src="/resources/images/locationIcon.png">
+						<span>${dcInfo.address }</span>
 					</div>
 					<div id="operatingHours">
-						<img src="/resources/images/clock.png"><span>10:30 ~
-							21:30</span>
+						<img src="/resources/images/clock.png">
+						<span>${dcInfo.bizTime }</span>
 					</div>
 				</div>
 			</div>
 			<div id="reservationAndLocation">
-				<span id="reservation">메뉴 예약</span> <span id="restaurantLocation">업체
-					정보</span>
+				<span id="reservation">메뉴 예약</span> <span id="restaurantLocation">업체 정보</span>
 			</div>
 			<div id="menu">
-				<h3>※ 당일 예약만 가능한 점 유의하시기 바랍니다.</h3>
+			<c:choose>
+				<c:when test="${!dcMenu.isEmpty()}">
+					<h3>※ 당일 예약만 가능한 점 유의하시기 바랍니다.</h3>
+					<input type="hidden" id="bizNo" value="${dcInfo.bizNo }">
+					<input type="hidden" id="userNo" value="${sessionScope.member.userNo }">
+					<input type="hidden" id="authorityId" value="${sessionScope.member.authorityId }">
+                <c:forEach items="${dcMenu}" var="m">
 				<div class="food">
-					<img src="/resources/images/칼국수.PNG">
+					<img src="${m.menuImage }">
 					<div>
-						<p>칼국수</p>
-						<p class="explain">구수하면서 진한 닭 육수, 부드러운 국수, 고명이 어우러진 칼국수</p>
-						<span class="price">9,000원</span><span class="salePrice">7,000원</span>
+						<p>${m.menuName }</p>
+						<p class="explain">${m.menuInfo }</p>
+						<span class="price">${m.originalPrice }원</span><span class="salePrice">${m.dcPrice }원</span>
 					</div>
-					<button>예약하기</button>
+					<button class="reservationBtn" value="${m.menuNo }">예약하기</button>
 				</div>
-				<div class="food">
-					<img src="/resources/images/만두.PNG">
-					<div>
-						<p>만두</p>
-						<p class="explain">최고급 암퇘지 고기, 채소, (호)부추, 갓 짠 참기름으로 만든 소를 채운 찜 만두</p>
-						<span class="price">10,000원</span><span class="salePrice">7,000원</span>
-					</div>
-					<button>예약하기</button>
-				</div>
-				<div class="food">
-					<img src="/resources/images/비빔국수.PNG">
-					<div>
-						<p>비빔국수</p>
-						<p class="explain">매콤 새콤 비빔국수</p>
-						<span class="price">9,000원</span><span class="salePrice">7,000원</span>
-					</div>
-					<button>예약하기</button>
-				</div>
+				</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<h3>※ 등록된 메뉴가 없습니다.</h3>
+				</c:otherwise>
+			</c:choose>	
 			</div>
 		</div>
 		<footer>
 			<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>
 		</footer>
 	</div>
+	
+	<script>
+		$('.reservationBtn').click(function(){
+			
+			var bizNo = $('#bizNo').val();
+			var userNo = $('#userNo').val();
+			var authorityId = $('#authorityId').val();
+			var menuNo = $(this).attr("value");
+			
+			console.log(userNo,authorityId,menuNo);
+			
+			Swal.fire({
+	            title: '당일에만 이용 가능합니다.',
+	            text: "예약 진행하시겠습니까?",
+	            icon: "info",
+	            showCancelButton: true,
+	            confirmButtonText: '예',
+	            cancelButtonText: '아니오',
+	            showLoaderOnConfirm: true,
+	            preConfirm: () => {
+	                
+	            	$.ajax({
+	            		
+	              		 url: "/dcRestaurant/reservation.do",
+	            		 data: {"bizNo":bizNo, "userNo":userNo, "menuNo":menuNo},
+	            		 type: "get",
+	            		 success: function(){
+	            			 
+	            		 },
+	            		 error: function(){
+	            			 console.log('ajax 통신 실패');
+	            		 }
+	            		
+	            	})
+	            }
+	        });
+		});
+	
+	</script>
 </body>
 </html>
