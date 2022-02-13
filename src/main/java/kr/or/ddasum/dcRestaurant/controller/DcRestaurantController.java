@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.dcRestaurant.model.service.DcRestaurantService;
+import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurant;
+import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurantMenu;
 import kr.or.ddasum.member.model.vo.BizMember;
 
 @Controller
@@ -25,9 +27,14 @@ public class DcRestaurantController {
     private JavaMailSender mailSender;
 	
 	@RequestMapping(value = "/dcRestaurant/dcRestaurantList.do", method = RequestMethod.GET)
-	public ModelAndView dcRestaurantList(@RequestParam(defaultValue ="1") int currentPage, @RequestParam(defaultValue ="SEOUL") String area,
-										 @RequestParam(defaultValue ="newest") String filter, HttpServletRequest request,
-										 ModelAndView mav) {
+	public ModelAndView dcRestaurantList(@RequestParam(defaultValue ="1") int currentPage, @RequestParam(required = false, defaultValue ="SEOUL") String area,
+										@RequestParam(required = false, defaultValue ="ALL") String restaurant, @RequestParam(required = false,defaultValue ="newest") String filter,
+										HttpServletRequest request, ModelAndView mav) {
+		
+		String choiceArea = area;
+		String choiceRestaurant = restaurant;
+		String choiceFilter = filter;
+		
 		
 		int recordCountPerPage = 12;
 		int naviCountPerPage = 5;
@@ -36,13 +43,22 @@ public class DcRestaurantController {
 		int endNavi = startNavi + naviCountPerPage - 1;
 		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
 		
-		ArrayList<BizMember> list = dcService.selectAllDcRestaurantList(currentPage, recordCountPerPage, area, filter);
+		ArrayList<DcRestaurant> list = dcService.selectDcRestaurantList(currentPage, recordCountPerPage, area, restaurant, filter);
 		ArrayList<Integer> navi = new ArrayList<>();
 		for (int i = startNavi; i <= endNavi; i++) {
 			navi.add(i);
 		}
 		
+		for(DcRestaurant dc : list) {
+			System.out.println(dc);
+		}
+		
 		mav.addObject("list", list);
+		mav.addObject("area", choiceArea);
+		mav.addObject("restaurant", choiceRestaurant);
+		mav.addObject("filter", choiceFilter);
+		
+		
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("navi", navi);
 		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
@@ -54,9 +70,24 @@ public class DcRestaurantController {
 	}
 	
 	@RequestMapping(value = "/dcRestaurant/dcRestaurantDetail.do", method = RequestMethod.GET)
-	public String dcRestaurantDetail() {
+	public ModelAndView dcRestaurantDetail(@RequestParam int bizNo, ModelAndView mav) {
+		
+		BizMember bm = dcService.selectoneDcRestaurant(bizNo);
+		
+		if(bm != null) {
+			
+			ArrayList<DcRestaurantMenu> dcMenu = dcService.selectAllDcMenu(bizNo);
+			mav.addObject("dcInfo", bm);
+			mav.addObject("dcMenu", dcMenu);
+			mav.setViewName("dcRestaurant/dcRestaurantDetail");
+			return mav;
 
-		return "dcRestaurant/dcRestaurantDetail";
-
+		}else {
+			mav.addObject("msg1", "비정상적인 접근입니다.");
+			mav.addObject("msg2", "지속적인 문제 발생 시 관리자에게 문의해주세요.");
+			mav.addObject("location", "/member/loginPage.do");
+			mav.setViewName("commons/errorMsg");
+			return mav;
+		}
 	}
 }

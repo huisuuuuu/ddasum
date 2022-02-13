@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,23 +28,39 @@
 				</ul>
 			</div>
 			<div id="imgAndTitle">
-				<img src="/resources/images/식당외관1.jpg">
+				<img src="${dcInfo.bizImage }">
 				<div id="mainInfo">
 					<div id="restaurantName">
+					<c:choose>
+					<c:when test="${dcInfo.restaurant eq 'KOR'}">
 						<div>한식</div>
-						<span>할인 식당</span>
+					</c:when>
+					<c:when test="${dcInfo.restaurant eq 'SCH'}">
+						<div>분식</div>
+					</c:when>
+					<c:when test="${dcInfo.restaurant eq 'WES'}">
+						<div>양식</div>
+					</c:when>
+					<c:when test="${dcInfo.restaurant eq 'CHI'}">
+						<div>중식</div>
+					</c:when>
+					<c:when test="${dcInfo.restaurant eq 'JAP'}">
+						<div>일식</div>
+					</c:when>	
+					</c:choose>
+						<span>${dcInfo.bizName }</span>
 					</div>
 					<div id="call">
 						<img src="/resources/images/callIcon.png">
-						<p>02)776-5348</p>
+						<p>${dcInfo.bizPhone }</p>
 					</div>
 					<div id="location">
-						<img src="/resources/images/locationIcon.png"><span>서울
-							중구 명동 10길 29</span>
+						<img src="/resources/images/locationIcon.png">
+						<span>${dcInfo.address }</span>
 					</div>
 					<div id="operatingHours">
-						<img src="/resources/images/clock.png"><span>10:30 ~
-							21:30</span>
+						<img src="/resources/images/clock.png">
+						<span>${dcInfo.bizTime }</span>
 					</div>
 				</div>
 			</div>
@@ -52,34 +69,25 @@
 					정보</span>
 			</div>
 			<div id="menu">
-				<h3>※ 당일 예약만 가능한 점 유의하시기 바랍니다.</h3>
+			<c:choose>
+				<c:when test="${!dcMenu.isEmpty()}">
+					<h3>※ 당일 예약만 가능한 점 유의하시기 바랍니다.</h3>
+                <c:forEach items="${dcMenu}" var="m">
 				<div class="food">
-					<img src="/resources/images/칼국수.PNG">
+					<img src="${m.menuImage }">
 					<div>
-						<p>칼국수</p>
-						<p class="explain">구수하면서 진한 닭 육수, 부드러운 국수, 고명이 어우러진 칼국수</p>
-						<span class="price">9,000원</span><span class="salePrice">7,000원</span>
+						<p>${m.menuName }</p>
+						<p class="explain">${m.menuInfo }</p>
+						<span class="price">${m.originalPrice }원</span><span class="salePrice">${m.dcPrice }원</span>
 					</div>
 					<button>예약하기</button>
 				</div>
-				<div class="food">
-					<img src="/resources/images/만두.PNG">
-					<div>
-						<p>만두</p>
-						<p class="explain">최고급 암퇘지 고기, 채소, (호)부추, 갓 짠 참기름으로 만든 소를 채운 찜 만두</p>
-						<span class="price">10,000원</span><span class="salePrice">7,000원</span>
-					</div>
-					<button>예약하기</button>
-				</div>
-				<div class="food">
-					<img src="/resources/images/비빔국수.PNG">
-					<div>
-						<p>비빔국수</p>
-						<p class="explain">매콤 새콤 비빔국수</p>
-						<span class="price">9,000원</span><span class="salePrice">7,000원</span>
-					</div>
-					<button>예약하기</button>
-				</div>
+				</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<h3>※ 등록된 메뉴가 없습니다.</h3>
+				</c:otherwise>
+			</c:choose>	
 			</div>
 		</div>
 		<footer>
