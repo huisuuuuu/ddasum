@@ -60,10 +60,9 @@ public class NoticeController {
 		if (startPage < 1) {
 			startPage = 1;
 		}
-		if(endPage <= 0) {
-			lastPage = 1;
-			endPage = 1;
-		}
+		/*
+		 * if(endPage <= 0) { lastPage = 1; endPage = 1; }
+		 */
 		String info_id = "NOTICE";
 		ArrayList<Notice> list = nService.selectAllNotice(info_id, nowPageInt, cntPerPageInt);
 		System.out.println(list);
@@ -82,8 +81,6 @@ public class NoticeController {
 		System.out.println(lastPage);
 		System.out.println(cntPerPageInt);
 		System.out.println(list);
-		
-		
 		
 		
 		mav.addObject("result", result);

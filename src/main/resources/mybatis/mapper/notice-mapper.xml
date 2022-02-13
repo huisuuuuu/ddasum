@@ -17,7 +17,7 @@
 					FROM
 						INFO
 			        where
-			            i_del_yn = 'N' and info_id = 'NOTICE'
+			            i_del_yn = 'N'
 				)cc
 			)
 		WHERE RN BETWEEN #{start} AND #{end}
