@@ -26,18 +26,29 @@
      <select id="adminMemberDetail" parameterType="int" resultType="detail">
   
         SELECT
-           M_RE_NO AS mReNo,
-           RESERVATION_DATE AS reservationDate,
-           AUTHORITY_INFO AS authorityInfo,
-           MENU_NO AS menuNo,
-           BIZ_NAME AS bizName
+           M_RE_NO AS MRENO,
+           RESERVATION_DATE AS RESERVATIONDATE,
+           AUTHORITY_INFO AS AUTHORITYINFO,
+           MENU_NAME AS MENUNAME,
+           BIZ_NAME AS BIZNAME
         FROM
            AUTHORITY
            INNER JOIN DETAIL ON (authority.AUTHORITY_ID = DETAIL.AUTHORITY_ID)
            INNER JOIN BIZ_MEMBER ON (authority.AUTHORITY_ID = BIZ_MEMBER.AUTHORITY_ID)
-           WHERE userNo = #{_params} AND DETAIL.BIZ_NO = BIZ_MEMBER.BIZ_NO
+           INNER JOIN MENU ON (MENU.MENU_NO = DETAIL.MENU_NO)
+           WHERE USERNO = #{_params} AND DETAIL.BIZ_NO = BIZ_MEMBER.BIZ_NO
         ORDER BY
         M_RE_NO DESC        
+
+     </select>
+     
+     <select id="memberDetailName" parameterType="int" resultType="hashmap">
+     
+     	SELECT USERID AS USERID,
+			USERNAME AS USERNAME,
+			NICK AS NICK
+		FROM MEMBER WHERE USERNO = #{_params}
+     
      </select>
      
      <select id="memberDetailTotalCount" resultType="int">
@@ -46,15 +57,138 @@
       WHERE USERNO = #{_params}
 
    	 </select>	 
-     
-<!--      <select id="adminSelectAllCardList" resultType="card">
-     
-     
-     
-     </select>
-     
-     <select id="selectAllCardMemberTotalCount" resultType="int">
-     
-     </select> -->
+   	 
+   	 <select id="adminSelectAllBizMember" resultType="hashmap">
+   	 	
+	SELECT
+   		BIZ_NO AS BIZNO,
+    	AUTHORITY_INFO AS AUTHORITYINFO,
+    	BIZ_ID AS BIZID,
+    	CEO_NAME AS CEONAME,
+    	BIZ_NAME AS BIZNAME,
+    	RESTAURANT_TYPE AS RESTTYPE,
+    	ADDRESS AS ADDRESS,
+    	BIZ_COUNT AS BIZCOUNT
+	FROM AUTHORITY
+    	INNER JOIN BIZ_MEMBER ON (AUTHORITY.AUTHORITY_ID = BIZ_MEMBER.AUTHORITY_ID)
+    	INNER JOIN TYPE_GROUP ON (TYPE_GROUP.RESTAURANT = BIZ_MEMBER.RESTAURANT)
+	ORDER BY BIZ_NO ASC   	 
+
+   	 </select>
+   	 
+   	 <select id="selectAllBizMemberTotalCount" resultType="int">
+   
+      SELECT COUNT(*) AS AllCount FROM BIZ_MEMBER
+
+   	 </select>	 
+   	 
+   	 <select id="selectAllCardMember" resultType="hashmap">
+    SELECT
+        C_M_NO AS CMNO,
+        USERID AS USERID,
+        USERNAME AS USERNAME,
+        TO_CHAR(ENROLLDATE, 'YYYY-MM-DD') AS ENROLLDATE,
+        DETAIL AS DETAILYN,
+        M_JOIN_STATUS AS STATUS,
+        CHECK_YN AS CHECKYN,
+        JOIN_YN AS JOINYN
+    FROM CARD_MANAGE
+        INNER JOIN MEMBER ON (MEMBER.USERNO = CARD_MANAGE.USERNO)
+        WHERE M_JOIN_STATUS = 'WAIT'
+    ORDER BY C_M_NO ASC
+   	 </select>
+   	 
+   	 <select id="selectAllCardTotalCount" resultType="int">
+   	 
+   	     SELECT COUNT(*) AS AllCount FROM MEMBER WHERE M_JOIN_STATUS = 'WAIT' 
+   	     
+   	 </select>
+   	 
+   	 <select id="selectOneMemberInfo" resultType="hashmap">
+
+	SELECT
+    	USERNO AS USERNO,
+   		USERID AS USERID,
+    	USERNAME AS USERNAME,
+    	NICK AS NICK,
+    	EMAIL AS EMAIL,
+    	PHONE AS PHONE,
+    	AUTHORITY_INFO AS AUTHORITYINFO,
+    	ADDRESS AS ADDRESS,
+    	TO_CHAR(ENROLLDATE, 'YYYY-MM-DD') AS ENROLLDATE,
+    	DEL_YN AS DELYN
+	FROM MEMBER
+    	INNER JOIN AUTHORITY ON (MEMBER.AUTHORITY_ID = AUTHORITY.AUTHORITY_ID)
+    	WHERE USERNO = #{_params}   	 
+   	 
+   	 </select>
+   	 
+   	 <select id="selectOneBizMemberInfo" resultType="hashmap">
+ 
+	SELECT
+    	BIZ_NO AS BIZNO,
+    	BIZ_ID AS BIZID,
+    	AUTHORITY_INFO AS AUTHORITYINFO,
+    	CEO_NAME AS CEONAME,
+    	BIZ_NAME AS BIZNAME,
+    	BIZ_EMAIL AS BIZEMAIL,
+    	BIZ_PHONE AS BIZPHONE,
+    	ADDRESS AS ADDRESS,
+    	BIZ_TIME AS BIZTIME,
+    	TO_CHAR(BIZ_ENROLLDATE, 'YYYY-MM-DD') AS BIZENROLLDATE,
+    	BIZ_COUNT AS BIZCOUNT,
+    	RESTAURANT_TYPE AS RESTYPE,
+    	BIZ_DEL_YN AS BIZDELYN
+	FROM AUTHORITY
+    	INNER JOIN BIZ_MEMBER ON (AUTHORITY.AUTHORITY_ID = BIZ_MEMBER.AUTHORITY_ID)
+    	INNER JOIN TYPE_GROUP ON (TYPE_GROUP.RESTAURANT = BIZ_MEMBER.RESTAURANT)
+    WHERE BIZ_NO = #{_params}
+	ORDER BY BIZ_NO
+  	 
+   	 </select>
+   	 
+   	 <select id="adminSelectAllNotice" resultType="hashmap">
+   	 
+	SELECT
+    	INFO_NAME AS INFONAME,
+    	I_NO AS INO,
+    	I_TITLE AS ITITILE,
+    	I_CONTENT AS ICONTENT,
+    	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
+    	I_DEL_YN AS DELYN
+	FROM INFO
+    	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
+    	WHERE INFO_GROUP.INFO_ID = 'HOLDNOTI' OR 
+    	INFO_GROUP.INFO_ID = 'NOTICE'
+   	 
+   	 </select>
+   	 
+   	 <select id="selectAllNoticeTotalCount" resultType="int">
+   	 
+   	SELECT COUNT(*) AS AllCount FROM INFO 
+    WHERE INFO_ID = 'HOLDNOTI' OR 
+    INFO_ID = 'NOTICE'
+   	 
+   	 </select>
+   	 
+   	 <select id="adminSelectAllFAQ" resultType="hashmap">
+	SELECT 
+    	INFO_NAME AS INFONAME,
+    	I_NO AS INO,
+    	I_TITLE AS ITITILE,
+    	I_CONTENT AS ICONTENT,
+    	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
+    	I_DEL_YN AS DELYN
+	FROM INFO
+    	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
+    	WHERE INFO_GROUP.INFO_ID = 'FAQ'   	 
+   	 </select>
+
+	<select id="selectAllFAQTotalCount" resultType="int">
+
+    SELECT COUNT(*) AS AllCount FROM INFO 
+    WHERE INFO_ID = 'FAQ'	
+
+	</select>
   
 </mapper>

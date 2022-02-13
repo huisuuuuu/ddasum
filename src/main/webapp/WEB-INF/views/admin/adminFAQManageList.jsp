@@ -12,11 +12,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
     integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/resources/commons/adminCommon.css">
-  <link rel="stylesheet" type="text/css" href="/resources/commons/adminNoticeBoard.css">
   <link rel="stylesheet" type="text/css" href="/resources/commons/styles.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script>
-  <script src="/resources/js/ui.js"></script>
+  <link rel="stylesheet" href="/resources/commons/adminNoticeBoard.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="/resources/js/ui.js"></script>
+
 </head>
 
 <body>
@@ -44,7 +44,7 @@
       <div class="container br-1">
         <div class="container_top">
           <div class="count-all">
-            <p>전체 <span>10</span> 건</p>
+            <p>전체 <span>${recordFAQTotalCount }</span> 건</p>
           </div>
 
           <div class="box-search">
@@ -69,6 +69,10 @@
                 <button class="wri_btn">
                   <a href="/admin/adminNoticeWrite.do">글쓰기</a>
                 </button>
+                
+                <button class="wri_btn">
+                	삭제
+                </button>
         
             </form>        
           </div>
@@ -89,14 +93,13 @@
 
             <tbody>
             <c:choose>
-            <c:when test="${!requestScope.list.isEmpty()} }">
-            <c:forEach items="${requestScope.list }" var="notice">
-
+            <c:when test="${!requestScope.list.isEmpty()}">
+            <c:forEach items="${requestScope.list}" var="faq" varStatus="i">
               <tr>
                 <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>${notice.iNo}</td>
-                <td>${notice.iTitle }</td>
-                <td>${notice.iContent }</td>
+                <td>${ i.count + (currentPage - 1) * 10 }</td>
+                <td>${faq.ITITILE }</td>
+                <td>${faq.ICONTENT }</td>
                 <td><button type="button" class="ok_btn">고정</button></td>
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
@@ -105,90 +108,34 @@
             </c:forEach>
             </c:when>
             </c:choose>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
-                <td>10</td>
-                <td>꿈나무 카드 인증 안내</td>
-                <td>글내용입니다길어져라얍얍얍</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
-              </tr>
             </tbody>
 
           </table>
 
           <div id="page_wrap">
             <ul class="page_ul">
-
+              <c:if test="${ preNavi > 0}">
+                <li><a href='/admin/adminFAQManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+              </c:if>
+              <c:forEach items="${ navi }" var="i">
+                <c:choose>
+                  <c:when test="${i==currentPage}">
+                  <li><a id="page_active" href='/admin/adminFAQManageList.do?currentPage=${i}'>${i}</a></li>
+                  </c:when>
+                <c:otherwise>
+                  <li><a id="page_inactive" href='/admin/adminFAQManageList.do?currentPage=${i}'>${i}</a></li>
+                </c:otherwise>
+                 </c:choose>
+               </c:forEach>
+               <c:if test="${ nextNavi } != 0">
+               <li><a href='/admin/adminFAQManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+               </c:if>
             </ul>
           </div>
 
         </div>
       </div>
+    </div>
     </div>
 
 </body>

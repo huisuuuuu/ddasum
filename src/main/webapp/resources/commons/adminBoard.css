@@ -281,3 +281,7 @@ a {
   border-radius: 50%;
   color: white;
 }
+
+#page_active > a{
+	color : white;
+}

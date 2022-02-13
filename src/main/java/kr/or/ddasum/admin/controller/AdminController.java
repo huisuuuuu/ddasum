@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.admin.model.service.AdminService;
 import kr.or.ddasum.admin.model.vo.AdminMember;
+import kr.or.ddasum.member.model.vo.BizMember;
 import kr.or.ddasum.member.model.vo.Detail;
 
 @Controller
@@ -97,8 +98,8 @@ public class AdminController {
 	public ModelAndView adminMemberDetail(@RequestParam(defaultValue ="1" ) int currentPage, HttpServletRequest request, ModelAndView mav, @RequestParam int userNo)
 	{
 		int recordCountPerPage = 5;
-		int naviCountPerPage = 6;
-		int detailTotalCount = admService.detailTotalCount();
+		int naviCountPerPage = 5;
+		int detailTotalCount = admService.detailTotalCount(userNo);
 		int pageTotalCount = (int)Math.ceil(detailTotalCount/(double)recordCountPerPage);
 		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
 		int endNavi = startNavi + naviCountPerPage - 1;
@@ -111,6 +112,7 @@ public class AdminController {
 		}
 		
 		mav.addObject("detailTotalCount", detailTotalCount);
+		mav.addObject("user", admService.memberDetailName(userNo));		
 		mav.addObject("list", list);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("navi", navi);
@@ -121,19 +123,117 @@ public class AdminController {
 		return mav;				
 	}
 	
+	//상세정보 확인
 	@RequestMapping(value="/admin/adminMemberInfo.do", method = RequestMethod.GET)
-	public String adminMemberInfo() {
-		return "/admin/adminMemberInfo";
+	public ModelAndView adminMemberInfo(@RequestParam int userNo, HttpServletRequest request, ModelAndView mav) {
+
+		HashMap<String, Object> map = admService.adminMemberInfo(userNo);
+		
+		mav.addObject("info", map);		
+		mav.setViewName("admin/adminMemberInfo");
+		
+		return mav;
+	}
+
+	//카드인증관리 페이징처리
+	@RequestMapping(value="/admin/adminCardManageList.do", method = RequestMethod.GET)
+	public ModelAndView adminSelectAllCardMember(@RequestParam(defaultValue ="1") int currentPage, HttpServletRequest request, ModelAndView mav){
+		
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int cardTotalCount = admService.cardTotalCount();
+		int pageTotalCount = (int)Math.ceil(cardTotalCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+		
+		ArrayList<HashMap<String, Object>> list = admService.selectAllCardMember(currentPage, recordCountPerPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}
+		
+		mav.addObject("cardTotalCount", cardTotalCount);
+		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		mav.setViewName("admin/adminCardManageList");
+		
+		return mav;		
+		
 	}
 	
+	//사업자페이지 페이징 처리
 	@RequestMapping(value="/admin/adminBizManageList.do", method = RequestMethod.GET)
-	public String adminBizManageList() {
-		return "/admin/adminBizManageList";
+	public ModelAndView adminSelectAllBizMember(@RequestParam(defaultValue ="1") int currentPage, HttpServletRequest request, ModelAndView mav){
+		
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int recordBizTotalCount = admService.recordBizTotalCount();
+		int pageTotalCount = (int)Math.ceil(recordBizTotalCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+		
+		ArrayList<HashMap<String, Object>> list = admService.adminSelectAllBizMember(currentPage, recordCountPerPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}
+				
+		mav.addObject("recordBizTotalCount", recordBizTotalCount);
+		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		mav.setViewName("admin/adminBizManageList");
+		
+		return mav;		
+		
 	}
 	
+	//사업자 상세정보 확인
+	@RequestMapping(value="/admin/adminBizMemberInfo.do", method = RequestMethod.GET)
+	public ModelAndView adminBizMemberInfo(@RequestParam int bizNo, HttpServletRequest request, ModelAndView mav) {
+
+		HashMap<String, Object> map = admService.adminBizMemberInfo(bizNo);
+		
+		mav.addObject("info", map);		
+		mav.setViewName("admin/adminBizMemberInfo");
+		
+		return mav;
+	}	
+	
+	//공지사항페이지
 	@RequestMapping(value="/admin/adminNoticeManageList.do", method = RequestMethod.GET)
-	public String adminNoticeManageList() {
-		return "/admin/adminNoticeManageList";
+	public ModelAndView adminSelectNoticeAllManageList(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav) {
+					
+			int recordCountPerPage = 10;
+			int naviCountPerPage = 5;
+			int recordNoticeTotalCount = admService.recordNoticeTotalCount();
+			int pageTotalCount = (int)Math.ceil(recordNoticeTotalCount/(double)recordCountPerPage);
+			int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+			int endNavi = startNavi + naviCountPerPage - 1;
+			endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+			
+			ArrayList<HashMap<String, Object>> list = admService.adminSelectAllNotice(currentPage, recordCountPerPage);
+			ArrayList<Integer> navi = new ArrayList<>();
+			for (int i = startNavi; i <= endNavi; i++) {
+				navi.add(i);
+			}
+					
+			mav.addObject("recordNoticeTotalCount", recordNoticeTotalCount);
+			mav.addObject("list", list);
+			mav.addObject("currentPage", currentPage);
+			mav.addObject("navi", navi);
+			mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+			mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+			mav.setViewName("admin/adminNoticeManageList");
+						
+			return mav;
 	}	
 	
 	@RequestMapping(value="/admin/adminSupport.do", method = RequestMethod.GET)
@@ -141,45 +241,43 @@ public class AdminController {
 		return "/admin/adminSupport";
 	}
 	
-//	//카드 인증 관리
-//	@RequestMapping(value="/admin/adminCardManageList.do", method = RequestMethod.GET)
-//	public ModelAndView adminCardManageList(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav, @RequestParam int userNo) {
-//
-//		int recordCountPerPage = 5;
-//		int naviCountPerPage = 6;
-//		int cardTotalCount = admService.cardTotalCount();
-//		int pageTotalCount = (int)Math.ceil(cardTotalCount/(double)recordCountPerPage);
-//		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
-//		int endNavi = startNavi + naviCountPerPage - 1;
-//		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
-//		
-//		ArrayList<Card> list = admService.adminSelectAllCardList(currentPage, recordCountPerPage, userNo);
-//		ArrayList<Integer> navi = new ArrayList<>();
-//		for (int i = startNavi; i <= endNavi; i++) {
-//			navi.add(i);
-//		}
-//		
-//		mav.addObject("cardTotalCount", cardTotalCount);
-//		mav.addObject("list", list);
-//		mav.addObject("currentPage", currentPage);
-//		mav.addObject("navi", navi);
-//		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
-//		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
-//		mav.setViewName("admin/adminCardManageList");
-//		
-//		return mav;		
-//	}
 	
+	//자주묻는 질문
 	@RequestMapping(value="/admin/adminFAQManageList.do", method = RequestMethod.GET)
-	public String adminFAQManageList() {
-		return "/admin/adminFAQManageList";
+	public ModelAndView adminSelectAllFAQManageList(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav) {
+					
+			int recordCountPerPage = 10;
+			int naviCountPerPage = 5;
+			int recordFAQTotalCount = admService.recordFAQTotalCount();
+			int pageTotalCount = (int)Math.ceil(recordFAQTotalCount/(double)recordCountPerPage);
+			int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+			int endNavi = startNavi + naviCountPerPage - 1;
+			endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+			
+			ArrayList<HashMap<String, Object>> list = admService.adminSelectAllFAQNotice(currentPage, recordCountPerPage);
+			ArrayList<Integer> navi = new ArrayList<>();
+			for (int i = startNavi; i <= endNavi; i++) {
+				navi.add(i);
+			}
+					
+			mav.addObject("recordFAQTotalCount", recordFAQTotalCount);
+			mav.addObject("list", list);
+			mav.addObject("currentPage", currentPage);
+			mav.addObject("navi", navi);
+			mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+			mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+			mav.setViewName("admin/adminFAQManageList");
+						
+			return mav;
 	}
 	
+	//공지사항 글쓰기
 	@RequestMapping(value="/admin/adminNoticeWrite.do", method = RequestMethod.GET)
 	public String adminNoticeWrite() {
 		return "/admin/adminNoticeWrite";
 	}	
 	
+	//카드인증관리확인
 	@RequestMapping(value="/admin/adminCardConfirm.do", method = RequestMethod.GET)
 	public String adminCardConfirm() {
 		return "/admin/adminCardConfirm";
