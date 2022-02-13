@@ -149,8 +149,7 @@
 			font-size: 16pt;
 		}
 		.imgsize{
-			width:100px;
-			padding-top: 60px;
+			width:100%;
 		}
 		h1{
 		float: left;
@@ -241,7 +240,7 @@
 					<div id="content-L">
 						<br><br>
 						<div id="bizImg">
-							<img class="imgsize" src="${requestScope.bizMember.bizImage }">
+							<img class="imgsize" id=bizImg src="${requestScope.bizMember.bizImage }">
 						</div>
 						<br>
 						<span></span>

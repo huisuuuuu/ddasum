@@ -18,4 +18,6 @@ public class FileServiceImpl implements FileService {
 		return fDAO.insertUploadFile(fd);
 		
 	}
+
+
 }
