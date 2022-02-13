@@ -436,7 +436,7 @@
 						}
 						
 						// 닉네임 중복 확인을 하지 않았을 경우 
-						if ($("#userId").attr("nickCheck") != "true") {
+						if ($("#nick").attr("nickCheck") != "true") {
 							
 							Swal.fire({
 								  icon: 'error',
