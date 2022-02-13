@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 회원 내역 상세보기</title>
+<title>관리자페이지 - 사업자 내역 상세보기</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
@@ -98,7 +98,7 @@
 	<div class="wrap">
 		<div class="info-wrap">
 			<div class="info-header">
-				${info.USERNAME}님 회원정보
+				${info.BIZNAME}님 회원정보
 			</div>
 			
 			<div class="info-content">
@@ -111,40 +111,49 @@
 					
 					<tr>
 						<td class="data-area">아이디</td>
-						<td class="info-area">${info.USERID }</td>
+						<td class="info-area">${info.BIZID }</td>
 					</tr>
 					<tr>
-						<td class="data-area">닉네임</td>
-						<td class="info-area">${info.NICK }</td>
+						<td class="data-area">대표명</td>
+						<td class="info-area">${info.CEONAME }</td>
 					</tr>
 					<tr>
-						<td class="data-area">이름</td>
-						<td class="info-area">${info.USERNAME }</td>
-					</tr>
-					<tr>
-						<td class="data-area">전화번호</td>
-						<td class="info-area">${info.PHONE }</td>
+						<td class="data-area">업체명</td>
+						<td class="info-area">${info.BIZNAME }</td>
 					</tr>
 					<tr>
 						<td class="data-area">이메일</td>
-						<td class="info-area">${info.EMAIL }</td>
+						<td class="info-area">${info.BIZEMAIL }</td>
 					</tr>
 					<tr>
-						<td class="data-area">회원등급</td>
-						<td class="info-area">${info.AUTHORITYINFO }</td>
+						<td class="data-area">전화번호</td>
+						<td class="info-area">${info.BIZPHONE }</td>
+					</tr>
+					<tr>
+						<td class="data-area">업종</td>
+						<td class="info-area">${info.RESTYPE }</td>
 					</tr>
 					<tr>
 						<td class="data-area">주소</td>
 						<td class="info-area">${info.ADDRESS }</td>
 					</tr>
 					<tr>
-						<td class="data-area">가입일</td>
-						<td class="info-area">${info.ENROLLDATE }</td>
+						<td class="data-area">운영시간</td>
+						<td class="info-area">${info.BIZTIME }</td>
+					</tr>
+					<tr>
+						<td class="data-area">후원횟수</td>
+						<td class="info-area">${info.BIZCOUNT }</td>
+					</tr>
+					<tr>
+						<td class="data-area">사업자유형</td>
+						<td class="info-area">${info.AUTHORITYINFO }</td>
 					</tr>
 					<tr>
 						<td class="data-area">탈퇴여부</td>
-						<td class="info-area">${info.DELYN }
+						<td class="info-area">${info.BIZDELYN.equals("Y") ? "탈퇴" : "사용중" }
 							<div class="del-btn">
+							
 								<button type="button">탈퇴</button>
 							</div>						
 						</td>
@@ -153,7 +162,7 @@
 				</table>
 				<div class="info-footer">
 					<div class="info-check"><button type="button">
-						<a href="/admin/adminMemberManageList">확인</button></a></div>
+						<a href="/admin/adminBizManageList">확인</button></a></div>
 				</div>
 				
 			</div>
