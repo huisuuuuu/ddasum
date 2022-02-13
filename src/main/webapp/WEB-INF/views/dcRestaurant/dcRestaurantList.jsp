@@ -80,20 +80,20 @@
 						<div id="page_wrap">
                         <ul id="page_ul">
                         <c:if test="${ preNavi > 0}">
-                           <li><a href='/dcRestaurant/dcRestaurantAllList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                           <li><a href='/dcRestaurant/dcRestaurantList.do?currentPage=${ preNavi }&area=${requestScope.area }&restaurant=${requestScope.restaurant }&filter=${requestScope.filter }'><i class='fas fa-chevron-left'></i></a></li>
                         </c:if>
                         <c:forEach items="${ navi }" var="i">
                            <c:choose>
                               <c:when test="${i==currentPage}">
-                                 <li><a id="page_active" href='/dcRestaurant/dcRestaurantList.do?currentPage=${i}&area=${dc.area}'>${i}</a></li>
+                                 <li><a id="page_active" href='/dcRestaurant/dcRestaurantList.do?currentPage=${i}&area=${requestScope.area }&restaurant=${requestScope.restaurant }&filter=${requestScope.filter }'>${i}</a></li>
                               </c:when>
                               <c:otherwise>
-                                 <li><a id="page_inactive" href='/dcRestaurant/dcRestaurantList.do?currentPage=${i}&area=${dc.area}'>${i}</a></li>
+                                 <li><a id="page_inactive" href='/dcRestaurant/dcRestaurantList.do?currentPage=${i}&area=${requestScope.area }&restaurant=${requestScope.restaurant }&filter=${requestScope.filter }'>${i}</a></li>
                               </c:otherwise>
                               </c:choose>
                         </c:forEach>
                         <c:if test="${ nextNavi } != 0">
-                           <li><a href='/dcRestaurant/dcRestaurantAllList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                           <li><a href='/dcRestaurant/dcRestaurantList.do?currentPage=${ nextNavi }&area=${requestScope.area }&restaurant=${requestScope.restaurant }&filter=${requestScope.filter }'><i class='fas fa-chevron-right'></i></a></li>
                         </c:if>
                         </ul>
                     </div>
@@ -140,7 +140,7 @@
          
          
          if(restaurant == 'existRestaurant'){
-        	 $('#saleRestaurant').css("justify-content","space-around");
+        	 $('#saleRestaurant').css("justify-content","space-between");
          }else{
         	 $('#saleRestaurant').css("justify-content","start");
          };

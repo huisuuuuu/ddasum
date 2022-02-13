@@ -13,6 +13,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<!--  jQuery 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<!-- SweetAlert2 CDN -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 <title>따숨, 마음을 나누다.</title>
 </head>
 <body>
@@ -65,13 +71,15 @@
 				</div>
 			</div>
 			<div id="reservationAndLocation">
-				<span id="reservation">메뉴 예약</span> <span id="restaurantLocation">업체
-					정보</span>
+				<span id="reservation">메뉴 예약</span> <span id="restaurantLocation">업체 정보</span>
 			</div>
 			<div id="menu">
 			<c:choose>
 				<c:when test="${!dcMenu.isEmpty()}">
 					<h3>※ 당일 예약만 가능한 점 유의하시기 바랍니다.</h3>
+					<input type="hidden" id="bizNo" value="${dcInfo.bizNo }">
+					<input type="hidden" id="userNo" value="${sessionScope.member.userNo }">
+					<input type="hidden" id="authorityId" value="${sessionScope.member.authorityId }">
                 <c:forEach items="${dcMenu}" var="m">
 				<div class="food">
 					<img src="${m.menuImage }">
@@ -80,7 +88,7 @@
 						<p class="explain">${m.menuInfo }</p>
 						<span class="price">${m.originalPrice }원</span><span class="salePrice">${m.dcPrice }원</span>
 					</div>
-					<button>예약하기</button>
+					<button class="reservationBtn" value="${m.menuNo }">예약하기</button>
 				</div>
 				</c:forEach>
 				</c:when>
@@ -94,5 +102,44 @@
 			<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>
 		</footer>
 	</div>
+	
+	<script>
+		$('.reservationBtn').click(function(){
+			
+			var bizNo = $('#bizNo').val();
+			var userNo = $('#userNo').val();
+			var authorityId = $('#authorityId').val();
+			var menuNo = $(this).attr("value");
+			
+			console.log(userNo,authorityId,menuNo);
+			
+			Swal.fire({
+	            title: '당일에만 이용 가능합니다.',
+	            text: "예약 진행하시겠습니까?",
+	            icon: "info",
+	            showCancelButton: true,
+	            confirmButtonText: '예',
+	            cancelButtonText: '아니오',
+	            showLoaderOnConfirm: true,
+	            preConfirm: () => {
+	                
+	            	$.ajax({
+	            		
+	              		 url: "/dcRestaurant/reservation.do",
+	            		 data: {"bizNo":bizNo, "userNo":userNo, "menuNo":menuNo},
+	            		 type: "get",
+	            		 success: function(){
+	            			 
+	            		 },
+	            		 error: function(){
+	            			 console.log('ajax 통신 실패');
+	            		 }
+	            		
+	            	})
+	            }
+	        });
+		});
+	
+	</script>
 </body>
 </html>

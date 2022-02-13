@@ -66,5 +66,17 @@ public class DcRestaurantDAO {
 		return new ArrayList<DcRestaurantMenu>(sqlSession.selectList("dcRestaurant.selectAllDcMenu",bizNo));
 	}
 
+	public int reservation(String bizNo, String userNo, String menuNo, String reNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("bizNo", bizNo);
+		map.put("userNo", userNo);
+		map.put("menuNo", menuNo);
+		map.put("reNo", reNo);
+		
+		return sqlSession.insert("dcRestaurant.reservation",map);
+	}
+
 
 }

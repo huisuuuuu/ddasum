@@ -1,6 +1,8 @@
 package kr.or.ddasum.dcRestaurant.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.or.ddasum.dcRestaurant.model.service.DcRestaurantService;
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurant;
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurantMenu;
+import kr.or.ddasum.email.TempKey;
 import kr.or.ddasum.member.model.vo.BizMember;
 
 @Controller
@@ -90,4 +93,25 @@ public class DcRestaurantController {
 			return mav;
 		}
 	}
+	
+	@RequestMapping(value = "/dcRestaurant/reservation.do", method = RequestMethod.GET)
+	public void reservation(@RequestParam String bizNo, @RequestParam String userNo,
+							@RequestParam String menuNo, ModelAndView mav) {
+			
+			Date today = new Date();
+			TempKey tk = new TempKey();
+			
+			SimpleDateFormat sdf;
+			sdf = new SimpleDateFormat("yyyyMMdd");
+			String reNo = sdf.format(today)+tk.getKey(6, false);
+			
+			System.out.println(bizNo+","+userNo+","+menuNo+","+reNo);
+	        
+			
+			int result = dcService.reservation(bizNo, userNo, menuNo, reNo);
+			
+			System.out.println(result);
+
+	}
+	
 }

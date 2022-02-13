@@ -16,4 +16,6 @@ public interface DcRestaurantService {
 
 	ArrayList<DcRestaurantMenu> selectAllDcMenu(int bizNo);
 
+	int reservation(String bizNo, String userNo, String menuNo, String reNo);
+
 }

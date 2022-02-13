@@ -42,4 +42,10 @@ public class DcRestaurantServiceImpl implements DcRestaurantService{
 		return dcDAO.selectAllDcMenu(bizNo);
 	}
 
+	@Override
+	public int reservation(String bizNo, String userNo, String menuNo, String reNo) {
+		
+		return dcDAO.reservation(bizNo, userNo, menuNo, reNo);
+	}
+
 }

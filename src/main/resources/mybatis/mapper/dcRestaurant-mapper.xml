@@ -36,10 +36,10 @@
 		where
 			<choose>
 				<when test="restaurant.equals('ALL')">
-		 			area = #{area} AND biz_del_yn='N'
+		 			authority_id ='DC' AND area = #{area} AND biz_del_yn='N'
 		 		</when>
 		 		<otherwise>
-		 			area = #{area} AND restaurant = #{restaurant} AND biz_del_yn='N'
+		 			authority_id ='DC' AND area = #{area} AND restaurant = #{restaurant} AND biz_del_yn='N'
 		 		</otherwise>
 		 	</choose>
 		ORDER BY 
@@ -99,5 +99,20 @@
 		where biz_no = #{bizNo} and authority_id = 'DC' and menu_del_yn = 'N'
 	
 	</select>
+	
+	<insert id="reservation" parameterType="hashmap">
+		INSERT ALL
+    	WHEN Rest > 0 THEN
+		INTO DETAIL VALUES(
+    		M_RE_SEQ.NEXTVAL,#{userNo},SYSDATE,#{bizNo},'DC',#{menuNo},'N',#{reNo})
+		INTO BIZ_RESERVATION VALUES(
+    		#{bizNo},'DC',#{reNo})
+		SELECT
+			no as no,
+			userNo as userNo,
+			Rest as rest
+		FROM m_reservation
+		WHERE userNo=#{userNo};
+	</insert>
 	
 </mapper>
