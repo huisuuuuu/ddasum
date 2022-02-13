@@ -91,13 +91,12 @@
 }
 
 .close-btn {
-	border : 1px solid black;
 	margin : 0px auto;
-	padding : 20px;
+	padding-top : 20px;
+	padding-left : 350px;
 }
 
 #cl-btn {
-	border: 1px solid red;
 	margin : 0px auto;
 }
 
@@ -225,7 +224,7 @@ td:nth-of-type(1) {
 						<a href=""><button type="button" class="btn-ok">초기화</button></a>
 					</div>
 				</div>
-				
+				<br><br><br>
 				<div class="close-btn">
 					<button type="button" class="btn-ok" id="cl-btn"><a href="/admin/adminMemberManageList">닫기</a></button>
 				</div>
