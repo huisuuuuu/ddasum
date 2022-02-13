@@ -45,7 +45,16 @@
       SELECT COUNT(*) AS AllCount FROM DETAIL
       WHERE USERNO = #{_params}
 
-   </select>
+   	 </select>	 
      
+<!--      <select id="adminSelectAllCardList" resultType="card">
+     
+     
+     
+     </select>
+     
+     <select id="selectAllCardMemberTotalCount" resultType="int">
+     
+     </select> -->
   
 </mapper>

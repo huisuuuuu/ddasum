@@ -41,8 +41,20 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public int detailTotalCount() {
-		return admDAO.memberRecordTotalCount();
+		return admDAO.memberDetailTotalCount();
 	}
+
+//	@Override
+//	public ArrayList<Card> adminSelectAllCardList(int currentPage, int recordCountPerPage) {
+//		return admDAO.adminSelectAllCardList(currentPage, recordCountPerPage);
+//	}
+//
+//	@Override
+//	public int cardTotalCount() {
+//		
+//		return admDAO.selectAllCardMemberTotalCount();
+//
+//	}
 
 
 
