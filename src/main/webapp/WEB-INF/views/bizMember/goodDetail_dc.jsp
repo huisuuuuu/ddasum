@@ -140,7 +140,7 @@
 			font-size: 16pt;
 			border: none;
 		}
-		#GoodMo{
+		#addGood{
 			width: 120px;
 			height: 50px;
 			background-color: #FFA77E;
@@ -198,7 +198,7 @@
 				</a>
 			</div>
 			<div class="submenu"> 
-				<a href="/BizMember/goodsManage.do"><br>
+				<a href="/BizMember/goodsManage_dc.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu2.png" alt="로고">
 					<span class="menulist">상품 관리</span><br><br>
 				</a>
@@ -220,7 +220,7 @@
 	<div id="rightArea">
 		<div id="R-upArea">
 			<div id="goodManage">
-				<h1>후원 상품 관리>상품수정</h1>
+				<h1>상품 관리>상품등록</h1>
 					<span class="logout">
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
@@ -232,9 +232,9 @@
 		<div id="R-downArea">
 			<div id="R-content">
 				<div id="content-title">
-					후원 상품 수정
+					후원 상품 등록
 				</div>
-				<form action="/bizMember/GoodMo.do" method="post" id="addForm">
+				<form action="/bizMember/addGood.do" method="post" id="addForm">
 				<div id="content">
 					<div id="itemImgArea">
 						<div id="itemInfoImg">
@@ -242,7 +242,10 @@
 						</div>
 						<div id="itemImg">
 							<div id="itemImgInput">
-								<img id ="target_img" style="height:100%;" src="${requestScope.BizGoods.menuImage }">	
+								<img class="imgsize" src="/resources/images/bizImgAdd.png">
+							<div><br>
+							상품 사진을 추가해 주세요
+							</div>
 							</div>
 						</div>
 					</div>
@@ -251,7 +254,7 @@
 							<span>상품명</span>
 						</div>
 						<div class="infoWriter">
-							<input type='text' class="entertext" name="menuName" value=${requestScope.BizGoods.menuName }>
+							<input class="entertext" name="menuName" type="text">
 						</div>					
 					</div>
 					<div class="iteminfo">
@@ -259,7 +262,7 @@
 							<span>상품 설명</span>
 						</div>
 						<div class="infoWriter">
-							<input type='text' class="entertext" name="menuInfo" value=${requestScope.BizGoods.menuInfo }>
+							<input class="entertext" name="menuInfo" type="text">
 						</div>					
 					</div>
 					<div class="iteminfo">
@@ -267,14 +270,21 @@
 							<span>상품가격</span>
 						</div>
 						<div class="infoWriter">
-							<input type='text' class="entertext" name="originalPrice" value=${requestScope.BizGoods.originalPrice }>
+							<input class="entertext" name="originalPrice" type="text">
+						</div>					
+					</div>
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>할인가격</span>
+						</div>
+						<div class="infoWriter">
+							<input class="entertext" name="dcPrice" type="text">
 						</div>					
 					</div>
 					<div class="confirmArea">
-						<input type='submit' id="GoodMo" value='상품 수정'/>
-						<a href="/BizMember/goodsManage.do"><input class="confirmstyle" type="button" value="취소"></a>
+						<input type='button' id="addGood" value='상품 등록'/>
+						<a href="/BizMember/goodsManage_dc.do"><input class="confirmstyle" type="button" value="취소"></a>
 					</div>
-					<input type='hidden' name="menuNo" value="${requestScope.BizGoods.menuNo }"/>
 				</div>
 				</form>
 			</div>
@@ -296,27 +306,29 @@
     });
 	
 	
-	//상품 수정 ajax
+	//신규 상품 등록 ajax
 
-    $('#').click(function(){
+    $('#addGood').click(function(){
     	var form = {
     			menuName : $('input[name=menuName]').val(),
-    	  		menuInfo : $('input[name=menuInfo]').val(),
-    	   		originalPrice : $('input[name=originalPrice]').val()
+    			menuInfo : $('input[name=menuInfo]').val(),
+    			originalPrice : $('input[name=originalPrice]').val()
+    			dcPrice : $('input[name=dcPrice]').val()
+
     	}
-    	   
+    	
 	  	$.ajax({
-    		url : "/bizMember/GoodMo.do",
+    		url : "/bizMember/addGood.do",
 			dataType : "json",
-			data : form,
+			data : form, 
     		type : "POST",
     		success : function(rst){
-    			if(rst == "true"){
-    				alert("상품 수정 완료");
-    				location.replace("/BizMember/goodsManage.do");
+    			if(rst == true){
+    				alert("상품 등록 완료");
+    				location.replace("/BizMember/goodsManage_dc.do");
     			}else{
-    				alert("상품 수정 실패");
-    				location.replace("/BizMember/goodsManage.do");
+    				alert("상품 등록 실패");
+    				location.replace("/BizMember/goodsManage_dc.do");
     			}
     		},
     		error : function(){
@@ -326,8 +338,7 @@
     });
 	
 	
-
-
+	
 	
 </script>
 </body>

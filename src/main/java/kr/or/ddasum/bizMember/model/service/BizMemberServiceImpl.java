@@ -71,23 +71,10 @@ public class BizMemberServiceImpl implements BizMemberService{
 	}
 
 	@Override
-	public ArrayList<Detail> bizReserv(int bizNo, int nowPage, int cntPerPage) {
-
-		int end = nowPage * cntPerPage;
-		int start = end - cntPerPage + 1;
-		
-		return bDAO.bizReserv(bizNo, start, end);
-	}
-
-	@Override
-	public ArrayList<Calculater> calculate(int bizNo, int nowPage, int cntPerPage) {
-
-		int end = nowPage * cntPerPage;
-		int start = end - cntPerPage + 1;
-		
-		return bDAO.calculate(bizNo, start, end);
-	}
-	
+	public ArrayList<Detail> bizReserv(int currentPage, int recordCountPerPage, int bizNo) {
+		return bDAO.bizReserv(currentPage, recordCountPerPage, bizNo);
+		}
+	/*
 	@Override
 	public int countGood(int bizNo) {
 		return bDAO.countGood(bizNo);
@@ -103,7 +90,45 @@ public class BizMemberServiceImpl implements BizMemberService{
 	public int countcalculate(int bizNo) {
 		return bDAO.countcalculate(bizNo);
 	}
+*/
+	@Override
+	public int recordBizTotalCount(int bizNo) {
+		return bDAO.recordBizTotalCount(bizNo);
+	}
 
+	@Override
+	public ArrayList<HashMap<String, Object>> goodsManageList(int bizNo, int currentPage, int recordCountPerPage) {
+		return bDAO.goodsManageList(bizNo, currentPage, recordCountPerPage);
+	}
+
+	@Override
+	public int detailTotalCount(int bizNo) {
+		return bDAO.memberDetailTotalCount(bizNo);
+
+	}
+/*
+	@Override
+	public ArrayList<Detail> calculateManage(int currentPage, int recordCountPerPage, int bizNo) {
+		return bDAO.calculateManage(currentPage, recordCountPerPage, bizNo);
+
+	}
+
+	@Override
+	public int calculateTotalCount(int bizNo) {
+		return bDAO.calculateTotalCount(bizNo);
+
+	}
+
+/*	@Override
+	public ArrayList<Calculater> calculate(int bizNo, int parseInt, int parseInt2) {
+		return bDAO.calculate(bizNo, parseInt, parseInt2);
+	}
+*/
+
+	@Override
+	public ArrayList<Detail> calculateManage(int currentPage, int recordCountPerPage, int bizNo) {
+		return bDAO.calculateManage(currentPage, recordCountPerPage, bizNo);
+	}
 
 
 }

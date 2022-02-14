@@ -27,68 +27,31 @@ public class NoticeController {
 	private NoticeService nService;
 	
 	@RequestMapping(value = "/board/noticeBoard.do", method = RequestMethod.GET)
-	public ModelAndView selectAllNotice(HttpServletRequest request,
-										Notice notice,
-										ModelAndView mav, 
-										@RequestParam(value="nowPage", required=false)String nowPage,
-										@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-
-		//total
-		int result = nService.countnotice();
-
-		//paging
-		if (nowPage == null && cntPerPage == null) {
-			nowPage = "1";
-			cntPerPage = "10";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) { 
-			cntPerPage = "10";
+	public ModelAndView selectAllNotice(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav) {
+		
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int recordNoticeTotalCount = nService.recordNoticeTotalCount();
+		int pageTotalCount = (int)Math.ceil(recordNoticeTotalCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+		
+		ArrayList<HashMap<String, Object>> list = nService.selectAllNotice(currentPage, recordCountPerPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
 		}
-		
-		int cntPage = 5;
-		int cntPerPageInt = Integer.parseInt(cntPerPage);
-		int nowPageInt = Integer.parseInt(nowPage);
-		
-		int lastPage = (int)Math.ceil(result/cntPerPageInt);
-		int endPage = ((int)Math.ceil(nowPageInt/cntPage))*cntPage;
-		
-		if (lastPage < endPage) {
-			endPage = lastPage;
-		}
-		int startPage = endPage - cntPage + 1;
-		if (startPage < 1) {
-			startPage = 1;
-		}
-		/*
-		 * if(endPage <= 0) { lastPage = 1; endPage = 1; }
-		 */
-		String info_id = "NOTICE";
-		ArrayList<Notice> list = nService.selectAllNotice(info_id, nowPageInt, cntPerPageInt);
-		System.out.println(list);
-		
-		HashMap<String, Integer> paging;
-		paging = new HashMap<>();
-		paging.put("startPage", startPage);
-		paging.put("nowPage", nowPageInt);
-		paging.put("endPage", endPage);
-		paging.put("lastPage", lastPage);
-		paging.put("cntPerPage", cntPerPageInt);
-
-		System.out.println(startPage);
-		System.out.println(nowPageInt);
-		System.out.println(endPage);
-		System.out.println(lastPage);
-		System.out.println(cntPerPageInt);
-		System.out.println(list);
-		
-		
-		mav.addObject("result", result);
-		mav.addObject("paging", paging);
+				
+		mav.addObject("recordNoticeTotalCount", recordNoticeTotalCount);
 		mav.addObject("list", list);
-		mav.setViewName("/admin/noticeBoard");
-
-		return mav;		
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		mav.setViewName("admin/noticeBoard");
+					
+		return mav;
 		
 	}
 

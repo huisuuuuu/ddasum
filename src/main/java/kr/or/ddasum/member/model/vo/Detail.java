@@ -17,6 +17,8 @@ public class Detail {
 	private String menuName;
 	private String userName;
 	private String authorityInfo;
+	private int originalPrice;
+	private int dcPrice;
 	
 	
 	
@@ -25,7 +27,7 @@ public class Detail {
 		// TODO Auto-generated constructor stub
 	}
 	public Detail(int mReNo, int userNo, Date reservationDate, int bizNo, String authorityId, String reNo, int menuNo,
-			char reCancle, String bizName, String menuName, String userName, String authorityInfo) {
+			char reCancle, String bizName, String menuName, String userName, String authorityInfo, int originalPrice, int dcPrice) {
 		super();
 		this.mReNo = mReNo;
 		this.userNo = userNo;
@@ -39,6 +41,21 @@ public class Detail {
 		this.menuName = menuName;
 		this.userName = userName;
 		this.authorityInfo = authorityInfo;
+		this.originalPrice = originalPrice;
+		this.dcPrice = dcPrice;
+		
+	}
+	public int getOriginalPrice() {
+		return originalPrice;
+	}
+	public void setOriginalPrice(int originalPrice) {
+		this.originalPrice = originalPrice;
+	}
+	public int getDcPrice() {
+		return dcPrice;
+	}
+	public void setDcPrice(int dcPrice) {
+		this.dcPrice = dcPrice;
 	}
 	public int getmReNo() {
 		return mReNo;

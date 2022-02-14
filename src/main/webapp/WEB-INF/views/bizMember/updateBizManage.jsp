@@ -269,7 +269,7 @@
 			<div class="submenu"> 
 				<a href="/BizMember/calculateManage.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu4.png" alt="로고">
-					<span class="menulist">후원 정산 관리</span><br><br>
+					<span class="menulist">정산 관리</span><br><br>
 				</a>
 			</div>
 		</div>
@@ -298,7 +298,9 @@
 					<div id="content">
 						<div id="content-L">
 							<br><br>
-								<div id="bizImg">
+							
+							<div id="bizImg">
+	
                                 	<div>
 										<img class="imgsize" id=bizImg src="${requestScope.bizMember.bizImage }">
                                 	</div>
@@ -310,6 +312,7 @@
 									</form>
 								</div>
                     		</div>	
+						
 						</div>
 						<div id="content-R">
 						<ul>
@@ -464,15 +467,15 @@ const btnOpenPopup = document.querySelector('.pwdBTN');
 
 			if(result2==password)
 					{ $.ajax({
-			    		url : "/bizMember/withDraw.do",
+			    		url : "/BizMember/withDraw.do",
 			    		type : "POST",
 			    		success : function(rst){
-			    			if(rst == true){
+			    			if(rst == "true"){
 			    				alert("회원 정보 변경 성공");
-			    				location.replace("/bizMember/bizManage.do");
+			    				location.replace("/BizMember/bizManage.do");
 			    			}else{
 			    				alert("회원 정보 변경 실패");
-			    				location.replace("/bizMember/bizManage.do");
+			    				location.replace("/BizMember/bizManage.do");
 			    				}
 			    			},
 			    		error : function(request,status,error){
