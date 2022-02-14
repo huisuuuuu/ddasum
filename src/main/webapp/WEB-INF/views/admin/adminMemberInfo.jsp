@@ -152,14 +152,16 @@
 					</tr>
 					<tr>
 						<td class="data-area">탈퇴여부</td>
-						<td class="info-area">${info.DELYN }
+						<td class="info-area">${info.DELYN.equals("Y") ? "탈퇴" : "사용중" }
 						</td>
 					</tr>
 					</tbody>					
 				</table>
 				<div class="info-footer">
 					<div class="del-btn">
-						<button type="button" class="btn-ok">탈퇴</button>
+						<button type="button" class="btn-ok">
+						<a href="/admin/adminMemberWithdraw.do?userId=${info.USERID }&delYN=${info.DELYN}">
+						탈퇴</a></button>
 							</div>						
 					<div class="info-check"><button type="button" class="btn-ok">
 						<a href="/admin/adminMemberManageList">확인</button></a></div>

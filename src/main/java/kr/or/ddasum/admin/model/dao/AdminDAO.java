@@ -113,20 +113,45 @@ public class AdminDAO {
 		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.adminSelectAllFAQ", null, rb));
 	}
 
+	//MemberInfo 회원탈퇴
+	public int adminUpdateMemberEndYN(HashMap<String, Object> map) {
+		return sqlSession.update("admin.updateAdminMemberEndYN", map);
+	}
 	
-//	public ArrayList<Card> adminSelectAllCardList(int currentPage, int recordCountPerPage) {
-//		int start = (currentPage - 1) * recordCountPerPage;
-//		int end = recordCountPerPage;
-//		RowBounds rb = new RowBounds(start, end);
-//		return new ArrayList<Detail> (sqlSession.selectList("admin.adminCardManage", null, rb));
-//		
-//		return null;
-//	}
-//	
-//	public int selectAllCardMemberTotalCount() {
-//		// TODO Auto-generated method stub
-//		return sqlSession.selectOne("admin.selectAllCardMemberTotalCount");
-//	}
+	//사업자 회원탈퇴
+	public int adminUpdateBizMemberEndYN(HashMap<String, Object> map) {
+		return sqlSession.update("admin.updateAdminBizMemberEndYN", map);
+	}
 
+	//후원페이지 글 수
+	public int recordSupportTotalCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.selectAllSupportTotalCount");
+	}
+
+	//후원페이지 페이징
+	public ArrayList<HashMap<String, Object>> adminSelectAllSupport(int currentPage, int recordCountPerPage) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.adminSelectAllSupport", null, rb));
+	}
+
+	public int adminMemberSearchTotalCount() {
+
+		return sqlSession.selectOne("admin.memberSearchTotalCount");
+	}
+
+	public ArrayList<HashMap<String, Object>> adminMemberSearchList(String type, String keyword, int currentPage,
+			int recordCountPerPage) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.memberSearchList", null, rb));
+	}
+
+
+
+	
 
 }
