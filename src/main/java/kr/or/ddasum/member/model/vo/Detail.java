@@ -17,6 +17,7 @@ public class Detail {
 	private String menuName;
 	private String userName;
 	private String authorityInfo;
+	private String bizImage;
 	
 	
 	
@@ -25,7 +26,7 @@ public class Detail {
 		// TODO Auto-generated constructor stub
 	}
 	public Detail(int mReNo, int userNo, Date reservationDate, int bizNo, String authorityId, String reNo, int menuNo,
-			char reCancle, String bizName, String menuName, String userName, String authorityInfo) {
+			char reCancle, String bizName, String menuName, String userName, String authorityInfo, String bizImage) {
 		super();
 		this.mReNo = mReNo;
 		this.userNo = userNo;
@@ -39,6 +40,13 @@ public class Detail {
 		this.menuName = menuName;
 		this.userName = userName;
 		this.authorityInfo = authorityInfo;
+		this.bizImage = bizImage;
+	}
+	public String getBizImage() {
+		return bizImage;
+	}
+	public void setBizImage(String bizImage) {
+		this.bizImage = bizImage;
 	}
 	public int getmReNo() {
 		return mReNo;

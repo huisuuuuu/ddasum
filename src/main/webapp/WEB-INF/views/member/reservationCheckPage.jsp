@@ -383,7 +383,7 @@
 	                    </tr>
 	                    <c:forEach items="${requestScope.map.list }" var="d">
 	                    <tr>
-	                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>${d.menuName }</span></div></td>
+	                        <td style="padding-left: 10px;"><div id="shop-img"><img src="${d.bizImage }" style="width:100px; height: 100px; border-radius: 50px;" ></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>${d.menuName }</span></div></td>
 	                        <c:choose>
 		                        <c:when test="${d.authorityId eq 'SP'}">
 		                        	<td>후원</td>
