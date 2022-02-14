@@ -19,6 +19,7 @@
 		<typeAlias type="kr.or.ddasum.member.model.vo.Detail" alias="detail"/>
 		<typeAlias type="kr.or.ddasum.admin.model.vo.AdminCardMember" alias="card"/>
 		<typeAlias type="kr.or.ddasum.dcRestaurant.model.vo.DcRestaurant" alias="dcRestaurant"/>
+		<typeAlias type="kr.or.ddasum.file.model.vo.MemberCard" alias="card"/>
 
 	</typeAliases>
 
