@@ -128,11 +128,12 @@ public class MemberDAO {
 		
 	}
 	
-	public int reservationCancle(char reCancle, int userNo) {
+	public int reservationCancle(char reCancle, String reNo, int userNo) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("reCancle", reCancle);
 		map.put("userNo", userNo);
+		map.put("reNo", reNo);
 
 		return sqlSession.update("member.reservationCancleBtn", map);
 		

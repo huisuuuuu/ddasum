@@ -488,7 +488,7 @@
             </ul>
         </div>
         <div id="header-login-area">
-            <div id="header-myPage-hover-text"><a href="">${sessionScope.member.userId }</a>
+            <div id="header-myPage-hover-text"><a href="">${sessionScope.member.userId } 님</a>
                 <div id="hover-menu2" style="display: none">
                    <div id="myPage-img-area">
 		               <img src="/resources/images/user.png" style="width: 18px; padding-right: 5px">
@@ -639,9 +639,7 @@
             if(input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#profileImg').attr('src', e.target.result);
-                    
-                    
+                    $('#profileImg').attr('src', e.target.result);  
                 }
                 reader.readAsDataURL(input.files[0]);
             }

@@ -99,7 +99,7 @@ public class MemberController {
 
 		if (userPwd == null) {
 
-			return "member/passwordCheck";
+			return "member/passwordCheckPage";
 		} else {
 			String userId = request.getParameter("userId");
 
@@ -613,13 +613,14 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/reservationCancle.do", method = RequestMethod.POST)
-	public void reservationCancle(@RequestParam char reCancle,@SessionAttribute Member member,HttpServletResponse response) throws IOException {
+	public void reservationCancle(@RequestParam char reCancle,@RequestParam String reNo,@SessionAttribute Member member,HttpServletResponse response) throws IOException {
 		
 		reCancle = reCancle=='N'?'Y':'N';
 		
 		int userNo = member.getUserNo();
 		
-		int result = mService.reservationCancle(reCancle, userNo);
+		
+		int result = mService.reservationCancle(reCancle, reNo, userNo);
 		
 		if(result >0) {
 			response.getWriter().print("true");
