@@ -1,6 +1,6 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 
@@ -15,11 +15,17 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
     integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/resources/commons/adminCommon.css">
-  <link rel="stylesheet" type="text/css" href="/resources/commons/adminBoard.css">
+  <link rel="stylesheet" type="text/css" href="/resources/commons/adminNoticeBoard.css">
   <link rel="stylesheet" type="text/css" href="/resources/commons/styles.css">
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
   <script src="/resources/js/ui.js"></script>
+ <style>
+ .bold {
+ 	color : #ffa77e;
+ 	font-size : 1.5em;
+ }
+ </style>
 </head>
 
 <body>
@@ -113,125 +119,66 @@
         </section>
       </div>
 
+	
       <div class="container">
         <h3 class="cont-title">기간별 후원 정산 내역 검색 결과</h3>
+        	총 <span class="bold">${recordSupportTotalCount }</span>건
         <div class="table_wrap">
           <table class="pay-t">
             <thead class="bg-1">
               <tr class="fc-w fs-16">
-                <th width="200">회원등급</th>
-                <th width="200">아이디</th>
-                <th width="200">닉네임</th>
-                <th width="300">이메일</th>
-                <th width="200">가입일</th>
-                <th width="200">이용내역</th>
-                <th width="150">상세정보</th>
+                <th width="200">순번</th>
+                <th width="200">예약일</th>
+                <th width="200">사업자유형</th>
+                <th width="300">예약번호</th>
+                <th width="200">업체명</th>
+                <th width="200">상품명</th>
               </tr>
             </thead>
-
+			
             <tbody>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><a href="/admin/adminUserDetail.do"><button type="button" class="ok_btn">확인</button></a></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="none_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="ok_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="ok_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="ok_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="ok_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="ok_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="ok_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="ok_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-              <tr>
-                <td>꿈나무</td>
-                <td>user11</td>
-                <td>닉네임1</td>
-                <td>user11@naver.com</td>
-                <td>2022-02-02</td>
-                <td><button type="button" class="ok_btn">확인</button></td>
-                <td><button type="button" class="ok_btn">상세보기</button></td>
-              </tr>
-
+            <c:choose>
+            <c:when test="${!requestScope.list.isEmpty() }">
+            <c:forEach items="${requestScope.list }" var="sp" varStatus="i">
+            	<tr>
+            		<td>${ i.count + (currentPage - 1) * 10 }</td>
+            		<td>${sp.reservationDate }</td>
+            		<td>${sp.authorityInfo }</td>
+            		<td>${sp.reNo }</td>
+            		<td>${sp.bizName }</td>
+            		<td>${sp.menuName }</td>
+            	</tr>
+            </c:forEach>
+            </c:when>
+            </c:choose>
             </tbody>
 
           </table>
 
           <div id="page_wrap">
             <ul class="page_ul">
-
+              <c:if test="${ preNavi > 0}">
+                <li><a href='/admin/adminSelectAllSupport.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+              </c:if>
+              <c:forEach items="${ navi }" var="i">
+                <c:choose>
+                  <c:when test="${i==currentPage}">
+                  <li><a id="page_active" href='/admin/adminSelectAllSupport.do?currentPage=${i}'>${i}</a></li>
+                  </c:when>
+                <c:otherwise>
+                  <li><a id="page_inactive" href='/admin/adminSelectAllSupport.do?currentPage=${i}'>${i}</a></li>
+                </c:otherwise>
+                 </c:choose>
+               </c:forEach>
+               <c:if test="${ nextNavi } != 0">
+               <li><a href='/admin/adminSelectAllSupport?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+               </c:if>
             </ul>
           </div>
+
         </div>
       </div>
+    </div>
     </div>
 
     <script>

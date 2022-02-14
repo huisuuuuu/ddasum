@@ -190,5 +190,49 @@
     WHERE INFO_ID = 'FAQ'	
 
 	</select>
+	
+	<update id="updateAdminMemberEndYN" parameterType="hashmap">
+	
+	UPDATE MEMBER SET DEL_YN = #{delYN}
+	WHERE USERID = #{userId}
+	
+	</update>
+	
+	<update id="updateAdminBizMemberEndYN" parameterType="hashmap">
+	
+	UPDATE BIZ_MEMBER SET BIZ_DEL_YN = #{bizDelYN}
+	WHERE BIZ_ID = #{bizId}
+	
+	</update>
+	
+	<select id="selectAllSupportTotalCount" resultType="int">
+	
+	SELECT COUNT(*)
+	FROM BIZ_RESERVATION
+	
+	</select>
+	
+	<select id="adminSelectAllSupport" parameterType="hashmap" resultType="detail">
+	
+	SELECT 
+    	M_RE_NO AS mReNo,
+    	RESERVATION_DATE AS reservationDate,
+    	MENU_NAME AS menuName,
+    	AUTHORITY_INFO AS authorityInfo,
+    	BIZ_NAME AS bizName,
+    	RE_NO AS reNo
+    FROM DETAIL
+    	INNER JOIN MENU ON (DETAIL.MENU_NO=MENU.MENU_NO)
+    	INNER JOIN AUTHORITY ON (AUTHORITY.AUTHORITY_ID=DETAIL.AUTHORITY_ID)
+    	INNER JOIN BIZ_MEMBER ON (DETAIL.BIZ_NO=BIZ_MEMBER.BIZ_NO)
+    	ORDER BY M_RE_NO
+	
+	</select>
+	
+	<select id="memberSearchTotalCount" resultType="int">
+	
+	</select>
+	
+
   
 </mapper>

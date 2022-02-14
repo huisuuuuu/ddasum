@@ -52,7 +52,28 @@ public interface AdminService {
 
 	//FAQ 페이징
 	ArrayList<HashMap<String, Object>> adminSelectAllFAQNotice(int currentPage, int recordCountPerPage);
+
+	//회원탈퇴
+	int adminUpdateMemberEndYN(HashMap<String, Object> map);
+
+	//사업자 탈퇴
+	int adminUpdateBizMemberEndYN(HashMap<String, Object> map);
+
+	//후원 글 총 수
+	int recordSupportTotalCount();
+
+	//후원 페이징
+	ArrayList<HashMap<String, Object>> adminSelectAllSupport(int currentPage, int recordCountPerPage);
+
+	//검색 글 수 (회원관리)
+	int recordMemberSearchCount();
+
+	//검색 글 수 페이징 (회원관리)
+	ArrayList<HashMap<String, Object>> searchMember(String type, String keyword, int currentPage,
+			int recordCountPerPage);
 	
+
+
 
 
 }

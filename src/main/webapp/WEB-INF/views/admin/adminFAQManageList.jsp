@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="/resources/commons/adminNoticeBoard.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
+<style>
+</style>
 
 </head>
 
@@ -44,7 +46,7 @@
       <div class="container br-1">
         <div class="container_top">
           <div class="count-all">
-            <p>전체 <span>${recordFAQTotalCount }</span> 건</p>
+            <p>전체 <span class="bold">${recordFAQTotalCount }</span> 건</p>
           </div>
 
           <div class="box-search">
@@ -86,7 +88,6 @@
                 <th width="100">글번호</th>
                 <th width="200">글제목</th>
                 <th width="300">글내용</th>
-                <th width="150">상단 고정</th>
                 <th width="200">수정</th>
               </tr>
             </thead>
@@ -100,7 +101,6 @@
                 <td>${ i.count + (currentPage - 1) * 10 }</td>
                 <td>${faq.ITITILE }</td>
                 <td>${faq.ICONTENT }</td>
-                <td><button type="button" class="ok_btn">고정</button></td>
                 <td><button type="button" class="ok_btn">수정</button></td>
               </tr>
 

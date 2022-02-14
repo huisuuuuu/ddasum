@@ -50,7 +50,7 @@
 				</div>
 	
 				<div class="menu" id="menubox4">
-					<a href="/admin/adminSupport.do">
+					<a href="/admin/adminSelectAllSupport.do">
 						<img src="/resources/images/admin_main_chart.png" alt="후원정산" width="150px" height="150px">
 							<br><br><br>
 							<p>후원정산</p>
