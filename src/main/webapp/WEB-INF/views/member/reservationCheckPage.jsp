@@ -397,7 +397,11 @@
 	                        
 	                        <td>예약완료</td>
 	                        	
-	                        <td><button class="cancelBtn" data="${d.reCancle }">예약취소</button></td>
+                     		
+	                        <td>	         
+		                        <button class="cancelBtn" data1="${d.reCancle }" data2="${d.reNo }">예약취소</button>	
+	                        </td>
+		                  
 	                    </tr>
 	                    </c:forEach>
 					<tr align="center">
@@ -457,7 +461,8 @@
         
         
         $('.cancelBtn').click(function(){
-        	var reCancle = $(this).attr('data');
+        	var reCancle = $(this).attr('data1');
+        	var reNo = $(this).attr('data2');
 			var text = $(this).closest('tr');
 			
 			var $text2 = text.find('td:eq(4)');
@@ -465,11 +470,11 @@
         	var $this = $(this);
 			$.ajax({
 				url : "/member/reservationCancle.do",
-				data : {"reCancle":reCancle},
+				data : {"reCancle":reCancle,"reNo":reNo},
 				type : "post",
 				success : function(result){
 					if(result == "true"){
-						alert('변경성공');
+						alert('취소성공');
 						$this.css("display", "none");
 						$text2.html('예약취소');
 						$text2.css("color","red");

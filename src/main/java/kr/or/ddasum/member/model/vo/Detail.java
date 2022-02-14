@@ -9,7 +9,7 @@ public class Detail {
 	private Date reservationDate;
 	private int bizNo;
 	private String authorityId;
-	private int reNo;
+	private String reNo;
 	private int menuNo;
 	private char reCancle;
 	//sql구문에 의해 불러온 데이터
@@ -24,7 +24,7 @@ public class Detail {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Detail(int mReNo, int userNo, Date reservationDate, int bizNo, String authorityId, int reNo, int menuNo,
+	public Detail(int mReNo, int userNo, Date reservationDate, int bizNo, String authorityId, String reNo, int menuNo,
 			char reCancle, String bizName, String menuName, String userName, String authorityInfo) {
 		super();
 		this.mReNo = mReNo;
@@ -70,10 +70,10 @@ public class Detail {
 	public void setAuthorityId(String authorityId) {
 		this.authorityId = authorityId;
 	}
-	public int getReNo() {
+	public String getReNo() {
 		return reNo;
 	}
-	public void setReNo(int reNo) {
+	public void setReNo(String reNo) {
 		this.reNo = reNo;
 	}
 	public int getMenuNo() {
