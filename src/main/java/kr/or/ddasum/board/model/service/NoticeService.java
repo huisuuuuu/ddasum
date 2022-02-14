@@ -43,6 +43,31 @@ public interface NoticeService {
 	  */
 	ArrayList<HashMap<String, Object>> selectAllNotice(int currentPage, int recordCountPerPage);
 
+	
+	/**
+	  * @Method Name : noticeMainview
+	  * @작성일 : 2022. 2. 12.
+	  * @작성자 : j
+	  * @변경이력 : 
+	  * @Method 설명 :메인에 공지사항 제목노출
+	  * @param 
+	 * @return 
+	  */
+	
+	ArrayList<Notice> noticeMainPageview();
+	
+	/**
+	  * @Method Name : noticeMainview
+	  * @작성일 : 2022. 2. 12.
+	  * @작성자 : j
+	  * @변경이력 : 
+	  * @Method 설명 :메인에 자주묻는질문 제목노출
+	  * @param 
+	 * @return 
+	  */
+
+	ArrayList<Notice> faqMainPageview();
+
 
 
 

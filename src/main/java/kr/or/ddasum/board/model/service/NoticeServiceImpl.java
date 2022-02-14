@@ -29,6 +29,18 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDAO.recordNoticeTotalCount();
 
 	}
+	
+	@Override
+	public ArrayList<Notice> noticeMainPageview() {
+		return nDAO.noticeMainPageview();
+		
+	}
+
+	@Override
+	public ArrayList<Notice> faqMainPageview() {
+		return nDAO.faqMainPageview();
+		
+	}
 
 	@Override
 	public ArrayList<HashMap<String, Object>> selectAllNotice(int currentPage, int recordCountPerPage) {

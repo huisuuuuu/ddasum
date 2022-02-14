@@ -67,6 +67,40 @@ public class NoticeDAO {
 		RowBounds rb = new RowBounds(start, end);
 		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("notice.selectAllNotice", null, rb));
 	}
+	
+	
+	/**
+	  * @param iNo 
+	 * @Method Name : notiMainPageview
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : j
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @return
+	  */
+	public ArrayList<Notice> noticeMainPageview() {
+		
+		ArrayList<Notice> list = new ArrayList<Notice>(sqlSession.selectList("notice.notiMainPageview"));
+		
+		
+		return list;
+	}
+
+	
+	/**
+	  * @param iNo 
+	 * @Method Name : faqMainPageview
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : j
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @return
+	  */
+	public ArrayList<Notice> faqMainPageview() {
+		ArrayList<Notice> list = new ArrayList<Notice>(sqlSession.selectList("notice.faqMainPageview"));
+		
+		return list;
+	}
 
 
 

@@ -19,6 +19,7 @@
 	</select>
 
 
+
    	 <select id="recordNoticeTotalCount" resultType="int">
    	 
    	SELECT COUNT(*) AS AllCount FROM INFO 
@@ -43,6 +44,44 @@
    	 
    	 </select>	
 	
+
+	<select id="countnotice" resultType="int">
+		SELECT
+			COUNT(*) as cnt
+		FROM
+			INFO
+	</select>
 	
+	<select id="notiMainPageview" resultType="notice">
+		select * from (select ROW_NUMBER() OVER (order BY i_No ASC) as NUM, 
+			info.info_id as infoId,
+			i_no as iNo,
+			i_title as iTitle,
+			i_content as iContent,
+			i_regdate as iRegDate,
+			i_image as iImage,
+			i_del_yn as iDelYN
+		from INFO_GROUP
+            left join info on(info_group.info_ID = info.info_id)
+            where info_group.info_ID = info.info_id and info_name = '공지사항' and i_del_yn = 'N')
+			where NUM between 1 and 5
+
+		
+	</select>
+	
+	<select id="faqMainPageview" resultType="notice">
+		select * from (select ROW_NUMBER() OVER (order BY i_No ASC) as NUM, 
+			info.info_id as infoId,
+			i_no as iNo,
+			i_title as iTitle,
+			i_content as iContent,
+			i_regdate as iRegDate,
+			i_image as iImage,
+			i_del_yn as iDelYN
+		from INFO_GROUP
+            left join info on(info_group.info_ID = info.info_id)
+            where info_group.info_ID = info.info_id and info_name = '자주묻는질문' and i_del_yn = 'N')
+			where NUM between 1 and 5
+	</select>	
 
 </mapper>

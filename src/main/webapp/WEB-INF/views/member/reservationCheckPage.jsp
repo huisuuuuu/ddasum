@@ -383,7 +383,7 @@
 	                    </tr>
 	                    <c:forEach items="${requestScope.map.list }" var="d">
 	                    <tr>
-	                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>${d.menuName }</span></div></td>
+	                        <td style="padding-left: 10px;"><div id="shop-img"><img src="${d.bizImage }" style="width:100px; height: 100px; border-radius: 50px;" ></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>${d.menuName }</span></div></td>
 	                        <c:choose>
 		                        <c:when test="${d.authorityId eq 'SP'}">
 		                        	<td>후원</td>
@@ -397,7 +397,11 @@
 	                        
 	                        <td>예약완료</td>
 	                        	
-	                        <td><button class="cancelBtn" data="${d.reCancle }">예약취소</button></td>
+                     		
+	                        <td>	         
+		                        <button class="cancelBtn" data1="${d.reCancle }" data2="${d.reNo }">예약취소</button>	
+	                        </td>
+		                  
 	                    </tr>
 	                    </c:forEach>
 					<tr align="center">
@@ -457,7 +461,8 @@
         
         
         $('.cancelBtn').click(function(){
-        	var reCancle = $(this).attr('data');
+        	var reCancle = $(this).attr('data1');
+        	var reNo = $(this).attr('data2');
 			var text = $(this).closest('tr');
 			
 			var $text2 = text.find('td:eq(4)');
@@ -465,11 +470,11 @@
         	var $this = $(this);
 			$.ajax({
 				url : "/member/reservationCancle.do",
-				data : {"reCancle":reCancle},
+				data : {"reCancle":reCancle,"reNo":reNo},
 				type : "post",
 				success : function(result){
 					if(result == "true"){
-						alert('변경성공');
+						alert('취소성공');
 						$this.css("display", "none");
 						$text2.html('예약취소');
 						$text2.css("color","red");
