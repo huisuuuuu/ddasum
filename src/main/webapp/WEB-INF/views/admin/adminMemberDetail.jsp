@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/commons/adminCommon.css">
 <link rel="stylesheet" href="/resources/commons/adminNoticeBoard.css">
+<link rel="stylesheet" href="/resources/commons/styles.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
 <style>
@@ -19,6 +20,7 @@
 * {
 	box-sizing : border-box;
 	margin : 0px;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 	
 .wrap {
@@ -37,9 +39,11 @@
 	border-top-left-radius : 20px;
 	border-top-right-radius : 20px;
 	width : 100%;
-	height : 15%;
+	height : 10%;
 	background-color : #FFA77E;
 	text-align : center;
+	font-size : 16px;
+	padding-top : 20px;
 }
 
 .detail-content {
@@ -65,15 +69,15 @@
 .reset_area {
 	width : 30%;
 	height : 40px;
-	border : 1px solid black;
 	margin : 0px auto;
 	text-align : center;
+	padding-top : 20px;
 }
 
 .reset-text-area {
 	width : 50%;
 	height : 100%;
-	border : 1px solid blue;
+	padding-top : 5px;
 	float : left;
 	margin : 0px auto;
 }
@@ -82,11 +86,19 @@
 .reset-btn {
 	width : 50%;
 	height : 100%;
-	border : 1px solid red;
 	float : right;
 	margin : 0px auto;
 }
 
+.close-btn {
+	margin : 0px auto;
+	padding-top : 20px;
+	padding-left : 350px;
+}
+
+#cl-btn {
+	margin : 0px auto;
+}
 
 span {
 	display : inline;
@@ -107,6 +119,7 @@ td:nth-of-type(1) {
 #page_wrap {
   width: 100%;
   margin : 0px auto;
+  padding-top : 30px;
 }
 
 #page_wrap>ul {
@@ -152,7 +165,7 @@ td:nth-of-type(1) {
 <body>
 	<div class="detail-wrap">
 		<div class="detail-header">
-			${d.userName }님 이용내역 
+			${ user.NICK }님 이용내역 
 		</div>
 		
 		<div class="detail-content">
@@ -208,17 +221,17 @@ td:nth-of-type(1) {
 						<p>이용횟수 <span>${detailTotalCount }/30건</span></p>
 					</div>
 					<div class="reset-btn">
-						<a href=""><button type="button" class="ok_btn">초기화</button></a>
+						<a href=""><button type="button" class="btn-ok">초기화</button></a>
 					</div>
 				</div>
-				
+				<br><br><br>
 				<div class="close-btn">
-					<button type="button" class="ok_btn"><a href="/admin/adminMemberManageList">닫기</a></button>
+					<button type="button" class="btn-ok" id="cl-btn"><a href="/admin/adminMemberManageList">닫기</a></button>
 				</div>
                     
-
                 </div>
 
+		
                     		
 				
 

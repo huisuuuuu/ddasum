@@ -3,7 +3,9 @@
 
   <div id="sidenav">
     <div class="nav_logo">
+    	<a href="/">
       <img src="/resources/images/ddasum_header_logo.png" alt="따숨로고">
+      </a>
     </div>
 
     <nav class="nav_list">

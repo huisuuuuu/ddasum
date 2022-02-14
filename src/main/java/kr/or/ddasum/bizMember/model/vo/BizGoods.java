@@ -15,16 +15,22 @@ public class BizGoods {
 	private int dcPrice; 			//할인가격	
 	private String menuImage;		//상품이미지
 	private char menuDelYN;			//메뉴삭제여부
-	
+	private String userName;
 	
 		
 	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public BizGoods() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public BizGoods(int menuNo, int bizNo, String authorityId, String restaurant, String menuName, String menuInfo,
-			int originalPrice, int dcPrice, String menuImage, char menuDelYN) {
+			int originalPrice, int dcPrice, String menuImage, String userName, char menuDelYN) {
 		super();
 		this.menuNo = menuNo;
 		this.bizNo = bizNo;
@@ -36,6 +42,7 @@ public class BizGoods {
 		this.dcPrice = dcPrice;
 		this.menuImage = menuImage;
 		this.menuDelYN = menuDelYN;
+		this.userName = userName;
 	}
 	public int getMenuNo() {
 		return menuNo;

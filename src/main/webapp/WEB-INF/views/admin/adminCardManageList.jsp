@@ -1,5 +1,5 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +39,7 @@
             <div class="container">
                 <div class="container_top">
                     <div class="count-all">
-                        <p>전체 <span>10</span> 건</p>
+                        <p>전체 <span>${cardTotalCount }</span> 건</p>
                     </div>
                     
                     <div class="box-search">
@@ -80,134 +80,73 @@
                         </thead>
                         
                         <tbody>
+                        <c:choose>
+                        <c:when test="${!requestScope.list.isEmpty() }">
+                        <c:forEach items="${requestScope.list }" var="cm">
                             <tr>
-                                <td>${cm.cmNo }</td>
-                                <td>${cm.userId }</td>
-                                <td>${cm.userName }</td>
-                                <td>${cm.enrollDate }</td>
+                                <td>${cm.CMNO }</td>
+                                <td>${cm.USERID }</td>
+                                <td>${cm.USERNAME }</td>
+                                <td>${cm.ENROLLDATE }</td>
                                 <td>
-                                <c:if test="${cm.detailYN eq 'Y'.charAt(0) }">
+                                <c:if test='${ cm.DETAILYN.equals("Y") }'>
                                 <button type="button" class="ok_btn">있음</button>
                                 </c:if>
-                                <c:if test="${cm.detailYN eq 'N'.charAt(0) }">
+                                <c:if test='${ cm.DETAILYN.equals("N") }'>
                                 <button type="button" class="none_btn">없음</button>
                                 </c:if>
                                 </td>
                                 <td>
-                                <c:if test="${cm.checkYN eq 'Y'. charAt(0) }">
+                                <c:if test='${cm.CHECKYN.equals("Y") }'>
                                 <button type="button" class="pass_btn">
                                 <a href="/admin/adminCardConfirm.do">확인</a></button>
                                 </c:if>
-                                <c:if test="${cm.checkYN eq 'N'. chatAt(0) }">
+                                <c:if test='${cm.CHECKYN.equals("N") }'>
                                 <button type="button" class="wait_btn">
                                 <a href="/admin/adminCardConfirm.do">확인</a></button>
                                 </c:if>
                                 </td>
                                 <td>
-                                <c:if test="${cm.joinYN eq 'Y'.charAt(0) }">
+                                <c:if test='${cm.JOINYN.equals("Y") }'>
                                 <button type="button" class="success_btn">승인</button>
                                 </c:if>
-                                <c:if test="${cm.joinYN eq 'N'.charAt(0) }">
+                                <c:if test='${cm.JOINYN.equals("N") }'>
                                 <button type="button" class="reject_btn">반려</button>
                                 </c:if>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>user22</td>
-                                <td>김나나</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="none_btn">없음</button></td>
-                                <td><button type="button" class="wait_btn">대기</button></td>
-                                <td><button type="button" class="reject_btn">반려</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>user11</td>
-                                <td>김가가</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">있음</button></td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">승인</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>user22</td>
-                                <td>김나나</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="none_btn">없음</button></td>
-                                <td><button type="button" class="ok_btn">대기</button></td>
-                                <td><button type="button" class="ok_btn">반려</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>user11</td>
-                                <td>김가가</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">있음</button></td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">승인</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>user22</td>
-                                <td>김나나</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="none_btn">없음</button></td>
-                                <td><button type="button" class="ok_btn">대기</button></td>
-                                <td><button type="button" class="ok_btn">반려</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>user11</td>
-                                <td>김가가</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">있음</button></td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">승인</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>user22</td>
-                                <td>김나나</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="none_btn">없음</button></td>
-                                <td><button type="button" class="ok_btn">대기</button></td>
-                                <td><button type="button" class="ok_btn">반려</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>user11</td>
-                                <td>김가가</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="ok_btn">있음</button></td>
-                                <td><button type="button" class="ok_btn">확인</button></td>
-                                <td><button type="button" class="ok_btn">승인</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>user22</td>
-                                <td>김나나</td>
-                                <td>2022-02-02</td>
-                                <td><button type="button" class="none_btn">없음</button></td>
-                                <td><button type="button" class="ok_btn">대기</button></td>
-                                <td><button type="button" class="ok_btn">반려</button></td>
-                            </tr>
+                        </c:forEach>
+                        </c:when>
+                        </c:choose>
                         </tbody> 
                         
                     </table>
             
                     <div id="page_wrap">
-                        <ul class="page_ul">
-            
+                        <ul id="page_ul">
+                        <c:if test="${ preNavi > 0}">
+                           <li><a href='/admin/adminCardManageList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                        </c:if>
+                        <c:forEach items="${ navi }" var="i">
+                           <c:choose>
+                              <c:when test="${i==currentPage}">
+                                 <li><a id="page_active" href='/admin/adminCardManageList.do?currentPage=${i}'>${i}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a id="page_inactive" href='/admin/adminCardManageList.do?currentPage=${i}'>${i}</a></li>
+                              </c:otherwise>
+                              </c:choose>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+                           <li><a href='/admin/adminCardManageList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                        </c:if>
                         </ul>
                     </div>
 
                 </div>
             </div>
           </div>
-          
+         </div>          
 
 </body>
 </html>
