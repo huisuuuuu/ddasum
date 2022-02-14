@@ -37,6 +37,18 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDAO.countnotice();
 
 	}
+	
+	@Override
+	public ArrayList<Notice> noticeMainPageview() {
+		return nDAO.noticeMainPageview();
+		
+	}
+
+	@Override
+	public ArrayList<Notice> faqMainPageview() {
+		return nDAO.faqMainPageview();
+		
+	}
 
 
 
