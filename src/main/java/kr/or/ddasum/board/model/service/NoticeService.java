@@ -1,24 +1,14 @@
 package kr.or.ddasum.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.Detail;
 
 public interface NoticeService {
 
-	/**
-	  * @param info_id 
-	 * @param cntPerPageInt 
-	 * @param nowPageInt 
-	 * @return 
-	 * @Method Name : selectAllNotice
-	  * @작성일 : 2022. 2. 7.
-	  * @작성자 : lee
-	  * @변경이력 : 
-	  * @Method 설명 :공지사항 리스트 호출
-	  */
-	ArrayList<Notice> selectAllNotice(String info_id, int nowPage, int cntPerPage);
+
 
 	/**
 	  * @Method Name : noticeDetail
@@ -32,16 +22,26 @@ public interface NoticeService {
 	Notice noticeDetail(int iNo);
 
 	/**
-	  * @Method Name : countnotice
+	  * @Method Name : recordNoticeTotalCount
 	  * @작성일 : 2022. 2. 14.
 	  * @작성자 : lee
 	  * @변경이력 : 
 	  * @Method 설명 :
-	  * @param getiNo
 	  * @return
 	  */
-	int countnotice();
+	int recordNoticeTotalCount();
 
+	/**
+	  * @Method Name : selectAllNotice
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @return
+	  */
+	ArrayList<HashMap<String, Object>> selectAllNotice(int currentPage, int recordCountPerPage);
 
 	
 	/**

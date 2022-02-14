@@ -22,12 +22,14 @@ public class BizMemberDAO {
 	@Qualifier(value="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSession;
 
+	
+	
 	/**
 	  * @Method Name : bizManage
 	  * @작성일 : 2022. 2. 8.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :사업자 정보 요청
+	  * @Method 설명 :사업자 정보 페이지 데이터 호출
 	  * @param bizMember
 	  * @return
 	  */
@@ -42,7 +44,7 @@ public class BizMemberDAO {
 	  * @작성일 : 2022. 2. 8.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :상품 정보 리스트
+	  * @Method 설명 :상품 정보 리스트 호출(페이징 처리)
 	  * @param bizNo
 	  */
 	public ArrayList<BizGoods> goodsManage(int bizNo, int start, int end) {
@@ -75,7 +77,7 @@ public class BizMemberDAO {
 	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :회원탈퇴 로직
+	  * @Method 설명 :사업자 회원 탈퇴 호출(미완성)
 	  * @param bizId
 	  * @return
 	  */
@@ -90,7 +92,7 @@ public class BizMemberDAO {
 	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :사업자 유형 변환
+	  * @Method 설명 :사업자 유형(SP, DC) 변환 호출
 	  * @param bizNo
 	  * @return
 	  */
@@ -104,7 +106,7 @@ public class BizMemberDAO {
 	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :상품추가
+	  * @Method 설명 :상품 추가 로직(이미지 미 추가)
 	  * @param bg
 	  * @return
 	  */
@@ -119,7 +121,7 @@ public class BizMemberDAO {
 	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :메뉴수정 페이지 데이터 요청
+	  * @Method 설명 :메뉴 수정 페이지 데이터 요청
 	  * @param menuNo
 	  * @return
 	  */
@@ -133,7 +135,7 @@ public class BizMemberDAO {
 	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :상품수정
+	  * @Method 설명 :상품수정 로직
 	  * @param bg
 	  * @return
 	  */
@@ -147,40 +149,20 @@ public class BizMemberDAO {
 	  * @작성일 : 2022. 2. 11.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :예약 리스트 조회
+	  * @Method 설명 :예약 리스트 호출(페이징처리)
 	  * @param bizNo
 	 * @param end 
 	 * @param start 
 	  * @return
 	  */
-	public ArrayList<Detail> bizReserv(int bizNo, int start, int end) {
-		HashMap<String, Integer> hashmap;
-		hashmap = new HashMap<>();
-		hashmap.put("bizNo", bizNo);
-		hashmap.put("start", start);
-		hashmap.put("end", end);
-		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.bizReserv", hashmap));
+	public ArrayList<Detail> bizReserv(int currentPage, int recordCountPerPage, int bizNo) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.bizReserv", bizNo, rb));
 	}
 
-	/**
-	  * @Method Name : calculate
-	  * @작성일 : 2022. 2. 11.
-	  * @작성자 : lee
-	  * @변경이력 : 
-	  * @Method 설명 :정산 리스트 조회
-	  * @param bizNo
-	  * @return
-	  */
-	public ArrayList<Calculater> calculate(int bizNo, int start, int end) {
-		HashMap<String, Integer> hashmap;
-		hashmap = new HashMap<>();
-		hashmap.put("bizNo", bizNo);
-		hashmap.put("start", start);
-		hashmap.put("end", end);
-		
-		return new ArrayList<Calculater> (sqlSession.selectList("bizAdmin.calculate", hashmap));
-	}
-
+/*
 	/**
 	  * @Method Name : countGood
 	  * @작성일 : 2022. 2. 12.
@@ -190,7 +172,7 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-	public int countGood(int bizNo) {
+/*	public int countGood(int bizNo) {
 		return sqlSession.selectOne("bizAdmin.countGood", bizNo);
 	}
 
@@ -203,7 +185,7 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-	public int countreserv(int bizNo) {
+/*	public int countreserv(int bizNo) {
 		return sqlSession.selectOne("bizAdmin.countreserv", bizNo);
 	}
 
@@ -216,10 +198,10 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-	public int countcalculate(int bizNo) {
+/*	public int countcalculate(int bizNo) {
 		return sqlSession.selectOne("bizAdmin.countcalculate", bizNo);
 	}
-
+/*
 	/**
 	  * @Method Name : searchReserv
 	  * @작성일 : 2022. 2. 13.
@@ -242,7 +224,7 @@ public class BizMemberDAO {
 		map.put("keyword", keyword);
 		return new ArrayList<Community> (sqlSession.selectList("community.searchReserv", map, rb));
 	}
-
+*/
 	/**
 	  * @Method Name : calculate
 	  * @작성일 : 2022. 2. 13.
@@ -263,7 +245,6 @@ public class BizMemberDAO {
 		
 		return list;
 	}
-*/
 
 	/**
 	  * @Method Name : getPageNavi
@@ -277,7 +258,7 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-	public String getPageNavi(int currentPage, int recordCountPerPage, int naviCountPerPage, int bizNo) {
+	/*	public String getPageNavi(int currentPage, int recordCountPerPage, int naviCountPerPage, int bizNo) {
 		int recordTotalCount = countcalculate(bizNo);
 		
 		int pageTotalCount;
@@ -312,7 +293,92 @@ public class BizMemberDAO {
 		
 		return sb.toString();
 		}
+	*/
 
+	/**
+	  * @Method Name : recordBizTotalCount
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 사업자 수 확인
+	  * @return
+	  */
+	public int recordBizTotalCount(int bizNo) {
+		return sqlSession.selectOne("bizAdmin.recordBizTotalCount", bizNo);
+			}
+	/**
+	  * @Method Name : goodsManageList
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :상품 리스트 호출(페이징처리)
+	  * @return
+	  */
+	public ArrayList<HashMap<String, Object>> goodsManageList(int bizNo, int currentPage, int recordCountPerPage) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		int bizNo1 = bizNo;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("bizAdmin.goodsManageList", bizNo1, rb));
+		}
+
+	/**
+	  * @Method Name : memberDetailTotalCount
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :예약 수 확인
+	  * @param bizNo
+	  * @return
+	  */
+	public int memberDetailTotalCount(int bizNo) {
+		return sqlSession.selectOne("bizAdmin.memberDetailTotalCount", bizNo);
+
+	}
+
+	/**
+	  * @Method Name : calculateManage
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 정산 리스트(페이징)
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @param bizNo
+	  * @return
+	  */
+	public ArrayList<Detail> calculateManage(int currentPage, int recordCountPerPage, int bizNo) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<Detail> (sqlSession.selectList("bizAdmin.calculateManage", bizNo, rb));
+	}
+
+	/**
+	  * @Method Name : calculateTotalCount
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param bizNo
+	  * @return
+	  */
+/*	public int calculateTotalCount(int bizNo) {
+		return sqlSession.selectOne("bizAdmin.calculateTotalCount", bizNo);
+
+	}
+*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

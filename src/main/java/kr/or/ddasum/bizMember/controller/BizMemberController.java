@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -43,183 +44,116 @@ public class BizMemberController {
 	}	
 	
 	@RequestMapping(value="/BizMember/goodsManage.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView goodsManage(@SessionAttribute BizMember bizMember,
+	public ModelAndView goodsManage(@RequestParam(defaultValue ="1") int currentPage,
+								@SessionAttribute BizMember bizMember,
 								HttpServletRequest request,
 								BizGoods bizGoods,
 								ModelAndView mav
 								, @RequestParam(value="nowPage", required=false)String nowPage
 								, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-
-		//total
-		int result = bService.countreserv(bizMember.getBizNo());
-
-		//paging
-		if (nowPage == null && cntPerPage == null) {
-			nowPage = "1";
-			cntPerPage = "10";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) { 
-			cntPerPage = "10";
-		}
-		
-		int cntPage = 5;
-		int cntPerPageInt = Integer.parseInt(cntPerPage);
-		int nowPageInt = Integer.parseInt(nowPage);
-		
-		int lastPage = (int)Math.ceil(result/cntPerPageInt);
-		int endPage = ((int)Math.ceil(nowPageInt/cntPage))*cntPage;
-		
-		if (lastPage < endPage) {
-			endPage = lastPage;
-		}
-		int startPage = endPage - cntPage + 1;
-		if (startPage < 1) {
-			startPage = 1;
-		}
-		if(endPage <= 0) {
-			lastPage = 1;
-			endPage = 1;
-		}
-		
 		int bizNo = bizMember.getBizNo();
-		ArrayList<BizGoods> list = bService.goodsManage(bizNo, nowPageInt, cntPerPageInt);
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int recordBizTotalCount = bService.recordBizTotalCount(bizNo);
+		int pageTotalCount = (int)Math.ceil(recordBizTotalCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
 		
-		HashMap<String, Integer> paging;
-		paging = new HashMap<>();
-		paging.put("startPage", startPage);
-		paging.put("nowPage", nowPageInt);
-		paging.put("endPage", endPage);
-		paging.put("lastPage", lastPage);
-		paging.put("cntPerPage", cntPerPageInt);
-
-		mav.addObject("result", result);
-		mav.addObject("paging", paging);
+		ArrayList<HashMap<String, Object>> list = bService.goodsManageList(bizNo, currentPage, recordCountPerPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}
+		
+		
+		mav.addObject("recordBizTotalCount", recordBizTotalCount);
 		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		
+
+		
+		
 		mav.setViewName("/bizMember/goodsManage");
 
+		
 		return mav;
 
 	}	
 	
 	@RequestMapping(value="/BizMember/bizReserv.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView bizReserv(@SessionAttribute BizMember bizMember,
-								HttpServletRequest request,
+	public ModelAndView bizReserv(@RequestParam(defaultValue ="1" ) int currentPage, 
+								HttpServletRequest request, 
 								Detail detail,
-								ModelAndView mav
-								, @RequestParam(value="nowPage", required=false)String nowPage
-								, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-
-		//total
-		int result = bService.countreserv(bizMember.getBizNo());
-
-		//paging
-		if (nowPage == null && cntPerPage == null) {
-			nowPage = "1";
-			cntPerPage = "10";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) { 
-			cntPerPage = "10";
-		}
-		
-		int cntPage = 5;
-		int cntPerPageInt = Integer.parseInt(cntPerPage);
-		int nowPageInt = Integer.parseInt(nowPage);
-		
-		int lastPage = (int)Math.ceil(result/cntPerPageInt);
-		int endPage = ((int)Math.ceil(nowPageInt/cntPage))*cntPage;
-		
-		if (lastPage < endPage) {
-			endPage = lastPage;
-		}
-		int startPage = endPage - cntPage + 1;
-		if (startPage < 1) {
-			startPage = 1;
-		}
-		if(endPage <= 0) {
-			lastPage = 1;
-			endPage = 1;
-		}
-		
+								ModelAndView mav, 
+								@SessionAttribute BizMember bizMember){
 		int bizNo = bizMember.getBizNo();
-		ArrayList<Detail> list = bService.bizReserv(bizNo, nowPageInt, cntPerPageInt);
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int detailTotalCount = bService.detailTotalCount(bizNo);
+		int pageTotalCount = (int)Math.ceil(detailTotalCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
 		
-		HashMap<String, Integer> paging;
-		paging = new HashMap<>();
-		paging.put("startPage", startPage);
-		paging.put("nowPage", nowPageInt);
-		paging.put("endPage", endPage);
-		paging.put("lastPage", lastPage);
-		paging.put("cntPerPage", cntPerPageInt);
-
-		mav.addObject("result", result);
-		mav.addObject("paging", paging);
+		ArrayList<Detail> list = bService.bizReserv(currentPage, recordCountPerPage, bizNo);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}	
+		mav.addObject("detailTotalCount", detailTotalCount);
 		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
 		mav.setViewName("/bizMember/bizReserv");
+		
+		return mav;			
+		
 
-		return mav;
 		
 	}		
 	
 	@RequestMapping(value="/BizMember/calculateManage.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView calculate(@SessionAttribute BizMember bizMember,
-								HttpServletRequest request,
-								Calculater calculater,
-								ModelAndView mav
-								, @RequestParam(value="nowPage", required=false)String nowPage
-								, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+	public ModelAndView calculate(@RequestParam(defaultValue ="1" ) int currentPage, 
+								HttpServletRequest request, 
+								Detail detail,
+								ModelAndView mav, 
+								@SessionAttribute BizMember bizMember){
 
-		//total
-		int result = bService.countcalculate(bizMember.getBizNo());
-		
-		//paging
-		if (nowPage == null && cntPerPage == null) {
-			nowPage = "1";
-			cntPerPage = "10";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) { 
-			cntPerPage = "10";
-		}
-		
-		int cntPage = 5;
-		int cntPerPageInt = Integer.parseInt(cntPerPage);
-		int nowPageInt = Integer.parseInt(nowPage);
-		
-		int lastPage = (int)Math.ceil(result/cntPerPageInt);
-		int endPage = ((int)Math.ceil(nowPageInt/cntPage))*cntPage;
-		
-		if (lastPage < endPage) {
-			endPage = lastPage;
-		}
-		int startPage = endPage - cntPage + 1;
-		if (startPage < 1) {
-			startPage = 1;
-		}
-		if(endPage <= 0) {
-			lastPage = 1;
-			endPage = 1;
-		}
-		
 		int bizNo = bizMember.getBizNo();
-		ArrayList<Calculater> list = bService.calculate(bizNo, nowPageInt, cntPerPageInt);
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int detailTotalCount = bService.detailTotalCount(bizNo);
+		int pageTotalCount = (int)Math.ceil(detailTotalCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
 		
-		HashMap<String, Integer> paging;
-		paging = new HashMap<>();
-		paging.put("startPage", startPage);
-		paging.put("nowPage", nowPageInt);
-		paging.put("endPage", endPage);
-		paging.put("lastPage", lastPage);
-		paging.put("cntPerPage", cntPerPageInt);
-		
-		mav.addObject("result", result);
-		mav.addObject("paging", paging);
+		ArrayList<Detail> list = bService.calculateManage(currentPage, recordCountPerPage, bizNo);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}	
+		mav.addObject("detailTotalCount", detailTotalCount);
 		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
 		mav.setViewName("/bizMember/calculateManage");
-
-		return mav;
+		
+		return mav;			
 	}		
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="/BizMember/goodDetail.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String goodDetail() {
@@ -294,9 +228,11 @@ public class BizMemberController {
 	
 	@RequestMapping(value="/bizMember/withDraw.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String withDraw(HttpServletRequest request, Model model, 
-						@SessionAttribute String bizId,
+	public String withDraw(HttpServletRequest request,  
+						@SessionAttribute BizMember bizMember,
 						HttpSession session) {
+
+		String bizId = bizMember.getBizId();
 		
 		int result = bService.updateWithdraw(bizId);
 		
@@ -409,6 +345,7 @@ public class BizMemberController {
 
 	}
 
+	/*
 	@RequestMapping(value = "/excelConvert", method = RequestMethod.GET)
 	public ModelAndView excelConvert(Locale locale, @SessionAttribute BizMember bizMember, Calculater calculater, Model model
 									, @RequestParam(value="nowPage", required=false)String nowPage
@@ -456,4 +393,5 @@ public class BizMemberController {
 		
 		return mv;
 	}
+	*/
 }

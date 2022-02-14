@@ -198,7 +198,7 @@
 				</a>
 			</div>
 			<div class="submenu"> 
-				<a href="/BizMember/goodsManage.do"><br>
+				<a href="/BizMember/goodsManage_dc.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu2.png" alt="로고">
 					<span class="menulist">상품 관리</span><br><br>
 				</a>
@@ -220,7 +220,7 @@
 	<div id="rightArea">
 		<div id="R-upArea">
 			<div id="goodManage">
-				<h1>후원 상품 관리>상품수정</h1>
+				<h1>상품 관리>상품수정</h1>
 					<span class="logout">
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
@@ -232,7 +232,7 @@
 		<div id="R-downArea">
 			<div id="R-content">
 				<div id="content-title">
-					후원 상품 수정
+					할인 상품 수정
 				</div>
 				<form action="/bizMember/GoodMo.do" method="post" id="addForm">
 				<div id="content">
@@ -270,9 +270,17 @@
 							<input type='text' class="entertext" name="originalPrice" value=${requestScope.BizGoods.originalPrice }>
 						</div>					
 					</div>
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>할인가격</span>
+						</div>
+						<div class="infoWriter">
+							<input type='text' class="entertext" name="dcPrice" value=${requestScope.BizGoods.dcPrice }>
+						</div>					
+					</div>
 					<div class="confirmArea">
 						<input type='submit' id="GoodMo" value='상품 수정'/>
-						<a href="/BizMember/goodsManage.do"><input class="confirmstyle" type="button" value="취소"></a>
+						<a href="/BizMember/goodsManage_dc.do"><input class="confirmstyle" type="button" value="취소"></a>
 					</div>
 					<input type='hidden' name="menuNo" value="${requestScope.BizGoods.menuNo }"/>
 				</div>

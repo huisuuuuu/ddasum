@@ -48,8 +48,8 @@ crossorigin="anonymous"></script>
 			                <c:forEach items="${requestScope.list }" var="m" varStatus="i">
 							<tr>
 			                    <td>${i.count }</td>
-			                	<td><a href="/board/noticeDetail.do?iNo=${m.iNo }">${m.iTitle }</a></td>
-			                    <td>${m.iRegdate }</td>
+			                	<td><a href="/board/noticeDetail.do?iNo=${m.INO }">${m.ITITILE }</a></td>
+			                    <td>${m.REGDATE }</td>
 			                </tr>
 							</c:forEach>
 						</table>
@@ -63,25 +63,28 @@ crossorigin="anonymous"></script>
 				</div>
 				<div class="pagingArea">
 					<!-- paging -->
-					<div style="display: block; text-align: center;">		
-						<c:if test="${paging.startPage != 1 }">
-							<a href="/board/noticeBoard.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-						</c:if>
-						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-							<c:choose>
-								<c:when test="${p == paging.nowPage }">
-									<b>${p }</b>
-								</c:when>
-								<c:when test="${p != paging.nowPage }">
-									<a href="/board/noticeBoard.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-								</c:when>
-							</c:choose>
-						</c:forEach>
-						<c:if test="${paging.endPage != paging.lastPage}">
-							<a href="/board/noticeBoard.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-						</c:if>
-					</div>
+                    <div id="page_wrap">
+                        <ul id="page_ul">
+                        <c:if test="${ preNavi > 0}">
+                           <li><a href='/board/noticeBoard.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                        </c:if>
+                        <c:forEach items="${ navi }" var="i">
+                           <c:choose>
+                              <c:when test="${i==currentPage}">
+                                 <li><a id="page_active" href='/board/noticeBoard.do?currentPage=${i}'>${i}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a id="page_inactive" href='/board/noticeBoard.do?currentPage=${i}'>${i}</a></li>
+                              </c:otherwise>
+                              </c:choose>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+                           <li><a href='/board/noticeBoard.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                        </c:if>
+                        </ul>
+                    </div>
 				</div>
+				
 			</div>
 		</div>
 		<div id="footer">
