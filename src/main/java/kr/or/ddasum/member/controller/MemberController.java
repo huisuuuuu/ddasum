@@ -99,7 +99,7 @@ public class MemberController {
 
 		if (userPwd == null) {
 
-			return "member/passwordCheck";
+			return "member/passwordCheckPage";
 		} else {
 			String userId = request.getParameter("userId");
 

@@ -488,7 +488,7 @@
             </ul>
         </div>
         <div id="header-login-area">
-            <div id="header-myPage-hover-text"><a href="">${sessionScope.member.userId }</a>
+            <div id="header-myPage-hover-text"><a href="">${sessionScope.member.userId } 님</a>
                 <div id="hover-menu2" style="display: none">
                    <div id="myPage-img-area">
 		               <img src="/resources/images/user.png" style="width: 18px; padding-right: 5px">
