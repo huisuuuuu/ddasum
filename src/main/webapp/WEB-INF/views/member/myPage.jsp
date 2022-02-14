@@ -169,6 +169,14 @@
         font-size: 22px;
         font-weight: bolder;
     }
+     #under {
+        width: 80px;
+        height: 5px;
+        margin-bottom: 30px;
+        background: #FFA77E;
+        position: relative;
+        display: inline-block;
+    }
     #content-center-empty-top-area2{
         width: 100%;
         height: 95px;
@@ -404,9 +412,11 @@
     }
  </style>
 <body>
+
+
 <div id=header>
        <div id="header-logo-area">
-           <a href=""><img id="header-logo-img" src="/resources/images/ddasum_header_logo.png"></a>
+           <a href="/"><img id="header-logo-img" src="/resources/images/ddasum_header_logo.png"></a>
         </div>
        <div id="header-meun-area">
            <ul id="header-menu-ul">
@@ -443,11 +453,15 @@
         <div id="content-center">
             <div id="content-center-empty-top-area1"></div>
             <div id="myPage-title_area">
-                <span>마이페이지</span><hr style="width: 60px; border: 0px; height: 3px;background-color: #FFA77E; margin-left: 760px">
+               <div class="main_tit">
+                    <h1>마이페이지</h1>
+                    <div id="under"></div>
+                    
+                </div>
             </div>
             <div id="content-center-empty-top-area2"></div>
             <div id="content-center-info-area">
-                <div id="info-top-left"><span>꿈나무 정보</span></div><div id="info-top-rigth"><a href="/member/PasswordCheckPage.do"><button id="info-update-button">변경하기</button></a></div>
+                <div id="info-top-left"><span>꿈나무 정보</span></div><div id="info-top-rigth"><a href="/member/passwordCheckPage.do"><button id="info-update-button">변경하기</button></a></div>
                 <br><br><br><hr style="width: 100%; margin: 0px;">
                 
                 <div id="info-img-area">
@@ -537,8 +551,8 @@
         }, function() {
             $('#hover-menu2').css("display","none");
         });
-        
+  
     </script>
- 
+     
 </body>
 </html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="card">
+  <insert id="enrollMentImg" parameterType="card">
+  		MERGE INTO card_upload
+            USING DUAL
+            ON (userNo = #{userNo})
+            WHEN MATCHED THEN
+                      UPDATE SET
+                            c_original = #{cOriginal},
+                            c_change = #{cChange},
+                            c_filepath = #{cFilePath},
+                            c_filesize = #{cFileSize},
+                            c_fileupdate = #{cFileUpdate}
+            WHEN NOT MATCHED THEN
+                      INSERT (c_file_No, userNo, c_original, c_change, c_filepath, c_filesize, c_fileupdate) 
+                                 VALUES (CARD_UPLOAD_SEQ.nextval,#{userNo},#{cOriginal},#{cChange}, #{cFilePath},#{cFileSize},#{cFileUpdate})
+  	</insert>
+  	
+  	<update id="memberCardImage" parameterType="member">
+  		update member set 
+  			p_Image = #{pImage}
+  			where userNo = #{userNo}
+  	</update>
+</mapper>

@@ -171,7 +171,7 @@
   	</select>
   	
   	<update id="reservationCancleBtn" parameterType="hashmap">
-  		update detail set re_cancle = #{reCancle} where userNo = #{userNo} and re_No = #{reNo}
+  		update detail set re_cancle = 'Y' where userNo = #{userNo} and re_No = #{reNo}
   	</update>
   	
   	<update id="withdraw" parameterType="string">

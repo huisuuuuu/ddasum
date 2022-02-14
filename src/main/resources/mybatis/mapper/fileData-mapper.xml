@@ -33,5 +33,10 @@
                                  VALUES (PROFILE_IMG_SEQ.nextval,#{userNo},'',#{pOriginal},#{pChange}, #{pFilePath},#{pFileSize},#{pFileUpdate},'N' )
   	</insert> 	
   	
+  	<update id="memberPimage" parameterType="member">
+  		update member set 
+  			p_Image = #{pImage}
+  			where userNo = #{userNo}
+  	</update>
   	
 </mapper>
