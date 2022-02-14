@@ -73,24 +73,55 @@
 			<div id="reservationAndLocation">
 				<span id="reservation">메뉴 예약</span> <span id="restaurantLocation">업체 정보</span>
 			</div>
+				<input type="hidden" id="bizNo" value="${dcInfo.bizNo }">
+				<input type="hidden" id="userNo" value="${sessionScope.member.userNo }">
+				<input type="hidden" id="authorityId" value="${sessionScope.member.authorityId }">
+				<input type="hidden" id="address" value="${sessionScope.member.address }">
 			<div id="menu">
 			<c:choose>
 				<c:when test="${!dcMenu.isEmpty()}">
-					<h3>※ 당일 예약만 가능한 점 유의하시기 바랍니다.</h3>
-					<input type="hidden" id="bizNo" value="${dcInfo.bizNo }">
-					<input type="hidden" id="userNo" value="${sessionScope.member.userNo }">
-					<input type="hidden" id="authorityId" value="${sessionScope.member.authorityId }">
-                <c:forEach items="${dcMenu}" var="m">
-				<div class="food">
-					<img src="${m.menuImage }">
-					<div>
-						<p>${m.menuName }</p>
-						<p class="explain">${m.menuInfo }</p>
-						<span class="price">${m.originalPrice }원</span><span class="salePrice">${m.dcPrice }원</span>
-					</div>
-					<button class="reservationBtn" value="${m.menuNo }">예약하기</button>
-				</div>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${sessionScope.member.authorityId ne 'DREAM'}">
+						<h3>※ 꿈나무 회원만 예약 가능합니다.</h3>
+					</c:when>
+					<c:when test="${dcInfo.area ne '[sessionScope.member.address]'}">
+						<c:choose>
+							<c:when test="${dcInfo.area eq 'SEOUL' }">
+								<h3>※ 서울 거주자만 예약 가능합니다.</h3>
+							</c:when>
+							<c:when test="${dcInfo.area eq 'INCHEON' }">
+								<h3>※ 인천 거주자만 예약 가능합니다.</h3>
+							</c:when>
+							<c:when test="${dcInfo.area eq 'GYEONGGI' }">
+								<h3>※ 경기도 거주자만 예약 가능합니다.</h3>
+							</c:when>
+						</c:choose>
+					</c:when>
+					<c:otherwise>
+						<h3>※ 당일 예약만 가능한 점 유의하시기 바랍니다.</h3>
+					</c:otherwise>
+					</c:choose>	
+               			<c:forEach items="${dcMenu}" var="m">
+						<div class="food">
+						<img src="${m.menuImage }">
+						<div>
+							<p>${m.menuName }</p>
+							<p class="explain">${m.menuInfo }</p>
+							<span class="price">${m.originalPrice }원</span><span class="salePrice">${m.dcPrice }원</span>
+						</div>
+						<c:choose>
+							<c:when test="${sessionScope.member.authorityId ne 'DREAM'}">
+								<button class="reservationBtn" style="background-color:#FFEAE0" disabled="true">예약하기</button>
+							</c:when>
+							<c:when test="${dcInfo.area ne '[sessionScope.member.address]' }">
+								<button class="reservationBtn" style="background-color:#FFEAE0" disabled="true">예약하기</button>
+							</c:when>
+							<c:otherwise>
+								<button class="reservationBtn" value="${m.menuNo }">예약하기</button>
+							</c:otherwise>
+						</c:choose>
+						</div>
+					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<h3>※ 등록된 메뉴가 없습니다.</h3>
@@ -104,6 +135,15 @@
 	</div>
 	
 	<script>
+	
+	$(document).ready(function(){
+        var address = $("#address").attr("value");
+        
+        console.log(address);
+        
+    	});
+	
+	
 		$('.reservationBtn').click(function(){
 			
 			var bizNo = $('#bizNo').val();
@@ -128,8 +168,36 @@
 	              		 url: "/dcRestaurant/reservation.do",
 	            		 data: {"bizNo":bizNo, "userNo":userNo, "menuNo":menuNo},
 	            		 type: "get",
-	            		 success: function(){
+	            		 success: function(result){
 	            			 
+	            			 if(result=="true"){
+	            				 
+	            			 Swal.fire({
+	            		            title: '예약이 완료되었습니다.',
+	            		            text: "예약 페이지로 이동하시겠습니까?",
+	            		            icon: "success",
+	            		            showCancelButton: true,
+	            		            confirmButtonText: '예',
+	            		            cancelButtonText: '아니오',
+	            		            showLoaderOnConfirm: true,
+	            		            preConfirm: () => {
+	            			 
+	   									location.href='/member/reservationPage.do';
+	   								}
+	            			 })
+	   							$('.swal2-styled.swal2-confirm').css('background-color','#F8976A');
+	            			 
+	            			 }else{
+	            				 Swal.fire({
+	       						  icon: 'success',
+	       						  title: '예약 실패',
+	       						  text: '잔여 이용 횟수를 확인해주세요.'
+	       						})
+	       						
+	       						$('.swal2-styled.swal2-confirm').css('background-color','#F8976A');
+	         					$('.swal2-styled.swal2-confirm').html('확인');
+	            			 
+	            			 };
 	            		 },
 	            		 error: function(){
 	            			 console.log('ajax 통신 실패');

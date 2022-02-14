@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.or.ddasum.dcRestaurant.model.dao.DcRestaurantDAO;
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurant;
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurantMenu;
+import kr.or.ddasum.dcRestaurant.model.vo.MReservation;
 import kr.or.ddasum.member.model.vo.BizMember;
 
 @Service
@@ -43,9 +44,15 @@ public class DcRestaurantServiceImpl implements DcRestaurantService{
 	}
 
 	@Override
-	public int reservation(String bizNo, String userNo, String menuNo, String reNo) {
+	public int inserDetail(String bizNo, String userNo, String menuNo, String reNo) {
 		
-		return dcDAO.reservation(bizNo, userNo, menuNo, reNo);
+		return dcDAO.inserDetail(bizNo, userNo, menuNo, reNo);
+	}
+
+	@Override
+	public int insertBizReservation(String bizNo, String reNo) {
+		
+		return dcDAO.insertBizReservation(bizNo, reNo);
 	}
 
 }

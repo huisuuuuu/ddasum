@@ -41,6 +41,15 @@ public class MemberController {
 			if (m != null)
 			{
 				HttpSession session = request.getSession();
+				
+				if(m.getAddress().equals("서울")) {
+					m.setAddress("SEOUL");
+				}else if(m.getAddress().equals("인천")) {
+					m.setAddress("INCHEON");
+				}else if(m.getAddress().equals("경기")) {
+					m.setAddress("GYEONGGI");
+				};
+				
 				session.setAttribute("member", m);
 				session.setAttribute("bizMember", null);
 				return "main";

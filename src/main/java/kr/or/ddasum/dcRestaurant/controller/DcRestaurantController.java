@@ -1,10 +1,12 @@
 package kr.or.ddasum.dcRestaurant.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.or.ddasum.dcRestaurant.model.service.DcRestaurantService;
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurant;
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurantMenu;
+import kr.or.ddasum.dcRestaurant.model.vo.MReservation;
 import kr.or.ddasum.email.TempKey;
 import kr.or.ddasum.member.model.vo.BizMember;
 
@@ -96,7 +99,7 @@ public class DcRestaurantController {
 	
 	@RequestMapping(value = "/dcRestaurant/reservation.do", method = RequestMethod.GET)
 	public void reservation(@RequestParam String bizNo, @RequestParam String userNo,
-							@RequestParam String menuNo, ModelAndView mav) {
+							@RequestParam String menuNo, HttpServletResponse response) throws IOException{
 			
 			Date today = new Date();
 			TempKey tk = new TempKey();
@@ -105,12 +108,21 @@ public class DcRestaurantController {
 			sdf = new SimpleDateFormat("yyyyMMdd");
 			String reNo = sdf.format(today)+tk.getKey(6, false);
 			
-			System.out.println(bizNo+","+userNo+","+menuNo+","+reNo);
-	        
+			int result = dcService.inserDetail(bizNo, userNo, menuNo, reNo);
 			
-			int result = dcService.reservation(bizNo, userNo, menuNo, reNo);
-			
-			System.out.println(result);
+			if(result>0) {
+				
+				int result2 = dcService.insertBizReservation(bizNo, reNo);
+				
+				if(result2>0) {
+					response.getWriter().print("true");
+				}else {
+					response.getWriter().print("false");
+				}
+				
+			}else {
+				response.getWriter().print("false");
+			}
 
 	}
 	
