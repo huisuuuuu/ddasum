@@ -194,20 +194,6 @@ public interface BizMemberService {
 	  */
 	ArrayList<Detail> calculateManage(int currentPage, int recordCountPerPage, int bizNo);
 
-	/**
-	  * @Method Name : calculate
-	  * @작성일 : 2022. 2. 14.
-	  * @작성자 : lee
-	  * @변경이력 : 
-	  * @Method 설명 :
-	  * @param bizNo
-	  * @param parseInt
-	  * @param parseInt2
-	  * @return
-	  */
-	/*	ArrayList<Calculater> calculate(int bizNo, int parseInt, int parseInt2);
-*/
-
 
 	
 

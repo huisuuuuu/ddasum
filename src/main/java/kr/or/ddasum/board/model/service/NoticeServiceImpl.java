@@ -29,7 +29,7 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDAO.recordNoticeTotalCount();
 
 	}
-	
+	/*
 	@Override
 	public ArrayList<Notice> noticeMainPageview() {
 		return nDAO.noticeMainPageview();
@@ -41,11 +41,21 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDAO.faqMainPageview();
 		
 	}
-
+*/
 	@Override
 	public ArrayList<HashMap<String, Object>> selectAllNotice(int currentPage, int recordCountPerPage) {
 		return nDAO.selectAllNotice(currentPage, recordCountPerPage);
 		
+	}
+
+	@Override
+	public int faqTotalCount() {
+		return nDAO.faqTotalCount();
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> faqBoard(int currentPage, int recordCountPerPage) {
+		return nDAO.faqBoard(currentPage, recordCountPerPage);
 	}
 
 

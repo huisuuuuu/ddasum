@@ -25,60 +25,42 @@ crossorigin="anonymous"></script>
 			</div>
 			<div class="faqArea">
 				<div class="listArea">
-					<div class="icon">
-						
-					</div>
-					<div class="subject">
-					꿈나무 카드 인증안내
-					</div>
-					<div class="content">
-						<div class="iconArea">
-							<img class="img" src="/resources/images/answer.png">
-						</div>
-						<span class="comment">
-							마이페이지 > 꿈나무 카드 인증 메뉴에 꿈나무 카드 사진을 업로드 하시면,<br>
-							관리자가 3일 내에 승인 작업을 진행합니다. 상세한 내용은 카카오톡 문의 바랍니다.
-						</span>
-					</div>
+					<div class="icon"></div>
 					
-					<div class="subject">
-					꿈나무 카드 분실시 대처 방법
-					</div>
-					<div class="content">
-						<div class="iconArea">
-							<img class="img" src="/resources/images/answer.png">
-						</div>
+				<c:forEach items="${requestScope.list }" var="m" varStatus="i">
+					<ul class="subject">
+						<span>${m.iTitle }</span>
+					</ul>
+					<ul class="content">
+						<div class="iconArea"><img class="img" src="/resources/images/answer.png"></div>
 						<span class="comment">
-							꿈나무 카드 분실시 해당 내용을 카카오톡으로 문의 바랍니다.<br>
-							승인절차를 거쳐 꿈나무카드 재인증이 필요합니다.
+							${m.iContent }
 						</span>
-					</div>
-					<div class="subject">
-					후원 증빙 내역 다운로드 안내
-					</div>
-					<div class="content">
-						<div class="iconArea">
-							<img class="img" src="/resources/images/answer.png">
-						</div>
-						<span class="comment">
-							후원정산관리 > 후원 정산 내역 우측 엑셀 아이콘을 클릭하시면,<br>
-							다운로드가 됩니다. 상세한 내용은 카카오톡 문의 바랍니다.
-						</span>
-					</div>
-					<div class="subject">
-					후원 및 할인 업체 신청 방법
-					</div>
-					<div class="content">
-						<div class="iconArea">
-							<img class="img" src="/resources/images/answer.png">
-						</div>
-						<span class="comment">
-							꿈나무들의 식사를 후원해주실 업체는 카카오톡으로 문의 바랍니다.<br>
-							자세한 내용은 개별 응답하여 드리겠습니다.
-						</span>
-					</div>
-	
+					</ul>
+				</c:forEach>
+
 				</div>
+									<!-- paging -->
+                    <div id="page_wrap">
+                        <ul id="page_ul">
+                        <c:if test="${ preNavi > 0}">
+                           <li><a href='/board/faqBoard.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                        </c:if>
+                        <c:forEach items="${ navi }" var="i">
+                           <c:choose>
+                              <c:when test="${i==currentPage}">
+                                 <li><a id="page_active" href='/board/faqBoard.do?currentPage=${i}'>${i}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a id="page_inactive" href='/board/faqBoard.do?currentPage=${i}'>${i}</a></li>
+                              </c:otherwise>
+                              </c:choose>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+                           <li><a href='/board/faqBoard.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                        </c:if>
+                        </ul>
+                    </div>
 			</div>
 		<div id="footer">
 			<jsp:include page="../commons/footer/site-footer.jsp"/>			

@@ -119,10 +119,6 @@ public class BizMemberServiceImpl implements BizMemberService{
 
 	}
 
-/*	@Override
-	public ArrayList<Calculater> calculate(int bizNo, int parseInt, int parseInt2) {
-		return bDAO.calculate(bizNo, parseInt, parseInt2);
-	}
 */
 
 	@Override

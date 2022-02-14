@@ -139,6 +139,7 @@
 			border-radius: 220px;
 			border: 1px solid gray;
 			margin: 0 auto;
+			float:none;
 		}
 		ul{
 			list-style: none;
@@ -292,27 +293,34 @@
 			<div id="R-content">
 				<div id="content-title">
 					업체 정보 관리
-					<input type='button' id="updateBTN" value='수정완료'/>
+					<input type='submit' id="updateBTN" value='수정완료'/>
 				</div>
 				<form name="updateBiz" id="updateBiz" method="post">
 					<div id="content">
 						<div id="content-L">
 							<br><br>
-							
-							<div id="bizImg">
+							<%-- <img id="bizImg" src="${requestScope.bizMember.bizImage }" alt="사진영역"> --%>
+                            <br><br><br>
+                                
+ 							<div id="selectProfile-wrap">
+	                            <div id="profileImg-area">
+	                                <c:choose>
+	                                    <c:when test="${requestScope.bizMember.bizImage !=null}">
+	                                        <img name="bizImage" src="${requestScope.bizMember.bizImage}" id="bizImg">
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                        <img src="/resources/images/bizProfile.png" id="bizImg">
+	                                    </c:otherwise>
+	                                </c:choose>
 	
-                                	<div>
-										<img class="imgsize" id=bizImg src="${requestScope.bizMember.bizImage }">
-                                	</div>
-								
-								<div style="display:block;margin: 20px 0;align-items: left;">
-									<form action="fileupload" method="post" enctype="multipart/form-data">
-									    <input id="fileSelect" class="change" type="file" name="uploadfile" placeholder="파일 선택" /><br/>
-									    <input class="change"  type="submit" value="업로드">
-									</form>
-								</div>
-                    		</div>	
-						
+	                                <div id="profileImg-plusBtn">
+	                                    <label for="selectProfileImg"></label>
+	                                    <input type="file" name="profileImg" id="selectProfileImg" accept="image/*" >
+	                                    <!-- <input type="file" name="profileImg" id="selectProfileImg" accept="image/*" onchange="loadFile(this)"> -->
+	                                </div>
+	                            </div>
+	                        </div>
+	                        
 						</div>
 						<div id="content-R">
 						<ul>
@@ -424,6 +432,7 @@ const btnOpenPopup = document.querySelector('.pwdBTN');
 	//데이터값 변경 ajax 설정
 
     $('#updateBTN').click(function(){
+    	
     	var form = {
     			ceoName : $('input[name=ceoName]').val(),
     			bizName : $('input[name=bizName]').val(),
@@ -432,8 +441,8 @@ const btnOpenPopup = document.querySelector('.pwdBTN');
     			restaurant : $("#restaurant option:selected").val(),
     			address : $('input[name=address]').val(),
     			bizTime : $("#bizTime option:selected").val(),
-    			bizCount : $("#bizCount option:selected").val()
-				
+    			bizCount : $("#bizCount option:selected").val(),
+				bizImage : $('input[name=profileImg]').val()
     	}
     	
 	  	$.ajax({
@@ -522,22 +531,40 @@ const btnOpenPopup = document.querySelector('.pwdBTN');
 			location.replace("/bizMember/bizManage.do");
 		}
     });
-	
-    function readInputFile(input) {
-        if(input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#profileImg').attr('src', e.target.result);
-                
-                
-            }
-            reader.readAsDataURL(input.files[0]);
+
+    // 이미지 업로드
+    $('#img').on('change', function() {
+	    ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+	    //배열에 추출한 확장자가 존재하는지 체크
+	    if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+	        resetFormElement($(this)); //폼 초기화
+	        window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+	    } else {
+	        file = $('#img').prop("files")[0];
+	        blobURL = window.URL.createObjectURL(file);
+	        $('#bizImg img').attr('src', blobURL);
+	        
+	        
+	    }
+    });
+    
+    $(function(){
+        $('#selectProfileImg').on('change',function(){
+            readURL(this);
+            // input 태그에서 파일의 경로가 바뀌면 파일의 경로 읽고, 
+            // readURL 함수 실행
+        });
+    });
+    function readURL(input){
+        if (input.files && input.files[0]) {
+           var reader = new FileReader();
+           reader.onload = function (e) {
+              $('#bizImg').attr('src', e.target.result);
+           }
+           reader.readAsDataURL(input.files[0]);
         }
     }
-
-    $(".inp-img").on('change', function(){
-        readInputFile(this);
-    });	
-
+	
+	
 </script>
 </html>

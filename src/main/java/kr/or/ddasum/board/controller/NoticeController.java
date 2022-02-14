@@ -67,9 +67,31 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value="/board/faqBoard.do", method = RequestMethod.GET)
-	public String faqBoard() {
+	public ModelAndView faqBoard(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav) {
+
+		int recordCountPerPage = 5;
+		int naviCountPerPage = 5;
+		int faqTotalCount = nService.faqTotalCount();
+		int pageTotalCount = (int)Math.ceil(faqTotalCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
 		
-		return "admin/faqBoard";
+		ArrayList<HashMap<String, Object>> list = nService.faqBoard(currentPage, recordCountPerPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}
+				
+		mav.addObject("recordNoticeTotalCount", faqTotalCount);
+		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		mav.setViewName("admin/faqBoard");
+					
+		return mav;		
 		
 	}
 	

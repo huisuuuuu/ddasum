@@ -190,7 +190,7 @@
 			<div class="submenu"> 
 				<a href="/BizMember/calculateManage.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu4.png" alt="로고">
-					<span class="menulist">정산 관리</span><br><br>
+					<span class="menulist">할인 정산 관리</span><br><br>
 				</a>
 			</div>
 		</div>
@@ -283,7 +283,7 @@
 								<td>${m.reNo }</td>
 								<td>${m.bizName } </td>
 								<td>${m.menuName } </td>
-								<td>${m.originalPrice }</td>
+								<td>${m.originalPrice -m.dcPrice }</td>
 							</tr>
 						</c:forEach>
 						</table>

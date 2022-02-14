@@ -43,30 +43,28 @@ public interface NoticeService {
 	  */
 	ArrayList<HashMap<String, Object>> selectAllNotice(int currentPage, int recordCountPerPage);
 
-	
 	/**
-	  * @Method Name : noticeMainview
-	  * @작성일 : 2022. 2. 12.
-	  * @작성자 : j
+	  * @Method Name : faqTotalCount
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :메인에 공지사항 제목노출
-	  * @param 
-	 * @return 
+	  * @Method 설명 :faq 토탈 카운트
+	  * @return
 	  */
-	
-	ArrayList<Notice> noticeMainPageview();
-	
-	/**
-	  * @Method Name : noticeMainview
-	  * @작성일 : 2022. 2. 12.
-	  * @작성자 : j
-	  * @변경이력 : 
-	  * @Method 설명 :메인에 자주묻는질문 제목노출
-	  * @param 
-	 * @return 
-	  */
+	int faqTotalCount();
 
-	ArrayList<Notice> faqMainPageview();
+	/**
+	  * @Method Name : faqBoard
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : faq 보드리스트 호출(페이징)
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @return
+	  */
+	ArrayList<HashMap<String, Object>> faqBoard(int currentPage, int recordCountPerPage);
+
 
 
 

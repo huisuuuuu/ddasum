@@ -363,11 +363,7 @@ public class BizMemberDAO {
 	  * @param bizNo
 	  * @return
 	  */
-/*	public int calculateTotalCount(int bizNo) {
-		return sqlSession.selectOne("bizAdmin.calculateTotalCount", bizNo);
 
-	}
-*/
 	
 	
 	
