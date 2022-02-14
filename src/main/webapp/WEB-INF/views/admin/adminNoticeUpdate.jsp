@@ -39,13 +39,13 @@
         
         <div id="content">
         	<div class="container">
-        		<form action="/admin/adminNoticeWrite.do" method="post">
+        		<form action="/admin/adminNoticeUpdate.do" method="post">
 					<div class="box-write">
 						<div class="box-subject">
-							<input type="text" name="title" placeholder="제목을 입력하세요">
+							<input type="text" name="title" value="${notice.iTitle }">
 						</div>
 						<div class="box-content">
-							<textarea name="content" placeholder="내용을 입력하세요"></textarea>
+							<textarea name="content" value="${notice.iContent }"></textarea>
 						</div>
 					<div class="box-button">
 						<input type="submit" value="완료" class="btn-ok">
