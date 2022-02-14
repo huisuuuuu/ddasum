@@ -44,20 +44,20 @@ crossorigin="anonymous"></script>
                     <div id="page_wrap">
                         <ul id="page_ul">
                         <c:if test="${ preNavi > 0}">
-                           <li><a href='/admin/faqBoard.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                           <li><a href='/board/faqBoard.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
                         </c:if>
                         <c:forEach items="${ navi }" var="i">
                            <c:choose>
                               <c:when test="${i==currentPage}">
-                                 <li><a id="page_active" href='/admin/faqBoard.do?currentPage=${i}'>${i}</a></li>
+                                 <li><a id="page_active" href='/board/faqBoard.do?currentPage=${i}'>${i}</a></li>
                               </c:when>
                               <c:otherwise>
-                                 <li><a id="page_inactive" href='/admin/faqBoard.do?currentPage=${i}'>${i}</a></li>
+                                 <li><a id="page_inactive" href='/board/faqBoard.do?currentPage=${i}'>${i}</a></li>
                               </c:otherwise>
                               </c:choose>
                         </c:forEach>
                         <c:if test="${ nextNavi } != 0">
-                           <li><a href='/admin/faqBoard.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                           <li><a href='/board/faqBoard.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
                         </c:if>
                         </ul>
                     </div>
