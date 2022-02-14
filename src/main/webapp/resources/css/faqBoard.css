@@ -30,7 +30,7 @@
 		}
 		.listArea{
 			width: 80%;
-			height: 95%;
+			height: 85%;
 			margin: 0 auto;
 			font-size: 24pt;
 			border-top: 2px solid gray;
@@ -72,3 +72,18 @@
 	     .img{
 	     	width: 50px;
 	     }
+	   	li{
+			list-style: none;
+			font-size: 18pt;
+			padding: 10px;
+			text-align: center;
+		}
+		#page_wrap{
+			text-align: center;
+		}
+		ul#page_ul {
+    		display: inline-flex;
+		}	
+		* a{
+       		text-decoration: none;
+        	color: inherit;

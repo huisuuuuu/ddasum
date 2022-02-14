@@ -78,14 +78,14 @@ public class NoticeDAO {
 	  * @Method 설명 :
 	  * @return
 	  */
-	public ArrayList<Notice> noticeMainPageview() {
+	/*public ArrayList<Notice> noticeMainPageview() {
 		
 		ArrayList<Notice> list = new ArrayList<Notice>(sqlSession.selectList("notice.notiMainPageview"));
 		
 		
 		return list;
 	}
-
+*/
 	
 	/**
 	  * @param iNo 
@@ -100,6 +100,40 @@ public class NoticeDAO {
 		ArrayList<Notice> list = new ArrayList<Notice>(sqlSession.selectList("notice.faqMainPageview"));
 		
 		return list;
+	}
+
+
+
+	/**
+	  * @Method Name : faqTotalCount
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :faq 토탈 카운트
+	  * @return
+	  */
+	public int faqTotalCount() {
+		return sqlSession.selectOne("notice.faqTotalCount");
+
+	}
+
+
+
+	/**
+	  * @Method Name : faqBoard
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :faq 보드리스트 호출(페이징)
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @return
+	  */
+	public ArrayList<HashMap<String, Object>> faqBoard(int currentPage, int recordCountPerPage) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("notice.faqBoard", null, rb));
 	}
 
 

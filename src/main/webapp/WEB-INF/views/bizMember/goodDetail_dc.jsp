@@ -94,7 +94,7 @@
 		}
 		.itemInfo{
 			width: 100%;
-			height: 20%;
+			height: 15%;
 		}
 		.iteminfodiv{
 			width: 25%;
@@ -198,7 +198,7 @@
 				</a>
 			</div>
 			<div class="submenu"> 
-				<a href="/BizMember/goodsManage_dc.do"><br>
+				<a href="/BizMember/goodsManage.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu2.png" alt="로고">
 					<span class="menulist">상품 관리</span><br><br>
 				</a>
@@ -212,7 +212,7 @@
 			<div class="submenu"> 
 				<a href="/BizMember/calculateManage.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu4.png" alt="로고">
-					<span class="menulist">후원 정산 관리</span><br><br>
+					<span class="menulist">할인 정산 관리</span><br><br>
 				</a>
 			</div>
 		</div>
@@ -309,10 +309,11 @@
 	//신규 상품 등록 ajax
 
     $('#addGood').click(function(){
+    	
     	var form = {
     			menuName : $('input[name=menuName]').val(),
     			menuInfo : $('input[name=menuInfo]').val(),
-    			originalPrice : $('input[name=originalPrice]').val()
+    			originalPrice : $('input[name=originalPrice]').val(),
     			dcPrice : $('input[name=dcPrice]').val()
 
     	}
@@ -325,10 +326,10 @@
     		success : function(rst){
     			if(rst == true){
     				alert("상품 등록 완료");
-    				location.replace("/BizMember/goodsManage_dc.do");
+    				location.replace("/BizMember/goodsManage.do");
     			}else{
     				alert("상품 등록 실패");
-    				location.replace("/BizMember/goodsManage_dc.do");
+    				location.replace("/BizMember/goodsManage.do");
     			}
     		},
     		error : function(){

@@ -74,10 +74,17 @@ public class BizMemberController {
 		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
 		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
 		
-
+		String gopage = "";
+		if("SP".equals(bizMember.getAuthorityId())) {
+			gopage = "/bizMember/goodsManage";
+			
+		} else if("DC".equals(bizMember.getAuthorityId())) {
+			
+			gopage = "/bizMember/goodsManage_dc";
+		}
 		
 		
-		mav.setViewName("/bizMember/goodsManage");
+		mav.setViewName(gopage);
 
 		
 		return mav;
@@ -145,9 +152,21 @@ public class BizMemberController {
 		mav.addObject("navi", navi);
 		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
 		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
-		mav.setViewName("/bizMember/calculateManage");
 		
-		return mav;			
+		String gopage = "";
+		if("SP".equals(bizMember.getAuthorityId())) {
+			gopage = "/bizMember/calculateManage";
+			
+		} else if("DC".equals(bizMember.getAuthorityId())) {
+			
+			gopage = "/bizMember/calculateManage_dc";
+		}
+		
+		
+		mav.setViewName(gopage);
+
+		
+		return mav;		
 	}		
 	
 	
@@ -162,6 +181,17 @@ public class BizMemberController {
 		
 	}	
 
+	@RequestMapping(value="/BizMember/goodDetail_dc.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public String goodDetail_dc() {
+		
+		return "bizMember/goodDetail_dc";
+		
+	}	
+	
+	
+	
+	
+	
 	@RequestMapping(value="/bizMember/goodModify.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView goodModify(@SessionAttribute BizMember bizMember, 
 								@RequestParam int menuNo,
@@ -186,6 +216,7 @@ public class BizMemberController {
 	@RequestMapping(value="/bizMember/updateBizManage.do", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView updateBizMemeber(@SessionAttribute BizMember bizMember, HttpServletRequest request, ModelAndView mav) {
 
+		
 		BizMember bm = bService.bizManage(bizMember);
 		
 		mav.addObject("bizMember", bm);
@@ -198,11 +229,14 @@ public class BizMemberController {
 	@ResponseBody
 	public String updateBiz(BizMember bizMemberVo,
 							@SessionAttribute BizMember bizMember, 
-							HttpSession session, 
+							HttpSession session,
+							@RequestParam String bizImage,
 							HttpServletResponse response) throws IOException{
 		String bizId = bizMember.getBizId();
-		
+
+		System.out.println(bizImage);
 		BizMember bz = new BizMember();
+		bz.setBizImage(bizImage);
 		bz.setCeoName(bizMemberVo.getCeoName());
 		bz.setBizName(bizMemberVo.getBizName());
 		bz.setBizEmail(bizMemberVo.getBizEmail());
@@ -286,7 +320,9 @@ public class BizMemberController {
 						HttpServletResponse response,
 						@RequestParam String menuName,
 						@RequestParam String menuInfo,
-						@RequestParam int originalPrice
+						@RequestParam int originalPrice,
+						@RequestParam int dcPrice
+
 						) throws IOException{
 
 		int bizNo = bizMember.getBizNo();
@@ -298,6 +334,7 @@ public class BizMemberController {
 		bg.setMenuName(bizGoodsVo.getMenuName());
 		bg.setMenuInfo(bizGoodsVo.getMenuInfo());
 		bg.setOriginalPrice(bizGoodsVo.getOriginalPrice());
+		bg.setDcPrice(bizGoodsVo.getDcPrice());
 		
 		bg.setBizNo(bizNo);
 		bg.setAuthorityId(authorityId);
@@ -345,53 +382,39 @@ public class BizMemberController {
 
 	}
 
-	/*
+
 	@RequestMapping(value = "/excelConvert", method = RequestMethod.GET)
-	public ModelAndView excelConvert(Locale locale, @SessionAttribute BizMember bizMember, Calculater calculater, Model model
-									, @RequestParam(value="nowPage", required=false)String nowPage
-									, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-		
-		//total
-		int result = bService.countcalculate(bizMember.getBizNo());
-		
-		//paging
-		if (nowPage == null && cntPerPage == null) {
-			nowPage = "1";
-			cntPerPage = "10";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) { 
-			cntPerPage = "10";
-		}
-		
-		int cntPage = 5;
-		int lastPage = (int) Math.ceil( result /  Integer.parseInt(cntPerPage));
-		int endPage = ((int)Math.ceil(Integer.parseInt(nowPage) / cntPage)) * cntPage;
-		
-		if (lastPage < endPage) {
-			endPage = lastPage;
-		}
-		
-		int startPage = endPage - cntPage + 1;
-		if (startPage < 1) {
-			startPage = 1;
-		}
-		
+	public ModelAndView excelConvert(Locale locale, 
+									@RequestParam(defaultValue ="1" ) int currentPage, 
+									HttpServletRequest request, 
+									Detail detail,
+									@SessionAttribute BizMember bizMember) {
+								
 		int bizNo = bizMember.getBizNo();
-		ArrayList<Calculater> list = bService.calculate(bizNo, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int detailTotalCount = bService.detailTotalCount(bizNo);
+		int pageTotalCount = (int)Math.ceil(detailTotalCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
 		
-		HashMap<String, Integer> paging;
-		paging = new HashMap<>();
-		paging.put("startPage", startPage);
-		paging.put("nowPage", Integer.parseInt(nowPage));
-		paging.put("endPage", endPage);
-		paging.put("cntPerPage", Integer.parseInt(cntPerPage));
+		ArrayList<Detail> list = bService.calculateManage(currentPage, recordCountPerPage, bizNo);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}	
 		
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("detailTotalCount", detailTotalCount);
 		mv.addObject("list", list);
 		mv.setViewName("/bizMember/excelConvert");
 		
 		return mv;
 	}
-	*/
+	
+	
+	
+	
+	
 }

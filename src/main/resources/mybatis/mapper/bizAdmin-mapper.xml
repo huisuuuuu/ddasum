@@ -92,7 +92,7 @@
 		#{menuName},
 		#{menuInfo},
 		#{originalPrice},
-		NULL,
+		#{dcPrice},
 		NULL,
 		'N'
 		)
@@ -152,6 +152,7 @@
 			            b.BIZ_NAME as bizName,
 						c.AUTHORITY_INFO as authorityId,
 						m.original_price as originalPrice,
+						dc_price as dcPrice,
 						d.RE_NO as reNo,
 						m.MENU_NAME as menuName,
 						d.RE_CANCLE as reCancle
