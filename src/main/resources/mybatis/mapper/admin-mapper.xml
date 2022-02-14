@@ -152,7 +152,7 @@
 	SELECT
     	INFO_NAME AS INFONAME,
     	I_NO AS INO,
-    	I_TITLE AS ITITILE,
+    	I_TITLE AS ITITLE,
     	I_CONTENT AS ICONTENT,
     	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
     	I_DEL_YN AS DELYN
@@ -175,7 +175,7 @@
 	SELECT 
     	INFO_NAME AS INFONAME,
     	I_NO AS INO,
-    	I_TITLE AS ITITILE,
+    	I_TITLE AS ITITLE,
     	I_CONTENT AS ICONTENT,
     	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
     	I_DEL_YN AS DELYN
@@ -233,6 +233,37 @@
 	
 	</select>
 	
+	<select id="adminNoticeDetail" parameterType="int" resultType="notice">
+	
+	SELECT
+    	INFO_NAME AS INFONAME,
+    	I_NO AS INO,
+    	I_TITLE AS ITITLE,
+    	I_CONTENT AS ICONTENT
+	FROM INFO
+    	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
+    WHERE I_NO=#{_params}
+	
+	</select>	
+	
+	<select id="adminFAQDetail" parameterType="int" resultType="notice">
+	
+	SELECT
+    	INFO_NAME AS INFONAME,
+    	I_NO AS INO,
+    	I_TITLE AS ITITLE,
+    	I_CONTENT AS ICONTENT
+	FROM INFO
+    	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
+    WHERE I_NO=#{_params}
+	
+	</select>	
+	
+	<update id="updateNotice" parameterType="notice">
+	
+    UPDATE INFO SET I_TITLE=#{iTitle}, I_CONTENT=#{iContent} WHERE I_NO = #{_params}	
+	
+	</update>
 
   
 </mapper>

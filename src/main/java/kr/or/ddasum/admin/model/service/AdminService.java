@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.or.ddasum.admin.model.vo.AdminMember;
-import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.Detail;
 
 public interface AdminService {
@@ -71,6 +71,19 @@ public interface AdminService {
 	//검색 글 수 페이징 (회원관리)
 	ArrayList<HashMap<String, Object>> searchMember(String type, String keyword, int currentPage,
 			int recordCountPerPage);
+
+	//공지 글 읽기
+	Notice adminNoticeDetail(int iNo);
+
+	//FAQ 글 읽기
+	Notice adminFAQDetail(int iNo);
+	
+	//공지 글 수정
+	int adminNoticeUpdate(Notice noti);
+	
+
+
+	
 	
 
 

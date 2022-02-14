@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.ddasum.admin.model.dao.AdminDAO;
 import kr.or.ddasum.admin.model.vo.AdminMember;
+import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.Detail;
 
 @Service
@@ -139,6 +140,30 @@ public class AdminServiceImpl implements AdminService{
 
 		return admDAO.adminMemberSearchList(type, keyword, currentPage, recordCountPerPage);
 	}
+	
+	@Override
+	public Notice adminNoticeDetail(int iNo) {
+		
+		return admDAO.adminNoticeDetail(iNo);
+		
+	}
+
+	@Override
+	public Notice adminFAQDetail(int iNo) {
+		
+		return admDAO.adminFAQDetail(iNo);
+		
+	}
+
+	//공지 수정
+	@Override
+	public int adminNoticeUpdate(Notice noti) {
+		return admDAO.Notice(noti);
+	}
+
+
+
+
 
 
 }

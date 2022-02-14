@@ -1,6 +1,5 @@
 package kr.or.ddasum.admin.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,11 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.admin.model.service.AdminService;
 import kr.or.ddasum.admin.model.vo.AdminMember;
+import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.Detail;
 
 @Controller
@@ -216,15 +215,13 @@ public class AdminController {
 		
 		int result = admService.adminUpdateBizMemberEndYN(map);
 		
-		System.out.println(map);
-		
-		if(result>0) {
-			mav.addObject("message", bizId + "회원이 정상탈퇴처리되었습니다.");
-			mav.setViewName("/");
-		}else {
-			mav.addObject("message", bizId + "회원이 탈퇴처리가 되지 않았습니다.");
-			mav.setViewName("/");
-		}
+//		if(result>0) {
+//			mav.addObject("message", bizId + "회원이 정상탈퇴처리되었습니다.");
+//			mav.setViewName("/");
+//		}else {
+//			mav.addObject("message", bizId + "회원이 탈퇴처리가 되지 않았습니다.");
+//			mav.setViewName("/");
+//		}
 				
 	}
 	
@@ -368,5 +365,47 @@ public class AdminController {
 	public String stroyBoard() {
 		return "/member/storyBoard";
 	}
+	
+	//공지사항 글 읽기
+	@RequestMapping(value="/admin/adminNoticeDetail.do", method = RequestMethod.GET)
+	public ModelAndView adminNoticeDetail(ModelAndView mav, @RequestParam int iNo)
+	{
+		Notice notice = admService.adminNoticeDetail(iNo);
+		
+		mav.addObject("notice", notice);
+		mav.setViewName("admin/adminNoticeDetail");
+		return mav;
+	}
+	
+
+	@RequestMapping(value="/admin/adminNoticeUpdate.do", method = RequestMethod.GET)
+	public ModelAndView adminNoticeUpdate(ModelAndView mav, @RequestParam int iNo, @RequestParam String iTitle, @RequestParam String iContent, HttpSession session, HttpServletResponse response) {
+		
+		Notice noti = new Notice();
+		
+		noti.setiNo(iNo);
+		noti.setiTitle(iTitle);
+		noti.setiContent(iContent);
+		
+		int result = admService.adminNoticeUpdate(noti);
+				
+		mav.addObject("noti", noti);
+		mav.setViewName("admin/adminNoticeUpdate");
+		
+		return mav;
+	}
+
+	
+	//FAQ 글 읽기
+	@RequestMapping(value="/admin/adminFAQDetail.do", method = RequestMethod.GET)
+	public ModelAndView adminFAQDetail(ModelAndView mav, @RequestParam int iNo)
+	{
+		Notice faq = admService.adminFAQDetail(iNo);
+		
+		mav.addObject("faq", faq);
+		mav.setViewName("admin/adminFAQDetail");
+		return mav;
+	}
+	
 	
 }

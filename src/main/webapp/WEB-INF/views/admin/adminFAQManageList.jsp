@@ -99,9 +99,9 @@
               <tr>
                 <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>${ i.count + (currentPage - 1) * 10 }</td>
-                <td>${faq.ITITILE }</td>
-                <td>${faq.ICONTENT }</td>
-                <td><button type="button" class="ok_btn">수정</button></td>
+                <td><a href="/admin/adminFAQDetail.do?iNo=${faq.INO}">${faq.ITITLE }</a></td>
+                <td><a href="/admin/adminFAQDetail.do?iNo=${faq.INO}">${faq.ICONTENT }</a></td>
+                <td><button type="button" class="ok_btn"><a href="/admin/adminFAQUpdate.do?&iNo=${faq.INO }">수정</a></button></td>
               </tr>
 
             

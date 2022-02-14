@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddasum.admin.model.vo.AdminMember;
+import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.Detail;
  
 @Repository
@@ -143,12 +144,37 @@ public class AdminDAO {
 	}
 
 	public ArrayList<HashMap<String, Object>> adminMemberSearchList(String type, String keyword, int currentPage,
-			int recordCountPerPage) {
+		int recordCountPerPage) {
 		int start = (currentPage - 1) * recordCountPerPage;
 		int end = recordCountPerPage;
 		RowBounds rb = new RowBounds(start, end);
 		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.memberSearchList", null, rb));
 	}
+	
+	//공지사항 글 읽기
+	public Notice adminNoticeDetail (int iNo) {
+		return sqlSession.selectOne("admin.adminNoticeDetail",iNo);
+	}
+		
+	//FAQ 글 읽기
+	public Notice adminFAQDetail (int iNo) {
+		return sqlSession.selectOne("admin.adminFAQDetail",iNo);
+	}
+
+	//공지사항 글 수정
+	public int adminNoticeUpdate(Notice noti) {
+		
+		return sqlSession.update("admin.updateNotice", noti);
+	}
+
+	public int Notice(Notice noti) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+		
+		
+		
+		
 
 
 

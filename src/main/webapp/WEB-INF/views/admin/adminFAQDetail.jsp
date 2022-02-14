@@ -39,17 +39,18 @@
         
         <div id="content">
         	<div class="container">
-        		<form action="/admin/adminNoticeWrite.do" method="post">
+        		<form action="/admin/adminFAQDetail.do" method="get">
 					<div class="box-write">
 						<div class="box-subject">
-							<input type="text" name="title" placeholder="제목을 입력하세요">
+							${requestScope.faq.iTitle }
 						</div>
 						<div class="box-content">
-							<textarea name="content" placeholder="내용을 입력하세요"></textarea>
+							${requestScope.faq.iContent }
 						</div>
+					</div>
 					<div class="box-button">
 						<input type="submit" value="완료" class="btn-ok">
-						<button class="btn-ok"><a href="/admin/adminNoticeManageList.do">목록</a></button>
+						<button class="btn-ok"><a href="/admin/adminFAQManageList.do">목록</a></button>
 					</div>
 				</form>
         	</div>
