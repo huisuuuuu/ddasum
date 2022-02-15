@@ -16,15 +16,18 @@
 		* div{
 			box-sizing: border-box;
 		}
-		* {
-			font-family: 'Noto Sans KR', sans-serif;
-		}
+     * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin : 0px;
+			padding : 0px;
+        }
 		* a{
         text-decoration: none;
         color: inherit;
     	}
 		#wrapper{
-			width: 1920px;
+			width: 100%;
 			height: 1080px;
 			margin: 0 auto;
 		}
@@ -183,10 +186,39 @@
 		#searchForm{
 			float: right;
 		}
-		.prdtReg{
-			
-			
-		}
+/*page navi*/
+#page_wrap {
+    width: 100%;
+}
+#page_wrap .page_ul {
+    display: table;
+    margin : 0 auto;
+}
+#page_wrap .page_ul li {
+    display: block;
+    width: 35px;
+    height: 35px;
+    float: left;
+    text-align: center;
+    margin: 0 5px;
+    line-height: 15.5px;
+    font-size: 16px;
+    color: #2A2A2A;
+}
+#page_wrap .page_ul li a {
+    display: block;
+    font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	color: #2A2A2A;
+    padding: 10px;
+    border-radius: 50%;
+/*     transition: ease 0.3s; */
+}
+#page_wrap .page_ul li a.page_active {
+    background-color: #FFA77E;
+    border-radius: 50%;
+    color: #fff;
+}
 
 		
 	</style>

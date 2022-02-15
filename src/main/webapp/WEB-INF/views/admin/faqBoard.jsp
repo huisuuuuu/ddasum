@@ -61,6 +61,7 @@ crossorigin="anonymous"></script>
                         </c:if>
                         </ul>
                     </div>
+               </div>
 			</div>
 		<div id="footer">
 			<jsp:include page="../commons/footer/site-footer.jsp"/>			
