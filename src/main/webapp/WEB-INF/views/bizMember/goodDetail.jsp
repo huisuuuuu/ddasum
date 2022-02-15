@@ -28,7 +28,7 @@
         color: inherit;
     	}
 		#wrapper{
-			width: 100%;
+			width: 1920px;
 			height: 1080px;
 			margin: 0 auto;
 		}
@@ -275,7 +275,7 @@
 							<span>상품가격</span>
 						</div>
 						<div class="infoWriter">
-							<input class="entertext" name="originalPrice" type="text">
+							<input class="entertext" id="originalPrice" name="originalPrice" type="text">
 						</div>					
 					</div>
 					<div class="confirmArea">
@@ -305,20 +305,31 @@
 	
 	//신규 상품 등록 ajax
 
+	
+
     $('#addGood').click(function(){
-    	var form = {
+    	var originalPrice = document.getElementById('originalPrice').value;
+	
+       	var form = {
     			menuName : $('input[name=menuName]').val(),
     			menuInfo : $('input[name=menuInfo]').val(),
-    			originalPrice : $('input[name=originalPrice]').val()
+    			originalPrice : $('input[name=originalPrice]').val(),
+    			dcPrice : $('input[name=dcPrice]').val()
+
     	}
     	
+    	
+    	if(originalPrice>6100){
+    		alert("6000원을 초과할 수 없습니다.")
+    		}else{
+     	
 	  	$.ajax({
     		url : "/bizMember/addGood.do",
 			dataType : "json",
 			data : form, 
     		type : "POST",
     		success : function(rst){
-    			if(rst == true){
+    			if(rst == "true"){
     				alert("상품 등록 완료");
     				location.replace("/BizMember/goodsManage.do");
     			}else{
@@ -326,12 +337,13 @@
     				location.replace("/BizMember/goodsManage.do");
     			}
     		},
-    		error : function(){
+    		error : function(request,status,error){
     			console.log('ajax 통신 에러');
     		}
     	});
+    	}
     });
-	
+		
 	
 	
 	

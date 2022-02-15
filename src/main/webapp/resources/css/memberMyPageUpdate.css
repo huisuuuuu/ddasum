@@ -1,0 +1,309 @@
+@charset "UTF-8";
+
+body { 
+    	margin : 0px;
+    }
+    * div {
+        box-sizing: border-box;
+    }
+
+    * a {
+        color: white;
+        text-decoration: none;
+    }
+
+    * hr {
+        margin-top: 0px;
+        width: 85%;
+        background-color: #707070;
+        border: 0px;
+        height: 1px;
+        margin-left: 50px;
+    }
+    #content button{
+    	cursor: pointer;
+    }
+
+   
+
+    /*컨텐츠*/
+    #content {
+        min-width: 1500px;
+        width: 100%;
+    }
+
+    .content-side-back {
+        /*사이드 빈공간*/
+        border: 1px solid white;
+        width: 15%;
+        float: left;
+    }
+
+    #content-center {
+        /*중앙 컨텐츠 공간*/
+        width: 70%;
+        float: left;
+    }
+
+    #content-center-empty-top-area1 {
+        width: 100%;
+        height: 100px;
+    }
+
+    #myPage-title_area {
+        /*마이페이지 타이틀*/
+        padding-top: 10px;
+        width: 100%;
+        height: 60px;
+        text-align: center;
+        font-family: 'Noto Sans KR';
+        font-size: 22px;
+        font-weight: bolder;
+    }
+    #under {
+        width: 80px;
+        height: 5px;
+        margin-bottom: 30px;
+        background: #FFA77E;
+        position: relative;
+        display: inline-block;
+    }
+
+    #content-center-empty-top-area2 {
+        width: 100%;
+        height: 95px;
+    }
+
+    #content-center-info-area {
+        width: 100%;
+        height: 510px;
+
+    }
+
+    #info-top-left {
+        width: 50%;
+        height: 57px;
+        padding-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Noto Sans KR';
+        float: left;
+    }
+
+    #info-top-rigth {
+        width: 50%;
+        height: 57px;
+        float: left;
+        padding-top: 20px;
+    }
+
+    #info-update-button {
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+        float: right
+    }
+
+    #info-img-area {
+        /*이미지 업로드공간*/
+        width: 30%;
+        height: 463px;
+        float: left;
+        text-align: center;
+        padding-top: 30px;
+        font-family: 'Noto Sans KR';
+        font-weight: bolder;
+        color: #707070;
+    }
+
+    #img-area {
+        
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        margin-left: 160px;
+
+    }
+    #profileImg{
+        width: 160px;
+        height: 160px;
+        border-radius: 100px;
+        margin-left: -10px;
+        margin-top: -10px;
+       
+    }
+    
+    #info-img-update-button{
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+        
+    }
+    #profileImgUpdateBtn{
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+        
+    }
+
+    #info-info-area {
+        /*정보 수정 공간*/
+        width: 70%;
+        height: 463px;
+        float: left;
+        padding-top: 70px;
+    }
+
+    .data-title {
+        width: 20%;
+        height: 30px;
+        padding-top: 10px;
+        font-family: 'Noto Sans KR';
+        font-weight: bolder;
+        text-align: center;
+        color: #707070;
+        float: left;
+
+    }
+
+    .info-data {
+        width: 70%;
+        height: 30px;
+        float: left;
+        padding-top: 10px;
+        font-family: 'Noto Sans KR';
+    }
+
+    #info-addr-update-button {
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+        float: right
+    }
+
+    #content-center-empty-center-area {
+        width: 100%;
+        height: 41px;
+        float: left;
+    }
+
+    #content-confirm-area {
+        /*꿈나무 카드 등록공간*/
+        width: 100%;
+        height: 400PX;
+        float: left;
+
+    }
+
+    #confirm-top-rigth {
+        width: 50%;
+        height: 57px;
+        padding-top: 20px;
+        font-size: 20px;
+        font-family: 'Noto Sans KR';
+        font-weight: bold;
+        float: left;
+    }
+
+    #confirm-top-left {
+        width: 50%;
+        height: 57px;
+        padding-top: 20px;
+        font-size: 20px;
+        font-family: 'Noto Sans KR';
+        font-weight: bold;
+        float: left;
+    }
+
+    #img-enrollMent-button {
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+        float: right;
+    }
+
+    #cancle-button {
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        margin-left: 10px;
+        font-family: 'Noto Sans KR';
+        float: right;
+    }
+
+    #card-img-area {
+        /*이미지올라가는 곳*/
+        width: 35%;
+        height: 332px;
+        float: left;
+        padding-top: 40px;
+        padding-right: 25px;
+        text-align: center;
+    }
+
+    #card-img {
+        
+        width: 90%;
+        height: 60%;
+    }
+
+    #success-fail-text-area {
+        width: 65%;
+        height: 332px;
+        float: left;
+        padding-top: 10px;
+        padding-left: 50px;
+        font-family: 'Noto Sans KR';
+        color: #707070;
+    }
+    #info-enrollMent-update-button{
+    	background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+        margin-right:60px;
+    }
+
+    #content-center-empty-bottom-area {
+        width: 100%;
+        height: 50px;
+        float: left;
+    }
+
+    #delete-user-button-area {
+        width: 100%;
+        height: 75px;
+        float: left;
+        text-align: center;
+
+    }
+
+    #delete-user-button {
+        background-color: #E6510B;
+        color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        margin-left: 10px;
+        font-family: 'Noto Sans KR';
+    }

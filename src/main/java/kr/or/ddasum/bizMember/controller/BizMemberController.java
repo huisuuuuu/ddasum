@@ -189,21 +189,32 @@ public class BizMemberController {
 	}	
 	
 	
-	
-	
-	
 	@RequestMapping(value="/bizMember/goodModify.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView goodModify(@SessionAttribute BizMember bizMember, 
-								@RequestParam int menuNo,
+								@RequestParam String menuNo,
 								ModelAndView mav) {
-
-		BizGoods bg = bService.goodModify(menuNo);
-		
+		System.out.println("통신: 성공");
+		BizGoods bg = bService.goodModify(Integer.parseInt(menuNo));
+		System.out.println("bg1: "+bg);
 		mav.addObject("BizGoods", bg);
 		mav.setViewName("/bizMember/goodModify");
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/bizMember/goodModify_dc.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView goodModify_dc(@SessionAttribute BizMember bizMember, 
+								@RequestParam String menuNo,
+								ModelAndView mav) {
+		BizGoods bg = bService.goodModify_dc(Integer.parseInt(menuNo));
+		mav.addObject("BizGoods", bg);
+		mav.setViewName("/bizMember/goodModify_dc");
+		
+		return mav;
+	}
+	
+	
+	
 	
 	
 	@RequestMapping(value="/BizMember/logout.do", method = {RequestMethod.POST, RequestMethod.GET})
@@ -367,9 +378,8 @@ public class BizMemberController {
 		bg.setMenuName(menuName);
 		bg.setMenuInfo(menuInfo);
 		bg.setOriginalPrice(originalPrice);
-		
+
 		int result = bService.GoodMo(bg);
-		
 		if (result > 0) {
 			mav.addObject("msg", "상품 수정 성공");
 			mav.addObject("/bizMember/goodsManage.do");

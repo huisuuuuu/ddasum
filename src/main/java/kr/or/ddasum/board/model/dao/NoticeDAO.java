@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import kr.or.ddasum.admin.model.vo.AdminMember;
 import kr.or.ddasum.board.model.vo.Notice;
 
 
@@ -79,14 +78,14 @@ public class NoticeDAO {
 	  * @Method 설명 :
 	  * @return
 	  */
-	/*public ArrayList<Notice> noticeMainPageview() {
+	public ArrayList<Notice> noticeMainPageview() {
 		
 		ArrayList<Notice> list = new ArrayList<Notice>(sqlSession.selectList("notice.notiMainPageview"));
 		
 		
 		return list;
 	}
-*/
+
 	
 	/**
 	  * @param iNo 
@@ -143,6 +142,8 @@ public class NoticeDAO {
 		ArrayList<Notice> list = new ArrayList<Notice>(sqlSession.selectList("notice.selectFixNotice"));
 		return list;
 	}
+	
+	
 
 
 

@@ -27,11 +27,8 @@
         color: inherit;
     	}
 		#wrapper{
-			width: 100%;
+			width: 1920px;
 			height: 1080px;
-			margin: 0 auto;
-		}
-				#body{
 			margin: 0 auto;
 		}
 		#leftArea{
@@ -268,7 +265,7 @@
 					<div id="content">
 					
 					<c:choose>
-						<c:when test="${!requestScop.list.isEmpty() }">					
+						<c:when test="${!requestScope.list.isEmpty() }">					
 						<table class="reservTable">
 							<tr>
 			 					<th>번호</th>
@@ -291,7 +288,7 @@
 						</table>
 						</c:when>
 						<c:otherwise>
-							<H1>현재 저장된 회원이 없습니다.</H1>
+							<H1>현재 저장된 예약내역이 없습니다.</H1>
 						</c:otherwise>
 			
 					</c:choose>

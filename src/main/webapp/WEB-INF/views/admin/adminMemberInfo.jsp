@@ -159,9 +159,14 @@
 				</table>
 				<div class="info-footer">
 					<div class="del-btn">
+						<c:if test='${info.DELYN.equals("Y") }'>
 						<button type="button" class="btn-ok">
 						<a href="/admin/adminMemberWithdraw.do?userId=${info.USERID }&delYN=${info.DELYN}">
-						탈퇴</a></button>
+						탈퇴</a></button></c:if>
+						<c:if test='${info.DELYN.equals("N") }'>
+						<button type="button" class="btn-ok">
+						<a href="/admin/adminMemberWithdraw.do?userId=${info.USERID }&delYN=${info.DELYN}">
+						복원</a></button></c:if>					
 							</div>						
 					<div class="info-check"><button type="button" class="btn-ok">
 						<a href="/admin/adminMemberManageList">확인</button></a></div>

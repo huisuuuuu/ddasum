@@ -12,13 +12,15 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/commons/adminCommon.css">
 <link rel="stylesheet" href="/resources/commons/adminNoticeBoard.css">
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/resources/commons/swal.css">	
 <style>
 * > div {
 	box-sizing : border-box;
 	margin : 0px;
-}
+    font-family: 'Noto Sans KR', sans-serif;
+    }
 
 .wrap {
 	width : 100%;
@@ -37,19 +39,25 @@
 	border-top-left-radius : 20px;
 	border-top-right-radius : 20px;
 	width : 100%;
-	height : 15%;
+	height : 10%;
 	background-color : #FFA77E;
 	text-align : center;
+	padding-top : 20px;
 }
 
 .info-content {
 	width : 100%;
-	height : 85%;
+	height : 80%;
 }
 
 .info-footer {
 	width : 100%;
-	height : 15%;
+	height : 10%;
+	margin : 0px auto;
+	padding-top : 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 .info-content table {
@@ -70,26 +78,27 @@
 .data-area
 {
 	width:50%;
-	border : 1px solid blue;
 
 }
 
 .info-area
 {
 	width : 50%;
-	border : 1px solid red;
 }
 
 .del-btn {
 	width : 80px;
 	height : 100%;
-	float : right;
+	display : inline-block;
+	padding-right : 50px;
+	
 }
 
 .info-check {
-	border : 1px solid red;
-	width : 100%;
+	width : 80px;
 	height : 100%;
+	display : inline-block;
+	padding-left : 50px;
 }
 </style>
 </head>
@@ -152,23 +161,25 @@
 					<tr>
 						<td class="data-area">탈퇴여부</td>
 						<td class="info-area">${info.BIZDELYN.equals("Y") ? "탈퇴" : "사용중" }
-							<div class="del-btn">
-							
-								<button type="button" class="btn-ok">
-								<a href="/admin/adminBizMemberWithdraw.do?bizId=${info.BIZID }&bizDelYN=${info.BIZDELYN}">탈퇴</a></button>
-							</div>						
 						</td>
 					</tr>
 					</tbody>					
 				</table>
 				<div class="info-footer">
-					<div class="info-check"><button type="button">
-						<a href="/admin/adminBizManageList">확인</button></a></div>
+					<div class="del-btn">
+						<c:if test='${info.BIZDELYN.equals("Y") }'>
+						<button type="button" class="btn-ok">
+						<a href="/admin/adminBizMemberWithdraw.do?bizId=${info.BIZID }&bizDelYN=${info.BIZDELYN}">
+						복원</a></button></c:if>
+						<c:if test='${info.BIZDELYN.equals("N") }'>
+						<button type="button" class="btn-ok">
+						<a href="/admin/adminBizMemberWithdraw.do?bizId=${info.BIZID }&bizDelYN=${info.BIZDELYN}">
+						탈퇴</a></button></c:if>					
+							</div>						
+					<div class="info-check"><button type="button" class="btn-ok">
+						<a href="/admin/adminBizMemberManageList">확인</button></a></div>
 				</div>
-				
-			</div>
-		</div>
-	</div>
+
 	
 
 </body>

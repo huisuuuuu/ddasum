@@ -100,23 +100,39 @@
 
 	<select id="goodModify" parameterType="bizGoods" resultType="BizGoods">
 		SELECT
-			menu_no as menuNo,
-			biz_no as bizNo,
+			m.menu_no as menuNo,
+			m.biz_no as bizNo,
 			c.AUTHORITY_INFO as authorityId,
 			t.RESTAURANT_TYPE as restaurant,
-			menu_name as menuName,
-			menu_info as menuInfo,
-			original_price as originalPrice,
-			dc_price as dcPrice,
-			menu_image as menuImage,
-			menu_del_YN as menuDelYN
+			m.menu_name as menuName,
+			m.menu_info as menuInfo,
+			m.original_price as originalPrice,
+			m.dc_price as dcPrice,
+			m.menu_image as menuImage,
+			m.menu_del_YN as menuDelYN
 		FROM
 			MENU m, TYPE_GROUP t, AUTHORITY c
         WHERE m.restaurant = t.restaurant AND m.authority_id = c.AUTHORITY_ID
-        	AND menu_no = #{menuNo}
+        	AND m.menu_no = #{menuNo}
 	</select>
 
-
+	<select id="goodModify_dc" parameterType="bizGoods" resultType="BizGoods">
+		SELECT
+			m.menu_no as menuNo,
+			m.biz_no as bizNo,
+			c.AUTHORITY_INFO as authorityId,
+			t.RESTAURANT_TYPE as restaurant,
+			m.menu_name as menuName,
+			m.menu_info as menuInfo,
+			m.original_price as originalPrice,
+			m.dc_price as dcPrice,
+			m.menu_image as menuImage,
+			m.menu_del_YN as menuDelYN
+		FROM
+			MENU m, TYPE_GROUP t, AUTHORITY c
+        WHERE m.restaurant = t.restaurant AND m.authority_id = c.AUTHORITY_ID
+        	AND m.menu_no = #{menuNo}
+	</select>
 
    	<update id="GoodMo" parameterType="bizGoods">
   		update MENU set 
