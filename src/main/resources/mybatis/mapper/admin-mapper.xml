@@ -339,4 +339,9 @@
   	
   	</insert>
   
+  	<update id="cardNoUpdate" parameterType="hashmap">
+  	
+  	UPDATE CARD_MANAGE SET CARD_NO=#{cardNo} WHERE USERNO = #{userNo}
+  	
+  	</update>
 </mapper>

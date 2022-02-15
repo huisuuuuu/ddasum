@@ -609,7 +609,12 @@ public class AdminController {
 		
 	}
 	
-	//카드승인리스트
+	//카드승인 업데이트
+	
+	@RequestMapping(value="/admin/adminCardConfirm.do", method=RequestMethod.POST)
+	public void cardNoUpdate(@RequestParam int userNo, @RequestParam int cardNo, ModelAndView mav, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+		
+	}
 	
 	
 	
