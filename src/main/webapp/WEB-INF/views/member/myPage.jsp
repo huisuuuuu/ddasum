@@ -11,6 +11,9 @@
       crossorigin="anonymous"></script>
 </head>
 <style>
+	body { 
+    	margin : 0px;
+    }
    * div{
         box-sizing: border-box;
     }

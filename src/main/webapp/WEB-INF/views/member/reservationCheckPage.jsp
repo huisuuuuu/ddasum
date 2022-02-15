@@ -11,6 +11,10 @@
       crossorigin="anonymous"></script>
 </head>
 <style>
+
+	body { 
+    	margin : 0px;
+    }
     * div {
         box-sizing: border-box;
     }
@@ -214,7 +218,7 @@
          background-color: rgba(255,167,126,0.3);
      }
      #shop-img{
-         border: 1px solid black;
+         
          width: 90px;
          height: 90px;
          border-radius: 45px;
@@ -369,12 +373,13 @@
 	                        <th>예약 유형</th>
 	                        <th>예약 일자</th>
 	                        <th>예약 번호</th>
+	                        <th>예약 번호 전송</th>
 	                        <th>예약 상태</th>
 	                        <th style="width: 100px;">예약 취소</th>
 	                    </tr>
 	                    <c:forEach items="${requestScope.map.list }" var="d">
 	                    <tr>
-	                        <td style="padding-left: 10px;"><div id="shop-img"><img   ></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>${d.menuName }</span></div></td>
+	                        <td style="padding-left: 10px;"><div id="shop-img"><img src="${d.bizImage }" style="width:90px; height: 90px; border-radius: 45px;"></div><div id="shop-name-menu-area"><b><span>${d.bizName }</span></b><br><span>${d.menuName }</span></div></td>
 	                        <c:choose>
 		                        <c:when test="${d.authorityId eq 'SP'}">
 		                        	<td>후원</td>
@@ -384,7 +389,8 @@
 		                        </c:when>
 	                        </c:choose>
 	                        <td>${d.reservationDate }</td>
-	                        <td>${d.reNo }</td>                
+	                        <td>${d.reNo }</td>
+	                        <td><button>여기 공간이에여!</button></td>                
 	                       	<c:choose>
 								<c:when test="${d.reCancle eq 'N'.charAt(0)}">
 			                        <td>예약완료</td>
@@ -400,7 +406,7 @@
 	                    </tr>
 	                    </c:forEach>
 					<tr align="center">
-					<td colspan="6">
+					<td colspan="7">
 					<div id="page_wrap">
 					    <ul class="page_ul">
 					    	<li>

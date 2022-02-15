@@ -19,7 +19,7 @@
   	
   	<update id="memberCardImage" parameterType="member">
   		update member set 
-  			p_Image = #{pImage}
+  			cd_Image = #{cdImage}
   			where userNo = #{userNo}
   	</update>
 </mapper>
