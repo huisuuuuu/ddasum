@@ -19,9 +19,9 @@
        <div id="header-meun-area">
            <ul id="header-menu-ul">
                <li><a href="/member/storyBoard.do">스토리</a></li>
-               <li><a href="">후원식당</a></li>
-               <li><a href="/member/saleRestaurantListPage.do">할인식당</a></li>
-               <li><a href="">커뮤니티</a></li>
+               <li><a href="/spRestaurant/spRestaurantList.do">후원식당</a></li>
+               <li><a href="/dcRestaurant/dcRestaurantList.do">할인식당</a></li>
+               <li><a href="/community/communityList.do">커뮤니티</a></li>
                <li id="notice-button">
                    <a href="">고객센터</a>
                    <div id="hover-menu1" style="display: none">
@@ -63,21 +63,21 @@
        <div class="content-side-back"></div>
        <div id="content-center">
            <div id="content-center-empty-top-area"></div>
-           <a href=""><div id="content-center-menu1">
+           <a href="/spRestaurant/spRestaurantList.do"><div id="content-center-menu1">
                <span>베스트</span><br><br>
                <span>후원식당</span><br><br>
                <img class="center-menu-img" src="/resources/images/center-menu1.png" >
            </div></a>
-           <a href=""><div id="content-center-menu2">
+           <a href="/dcRestaurant/dcRestaurantList.do"><div id="content-center-menu2">
                <span>베스트</span><br><br>
                <span>할인식당</span><br><br>
                <img class="center-menu-img" src="/resources/images/center-menu2.png" >
            </div></a>
-           <a href=""><div id="content-center-menu3">
+           <a href="/member/reservationPage.do"><div id="content-center-menu3">
                <span>예약 확인</span><br><br><br>
                <img class="center-menu-img" src="/resources/images/center-menu3.png" >
            </div></a>
-           <a href=""><div id="content-center-menu4">
+           <a href="/community/communityList.do"><div id="content-center-menu4">
                <span>혼밥시러</span><br><br>
                <span>커뮤니티</span><br><br>
                <img class="center-menu-img" src="/resources/images/center-menu4.png" >
