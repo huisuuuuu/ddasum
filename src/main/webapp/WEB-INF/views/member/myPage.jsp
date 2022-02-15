@@ -51,7 +51,17 @@
                         <br><br><hr>
                         <div class="data-title">이메일</div><div class="info-data"><span>${sessionScope.member.email }</span></div>
                         <br><br><hr>
-                        <div class="data-title">주소</div><div class="info-data"><span>${sessionScope.member.address }</span></div>
+                        <c:choose>
+							<c:when test="${sessionScope.member.address eq 'SEOUL' }">
+								<div class="data-title">주소</div><div class="info-data"><span>서울</span></div>
+							</c:when>
+							<c:when test="${sessionScope.member.address eq 'INCHEON' }">
+								<div class="data-title">주소</div><div class="info-data"><span>인천</span></div>
+							</c:when>
+							<c:when test="${sessionScope.member.address eq 'GYEONGGI' }">
+								<div class="data-title">주소</div><div class="info-data"><span>경기도</span></div>
+							</c:when>
+						</c:choose>
                         <br><br><hr>
                         <div class="data-title">휴대전화</div><div class="info-data"><span>${sessionScope.member.phone }</span></div>
                         <br><br><hr>

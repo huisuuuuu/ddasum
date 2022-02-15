@@ -90,7 +90,7 @@
 						<tr>
 							<th>휴대폰 번호</th>
 							<td>
-								<input type="text" class="dataInput check" id="phone" name="phone" maxlength="11" placeholder="-없이 입력하세요">
+								<input type="text" class="dataInput check" id="phone" name="phone" maxlength="11" placeholder="-없이 입력하세요" dataType="휴대폰 번호">
 								<span class="hide">10~11자의 숫자만 입력하세요.</span>
 							</td>
 						</tr>
@@ -110,12 +110,12 @@
 						<div class="agree_box">
 							<ul>
 								<li class="join_agree">
-									<input type="checkbox" class="userAgreements" name="chk_personal" value="N">
+									<input type="checkbox" id="personalAgreement" name="chk_personal" value="N">
 									<label for="chk_personal">개인정보 취급방침</label>
 									<span><a href="/member/personal.do" target="_blank">전문보기</a></span>
 								</li>
 								<li class="join_agree">
-									<input type="checkbox" class="userAgreements" name="chk_join userAgreements" value="N">
+									<input type="checkbox" id="contractAgreement" name="chk_join userAgreements" value="N">
 									<label for="chk_join">이용약관 동의</label>
 									<span><a href="/member/contract.do" target="_blank">전문보기</a></span>
 								</li>
@@ -393,7 +393,7 @@
 						
 						
 						//필수 동의 사항을 체크 하지 않은 경우
-						if (!$(".userAgreements").prop("checked")) {
+						if (!$("#personalAgreement").prop("checked") || !$("#contractAgreement").prop("checked") ) {
 							
 							Swal.fire({
 								  icon: 'error',

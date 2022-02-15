@@ -94,7 +94,7 @@
 							<th id="regNoTh">사업자 등록번호</th>
 							<td id="regNoTd">
 								<p>${param.regNo }</p>
-								<input type="hidden" name="regNo" value="${param.regNum }">
+								<input type="hidden" name="regNo" value="${param.regNo }">
 							</td>
 						</tr>
 						<tr>
