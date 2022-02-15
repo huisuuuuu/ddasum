@@ -41,7 +41,7 @@
         	<div class="container">
         		<form action="/admin/adminNoticeWrite.do" method="post">
         		<div class="select-search">
-        		<select id="infoId" name="infoId">
+        		<select id="infoId" name="infoId" onchange="select">
                   <option>유형선택</option>
                   <option value="holdnoti">고정글</option>
                   <option value="notice">공지사항</option>
@@ -66,7 +66,9 @@
     </div>
 
 <script>
-${"#infoId option:selected"}.val();
+
+var 
+
 </script>
 
 </body>

@@ -532,17 +532,23 @@ public class AdminController {
 		
 		int result = admService.adminFAQUpdate(noFaq);
 
-		if(result>0)
-		{
-			mav.addObject("noFaq", noFaq);
-			mav.setViewName("admin/adminFAQDetail");
-		}else
-		{
-			mav.addObject("noFaq", noFaq);
-			mav.setViewName("views/commons/errorMSG");
+		if(result>0) {
+			mav.addObject("msg1", "수정완료");
+			mav.addObject("msg2", "정상수정처리되었습니다.");
+			mav.addObject("location", "/admin/adminFAQDetail.do?iNo="+iNo);
+			mav.setViewName("commons/successMsg");
+				
+			return mav;
+				
+		}else {
+			mav.addObject("msg1", "수정불가");
+			mav.addObject("msg2", "수정처리가 되지 않았습니다.");
+			mav.addObject("location", "/admin/adminFAQDetail.do?iNo="+iNo);
+			mav.setViewName("commons/errorMsg");
+				
+			return mav;			
 		}
 		
-		return mav;
 	}
 	
 	//공지사항 삭제
@@ -604,6 +610,7 @@ public class AdminController {
 	}
 	
 	//카드승인리스트
+	
 	
 	
 }
