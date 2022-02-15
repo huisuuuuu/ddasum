@@ -24,18 +24,15 @@ public class CommunityDAO {
 		return new ArrayList<Community> (sqlSession.selectList("community.selectAllCommunity", null, rb));
 	}
 
-	public ArrayList<Community> searchCommunity(SqlSessionTemplate sqlSession, String type, String keyword, int currentPage, int recordCountPerPage) {
+	public ArrayList<Community> searchCommunity(SqlSessionTemplate sqlSession, HashMap<String, String> search, int currentPage, int recordCountPerPage) {
 		
 		int offset = ((currentPage-1));
 		int limit = recordCountPerPage;
 		
 		RowBounds rb = new RowBounds(offset, limit);
 		
-		HashMap<String, String> map = new HashMap<String, String> ();
-		map.put("type", type);
-		map.put("keyword", keyword);
 		
-		return new ArrayList<Community> (sqlSession.selectList("community.searchCommunity", map, rb));
+		return new ArrayList<Community> (sqlSession.selectList("community.searchCommunity", search, rb));
 	}
 
 	public Community detailOneCommunity(SqlSessionTemplate sqlSession, int cNo) {

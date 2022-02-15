@@ -50,7 +50,14 @@ public class CommunityController {
 	@RequestMapping(value="/community/communitySearch.do", method=RequestMethod.GET)
 	public ModelAndView searchCommunity(@RequestParam String type, @RequestParam String keyword, ModelAndView mav, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 		
-		HashMap<String, Object> map = cService.searchCommunity(type, keyword, currentPage);
+		HashMap<String, String> search = new HashMap<String, String> ();
+		search.put("type", type);
+		search.put("keyword", keyword);
+		
+		HashMap<String, Object> map = cService.searchCommunity(search, currentPage);
+		
+		System.out.println(type);
+		System.out.println(keyword);
 		
 		mav.addObject("map", map);
 		mav.addObject("currentPage", currentPage);

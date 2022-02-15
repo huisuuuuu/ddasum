@@ -90,9 +90,10 @@
             			</c:if>
             		</div>
                 <hr class="underbar">
-                <!-- 댓글생성 -->
+                
+                
                 <c:choose>
-                	<!-- 댓글이 있을 경우 -->
+                
 	                <c:when test="${!requestScope.map['comment'].isEmpty() }">
 	                	<c:forEach items="${requestScope.map['comment'] }" var="com">
 		                	<div>
@@ -138,7 +139,7 @@
 			                    <hr class="underbar">
 	                	</c:forEach> 
 	            	</c:when>
-	            	<!-- 댓글이 없을 경우 -->
+	            	
             		<c:otherwise>
             			<div style="margin:10px;">등록된 댓글이 없습니다.</div>
             		</c:otherwise>

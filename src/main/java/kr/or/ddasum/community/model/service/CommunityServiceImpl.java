@@ -38,9 +38,9 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 
 	@Override
-	public HashMap<String, Object> searchCommunity(String type, String keyword, int currentPage) {
+	public HashMap<String, Object> searchCommunity(HashMap<String, String> search, int currentPage) {
 		//검색된 게시물 리스트 받기
-		ArrayList<Community> list = cDAO.searchCommunity(sqlSession, type, keyword, currentPage, recordCountPerPage);
+		ArrayList<Community> list = cDAO.searchCommunity(sqlSession, search, currentPage, recordCountPerPage);
 		//페이징 네비바
 		String navi = cDAO.getPageNavi(sqlSession, currentPage, recordCountPerPage, naviCountPerPage);
 		
