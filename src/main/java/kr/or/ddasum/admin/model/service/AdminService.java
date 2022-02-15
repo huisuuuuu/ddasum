@@ -101,6 +101,10 @@ public interface AdminService {
 
 	void insert(Notice notice);
 
+	int adminNoticePostDelete(String[] noticeBoardNoValues);
+
+	int adminNoticeFix(String iNo);
+
 
 
 

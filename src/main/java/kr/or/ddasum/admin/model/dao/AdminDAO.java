@@ -200,6 +200,19 @@ public class AdminDAO {
 		return sqlSession.update("admin.noticeFix", map);
 	}
 
+	public int adminNoticePostDelete(String[] noticeBoardNoValues) {
+		
+		String values = String.join("','", noticeBoardNoValues);
+		System.out.println(values);
+		
+		return sqlSession.update("admin.adminNoticePostDelete", values);
+	}
+
+	public int adminNoticeFix(String iNo) {
+		
+		return sqlSession.update("admin.adminNoticeFix", iNo);
+	}
+
 
 
 		

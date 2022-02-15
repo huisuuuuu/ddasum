@@ -338,5 +338,17 @@
   		#{iDelYN})
   	
   	</insert>
+  	
+  	<update id="adminNoticePostDelete" parameterType="String">
+  		UPDATE
+  		 	INFO SET I_DEL_YN='Y'
+  		WHERE I_NO IN(#{values})
+  	</update>
+  
+    <update id="adminNoticeFix" parameterType="String">
+  		UPDATE
+  		 	INFO SET INFO_ID='HOLDNOTI'
+  		WHERE I_NO = #{iNo}
+  	</update>
   
 </mapper>

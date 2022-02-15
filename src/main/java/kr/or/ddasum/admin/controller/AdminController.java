@@ -328,35 +328,54 @@ public class AdminController {
 			mav.setViewName("admin/adminNoticeManageList");
 						
 			return mav;
-	}	
+	}
 	
-	//후원페이지 연결
-	@RequestMapping(value="/admin/adminSelectAllSupport.do", method = RequestMethod.GET)
-	public ModelAndView adminSelectAllSupport(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav) {
+	//공지사항페이지
+	@RequestMapping(value="/admin/adminNoticePostDelete.do", method = RequestMethod.POST)
+	public ModelAndView adminNoticePostDelete(HttpServletRequest request, ModelAndView mav) {
 					
-			int recordCountPerPage = 10;
-			int naviCountPerPage = 5;
-			int recordSupportTotalCount = admService.recordSupportTotalCount();			
-			int pageTotalCount = (int)Math.ceil(recordSupportTotalCount/(double)recordCountPerPage);
-			int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
-			int endNavi = startNavi + naviCountPerPage - 1;
-			endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+		    String[] noticeBoardNoValues = request.getParameterValues("noticeNo");
+		
+			int result = admService.adminNoticePostDelete(noticeBoardNoValues);
 			
-			ArrayList<HashMap<String, Object>> list = admService.adminSelectAllSupport(currentPage, recordCountPerPage);
-			ArrayList<Integer> navi = new ArrayList<>();
-			for (int i = startNavi; i <= endNavi; i++) {
-				navi.add(i);
+			
+			if(result==noticeBoardNoValues.length){
+			
+				mav.addObject("msg1", "삭제 완료");
+				mav.addObject("msg2", "요청하신 글의 삭제가 완료되었습니다.");
+				mav.addObject("location", "/admin/adminNoticeManageList.do");
+				mav.setViewName("commons/successMsg");
+			}else{
+				mav.addObject("msg1", "삭제 실패");
+				mav.addObject("msg2", "지속적인 문제 발생 시 관리자에게 문의 바랍니다.");
+				mav.addObject("location", "/admin/adminNoticeManageList.do");
+				mav.setViewName("commons/errorMsg");
 			}
-					
-			mav.addObject("recordSupportTotalCount", recordSupportTotalCount);
-			mav.addObject("list", list);
-			mav.addObject("currentPage", currentPage);
-			mav.addObject("navi", navi);
-			mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
-			mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
-			mav.setViewName("admin/adminSelectAllSupport");
-						
+			
 			return mav;
+						
+	}
+	
+	//공지사항 글 고정
+	@RequestMapping(value="/admin/adminNoticeFix.do", method = RequestMethod.GET)
+	public ModelAndView adminNoticeFix(@RequestParam String iNo, HttpServletRequest request, ModelAndView mav) {
+					
+		int result = admService.adminNoticeFix(iNo);
+		
+		if(result>0){
+		
+			mav.addObject("msg1", "상단 고정 완료");
+			mav.addObject("msg2", "요청하신 글의 상단 고정이 완료되었습니다.");
+			mav.addObject("location", "/admin/adminNoticeManageList.do");
+			mav.setViewName("commons/successMsg");
+		}else{
+			mav.addObject("msg1", "삭제 실패");
+			mav.addObject("msg2", "지속적인 문제 발생 시 관리자에게 문의 바랍니다.");
+			mav.addObject("location", "/admin/adminNoticeManageList.do");
+			mav.setViewName("commons/errorMsg");
+		}
+		
+		return mav;
 	}	
 	
 	//자주묻는 질문

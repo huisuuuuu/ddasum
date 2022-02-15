@@ -204,6 +204,18 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 
+	@Override
+	public int adminNoticePostDelete(String[] noticeBoardNoValues) {
+		
+		return admDAO.adminNoticePostDelete(noticeBoardNoValues);
+	}
+
+	@Override
+	public int adminNoticeFix(String iNo) {
+		
+		return admDAO.adminNoticeFix(iNo);
+	}
+
 
 
 	}
