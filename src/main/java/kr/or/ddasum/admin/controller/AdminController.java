@@ -610,37 +610,38 @@ public class AdminController {
 	
 	//카드승인 업데이트
 	
-	@RequestMapping(value="/admin/adminCardCheck.do", method=RequestMethod.GET)
-	public ModelAndView cardNoUpdate(@RequestParam int userNo, @RequestParam int cardNo,
-									@RequestParam int cmNo, ModelAndView mav, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("userNo", userNo);
-		map.put("cmNo", cmNo);
-		map.put("cardNo", cardNo);
-		
-		int result = admService.adminCardCheck(map);
-		
-		if(result>0) {
-			mav.addObject("msg1", "카드 정보 입력완료");
-			mav.addObject("msg2", "정상적으로 입력이 완료되었습니다.");
-			mav.addObject("location", "/admin/adminCardConfirm.do?userNo="+userNo);
-			mav.setViewName("commons/succesMsg");
-			
-			return mav;
-			
-		}else {
-			mav.addObject("msg1", "카드 정보 입력실패");
-			mav.addObject("msg2", "카드 정보 입력에 실패하였습니다.");
-			mav.addObject("location", "/admin/adminCardConfirm.do?userNo="+userNo);
-			mav.setViewName("commons/erroMsg");
-			
-			return mav;
-		}
-		
-	}
+//	@RequestMapping(value="/admin/adminCardCheck.do", method=RequestMethod.GET)
+//	public ModelAndView cardNoUpdate(@RequestParam int userNo, @RequestParam int cardNo,
+//									@RequestParam int cmNo, ModelAndView mav, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+//		
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("userNo", userNo);
+//		map.put("cmNo", cmNo);
+//		map.put("cardNo", cardNo);
+//		
+//		int result = admService.adminCardCheck(map);
+//		
+//		if(result>0) {
+//			mav.addObject("msg1", "카드 정보 입력완료");
+//			mav.addObject("msg2", "정상적으로 입력이 완료되었습니다.");
+//			mav.addObject("location", "/admin/adminCardConfirm.do?userNo="+userNo);
+//			mav.setViewName("commons/succesMsg");
+//			
+//			return mav;
+//			
+//		}else {
+//			mav.addObject("msg1", "카드 정보 입력실패");
+//			mav.addObject("msg2", "카드 정보 입력에 실패하였습니다.");
+//			mav.addObject("location", "/admin/adminCardConfirm.do?userNo="+userNo);
+//			mav.setViewName("commons/erroMsg");
+//			
+//			return mav;
+//		}
+//		
+//	}
 	
+	//카드승인 ajax (중복확인)
 	@RequestMapping(value="/admin/adminCardNoCheck.do", method=RequestMethod.GET)
 	public void cardCheck(@RequestParam int cardNo, HttpServletResponse response) throws IOException {
 		
@@ -673,7 +674,7 @@ public class AdminController {
 	
 	}
 	
-	//공지사항페이지
+	//공지사항 글 삭제
 	@RequestMapping(value="/admin/adminNoticePostDelete.do", method = RequestMethod.POST)
 	public ModelAndView adminNoticePostDelete(HttpServletRequest request, ModelAndView mav) {
 					
@@ -698,6 +699,34 @@ public class AdminController {
 			return mav;
 						
 	}
+	
+	//FAQ 글 삭제
+	@RequestMapping(value="/admin/adminFAQPostDelete.do", method = RequestMethod.POST)
+	public ModelAndView adminFAQPostDelete(HttpServletRequest request, ModelAndView mav) {
+					
+		    String[] noticeFAQNoValues = request.getParameterValues("FAQNo");
+		
+			int result = admService.adminFAQPostDelete(noticeFAQNoValues);
+			
+			
+			if(result==noticeFAQNoValues.length){
+			
+				mav.addObject("msg1", "삭제 완료");
+				mav.addObject("msg2", "요청하신 글의 삭제가 완료되었습니다.");
+				mav.addObject("location", "/admin/adminFAQManageList.do");
+				mav.setViewName("commons/successMsg");
+			}else{
+				mav.addObject("msg1", "삭제 실패");
+				mav.addObject("msg2", "지속적인 문제 발생 시 관리자에게 문의 바랍니다.");
+				mav.addObject("location", "/admin/adminFAQManageList.do");
+				mav.setViewName("commons/errorMsg");
+			}
+			
+			return mav;
+						
+	}
+	
+	
 	
 	
 	

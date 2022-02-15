@@ -212,6 +212,7 @@ public class AdminServiceImpl implements AdminService{
 		return admDAO.cardCheck(map);
 	}
 	
+	//카드번호 확인 ajax
 	public int cardCheck(int cardNo) {
 		return admDAO.cardCheck(cardNo);
 	}
@@ -232,6 +233,19 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int recordMemberSearchCount(String type, String keyword) {
 		return admDAO.searchMember(type, keyword);
+	}
+
+	//FAQ 글삭제
+	@Override
+	public int adminFAQPostDelete(String[] noticeFAQNoValues) {
+		return admDAO.adminFAQPostDelete(noticeFAQNoValues);
+	
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> adminMembersearchList(String type, String keyword, int currentPage,
+			int recordCountPerPage) {
+		return admDAO.adminMemberSearchList(type, keyword, currentPage, recordCountPerPage);
 	}
 
 

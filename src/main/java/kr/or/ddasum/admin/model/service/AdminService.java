@@ -69,7 +69,7 @@ public interface AdminService {
 	int recordMemberSearchCount();
 
 	//검색 글 수 페이징 (회원관리)
-	ArrayList<HashMap<String, Object>> searchMember(String type, String keyword, int currentPage,
+	ArrayList<HashMap<String, Object>> adminMembersearchList(String type, String keyword, int currentPage,
 			int recordCountPerPage);
 
 	//공지 글 읽기
@@ -102,19 +102,26 @@ public interface AdminService {
 	//공지사항 글쓰기
 	void insert(Notice notice);
 
+	//공지사항 삭제
 	int adminNoticePostDelete(String[] noticeBoardNoValues);
 
+	//공지사항 고정
 	int adminNoticeFix(String iNo);
 	
 	//카드번호 확인
 	int adminCardCheck(HashMap<String, Object> map);
 
 	//카드번호중복확인
-	
 	int cardCheck(int cardNo);
 
 	//회원 검색
 	int recordMemberSearchCount(String type, String keyword);
+
+	//FAQ 글삭제
+	int adminFAQPostDelete(String[] noticeFAQNoValues);
+
+	ArrayList<HashMap<String, Object>> searchMember(String type, String keyword, int currentPage,
+			int recordCountPerPage);
 
 
 

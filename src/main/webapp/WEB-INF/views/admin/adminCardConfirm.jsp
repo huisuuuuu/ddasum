@@ -79,7 +79,7 @@
               <img class="card-img" src="/resources/images/card.png" alt="카드">
             </div>
 
-            <form action="/admin/adminCardCheck.do" method="get" class="cardNoinput" name="cardNoinput">            
+            <form action="/admin/adminCardNoCheck.do" method="get" class="cardNoinput" name="cardNoinput">
             <div class="w-50">
               <div class="input-group-2 d-flex mb-4">
                 <input type="text" placeholder="카드번호 입력: 1234567890" id="cardExist"/>
@@ -128,7 +128,7 @@
 				console.log('ajax 통신 실패');
 			}
 		});	
-		
+		console.log(data);
 	}
 	</script>
 </body>

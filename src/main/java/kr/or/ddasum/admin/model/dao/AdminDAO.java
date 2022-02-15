@@ -249,6 +249,15 @@ public class AdminDAO {
 			return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.adminSearchMember", query, rb));
 		}
 
+	//FAQ 글삭제
+	public int adminFAQPostDelete(String[] noticeFAQNoValues) {
+
+		String values = String.join("','", noticeFAQNoValues);
+		System.out.println(values);
+		
+		return sqlSession.update("admin.adminFAQPostDelete", values);
+	}
+
 
 		
 		

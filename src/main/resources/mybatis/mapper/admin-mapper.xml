@@ -184,8 +184,8 @@
     	I_DEL_YN AS IDELYN
 	FROM INFO
     	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
-    	WHERE INFO_GROUP.INFO_ID = 'HOLDNOTI' OR 
-    	INFO_GROUP.INFO_ID = 'NOTICE'
+    	WHERE (INFO_GROUP.INFO_ID = 'HOLDNOTI' OR 
+    	INFO_GROUP.INFO_ID = 'NOTICE') AND I_DEL_YN ='N'     
    	 
    	 </select>
    	 
@@ -207,7 +207,7 @@
     	I_DEL_YN AS DELYN
 	FROM INFO
     	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
-    	WHERE INFO_GROUP.INFO_ID = 'FAQ'   	 
+    	WHERE INFO_GROUP.INFO_ID = 'FAQ' AND I_DEL_YN ='N'   	 
    	 </select>
 
 	<select id="selectAllFAQTotalCount" resultType="int">
@@ -388,4 +388,11 @@
   	SELECT COUNT (*) FROM CARD_MANAGE WHERE CARD_NO=#{_params}
   	
   	</select>
+  	
+  	<update id="adminFAQPostDelete" parameterType="String">
+  		UPDATE
+  		 	INFO SET I_DEL_YN='Y'
+  		WHERE I_NO IN(#{values})
+  	</update>
+  	
 </mapper>

@@ -261,6 +261,7 @@ td:nth-of-type(1) {
                   		     </c:forEach>
        		                 </c:when>
                         </c:choose>
+                        
                             
                         </tbody> 
                         
