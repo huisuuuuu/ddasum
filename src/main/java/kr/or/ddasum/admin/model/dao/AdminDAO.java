@@ -173,6 +173,21 @@ public class AdminDAO {
 		return sqlSession.update("admin.updateNotice", noti);
 	}
 
+	public Notice adminFAQOnePost(int iNo) {
+
+		return sqlSession.selectOne("admin.adminFAQOnePost",iNo);
+	}
+
+	public int admFAQUpdate(Notice noFaq) {
+		return sqlSession.update("admin.updateFAQ", noFaq);
+	}
+
+	//카드인증멤버이름
+	public HashMap<String, Object> adminSelectOneCardMemberInfo(int userNo) {
+
+		return sqlSession.selectOne("admin.cardDetailName", userNo);
+	}
+
 
 		
 		
