@@ -26,11 +26,11 @@
         color: inherit;
     	}
 		#wrapper{
-			width: 100%;
+			width: 1920px;
 			height: 1080px;
 		}
 		#body{
-			width: 1920px;
+			width: 100%;
 			height: 1080px;
 		}
 		#leftArea{

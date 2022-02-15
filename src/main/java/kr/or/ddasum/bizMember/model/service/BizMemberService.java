@@ -89,6 +89,17 @@ public interface BizMemberService {
 	BizGoods goodModify(int menuNo);
 
 	/**
+	  * @Method Name : goodModify_dc
+	  * @작성일 : 2022. 2. 15.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :메뉴수정 페이지 데이터 요청
+	  * @param menuNo
+	 * @return 
+	  */
+	BizGoods goodModify_dc(int menuNo);	
+	
+	/**
 	  * @Method Name : GoodMo
 	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee

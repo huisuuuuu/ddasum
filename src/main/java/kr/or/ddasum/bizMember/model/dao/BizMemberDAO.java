@@ -131,6 +131,20 @@ public class BizMemberDAO {
 	}
 
 	/**
+	  * @Method Name : goodModify_dc
+	  * @작성일 : 2022. 2. 15.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :메뉴 수정 페이지 데이터 요청
+	  * @param menuNo
+	  * @return
+	  */
+	public BizGoods goodModify_dc(int menuNo) {
+
+		return sqlSession.selectOne("bizAdmin.goodModify", menuNo);
+	}	
+	
+	/**
 	  * @Method Name : GoodMo
 	  * @작성일 : 2022. 2. 10.
 	  * @작성자 : lee

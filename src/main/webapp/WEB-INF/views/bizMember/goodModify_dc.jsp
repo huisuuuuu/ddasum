@@ -28,7 +28,7 @@
         color: inherit;
     	}
 		#wrapper{
-			width: 100%;
+			width: 1920px;
 			height: 1080px;
 			margin: 0 auto;
 		}
@@ -97,7 +97,7 @@
 		}
 		.itemInfo{
 			width: 100%;
-			height: 20%;
+			height: 15%;
 		}
 		.iteminfodiv{
 			width: 25%;
@@ -285,7 +285,7 @@
 					</div>
 					<div class="confirmArea">
 						<input type='submit' id="GoodMo" value='상품 수정'/>
-						<a href="/BizMember/goodsManage_dc.do"><input class="confirmstyle" type="button" value="취소"></a>
+						<a href="/BizMember/goodsManage.do"><input class="confirmstyle" type="button" value="취소"></a>
 					</div>
 					<input type='hidden' name="menuNo" value="${requestScope.BizGoods.menuNo }"/>
 				</div>
