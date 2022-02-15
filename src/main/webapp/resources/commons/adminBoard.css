@@ -23,8 +23,10 @@ a {
 }
 
 .box-search {
-  width: auto;
+  /* border : 1px solid black; */
+  width: auto; /* 수정 */
   float: right;
+  white-space: nowrap;
 }
 .btn-write {
   float: left;
@@ -41,20 +43,19 @@ a {
   margin-right: 20px;
 }
 
+/* 추가 */
 .select-search select {
   background-color: white;
 }
-
-
+/* 추가 */
 
 .select-search > select {
   width: 100%;
   height: 100%;
   border: 0.5px solid #d8d8d8;
-  border-radius: .25rem;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
-  color: #707070;
+  color: #2a2a2a;
   padding: 0 40px 0 18px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -72,12 +73,12 @@ a {
 }
 
 .input-search {
-  float: right;
+  float: left; /*수정*/
   width: 300px;
   height: 40px;
   border: 0.5px solid #d8d8d8;
   box-sizing: border-box;
-  /* margin-right: 10px;    */
+  margin-right: 10px;
 }
 
 .input-search > input {
@@ -85,7 +86,7 @@ a {
   font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
   color: #2a2a2a;
-  margin-top: 6px;
+  margin-top: 5px;
   margin-left: 10px;
 }
 
@@ -114,6 +115,11 @@ a {
   float: left;
 }
 
+.notice-write {
+  width: 80px;
+  height: 40px;
+}
+
 .container .table_wrap {
   width: 100%;
   clear: both;
@@ -121,7 +127,7 @@ a {
 
 .container table {
   width: 100%;
-  margin: 30px 0;
+  margin: 10px 0;
   border-top: 0.5px solid #d8d8d8;
 }
 
@@ -143,7 +149,7 @@ a {
 .container table tr th {
   font-family: "Noto Sans KR", sans-serif;
   font-size: 18px;
-  color: black;
+  color: #2a2a2a;
   text-align: center;
   border-bottom: 0.5px solid #d8d8d8;
 }
@@ -154,7 +160,6 @@ a {
   color: #2a2a2a;
   text-align: center;
 }
-
 .text-ellipsis {
   white-space: nowrap;
   overflow: hidden;
@@ -187,6 +192,7 @@ a {
 
 .container table tr td button.ok_btn {
   background-color: #ffa77e;
+  color : white;
 }
 
 .container table tr td button.none_btn {
@@ -207,10 +213,6 @@ a {
 
 .container table tr td button.reject_btn {
   background-color: #ffa0a2;
-}
-
-.container table tr td button.write_btn {
-  background-color: #e6510b;
 }
 
 .container table tr td button.man_btn {
@@ -235,11 +237,10 @@ a {
   width: 100%;
   height: 100%;
   line-height: 40px;
-
+  color: #2a2a2a;
 }
 
 /* Page */
-
 #page_wrap {
   width: 100%;
 }
@@ -279,9 +280,54 @@ a {
   transition: ease 0.3s;   
   background-color: #ffa77e;
   border-radius: 50%;
-  color: white;
+  color: white !important;
 }
 
 #page_active > a{
 	color : white;
+}
+input[type="checkbox"] {
+        -webkit-appearance: none;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        outline: none !important;
+        border: 1px solid #A5A5A5;
+        border-radius: 2px;
+        background: #fbfbfb;
+    }
+ 
+    input[type="checkbox"]::before {
+        content: "\2713";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        transform: scale(0) translate(-50%, -50%);
+        line-height: 1;
+    }
+ 
+    input[type="checkbox"]:hover {
+        border-color: #A5A5A5;
+    }
+ 
+    input[type="checkbox"]:checked {
+        background-color: #FFA77E;
+        border-color: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+ 
+    input[type="checkbox"]:checked::before {
+        border-radius: 2px;
+        transform: scale(1) translate(-50%, -50%)
+    }
+    
+    .container table tr td button a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    color: white;
+    font-weight: 500;
 }

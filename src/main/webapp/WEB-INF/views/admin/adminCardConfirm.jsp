@@ -17,9 +17,7 @@
   <link rel="stylesheet" type="text/css" href="/resources/commons/adminCommon.css">
   <link rel="stylesheet" type="text/css" href="/resources/commons/adminBoard.css">
   <link rel="stylesheet" type="text/css" href="/resources/commons/styles.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script>
-  <script src="/resources/js/ui.js"></script>
+  
   <style>
 
   form {
@@ -81,15 +79,13 @@
               <img class="card-img" src="/resources/images/card.png" alt="카드">
             </div>
 
-            <form action="/admin/adminCardCheck.do" method="post" class="cardNoinput">            
+            <form action="/admin/adminCardCheck.do" method="get" class="cardNoinput" name="cardNoinput">            
             <div class="w-50">
               <div class="input-group-2 d-flex mb-4">
-                <input type="text" placeholder="카드번호 입력: 1234-1234-1234-1234" />
-                <button class="btn-md fs-16 fc-w bg-1">등록</button>
+                <input type="text" placeholder="카드번호 입력: 1234567890" id="cardExist"/>
+                <button type="button" class="btn-md fs-16 fc-w bg-1" onclick="checkCardExist();">등록</button>
               </div>
-             </form>
               
-              <form action="/admin/adminCardComment.do" method="post">
               <div class="input-group-2">
                 <textarea name="content" placeholder="코멘트를 입력하세요"></textarea>
               </div>
@@ -108,7 +104,33 @@
       </div>
     </div>
   </div>
-
+  	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  	<script src="/resources/js/ui.js"></script>
+	<script>
+	function checkCardExist() {
+		var cardExist = document.getElementById('cardExist');
+		
+		$.ajax({
+			url: '/admin/adminCardNoCheck.do',
+			type: 'get',
+			data: {
+				cardNo: cardExist.value
+			},
+			success: function(data) {
+				if (data) {
+					alert('중복된 카드입니다.');
+				}else {
+					alert('중복되지 않은 카드입니다.');
+				}
+			},
+			error: function() {
+				console.log('ajax 통신 실패');
+			}
+		});	
+		
+	}
+	</script>
 </body>
 
 </html>

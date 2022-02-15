@@ -80,22 +80,9 @@
 	     .img{
 	     	width: 50px;
 	     }
-	   	li{
-			list-style: none;
-			font-size: 16pt;
-			padding: 10px;
-			text-align: center;
-		}
-		#page_wrap{
-			text-align: center;
-		}
-		ul#page_ul {
-    		display: inline-flex;
-		}	
-		* a{
-       		text-decoration: none;
-        	color: inherit;
-		}
+
+
+
 /*page navi*/
 
 	#page_wrap {
