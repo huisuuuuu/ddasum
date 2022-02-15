@@ -114,7 +114,7 @@
 			list-style: none;
 			font-size: 18pt;
 			padding: 10px;
-			border-bottom: 1px solid #A5A5A5;
+			text-align: center;
 		}
 		#typeOption{
 			width: 120px;
@@ -224,7 +224,7 @@
 			<div class="submenu"> 
 				<a href="/BizMember/calculateManage.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu4.png" alt="로고">
-					<span class="menulist">후원 정산 관리</span><br><br>
+					<span class="menulist">정산 관리</span><br><br>
 				</a>
 			</div>
 		</div>
@@ -246,7 +246,7 @@
 			<div id="R-content">
 				<div id="content">
 					<div id="content-title">
-						<span style="text-align:left; float:left;">전체 ${requestScope.result }건</span>
+						<span style="text-align:left; float:left;">전체 ${requestScope.recordBizTotalCount }건</span>
 						<div class="search" style="text-align:right;">
 
 							<select>
@@ -277,10 +277,10 @@
 							<tr>
 								<td><input type="checkbox" name="chk" value="1"></td>
 								<td>${i.count }</td>
-								<td><img style="height:100%;" src="${m.menuImage }"> </td>
-								<td>${m.menuName } </td>
-								<td>${m.menuInfo } </td>
-								<td>${m.originalPrice }</td>
+								<td><img style="height:100%;" src="${m.MENUIMAGE }"> </td>
+								<td>${m.MENUNAME } </td>
+								<td>${m.MENUINFO } </td>
+								<td>${m.ORIGINALPRICE }</td>
 								<td>
 									<button type="button" class="prdtEdt" name="prdtEdt">
 										<a href="/bizMember/goodModify.do?menuNo=${m.menuNo }">수정</a>
@@ -297,27 +297,30 @@
 					</c:choose>
 						<button type="button" class="prdtDel" name="prdtDel" style="margin: 20px 0;">삭제</button>
 					</div>
-					<!-- paging -->
-					<div style="display: block; text-align: center;">		
-						<c:if test="${paging.startPage != 1 }">
-							<a href="/BizMember/calculateManage.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-						</c:if>
-						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-							<c:choose>
-								<c:when test="${p == paging.nowPage }">
-									<b>${p }</b>
-								</c:when>
-								<c:when test="${p != paging.nowPage }">
-									<a href="/BizMember/calculateManage.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-								</c:when>
-							</c:choose>
-						</c:forEach>
-						<c:if test="${paging.endPage != paging.lastPage}">
-							<a href="/BizMember/calculateManage.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-						</c:if>
-					</div>
-				</div>
 
+                    
+				</div>
+					<!-- paging -->
+                    <div id="page_wrap">
+                        <ul id="page_ul">
+                        <c:if test="${ preNavi > 0}">
+                           <li><a href='/BizMember/goodsManage.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                        </c:if>
+                        <c:forEach items="${ navi }" var="i">
+                           <c:choose>
+                              <c:when test="${i==currentPage}">
+                                 <li><a id="page_active" href='/BizMember/goodsManage.do?currentPage=${i}'>${i}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a id="page_inactive" href='/BizMember/goodsManage.do?currentPage=${i}'>${i}</a></li>
+                              </c:otherwise>
+                              </c:choose>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+                           <li><a href='/BizMember/goodsManage.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                        </c:if>
+                        </ul>
+                    </div>
 			</div>
 		</div>
 	</div>

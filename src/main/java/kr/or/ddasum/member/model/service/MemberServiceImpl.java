@@ -101,8 +101,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int reservationCancle(char reCancle, int userNo) {
-		return mDAO.reservationCancle(reCancle, userNo);
+	public int reservationCancle(int userNo, int reNo) {
+		return mDAO.reservationCancle(userNo, reNo);
 		
 	}
 

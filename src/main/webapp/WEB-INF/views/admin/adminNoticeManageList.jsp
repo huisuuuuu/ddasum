@@ -98,10 +98,10 @@
               <tr>
                 <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
                 <td>${ i.count + (currentPage - 1) * 10 }</td>
-                <td>${noti.ITITILE }</td>
-                <td>${noti.ICONTENT }</td>
+                <td><a href="/admin/adminNoticeDetail.do?iNo=${noti.INO}">${noti.ITITLE }</a></td>
+                <td><a href="/admin/adminNoticeDetail.do?iNo=${noti.INO}">${noti.ICONTENT }</a></td>
                 <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn">수정</button></td>
+                <td><button type="button" class="ok_btn"><a href="/admin/adminNoticeUpdate.do?&iNo=${noti.INO}">수정</a></button></td>
               </tr>
 
             

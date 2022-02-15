@@ -149,17 +149,19 @@
 			reservation_date as reservationDate,
   			authority.AUTHORITY_ID as authorityId,
   			re_No as reNo,
-  			menu_no as menuNo,
+  			detail.menu_no as menuNo,
   			re_cancle as reCancle,
   			authority_Info as authorityInfo,
   			biz_name as bizName,
             biz_image as bizImage,
-  			address as address
+  			address as address,
+  			menu_name as menuName
   		from
   			authority
   			inner join detail on(authority.AUTHORITY_ID = detail.AUTHORITY_ID)
             inner join Biz_Member on (authority.AUTHORITY_ID = biz_member.AUTHORITY_ID)
-            where userNo = #{_params} and detail.biz_No = biz_member.biz_no
+            inner join menu on (authority.AUTHORITY_ID = menu.AUTHORITY_ID)
+            where userNo = #{_params} and detail.biz_No = biz_member.biz_no and detail.MENU_NO = menu.MENU_NO
             ORDER BY
 			m_re_no DESC
   	</select>
@@ -169,7 +171,7 @@
   	</select>
   	
   	<update id="reservationCancleBtn" parameterType="hashmap">
-  		update detail set re_cancle = #{reCancle} where userNo = #{userNo}
+  		update detail set re_cancle = 'Y' where userNo = #{userNo} and re_No = #{reNo}
   	</update>
   	
   	<update id="withdraw" parameterType="string">

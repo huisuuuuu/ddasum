@@ -14,13 +14,13 @@
 <body>
 	<div id=header>
        <div id="header-logo-area">
-           <a href=""><img id="header-logo-img" src="/resources/images/ddasum_header_logo.png"></a>
+           <a href="/"><img id="header-logo-img" src="/resources/images/ddasum_header_logo.png"></a>
         </div>
        <div id="header-meun-area">
            <ul id="header-menu-ul">
-               <li><a href="">스토리</a></li>
+               <li><a href="/member/storyBoard.do">스토리</a></li>
                <li><a href="">후원식당</a></li>
-               <li><a href="">할인식당</a></li>
+               <li><a href="/member/saleRestaurantListPage.do">할인식당</a></li>
                <li><a href="">커뮤니티</a></li>
                <li id="notice-button">
                    <a href="">고객센터</a>
@@ -91,48 +91,62 @@
            </div>
            <div id="content-center-empty-center-area"></div>
            <div id="content-center-noti-area1"> 
-               <div class="noti"><span class="noti-top-title">공지사항</span> </div> <div class="plus-button-area"><a href=""><img class="noti-plus-button" src="/resources/images/plusbutton.png"></a></div>
+               <div class="noti"><span class="noti-top-title">공지사항</span> </div> <div class="plus-button-area"><a href="/board/noticeBoard.do"><img class="noti-plus-button" src="/resources/images/plusbutton.png"></a></div>
                <hr>
-               <div class="noti-title">
-                   <ul >
-                       <li><a href="">꿈나무 카드 인증안내</a></li>
-                       <li><a href="">사업자 등록증 인증 안내</a></li>
-                       <li><a href="">후원 증빙 내역 다운로드 안내</a></li>
-                       <li><a href="">2021년 배스트 후원 업체 선정</a></li>
-                       <li><a href="">인증 횟수 만료 회원 재인증 관련안내</a></li>
-                   </ul>
-               </div>
-               <div class="noti-sysdate">
-                   <ul>
-                       <li>2022.01.29</li>
-                       <li>2022.01.27</li>
-                       <li>2022.01.23</li>
-                       <li>2022.01.22</li>
-                       <li>2022.01.21</li>
-                   </ul>
-               </div>
+               <c:choose>
+	               <c:when test="${!requestScope.list1.isEmpty() }">
+		               <div class="noti-title">
+		               <ul >
+		                   <c:forEach items="${requestScope.list1}" var="n" >
+		                   	
+		                   		<li><a href="/board/noticeDetail.do?iNo=${n.iNo }">${n.iTitle}</a></li>
+		                   	
+		                   </c:forEach>
+		               </ul>
+		               </div>
+		               <div class="noti-sysdate">
+		                   <ul>
+		                   <c:forEach items="${requestScope.list1}" var="n" >
+		                       <li>${n.iRegdate }</li>
+		                    </c:forEach>
+		                   </ul>
+		               </div>
+	               </c:when> 
+	               <c:otherwise>
+	               	<div class="noti-title">
+
+		                  <h3>공지사항이 없습니다.</h3>
+		              
+		             </div>
+	               </c:otherwise>
+	            </c:choose>
            </div>
            <div id="content-center-noti-area2">
-               <div class="noti"><span class="noti-top-title">자주 묻는 질문</span> </div> <div class="plus-button-area"><a href=""><img class="noti-plus-button" src="/resources/images/plusbutton.png"></a></div>
+               <div class="noti"><span class="noti-top-title">자주 묻는 질문</span> </div> <div class="plus-button-area"><a href="/board/faqBoard.do"><img class="noti-plus-button" src="/resources/images/plusbutton.png"></a></div>
                <hr>
-               <div class="noti-title">
-                   <ul >
-                       <li><a href="">꿈나무 카드 인증안내</a></li>
-                       <li><a href="">사업자 등록증 인증 안내</a></li>
-                       <li><a href="">후원 증빙 내역 다운로드 안내</a></li>
-                       <li><a href="">2021년 배스트 후원 업체 선정</a></li>
-                       <li><a href="">인증 횟수 만료 회원 재인증 관련안내</a></li>
-                   </ul>
-               </div>
-               <div class="noti-sysdate">
-                   <ul>
-                       <li>2022.01.29</li>
-                       <li>2022.01.27</li>
-                       <li>2022.01.23</li>
-                       <li>2022.01.22</li>
-                       <li>2022.01.21</li>
-                   </ul>
-               </div>
+               <c:choose>
+	               <c:when test="${!requestScope.list2.isEmpty() }">
+		               <div class="noti-title">
+		                   <ul>
+		                   
+		                   <c:forEach items="${requestScope.list2}" var="f">
+		                  	 
+		                     <li><a href="">${f.iTitle } </a></li>
+		                        
+		                    </c:forEach>
+		                   
+		                   </ul>
+		               </div>
+		               <div class="noti-sysdate">
+		                   <ul>
+		                   <c:forEach items="${requestScope.list2}" var="f">
+		                       <li>${f.iRegdate }</li>
+		         
+		                    </c:forEach>
+		                   </ul>
+		               </div>
+		           	</c:when> 
+		       </c:choose>
            </div>
            
             <div id="content-center-empty-bottom-area"></div>
@@ -179,6 +193,9 @@
           $('#header').css("background-color" , "rgba(166,166,166,0.2)");   
         }
       });
+       
+       
+       
     </script>
 
 </body>

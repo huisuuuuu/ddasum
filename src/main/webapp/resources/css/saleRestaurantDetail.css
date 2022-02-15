@@ -108,12 +108,12 @@
 	cursor: pointer;
 }
 
-#reservationAndLocation>span:first-child {
+#reservationAndLocation>span:first-child>a {
 	color: #FFA77E;
 	font-weight: bold;
 }
 
-#reservationAndLocation>span:last-child {
+#reservationAndLocation>span:last-child>a {
 	color: #A5A5A5;
 }
 

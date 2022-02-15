@@ -100,19 +100,41 @@
 	
 	</select>
 	
-	<insert id="reservation" parameterType="hashmap">
-		INSERT ALL
-    	WHEN Rest > 0 THEN
-		INTO DETAIL VALUES(
-    		M_RE_SEQ.NEXTVAL,#{userNo},SYSDATE,#{bizNo},'DC',#{menuNo},'N',#{reNo})
-		INTO BIZ_RESERVATION VALUES(
-    		#{bizNo},'DC',#{reNo})
+	<insert id="inserDetail" parameterType="hashmap">		
+		INSERT INTO
+		detail
+		VALUES(
+			M_RE_SEQ.NEXTVAL,
+			#{userNo},
+			SYSDATE,
+			#{bizNo},
+			'DC',
+			#{menuNo},
+			'N',
+			#{reNo}
+			)
+	</insert>
+	
+	<insert id="insertBizReservation" parameterType="hashmap">		
+		INSERT INTO biz_reservation VALUES(#{bizNo},'DC',#{reNo})
+	</insert>
+	
+	
+	<select id="selectOneMReservation" parameterType="String" resultType="kr.or.ddasum.dcRestaurant.model.vo.MReservation">
 		SELECT
 			no as no,
 			userNo as userNo,
-			Rest as rest
-		FROM m_reservation
-		WHERE userNo=#{userNo};
-	</insert>
+			rest as rest
+		FROM
+			m_reservation
+		WHERE userNo = #{userNo}	
+	</select>
+	
+	<update id="updateMReservation" parameterType="hashmap">
+		update m_reservation set
+			rest = #{rest}
+		where
+		userNo = #{userNo}
+	</update>
 	
 </mapper>

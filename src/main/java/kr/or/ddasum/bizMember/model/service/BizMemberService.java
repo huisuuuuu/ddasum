@@ -108,6 +108,8 @@ public interface BizMemberService {
 	  * @param bizNo
 	  * @return
 	  */
+	
+	/*
 	int countcalculate(int bizNo);
 	
 	/**
@@ -119,17 +121,7 @@ public interface BizMemberService {
 	  * @param bizNo
 	  * @return
 	  */
-	
-	public ArrayList<Calculater> calculate(int bizNo, int nowPage, int cntPerPage);
-	/**
-	  * @Method Name : countgood
-	  * @작성일 : 2022. 2. 12.
-	  * @작성자 : lee
-	  * @변경이력 : 
-	  * @Method 설명 : 상품 총 수량
-	  * @param bizNo
-	  * @return
-	  */
+	/*
 	int countGood(int bizNo);
 
 	/**
@@ -141,21 +133,66 @@ public interface BizMemberService {
 	  * @param bizNo
 	  * @return
 	  */
-	int countreserv(int bizNo);
+/*	int countreserv(int bizNo);
 
 	/**
 	  * @Method Name : bizReserv
 	  * @작성일 : 2022. 2. 13.
 	  * @작성자 : lee
 	  * @변경이력 : 
-	  * @Method 설명 :
+	  * @Method 설명 :예약 리스트(페이징)
 	  * @param bizNo
 	  * @param nowPageInt
 	  * @param cntPerPageInt
 	  * @return
 	  */
-	ArrayList<Detail> bizReserv(int bizNo, int nowPageInt, int cntPerPageInt);
+	ArrayList<Detail> bizReserv(int currentPage, int recordCountPerPage, int bizNo);
 
+	/**
+	  * @Method Name : recordBizTotalCount
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @return
+	  */
+	int recordBizTotalCount(int bizNo);
+
+	/**
+	  * @Method Name : goodsManageList
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :상품 리스트(페이징)
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @return
+	  */
+	ArrayList<HashMap<String, Object>> goodsManageList(int bizNo, int currentPage, int recordCountPerPage);
+
+	/**
+	  * @Method Name : reservTotalCount
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param bizNo
+	  * @return
+	  */
+	int detailTotalCount(int bizNo);
+
+	/**
+	  * @Method Name : calculateManage
+	  * @작성일 : 2022. 2. 14.
+	  * @작성자 : lee
+	  * @변경이력 : 
+	  * @Method 설명 : 정산 리스트(페이징)
+	  * @param currentPage
+	  * @param recordCountPerPage
+	  * @param bizNo
+	  * @return
+	  */
+	ArrayList<Detail> calculateManage(int currentPage, int recordCountPerPage, int bizNo);
 
 
 	

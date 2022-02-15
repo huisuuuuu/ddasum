@@ -44,7 +44,7 @@
 
       <ul class="nav_list_item">
         <li>
-          <a href="/admin/adminSupport.do">
+          <a href="/admin/adminSelectAllSupport.do">
             <img class="nav-i" src="/resources/images/sales.png" alt="후원 정산관리">후원 정산관리</a>
         </li>
       </ul>

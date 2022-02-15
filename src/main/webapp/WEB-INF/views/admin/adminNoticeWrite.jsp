@@ -47,14 +47,6 @@
 						<div class="box-content">
 							<textarea name="content" placeholder="내용을 입력하세요"></textarea>
 						</div>
-						<div class="box-upload">
-							<label for="upload">
-								<i class="far fa-image"></i>
-								<span>사진첨부</span>
-							</label>
-							<input type="file" id="upload">
-						</div>
-					</div>
 					<div class="box-button">
 						<input type="submit" value="완료" class="btn-ok">
 						<button class="btn-ok"><a href="/admin/adminNoticeManageList.do">목록</a></button>

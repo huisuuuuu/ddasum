@@ -218,13 +218,13 @@
         display: inline-block;
     }
 
-    .login_area {
+    .passoword_area {
         width: 50%;
         margin: 0 auto;
 
     }
 
-    .btn_login {
+    .btn_password {
 
         width: 450px;
         height: 60px;
@@ -243,7 +243,7 @@
         padding: 2%;
     }
 
-    .login_area input:not(:last-child) {
+    .passoword_area input:not(:last-child) {
         display: block;
         width: 450px;
         height: 40px;
@@ -302,7 +302,7 @@
 <body>
 	<div id=header>
         <div id="header-logo-area">
-            <a href=""><img id="header-logo-img" src="/resources/images/ddasum_header_logo.png"></a>
+            <a href="/member/mainPage.do"><img id="header-logo-img" src="/resources/images/ddasum_header_logo.png"></a>
         </div>
         <div id="header-meun-area">
             <ul id="header-menu-ul">
@@ -349,11 +349,11 @@
             </div>
             <div id="content-center-empty-center-area"></div>
             <div class="contents_wrap">
-                <div class="login_area">
+                <div class="passoword_area">
                     <form id="loginForm" action="/member/myPageUpdate.do" method="post">
-                        <input type="text" name="userId" value="${sessionScope.member.userId }">
+                        <input type="text" name="userId" value="${sessionScope.member.userId }" readonly>
                         <input type="password" name="userPwd" placeholder="비밀번호">
-                        <input class="btn_login" type="submit" value="확인">
+                        <input class="btn_password" type="submit" value="확인">
                     </form>
                 </div>
             </div>

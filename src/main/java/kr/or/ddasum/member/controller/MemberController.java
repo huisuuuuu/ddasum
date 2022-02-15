@@ -41,6 +41,15 @@ public class MemberController {
 			if (m != null)
 			{
 				HttpSession session = request.getSession();
+				
+				if(m.getAddress().equals("서울")) {
+					m.setAddress("SEOUL");
+				}else if(m.getAddress().equals("인천")) {
+					m.setAddress("INCHEON");
+				}else if(m.getAddress().equals("경기")) {
+					m.setAddress("GYEONGGI");
+				};
+				
 				session.setAttribute("member", m);
 				session.setAttribute("bizMember", null);
 				return "main";
@@ -82,8 +91,9 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/myPage.do")
-	public String myPageIn(Member member) {
-
+	public String myPageIn(HttpSession session,@SessionAttribute Member member) {
+		Member m = mService.memberLogin(member);
+		session.setAttribute("member", m);
 		return "member/myPage";
 	}
 
@@ -99,7 +109,7 @@ public class MemberController {
 
 		if (userPwd == null) {
 
-			return "member/passwordCheck";
+			return "member/passwordCheckPage";
 		} else {
 			String userId = request.getParameter("userId");
 
@@ -612,20 +622,26 @@ public class MemberController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/member/reservationCancle.do", method = RequestMethod.POST)
-	public void reservationCancle(@RequestParam char reCancle,@SessionAttribute Member member,HttpServletResponse response) throws IOException {
+	@RequestMapping(value = "/member/reservationCancle.do", method = RequestMethod.GET)
+	public ModelAndView reservationCancle(@RequestParam int reNo,@SessionAttribute Member member,HttpServletResponse response, ModelAndView mav) throws IOException {
 		
-		reCancle = reCancle=='N'?'Y':'N';
+		
 		
 		int userNo = member.getUserNo();
 		
-		int result = mService.reservationCancle(reCancle, userNo);
+		int result = mService.reservationCancle(userNo, reNo);
 		
 		if(result >0) {
-			response.getWriter().print("true");
+			mav.addObject("msg", "예약을 취소하였습니다.");
+			mav.addObject("location", "/member/reservationPage.do");
 		}else {
-			response.getWriter().print("false");
+			mav.addObject("msg", "예약 취소 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. -");
+			mav.addObject("location", "/");
 		}
+		
+		mav.setViewName("commons/msg");
+		
+		return mav;
 	}
 	
 	
@@ -644,6 +660,27 @@ public class MemberController {
 			response.getWriter().print("false");
 		}
 		
+	}
+	
+	@RequestMapping(value = "/member/smsYN.do", method = RequestMethod.GET)
+	public String smsYN() {
+
+		return "member/sms";
+
+	}
+	
+	@RequestMapping(value = "/member/contract.do", method = RequestMethod.GET)
+	public String contract() {
+
+		return "member/contract";
+
+	}
+	
+	@RequestMapping(value = "/member/personal.do", method = RequestMethod.GET)
+	public String personal() {
+
+		return "member/personal";
+
 	}
 
 }

@@ -154,7 +154,8 @@
 						<td class="info-area">${info.BIZDELYN.equals("Y") ? "탈퇴" : "사용중" }
 							<div class="del-btn">
 							
-								<button type="button">탈퇴</button>
+								<button type="button" class="btn-ok">
+								<a href="/admin/adminBizMemberWithdraw.do?bizId=${info.BIZID }&bizDelYN=${info.BIZDELYN}">탈퇴</a></button>
 							</div>						
 						</td>
 					</tr>
