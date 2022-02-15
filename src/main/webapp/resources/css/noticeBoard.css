@@ -1,16 +1,15 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap');
 
-
-     * {
+		* {
             box-sizing: border-box;
             font-family: 'Noto Sans KR', sans-serif;
             margin : 0px;
 			padding : 0px;
         }
 		* a{
-        text-decoration: none;
-        color: inherit;
+	        text-decoration: none;
+	        color: inherit;
     	}
 		#wrapper{
 			width: 100%;
@@ -120,17 +119,6 @@
 			padding: 20px;
 			color: #666666;
 		}
-		.listBtn{
-			text-align: center;
-			padding-top: 10px;
-		}
-		.subject{
-			display: block;
-			text-align: left;
-			padding-top: 10px;		
-			font-size: 22pt;
-			word-break:break-all;
-		}
 		.regdate{
 			font-size: 18pt;
 		}
@@ -149,29 +137,12 @@
 		.searchImg{
 			width: 15px;
 		}
-		#page_wrap{
-			text-align: center;
-		}
-		ul#page_ul {
-    		display: inline-flex;
-		}	
-		* a{
-       		text-decoration: none;
-        	color: inherit;
-        	}
-		ul{
-   			list-style:none;
-   			font-size: 18pt;
-   		}
-		li{
-			list-style: none;
-			font-size: 16pt;
-			padding: 10px;
-			text-align: center;
-		}
 		#fix{
+			width: 30px;
+			height: 20px;
 			border: none;
 			background-color: #E6510B;
+			
 			color: white;
 			border-radius: 5px;
 			
