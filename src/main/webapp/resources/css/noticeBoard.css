@@ -35,7 +35,7 @@
 		}
 		.resultArea{
 			width: 100%;
-			height: 780px;
+			height: 700px;
 		}
 		.pagingArea{
 			width: 100%;
@@ -106,10 +106,10 @@
 			width: 17%;
 			height: 5px;
 		}
-		p{
+/* 		p{
 			border-bottom: 1px solid #707070;
 			height: 130px;
-		}
+		} */
 		.detailTable{
 			width: 80%;
 			height: 100%;
@@ -154,5 +154,24 @@
 		.searchImg{
 			width: 15px;
 		}
-		
-		
+		#page_wrap{
+			text-align: center;
+		}
+		ul#page_ul {
+    		display: inline-flex;
+		}	
+		* a{
+       		text-decoration: none;
+        	color: inherit;
+        	}
+		ul{
+   			list-style:none;
+   			font-size: 24pt;
+   		}
+		li{
+			list-style: none;
+			font-size: 18pt;
+			padding: 10px;
+			text-align: center;
+		}
+   		

@@ -91,8 +91,9 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/myPage.do")
-	public String myPageIn(Member member) {
-
+	public String myPageIn(HttpSession session,@SessionAttribute Member member) {
+		Member m = mService.memberLogin(member);
+		session.setAttribute("member", m);
 		return "member/myPage";
 	}
 
@@ -621,21 +622,26 @@ public class MemberController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/member/reservationCancle.do", method = RequestMethod.POST)
-	public void reservationCancle(@RequestParam char reCancle,@RequestParam String reNo,@SessionAttribute Member member,HttpServletResponse response) throws IOException {
+	@RequestMapping(value = "/member/reservationCancle.do", method = RequestMethod.GET)
+	public ModelAndView reservationCancle(@RequestParam int reNo,@SessionAttribute Member member,HttpServletResponse response, ModelAndView mav) throws IOException {
 		
-		reCancle = reCancle=='N'?'Y':'N';
+		
 		
 		int userNo = member.getUserNo();
 		
-		
-		int result = mService.reservationCancle(reCancle, reNo, userNo);
+		int result = mService.reservationCancle(userNo, reNo);
 		
 		if(result >0) {
-			response.getWriter().print("true");
+			mav.addObject("msg", "예약을 취소하였습니다.");
+			mav.addObject("location", "/member/reservationPage.do");
 		}else {
-			response.getWriter().print("false");
+			mav.addObject("msg", "예약 취소 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. -");
+			mav.addObject("location", "/");
 		}
+		
+		mav.setViewName("commons/msg");
+		
+		return mav;
 	}
 	
 	

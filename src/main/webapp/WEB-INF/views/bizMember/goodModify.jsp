@@ -242,7 +242,7 @@
 						</div>
 						<div id="itemImg">
 							<div id="itemImgInput">
-								<img style="height:100%;" src="${requestScope.BizGoods.menuImage }">	
+								<img id ="target_img" style="height:100%;" src="${requestScope.BizGoods.menuImage }">	
 							</div>
 						</div>
 					</div>
@@ -326,7 +326,8 @@
     });
 	
 	
-	
+
+
 	
 </script>
 </body>

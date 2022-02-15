@@ -1,6 +1,7 @@
 package kr.or.ddasum.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,6 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private NoticeDAO nDAO;
 
-	@Override
-	public ArrayList<Notice> selectAllNotice(String info_id, int nowPage, int cntPerPage) {
-
-		int end = nowPage * cntPerPage;
-		int start = end - cntPerPage + 1;
-		
-		return nDAO.selectAllNotice(info_id, start, end);
-	}
 
 	@Override
 	public Notice noticeDetail(int iNo) {
@@ -31,13 +24,12 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDAO.noticeDetail(iNo);
 	}
 
-	
 	@Override
-	public int countnotice() {
-		return nDAO.countnotice();
+	public int recordNoticeTotalCount() {
+		return nDAO.recordNoticeTotalCount();
 
 	}
-	
+	/*
 	@Override
 	public ArrayList<Notice> noticeMainPageview() {
 		return nDAO.noticeMainPageview();
@@ -49,6 +41,23 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDAO.faqMainPageview();
 		
 	}
+*/
+	@Override
+	public ArrayList<HashMap<String, Object>> selectAllNotice(int currentPage, int recordCountPerPage) {
+		return nDAO.selectAllNotice(currentPage, recordCountPerPage);
+		
+	}
+
+	@Override
+	public int faqTotalCount() {
+		return nDAO.faqTotalCount();
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> faqBoard(int currentPage, int recordCountPerPage) {
+		return nDAO.faqBoard(currentPage, recordCountPerPage);
+	}
+
 
 
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddasum.admin.model.vo.AdminMember;
+import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.Detail;
  
 @Repository
@@ -113,20 +114,70 @@ public class AdminDAO {
 		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.adminSelectAllFAQ", null, rb));
 	}
 
+	//MemberInfo 회원탈퇴
+	public int adminUpdateMemberEndYN(HashMap<String, Object> map) {
+		return sqlSession.update("admin.updateAdminMemberEndYN", map);
+	}
 	
-//	public ArrayList<Card> adminSelectAllCardList(int currentPage, int recordCountPerPage) {
-//		int start = (currentPage - 1) * recordCountPerPage;
-//		int end = recordCountPerPage;
-//		RowBounds rb = new RowBounds(start, end);
-//		return new ArrayList<Detail> (sqlSession.selectList("admin.adminCardManage", null, rb));
-//		
-//		return null;
-//	}
-//	
-//	public int selectAllCardMemberTotalCount() {
-//		// TODO Auto-generated method stub
-//		return sqlSession.selectOne("admin.selectAllCardMemberTotalCount");
-//	}
+	//사업자 회원탈퇴
+	public int adminUpdateBizMemberEndYN(HashMap<String, Object> map) {
+		return sqlSession.update("admin.updateAdminBizMemberEndYN", map);
+	}
 
+	//후원페이지 글 수
+	public int recordSupportTotalCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.selectAllSupportTotalCount");
+	}
+
+	//후원페이지 페이징
+	public ArrayList<HashMap<String, Object>> adminSelectAllSupport(int currentPage, int recordCountPerPage) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.adminSelectAllSupport", null, rb));
+	}
+
+	public int adminMemberSearchTotalCount() {
+
+		return sqlSession.selectOne("admin.memberSearchTotalCount");
+	}
+
+	public ArrayList<HashMap<String, Object>> adminMemberSearchList(String type, String keyword, int currentPage,
+		int recordCountPerPage) {
+		int start = (currentPage - 1) * recordCountPerPage;
+		int end = recordCountPerPage;
+		RowBounds rb = new RowBounds(start, end);
+		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.memberSearchList", null, rb));
+	}
+	
+	//공지사항 글 읽기
+	public Notice adminNoticeDetail (int iNo) {
+		return sqlSession.selectOne("admin.adminNoticeDetail",iNo);
+	}
+		
+	//FAQ 글 읽기
+	public Notice adminFAQDetail (int iNo) {
+		return sqlSession.selectOne("admin.adminFAQDetail",iNo);
+	}
+
+	//공지사항 글 수정
+	public int adminNoticeUpdate(Notice noti) {
+		
+		return sqlSession.update("admin.updateNotice", noti);
+	}
+
+	public int Notice(Notice noti) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+		
+		
+		
+		
+
+
+
+	
 
 }

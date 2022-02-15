@@ -387,6 +387,14 @@
         font-family: 'Noto Sans KR';
         color: #707070;
     }
+    #info-enrollMent-update-button{
+    	 background-color: white;
+        border-radius: 3px;
+        border: 1px solid #707070;
+        width: 80px;
+        height: 30px;
+        font-family: 'Noto Sans KR';
+    }
 
     #content-center-empty-bottom-area {
         width: 100%;
@@ -471,7 +479,7 @@
 <body>
 <div id=header>
         <div id="header-logo-area">
-            <a href=""><img id="header-logo-img" src="/resources/images/ddasum_header_logo.png"></a>
+            <a href="/member/mainPage.do"><img id="header-logo-img" src="/resources/images/ddasum_header_logo.png"></a>
         </div>
         <div id="header-meun-area">
             <ul id="header-menu-ul">
@@ -509,8 +517,11 @@
         <div id="content-center">
             <div id="content-center-empty-top-area1"></div>
             <div id="myPage-title_area">
-                <h1>마이페이지</h1>
-                <div id="under"></div>
+                <div class="main_tit">
+                    <h1>마이페이지</h1>
+                    <div id="under"></div>
+               
+                </div>
             </div>
             <div id="content-center-empty-top-area2"></div>
             <div id="content-center-info-area">
@@ -521,11 +532,17 @@
 
                 <div id="info-img-area">
                     <span>프로필 사진</span><br><br>
-                    <div id="img-area"><img id="profileImg" src="${sessionScope.member.pImage }"> </div><br><br>
+                    <div id="img-area">
+                    
+                    <img id="profileImg" src="${sessionScope.member.pImage }">
+                   
+                    </div><br><br>
                     <form method="POST" id="uploadForm">
-                    <input type="file" class="inp-img" name="uploadFile" id="img" accept=".jpg" style="display:none;"/>
+                    <input type="file" class="profile-img" name="uploadFile" id="img" accept=".jpg" style="display:none;"/>
                     </form>
-                    <button id="info-img-update-button"><label for="img">변경하기</label></button>
+                    <button id="info-img-update-button"><label for="img">사진선택</label></button><br><br><br>
+                    <button id="profileImgUpdateBtn">프로필 변경</button>
+                    
                 </div>
                 <div id="info-info-area">
                     <div class="data-title">아이디</div>
@@ -573,8 +590,13 @@
                 <br><br><br>
                 <hr style="width: 100%; margin: 0px;">
                 <div id="card-img-area">
-                    <div id="card-img"></div><br>
-                    <input type="file" />
+                    <div id="card-img">
+                    <img id="e-img" src="">
+                    </div><br>
+                     <form method="POST" id="enrollMentImgForm">
+                    <input type="file" class="enrollMent-img" name="enrollMentImgFIle" id="enrollMentImg" accept=".jpg" style="display:none;"/>
+                    </form>
+                    <button id="info-enrollMent-update-button"><label for="enrollMentImg">사진선택</label></button><br><br><br>
                 </div>
                 <div id="success-fail-text-area">
                     <br>
@@ -634,33 +656,26 @@
                 }
             }).open();
         }
+       
         
-        function readInputFile(input) {
+        $("#img").on('change', function(){
+            readInputFile1(this);
+        });
+        
+        function readInputFile1(input) {
             if(input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#profileImg').attr('src', e.target.result);  
+                    $('#profileImg').attr('src', e.target.result);
+            
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
-        $(".inp-img").on('change', function(){
-            readInputFile(this);
-        });
+       
+	       
         
-        
-        
-        
-        $('#info-update-button').click(function(){
-        	
-        	var userPwd = $('input[name=userPwd]').val();
-        	var userName = $('input[name=userName]').val();
-        	var nick = $('input[name=nick]').val();
-        	var email = $('input[name=email]').val();
-        	var address = $('input[name=address]').val();
-        	var phone = $('input[name=phone]').val();
-        	
+        $('#profileImgUpdateBtn').click(function(){
         	var formData = new FormData();
         	formData.append("uploadFile", $("input[name=uploadFile]")[0].files[0]);
         	
@@ -672,30 +687,41 @@
         		contentType: false,
         		success : function(result){
         			if(result == "true"){
-        			$.ajax({
-                		url : "/member/memberInfoUpdate.do",
-                		data : {"userPwd":userPwd, 
-                				"userName":userName, 
-                				"nick":nick, 
-                				"email":email, 
-                				"address":address, 
-                				"phone":phone},
-                		type : "POST",
-                		success : function(result){
-                			if(result == "true"){
-                				alert('회원 정보 변경 성공');
-                				location.replace("/member/myPage.do");
-                			}else{
-                				alert(' 회원 정보 변경 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. - ');
-                				location.replace("/member/myPage.do");
-                			}
-                		},
-                		error : function(){
-                			console.log('ajax 통신 에러');
-                		}
-                	});
+        				
         			}else{
-        				alert('정보수정실패 - 지속적인 문제 발생시 관리자에게 문의 바랍니다 -');
+        				alert(' 회원 정보 변경 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. - ');
+        			}
+        		},
+        		error : function(){
+        			console.log('ajax 통신 에러');
+        		}
+        	});
+        
+        });
+        $('#info-update-button').click(function(){
+        	
+        	var userPwd = $('input[name=userPwd]').val();
+        	var userName = $('input[name=userName]').val();
+        	var nick = $('input[name=nick]').val();
+        	var email = $('input[name=email]').val();
+        	var address = $('input[name=address]').val();
+        	var phone = $('input[name=phone]').val();
+        	
+        	$.ajax({
+        		url : "/member/memberInfoUpdate.do",
+        		data : {"userPwd":userPwd, 
+        				"userName":userName, 
+        				"nick":nick, 
+        				"email":email, 
+        				"address":address, 
+        				"phone":phone},
+        		type : "POST",
+        		success : function(result){
+        			if(result == "true"){
+        				alert('회원 정보 변경 성공');
+        				location.replace("/member/myPage.do");
+        			}else{
+        				alert(' 회원 정보 변경 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. - ');
         				location.replace("/member/myPage.do");
         			}
         		},
@@ -722,12 +748,52 @@
         			}
         		},
         		error : function(){
-        			
+        			console.log('ajax 통신 에러');
         		}
         	});
         	}
         	
     	});
+        
+        $("#enrollMentImg").on('change', function(){
+           	readInputFile2(this);
+       	});
+        function readInputFile2(input) {
+            if(input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#e-img').attr('src', e.target.result);
+                    
+                    
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        $('#img-enrollMent-button').click(function(){
+        	var formData = new FormData();
+        	formData.append("enrollMentImgFIle", $("input[name=enrollMentImgFIle]")[0].files[0]);
+        	
+        	$.ajax({
+        		url : "/file/enrollMentImgUpload.do",
+        		data : formData,
+        		type : "POST",
+        		processData: false,
+        		contentType: false,
+        		success : function(result){
+        			if(result == "true"){
+        				alert('인증사진 등록완료 \n - (조금만 기다려 주새요) -');
+        			}else{
+        				alert('카드 인증 실패 - 지속적인 문제 발생시 관리자에게 문의바랍니다. - ');
+        			}
+        		},
+        		error : function(){
+        			console.log('ajax 통신 에러');
+        		}
+        	});
+        
+        });
+	       
     </script>
 
 </body>

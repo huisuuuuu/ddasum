@@ -195,21 +195,23 @@ td:nth-of-type(1) {
                     <div class="box-search">
                   <form action="/admin/adminMemberSearch.do" method="get">
                      <div class="select-search">
-                        <select name="type" id="search-type">
+                        <select name="type" id="searchtype">
                            <option>검색필터</option>
-                           <option value="userId">아이디</option>
-                                   <option value="nick">닉네임</option>
-                                   <option value="userName">이름</option>
+                           <option value="userId">
+                           <c:if test="${map.searchtype == 'userId' }">selected</c:if>아이디</option>
+                           <option value="nick">닉네임</option>
+                           <option value="userName">이름</option>
                         </select>
                         <i class="fas fa-chevron-down icon-arrow"></i>
                      </div>
                      
                      <div class="input-search">
-                        <input type="search-keyword" name="keyword" placeholder="검색어를 입력해주세요" />
+                        <input type="searchkeyword" name="keyword" placeholder="검색어를 입력해주세요" />
                            <div class="search-btn"><button type="button" class="search">
                               <i class="fas fa-search icon-search"></i></button>                     
                            </div>                        
                      </div>
+                     
                   </form>
                </div>
                 </div>

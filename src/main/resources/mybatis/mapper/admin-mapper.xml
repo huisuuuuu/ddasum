@@ -152,7 +152,7 @@
 	SELECT
     	INFO_NAME AS INFONAME,
     	I_NO AS INO,
-    	I_TITLE AS ITITILE,
+    	I_TITLE AS ITITLE,
     	I_CONTENT AS ICONTENT,
     	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
     	I_DEL_YN AS DELYN
@@ -175,7 +175,7 @@
 	SELECT 
     	INFO_NAME AS INFONAME,
     	I_NO AS INO,
-    	I_TITLE AS ITITILE,
+    	I_TITLE AS ITITLE,
     	I_CONTENT AS ICONTENT,
     	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
     	I_DEL_YN AS DELYN
@@ -190,5 +190,80 @@
     WHERE INFO_ID = 'FAQ'	
 
 	</select>
+	
+	<update id="updateAdminMemberEndYN" parameterType="hashmap">
+	
+	UPDATE MEMBER SET DEL_YN = #{delYN}
+	WHERE USERID = #{userId}
+	
+	</update>
+	
+	<update id="updateAdminBizMemberEndYN" parameterType="hashmap">
+	
+	UPDATE BIZ_MEMBER SET BIZ_DEL_YN = #{bizDelYN}
+	WHERE BIZ_ID = #{bizId}
+	
+	</update>
+	
+	<select id="selectAllSupportTotalCount" resultType="int">
+	
+	SELECT COUNT(*)
+	FROM BIZ_RESERVATION
+	
+	</select>
+	
+	<select id="adminSelectAllSupport" parameterType="hashmap" resultType="detail">
+	
+	SELECT 
+    	M_RE_NO AS mReNo,
+    	RESERVATION_DATE AS reservationDate,
+    	MENU_NAME AS menuName,
+    	AUTHORITY_INFO AS authorityInfo,
+    	BIZ_NAME AS bizName,
+    	RE_NO AS reNo
+    FROM DETAIL
+    	INNER JOIN MENU ON (DETAIL.MENU_NO=MENU.MENU_NO)
+    	INNER JOIN AUTHORITY ON (AUTHORITY.AUTHORITY_ID=DETAIL.AUTHORITY_ID)
+    	INNER JOIN BIZ_MEMBER ON (DETAIL.BIZ_NO=BIZ_MEMBER.BIZ_NO)
+    	ORDER BY M_RE_NO
+	
+	</select>
+	
+	<select id="memberSearchTotalCount" resultType="int">
+	
+	</select>
+	
+	<select id="adminNoticeDetail" parameterType="int" resultType="notice">
+	
+	SELECT
+    	INFO_NAME AS INFONAME,
+    	I_NO AS INO,
+    	I_TITLE AS ITITLE,
+    	I_CONTENT AS ICONTENT
+	FROM INFO
+    	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
+    WHERE I_NO=#{_params}
+	
+	</select>	
+	
+	<select id="adminFAQDetail" parameterType="int" resultType="notice">
+	
+	SELECT
+    	INFO_NAME AS INFONAME,
+    	I_NO AS INO,
+    	I_TITLE AS ITITLE,
+    	I_CONTENT AS ICONTENT
+	FROM INFO
+    	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
+    WHERE I_NO=#{_params}
+	
+	</select>	
+	
+	<update id="updateNotice" parameterType="notice">
+	
+    UPDATE INFO SET I_TITLE=#{iTitle}, I_CONTENT=#{iContent} WHERE I_NO = #{_params}	
+	
+	</update>
+
   
 </mapper>

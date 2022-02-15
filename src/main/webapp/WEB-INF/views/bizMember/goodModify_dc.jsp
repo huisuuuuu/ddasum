@@ -5,7 +5,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +49,7 @@
 			height:972px;
 			background-color: rgba(255, 211, 190, 0.2);
 		}
-		#bizManage{
+		#goodManage{
 			width: 95%;
 			height: 85%;
 			background-color: white;
@@ -75,81 +74,80 @@
 		#content{
 			width: 100%;
 			height: 90%;
-		}
-		#content-L{
-			width: 30%;
-			height: 100%;
-			float: left;
-			text-align: center;
 			border-bottom-left-radius: 20px;
-		}
-		#content-R{
-			width: 15%;
-			height: 100%;
-			float: left;
-		}
-		#content-result{
-			width: 55%;
-			height: 100%;
-			float: left;
 			border-bottom-right-radius: 20px;
 		}
-		.modifyBTN{
-			float: right;
-			width: 120px;
-			height: 40px;
-			font-size: 18pt;
-			color: #FFA77E;
-			border: 1px solid #FFA77E;
-			background-color: white;
-			border-radius: 5px;
+		#itemImgArea{
+			width: 100%;
+			height: 30%;
 		}
-		.modifyBTN2{
-			float: right;
-			width: 120px;
-			height: 32px;
-			font-size: 14pt;
-			color: white;
-			border: none;
-			background-color: #FFA77E;
-			border-radius: 5px;
+		#itemInfoImg{
+			width: 25%;
+			height: 100%;
+			float: left;
+			padding-left: 150px;
 		}
-		.modifyBTN3{
-			float: right;
-			width: 120px;
-			height: 32px;
-			font-size: 14pt;
-			color: white;
-			border: none;
-			background-color: #FFA77E;
-			border-radius: 5px;
-		}		
-		#bizImg{
-			width: 220px;
-			height: 220px;
-			border-radius: 220px;
-			border: 1px solid gray;
-			margin: 0 auto;
+		#itemImg{
+			width: 75%;
+			height: 100%;		
+			float: left;
 		}
-		ul{
-			list-style: none;
-			font-size: 18pt;
-			padding: 0;
+		.itemInfo{
+			width: 100%;
+			height: 20%;
 		}
-		li{
-			list-style: none;
-			font-size: 18pt;
-			padding: 10px;
-			border-bottom: 1px solid #A5A5A5;
-			height: 40px;
+		.iteminfodiv{
+			width: 25%;
+			height: 100%;
+			float: left;
+			padding-left: 150px;
 		}
-		#typeOption{
-			width: 120px;
-			height: 30px;	
+		.infoWriter{
+			width: 75%;
+			height: 100%;
+			float: left;
+		}
+		.confirmArea{
+			width: 100%;
+			height: 10%;
+			text-align: center;
+		}
+		span{
 			font-size: 16pt;
 		}
+		.entertext{
+			width: 300px;
+			height: 35px;
+			font-size: 16pt;
+			border-color: gray;
+		}
 		.imgsize{
-			width:100%;
+			width:100px;
+			padding-top: 40px;
+		}
+		#itemImgInput{
+			width: 300px;
+			height: 220px;
+			border: 1px solid gray;
+			text-align: center;
+		}
+		.confirmstyle{
+			width: 120px;
+			height: 50px;
+			background-color: #FFA77E;
+			color: white;
+			border-radius: 10px;
+			font-size: 16pt;
+			border: none;
+		}
+		#GoodMo{
+			width: 120px;
+			height: 50px;
+			background-color: #FFA77E;
+			color: white;
+			border-radius: 10px;
+			font-size: 16pt;
+			border: none;
 		}
 		h1{
 		float: left;
@@ -173,7 +171,10 @@
 			float: right;
 			font-size: 18pt;
 			padding-top: 20px;
-		}
+		}	
+		
+		
+		
 		
 	</style>
 
@@ -197,7 +198,7 @@
 				</a>
 			</div>
 			<div class="submenu"> 
-				<a href="/BizMember/goodsManage.do"><br>
+				<a href="/BizMember/goodsManage_dc.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu2.png" alt="로고">
 					<span class="menulist">상품 관리</span><br><br>
 				</a>
@@ -211,76 +212,88 @@
 			<div class="submenu"> 
 				<a href="/BizMember/calculateManage.do"><br>
 					<img class="Icons" src="/resources/images/bizSubMenu4.png" alt="로고">
-					<span class="menulist">정산 관리</span><br><br>
+					<span class="menulist">후원 정산 관리</span><br><br>
 				</a>
 			</div>
 		</div>
 	</div>
 	<div id="rightArea">
 		<div id="R-upArea">
-			<div id="bizManage">
-				<h1>업체 관리</h1>
+			<div id="goodManage">
+				<h1>상품 관리>상품수정</h1>
 					<span class="logout">
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
 					<span class="bizId"> ${sessionScope.bizMember.bizName } </span>
-					<span class="bizSmallImage"> <img class="smaillimg" src="${requestScope.bizMember.bizImage }">
+					<span class="bizSmallImage"> <img class="smaillimg" src="${sessionScope.bizMember.bizImage }">
 					</span>
-					
-
 			</div>
 		</div>
 		<div id="R-downArea">
 			<div id="R-content">
 				<div id="content-title">
-					업체 정보 관리
-					<a href="updateBizManage.do"><button class="modifyBTN">변경하기</button></a>
+					할인 상품 수정
 				</div>
+				<form action="/bizMember/GoodMo.do" method="post" id="addForm">
 				<div id="content">
-					<div id="content-L">
-						<br><br>
-						<div id="bizImg">
-							<img class="imgsize" id=bizImg src="${requestScope.bizMember.bizImage }">
+					<div id="itemImgArea">
+						<div id="itemInfoImg">
+							<span>상품 이미지</span>
 						</div>
-						<br>
-						<span></span>
+						<div id="itemImg">
+							<div id="itemImgInput">
+								<img id ="target_img" style="height:100%;" src="${requestScope.BizGoods.menuImage }">	
+							</div>
+						</div>
 					</div>
-					<div id="content-R">
-					<ul>
-						<li>아이디 </li>
-						<li>대표명 </li>
-						<li>업체명 </li>
-						<li>이메일 </li>
-						<li>휴대전화 </li>
-						<li>업종</li>
-						<li>주소 </li>
-						<li>운영시간 </li>
-						<li>후원횟수 </li>
-						<li>사업자유형 </li>
-						<li>탈퇴여부 </li>
-					</ul>
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>상품명</span>
+						</div>
+						<div class="infoWriter">
+							<input type='text' class="entertext" name="menuName" value=${requestScope.BizGoods.menuName }>
+						</div>					
 					</div>
-					<div id="content-result">
-					<ul>
-						<li>${requestScope.bizMember.bizId }</li>
-						<li>${requestScope.bizMember.ceoName }</li>
-						<li>${requestScope.bizMember.bizName }</li>
-						<li>${requestScope.bizMember.bizEmail }</li>
-						<li>${requestScope.bizMember.bizPhone }</li>
-						<li>${requestScope.bizMember.restaurant }</li>
-						<li>${requestScope.bizMember.address }</li>
-						<li>${requestScope.bizMember.bizTime }</li>
-						<li>${requestScope.bizMember.bizCount }</li>
-						<li>${requestScope.bizMember.authorityId }</li>
-						<li>${requestScope.bizMember.bizDelYN }</li>
-					</ul>
-					
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>상품 설명</span>
+						</div>
+						<div class="infoWriter">
+							<input type='text' class="entertext" name="menuInfo" value=${requestScope.BizGoods.menuInfo }>
+						</div>					
 					</div>
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>상품가격</span>
+						</div>
+						<div class="infoWriter">
+							<input type='text' class="entertext" name="originalPrice" value=${requestScope.BizGoods.originalPrice }>
+						</div>					
+					</div>
+					<div class="iteminfo">
+						<div class="iteminfodiv">
+							<span>할인가격</span>
+						</div>
+						<div class="infoWriter">
+							<input type='text' class="entertext" name="dcPrice" value=${requestScope.BizGoods.dcPrice }>
+						</div>					
+					</div>
+					<div class="confirmArea">
+						<input type='submit' id="GoodMo" value='상품 수정'/>
+						<a href="/BizMember/goodsManage_dc.do"><input class="confirmstyle" type="button" value="취소"></a>
+					</div>
+					<input type='hidden' name="menuNo" value="${requestScope.BizGoods.menuNo }"/>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+
+
+
 <script>
 	$(function(){
         $('.submenu').hover(function() {
@@ -289,6 +302,41 @@
             $(this).removeClass('submenu_hover');
         });
     });
+	
+	
+	//상품 수정 ajax
+
+    $('#').click(function(){
+    	var form = {
+    			menuName : $('input[name=menuName]').val(),
+    	  		menuInfo : $('input[name=menuInfo]').val(),
+    	   		originalPrice : $('input[name=originalPrice]').val()
+    	}
+    	   
+	  	$.ajax({
+    		url : "/bizMember/GoodMo.do",
+			dataType : "json",
+			data : form,
+    		type : "POST",
+    		success : function(rst){
+    			if(rst == "true"){
+    				alert("상품 수정 완료");
+    				location.replace("/BizMember/goodsManage.do");
+    			}else{
+    				alert("상품 수정 실패");
+    				location.replace("/BizMember/goodsManage.do");
+    			}
+    		},
+    		error : function(){
+    			console.log('ajax 통신 에러');
+    		}
+    	});
+    });
+	
+	
+
+
+	
 </script>
 </body>
 </html>

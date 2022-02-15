@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddasum.admin.model.service.AdminService;
 import kr.or.ddasum.admin.model.vo.AdminMember;
-import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.Detail;
 
 @Controller
@@ -60,39 +62,7 @@ public class AdminController {
 		return mav;		
 		
 	}
-		
-
-//	@RequestMapping(value="/admin/adminMemberManageList.do", method = RequestMethod.GET)
-//	public String adminMemberManageList() {
-//		
-//		return "/admin/adminMemberManageList";
-//	}
-
-	//이용내역 확인
-//	@RequestMapping(value="/admin/adminUserDetail.do", method = RequestMethod.GET)
-//	public ModelAndView adminUserDetail(HttpServletRequest request, ModelAndView mav, @RequestParam int userNo) {
-//		
-//		int currentPage;
-//		
-//		if(request.getParameter("currentPage") == null) {
-//			currentPage = 1;
-//		}else {
-//			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-//		}
-//				
-//		HashMap<String,Object> map = admService.userDetail(currentPage, userNo);
-//		
-//		
-//		map.put("currentPage", currentPage);
-//		map.put("userNo", userNo);
-//		
-//		mav.addObject("map", map);
-//		mav.setViewName("admin/adminUserDetail");
-//
-//		return mav;
-//				
-//	}
-	
+			
 	//이용내역 확인
 	@RequestMapping(value="/admin/adminMemberDetail.do", method = RequestMethod.GET)
 	public ModelAndView adminMemberDetail(@RequestParam(defaultValue ="1" ) int currentPage, HttpServletRequest request, ModelAndView mav, @RequestParam int userNo)
@@ -121,6 +91,31 @@ public class AdminController {
 		mav.setViewName("admin/adminMemberDetail");
 		
 		return mav;				
+	}
+	
+	//회원탈퇴
+	@RequestMapping(value = "/admin/adminMemberWithdraw.do")
+	public void adminMemberWithDraw(@RequestParam String userId, @RequestParam(defaultValue="Y") char delYN, HttpSession session, HttpServletResponse response, ModelAndView mav) {
+		
+		//admin = null 비정상접근
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userId", userId);		
+		map.put("delYN", delYN == 'Y' ? 'N' : 'Y' );
+		
+		int result = admService.adminUpdateMemberEndYN(map);
+		
+		if(result>0) {
+			mav.addObject("message", userId + "회원이 정상탈퇴처리되었습니다.");
+			mav.setViewName("/");
+		}else {
+			mav.addObject("message", userId + "회원이 탈퇴처리가 되지 않았습니다.");
+			mav.setViewName("/");
+			
+			System.out.println(map);
+		}
+				
 	}
 	
 	//상세정보 확인
@@ -207,6 +202,30 @@ public class AdminController {
 		return mav;
 	}	
 	
+	//사업자 탈퇴
+	@RequestMapping(value = "/admin/adminBizMemberWithdraw.do")
+	public void adminBizMemberWithDraw(@RequestParam String bizId, @RequestParam(defaultValue="Y") char bizDelYN, HttpSession session, HttpServletResponse response, ModelAndView mav) {
+		
+		//admin = null 비정상접근
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("bizId", bizId);		
+		map.put("bizDelYN", bizDelYN == 'Y' ? 'N' : 'Y' );
+		
+		int result = admService.adminUpdateBizMemberEndYN(map);
+		
+//		if(result>0) {
+//			mav.addObject("message", bizId + "회원이 정상탈퇴처리되었습니다.");
+//			mav.setViewName("/");
+//		}else {
+//			mav.addObject("message", bizId + "회원이 탈퇴처리가 되지 않았습니다.");
+//			mav.setViewName("/");
+//		}
+				
+	}
+	
+	
 	//공지사항페이지
 	@RequestMapping(value="/admin/adminNoticeManageList.do", method = RequestMethod.GET)
 	public ModelAndView adminSelectNoticeAllManageList(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav) {
@@ -236,11 +255,34 @@ public class AdminController {
 			return mav;
 	}	
 	
-	@RequestMapping(value="/admin/adminSupport.do", method = RequestMethod.GET)
-	public String adminSupport() {
-		return "/admin/adminSupport";
-	}
-	
+	//후원페이지 연결
+	@RequestMapping(value="/admin/adminSelectAllSupport.do", method = RequestMethod.GET)
+	public ModelAndView adminSelectAllSupport(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav) {
+					
+			int recordCountPerPage = 10;
+			int naviCountPerPage = 5;
+			int recordSupportTotalCount = admService.recordSupportTotalCount();			
+			int pageTotalCount = (int)Math.ceil(recordSupportTotalCount/(double)recordCountPerPage);
+			int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+			int endNavi = startNavi + naviCountPerPage - 1;
+			endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+			
+			ArrayList<HashMap<String, Object>> list = admService.adminSelectAllSupport(currentPage, recordCountPerPage);
+			ArrayList<Integer> navi = new ArrayList<>();
+			for (int i = startNavi; i <= endNavi; i++) {
+				navi.add(i);
+			}
+					
+			mav.addObject("recordSupportTotalCount", recordSupportTotalCount);
+			mav.addObject("list", list);
+			mav.addObject("currentPage", currentPage);
+			mav.addObject("navi", navi);
+			mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+			mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+			mav.setViewName("admin/adminSelectAllSupport");
+						
+			return mav;
+	}	
 	
 	//자주묻는 질문
 	@RequestMapping(value="/admin/adminFAQManageList.do", method = RequestMethod.GET)
@@ -271,6 +313,41 @@ public class AdminController {
 			return mav;
 	}
 	
+	//회원관리페이지 검색처리
+	@RequestMapping(value="/admin/memberSearch.do", method=RequestMethod.GET)
+	public ModelAndView searchMember(@RequestParam(defaultValue="1") int currentPage, ModelAndView mav, @RequestParam String type, @RequestParam String keyword) {
+	
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int recordMemberSearchCount = admService.recordMemberSearchCount();
+		int pageTotalCount = (int)Math.ceil(recordMemberSearchCount/(double)recordCountPerPage);
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi;
+		
+		ArrayList<HashMap<String, Object>> list = admService.searchMember(type, keyword, currentPage, recordCountPerPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}
+
+		mav.addObject("type", type);
+		mav.addObject("keyword", keyword);
+		mav.addObject("recordMemberSearchCount", recordMemberSearchCount);
+		mav.addObject("list", list);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		mav.setViewName("admin/adminMemberManageList");
+					
+		return mav;
+		
+		
+		
+	}
+	
+	
 	//공지사항 글쓰기
 	@RequestMapping(value="/admin/adminNoticeWrite.do", method = RequestMethod.GET)
 	public String adminNoticeWrite() {
@@ -283,9 +360,52 @@ public class AdminController {
 		return "/admin/adminCardConfirm";
 	}
 	
+	//스토리보드 연결
 	@RequestMapping(value="/member/storyBoard.do", method = RequestMethod.GET)
 	public String stroyBoard() {
 		return "/member/storyBoard";
 	}
+	
+	//공지사항 글 읽기
+	@RequestMapping(value="/admin/adminNoticeDetail.do", method = RequestMethod.GET)
+	public ModelAndView adminNoticeDetail(ModelAndView mav, @RequestParam int iNo)
+	{
+		Notice notice = admService.adminNoticeDetail(iNo);
+		
+		mav.addObject("notice", notice);
+		mav.setViewName("admin/adminNoticeDetail");
+		return mav;
+	}
+	
+
+	@RequestMapping(value="/admin/adminNoticeUpdate.do", method = RequestMethod.GET)
+	public ModelAndView adminNoticeUpdate(ModelAndView mav, @RequestParam int iNo, @RequestParam String iTitle, @RequestParam String iContent, HttpSession session, HttpServletResponse response) {
+		
+		Notice noti = new Notice();
+		
+		noti.setiNo(iNo);
+		noti.setiTitle(iTitle);
+		noti.setiContent(iContent);
+		
+		int result = admService.adminNoticeUpdate(noti);
+				
+		mav.addObject("noti", noti);
+		mav.setViewName("admin/adminNoticeUpdate");
+		
+		return mav;
+	}
+
+	
+	//FAQ 글 읽기
+	@RequestMapping(value="/admin/adminFAQDetail.do", method = RequestMethod.GET)
+	public ModelAndView adminFAQDetail(ModelAndView mav, @RequestParam int iNo)
+	{
+		Notice faq = admService.adminFAQDetail(iNo);
+		
+		mav.addObject("faq", faq);
+		mav.setViewName("admin/adminFAQDetail");
+		return mav;
+	}
+	
 	
 }

@@ -39,7 +39,7 @@ public interface MemberService {
 
 	HashMap<String, Object> detailMemberList(int currentPage, int userNo);
 	
-	int reservationCancle(char reCancle, String reNo, int userNo);
+	int reservationCancle(int userNo, int reNo);
 
 	int memberWithdraw(String userId);
 

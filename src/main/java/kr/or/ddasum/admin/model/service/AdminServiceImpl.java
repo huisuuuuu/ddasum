@@ -3,14 +3,13 @@ package kr.or.ddasum.admin.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddasum.admin.model.dao.AdminDAO;
 import kr.or.ddasum.admin.model.vo.AdminMember;
-import kr.or.ddasum.member.model.vo.BizMember;
+import kr.or.ddasum.board.model.vo.Notice;
 import kr.or.ddasum.member.model.vo.Detail;
 
 @Service
@@ -105,25 +104,66 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<HashMap<String, Object>> adminSelectAllFAQNotice(int currentPage, int recordCountPerPage) {
 		return admDAO.adminSelectAllFAQ(currentPage, recordCountPerPage);
 	}
+
+	//회원탈퇴
+	@Override
+	public int adminUpdateMemberEndYN(HashMap<String, Object> map) {
+		return admDAO.adminUpdateMemberEndYN(map);
+	}
+
+	//사업자 탈퇴
+	@Override
+	public int adminUpdateBizMemberEndYN(HashMap<String, Object> map) {
+		return admDAO.adminUpdateBizMemberEndYN(map);
+	}
+
+	@Override
+	public int recordSupportTotalCount() {
+		
+		return admDAO.recordSupportTotalCount();
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> adminSelectAllSupport(int currentPage, int recordCountPerPage) {
+		return admDAO.adminSelectAllSupport(currentPage, recordCountPerPage);
+	}
+
+	@Override
+	public int recordMemberSearchCount() {
+		
+		return admDAO.adminMemberSearchTotalCount();
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> searchMember(String type, String keyword, int currentPage,
+			int recordCountPerPage) {
+
+		return admDAO.adminMemberSearchList(type, keyword, currentPage, recordCountPerPage);
+	}
 	
-	//사업자 상세정보
-	
+	@Override
+	public Notice adminNoticeDetail(int iNo) {
+		
+		return admDAO.adminNoticeDetail(iNo);
+		
+	}
 
-//	@Override
-//	public ArrayList<Card> adminSelectAllCardList(int currentPage, int recordCountPerPage) {
-//		return admDAO.adminSelectAllCardList(currentPage, recordCountPerPage);
-//	}
-//
-//	@Override
-//	public int cardTotalCount() {
-//		
-//		return admDAO.selectAllCardMemberTotalCount();
-//
-//	}
+	@Override
+	public Notice adminFAQDetail(int iNo) {
+		
+		return admDAO.adminFAQDetail(iNo);
+		
+	}
+
+	//공지 수정
+	@Override
+	public int adminNoticeUpdate(Notice noti) {
+		return admDAO.Notice(noti);
+	}
 
 
 
 
-	
+
 
 }
