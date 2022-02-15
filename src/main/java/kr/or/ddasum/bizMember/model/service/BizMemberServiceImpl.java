@@ -64,6 +64,12 @@ public class BizMemberServiceImpl implements BizMemberService{
 		return bDAO.goodModify(menuNo);
 		
 	}
+	
+	@Override
+	public BizGoods goodModify_dc(int menuNo) {
+		return bDAO.goodModify_dc(menuNo);
+		
+	}	
 
 	@Override
 	public int GoodMo(BizGoods bg) {

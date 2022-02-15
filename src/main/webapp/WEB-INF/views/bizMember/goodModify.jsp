@@ -28,7 +28,7 @@
         color: inherit;
     	}
 		#wrapper{
-			width: 100%;
+			width: 1920px;
 			height: 1080px;
 			margin: 0 auto;
 		}

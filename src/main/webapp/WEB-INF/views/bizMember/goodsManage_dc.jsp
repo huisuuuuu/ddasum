@@ -27,10 +27,8 @@
         color: inherit;
     	}
 		#wrapper{
-			width: 100%;
+			width: 1920px;
 			height: 1080px;
-			margin: 0 auto;
-		}		height: 1080px;
 			margin: 0 auto;
 		}
 		#leftArea{
@@ -189,7 +187,8 @@
 		}
 		#searchForm{
 			float: right;
-		}/*page navi*/
+		}
+		/*page navi*/
 
 	#page_wrap {
 			margin-top: 10px;
@@ -226,7 +225,45 @@
 		    background-color: #FFA77E;
 		    border-radius: 50%;
 		    color: #fff;
-		}  		
+		}  	
+		
+		
+		input[type="checkbox"] {
+        -webkit-appearance: none;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        outline: none !important;
+        border: 1px solid #eeeeee;
+        border-radius: 2px;
+        background: #fbfbfb;
+    }
+ 
+    input[type="checkbox"]::before {
+        content: "\2713";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        transform: scale(0) translate(-50%, -50%);
+        line-height: 1;
+    }
+ 
+    input[type="checkbox"]:hover {
+        border-color: rgba(170, 170, 170, 0.5);
+    }
+ 
+    input[type="checkbox"]:checked {
+        background-color: #FFA77E;
+        border-color: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+ 
+    input[type="checkbox"]:checked::before {
+        border-radius: 2px;
+        transform: scale(1) translate(-50%, -50%)
+    }	
 	</style>
 </head>
 <body>
@@ -321,7 +358,7 @@
 								<td>${m.DCPRICE } </td>
 								<td>
 									<button type="button" class="prdtEdt" name="prdtEdt">
-										<a href="/bizMember/goodModify_dc.do?menuNo=${m.menuNo }">수정</a>
+										<a href="/bizMember/goodModify_dc.do?menuNo=${m.MENUNO }">수정</a>
 									</button>  
 								</td>
 							</tr>
@@ -329,7 +366,7 @@
 						</table>
 						</c:when>
 						<c:otherwise>
-							<H1>현재 저장된 회원이 없습니다.</H1>
+							<H1>현재 저장된 상품이 없습니다.</H1>
 						</c:otherwise>
 			
 					</c:choose>

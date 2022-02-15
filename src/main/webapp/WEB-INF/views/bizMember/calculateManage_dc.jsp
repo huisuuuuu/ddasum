@@ -15,22 +15,20 @@
 		* div{
 			box-sizing: border-box;
 		}
-     * {
+		* {
             box-sizing: border-box;
             font-family: 'Noto Sans KR', sans-serif;
-            margin : 0px;
-			padding : 0px;
         }
 		* a{
         text-decoration: none;
         color: inherit;
     	}
+    	body{
+    	margin: 0;
+    	}
 		#wrapper{
-			width: 100%;
+			width: 1920px;
 			height: 1080px;
-			margin: 0 auto;
-		}
-				#body{
 			margin: 0 auto;
 		}
 		#leftArea{
@@ -82,7 +80,7 @@
 		}
 		#content{
 			width: 100%;
-			height: 95%;
+			height: 90%;
 		}
 		ul{
 			list-style: none;
@@ -134,7 +132,6 @@
 		h1{
 		float: left;
 		font-size: 23pt;
-		padding-top: 20px;
 		}
 		.bizSmallImage{
 				float: right;
@@ -200,6 +197,45 @@
 		    border-radius: 50%;
 		    color: #fff;
 		}  
+
+input[type="checkbox"] {
+        -webkit-appearance: none;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        outline: none !important;
+        border: 1px solid #eeeeee;
+        border-radius: 2px;
+        background: #fbfbfb;
+    }
+ 
+    input[type="checkbox"]::before {
+        content: "\2713";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        transform: scale(0) translate(-50%, -50%);
+        line-height: 1;
+    }
+ 
+    input[type="checkbox"]:hover {
+        border-color: rgba(170, 170, 170, 0.5);
+    }
+ 
+    input[type="checkbox"]:checked {
+        background-color: #FFA77E;
+        border-color: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+ 
+    input[type="checkbox"]:checked::before {
+        border-radius: 2px;
+        transform: scale(1) translate(-50%, -50%)
+    }
+
+
 		
 	</style>
 </head>
@@ -243,7 +279,7 @@
 	<div id="rightArea">
 		<div id="R-upArea">
 			<div id="calculateManage">
-				<h1>후원 정산 관리</h1>
+				<h1>할인 정산 관리</h1>
 					<span class="logout">
 						<a href="/BizMember/logout.do">로그아웃</a>
 					</span>
