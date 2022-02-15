@@ -23,7 +23,7 @@
   <style>
 
   form {
-  	width : 90%;
+  	width : 100%;
   	height : 100%x;
   	margin : 0px auto;
   	padding : 0 !important;
@@ -80,13 +80,16 @@
             <div class="w-50" id="cardImgBox">
               <img class="card-img" src="/resources/images/card.png" alt="카드">
             </div>
-            
-            <form action="/admin/adminCardCheck.do" method="post" class="cardinput">
+
+            <form action="/admin/adminCardCheck.do" method="post" class="cardNoinput">            
             <div class="w-50">
               <div class="input-group-2 d-flex mb-4">
                 <input type="text" placeholder="카드번호 입력: 1234-1234-1234-1234" />
                 <button class="btn-md fs-16 fc-w bg-1">등록</button>
               </div>
+             </form>
+              
+              <form action="/admin/adminCardComment.do" method="post">
               <div class="input-group-2">
                 <textarea name="content" placeholder="코멘트를 입력하세요"></textarea>
               </div>
@@ -95,8 +98,8 @@
                 <button class="btn-sm-2 bg-3"><a href="/admin/adminCardConfirmNo.do?cmNo=${info.CMNO }">반려</a></button>
                 <button class="btn-sm-2 bg-4"><a href="/admin/adminCardManageList.do">취소</a></button>
               </div>
+              </form>
             </div>
-            </form>
           </div>
         </div>
 

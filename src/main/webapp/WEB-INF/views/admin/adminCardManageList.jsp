@@ -109,10 +109,12 @@
                                 </td>
                                 <td>
                                 <c:if test='${cm.JOINYN.equals("Y") }'>
-                                <button type="button" class="success_btn">승인</button>
+                                <button type="button" class="success_btn">
+                                <a href="/admin/adminMemberJoin.do?userNo=${cm.USERNO }">승인</a></button>
                                 </c:if>
                                 <c:if test='${cm.JOINYN.equals("N") }'>
-                                <button type="button" class="reject_btn">반려</button>
+                                <button type="button" class="reject_btn">
+                                <a href="/admin/adminMemberJoin.do?userNo=${cm.USERNO }">반려</a></button>
                                 </c:if>
                                 </td>
                             </tr>

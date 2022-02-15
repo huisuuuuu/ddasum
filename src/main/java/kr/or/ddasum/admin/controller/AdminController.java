@@ -95,7 +95,7 @@ public class AdminController {
 	
 	//회원탈퇴
 	@RequestMapping(value = "/admin/adminMemberWithdraw.do")
-	public void adminMemberWithDraw(@RequestParam String userId, @RequestParam(defaultValue="Y") char delYN, HttpSession session, HttpServletResponse response, ModelAndView mav) {
+	public ModelAndView adminMemberWithDraw(@RequestParam String userId, @RequestParam(defaultValue="Y") char delYN, HttpSession session, HttpServletResponse response, ModelAndView mav) {
 		
 		//admin = null 비정상접근
 		
@@ -106,14 +106,44 @@ public class AdminController {
 		
 		int result = admService.adminUpdateMemberEndYN(map);
 		
-		if(result>0) {
-			mav.addObject("message", userId + "회원이 정상탈퇴처리되었습니다.");
-			mav.setViewName("/");
+		if(delYN == 'Y') {
+			if(result>0) {
+				mav.addObject("msg1", "탈퇴완료");
+				mav.addObject("msg2", userId + "회원이 정상탈퇴처리되었습니다.");
+				mav.addObject("location", "/admin/adminMemberManageList.do");
+				mav.setViewName("commons/successMsg");
+				
+				return mav;
+				
+			}else {
+				mav.addObject("msg1", "탈퇴불가");
+				mav.addObject("msg2", userId + "회원의 탈퇴처리가 되지 않았습니다.");
+				mav.addObject("location", "/admin/adminMemberManageList.do");
+				mav.setViewName("commons/errorMsg");
+				
+				return mav;			
+			}
 		}else {
-			mav.addObject("message", userId + "회원이 탈퇴처리가 되지 않았습니다.");
-			mav.setViewName("/");
 			
-			System.out.println(map);
+
+			if(result>0) {
+				mav.addObject("msg1", "복원완료");
+				mav.addObject("msg2", userId + "회원이 정상복원처리되었습니다.");
+				mav.addObject("location", "/admin/adminMemberManageList.do");
+				mav.setViewName("commons/successMsg");
+				
+				return mav;
+				
+			}else {
+				mav.addObject("msg1", "복원불가");
+				mav.addObject("msg2", userId + "회원의 복원처리가 되지 않았습니다.");
+				mav.addObject("location", "/admin/adminMemberManageList.do");
+				mav.setViewName("commons/errorMsg");
+				
+				return mav;
+
+		}
+		
 		}
 				
 	}
@@ -216,7 +246,7 @@ public class AdminController {
 	
 	//사업자 탈퇴
 	@RequestMapping(value = "/admin/adminBizMemberWithdraw.do")
-	public void adminBizMemberWithDraw(@RequestParam String bizId, @RequestParam(defaultValue="Y") char bizDelYN, HttpSession session, HttpServletResponse response, ModelAndView mav) {
+	public ModelAndView adminBizMemberWithDraw(@RequestParam String bizId, @RequestParam(defaultValue="Y") char bizDelYN, HttpSession session, HttpServletResponse response, ModelAndView mav) {
 		
 		//admin = null 비정상접근
 		
@@ -227,13 +257,45 @@ public class AdminController {
 		
 		int result = admService.adminUpdateBizMemberEndYN(map);
 		
-//		if(result>0) {
-//			mav.addObject("message", bizId + "회원이 정상탈퇴처리되었습니다.");
-//			mav.setViewName("/");
-//		}else {
-//			mav.addObject("message", bizId + "회원이 탈퇴처리가 되지 않았습니다.");
-//			mav.setViewName("/");
-//		}
+		if(bizDelYN == 'Y') {
+			if(result>0) {
+				mav.addObject("msg1", "탈퇴완료");
+				mav.addObject("msg2", bizId + "회원이 정상탈퇴처리되었습니다.");
+				mav.addObject("location", "/admin/adminBizManageList.do");
+				mav.setViewName("commons/successMsg");
+				
+				return mav;
+				
+			}else {
+				mav.addObject("msg1", "탈퇴불가");
+				mav.addObject("msg2", bizId + "회원의 탈퇴처리가 되지 않았습니다.");
+				mav.addObject("location", "/admin/adminBizManageList.do");
+				mav.setViewName("commons/errorMsg");
+				
+				return mav;			
+			}
+		}else {
+			
+
+			if(result>0) {
+				mav.addObject("msg1", "복원완료");
+				mav.addObject("msg2", bizId + "회원이 정상복원처리되었습니다.");
+				mav.addObject("location", "/admin/adminBizManageList.do");
+				mav.setViewName("commons/successMsg");
+				
+				return mav;
+				
+			}else {
+				mav.addObject("msg1", "복원불가");
+				mav.addObject("msg2", bizId + "회원의 복원처리가 되지 않았습니다.");
+				mav.addObject("location", "/admin/adminBizManageList.do");
+				mav.setViewName("commons/errorMsg");
+				
+				return mav;
+
+		}
+		
+		}
 				
 	}
 	
@@ -410,17 +472,36 @@ public class AdminController {
 		noti.setiContent(iContent);		
 		
 		int result = admService.adminNoticeUpdate(noti);
-						
-		if(result>0)
-		{
-			mav.addObject("noti", noti);
-			mav.setViewName("admin/adminNoticeDetail");
 
-		}else
-		{
-			mav.addObject("noti", noti);
-			mav.setViewName("views/commons/errorMSG");
-		}
+//		if(result>0) {
+//			mav.addObject("msg1", "수정완료");
+//			mav.addObject("msg2", "정상수정처리되었습니다.");
+//			mav.addObject("location", "/admin/adminNoticeDetail.do?&noti");
+//			mav.setViewName("commons/successMsg");
+//				
+//			return mav;
+//				
+//		}else {
+//			mav.addObject("msg1", "수정불가");
+//			mav.addObject("msg2", "수정처리가 되지 않았습니다.");
+//			mav.addObject("location", "/admin/adminNoticeDetail.do");
+//			mav.setViewName("commons/errorMsg");
+//				
+//			return mav;			
+//		}
+		
+//		if(result>0)
+//		{
+//			mav.addObject("noti", noti);
+//			mav.addObject("msg1", "수정완료");
+//			mav.add
+//			mav.setViewName("admin/adminNoticeDetail");
+//
+//		}else
+//		{
+//			mav.addObject("noti", noti);
+//			mav.setViewName("views/commons/errorMSG");
+//		}
 		
 		
 		return mav;
@@ -500,6 +581,11 @@ public class AdminController {
 	}
 	
 	//공지사항 글쓰기
+	
+//	public ModelAndView noticeWrite(@RequestParam String title, @RequestParam String Content) {
+//		
+//		return mav;
+//	}
 	
 	//공지사항 고정글
 	public ModelAndView noticeFix(@RequestParam int iNo, ModelAndView mav, @RequestParam String infoId, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
