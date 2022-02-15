@@ -156,7 +156,7 @@
     	I_TITLE AS ITITLE,
     	I_CONTENT AS ICONTENT,
     	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
-    	I_DEL_YN AS DELYN
+    	I_DEL_YN AS IDELYN
 	FROM INFO
     	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
     	WHERE INFO_GROUP.INFO_ID = 'HOLDNOTI' OR 
@@ -298,9 +298,10 @@
 	
 	</update>
   
-     <select id="cardDetailName" parameterType="int" resultType="hashmap">
+     <select id="cardDetailName" resultType="hashmap">
      
     SELECT 
+    	C_M_NO AS CMNO,
         MEMBER.USERNO AS USERNO,
         MEMBER.USERNAME AS USERNAME,
         C_FILE_NO AS CFILENO
@@ -309,5 +310,20 @@
         WHERE MEMBER.USERNO=#{_params}   
         
      </select>
+  
+  	<!-- 게시글 삭제 -->   
+     <update id="noticeDelete" parameterType="hashmap">
+     
+     UPDATE INFO SET I_DEL_YN=#{iDelYN} WHERE I_NO=#{iNo}
+     
+     </update>
+  
+  <!-- 공지사항 고정글 -->
+  
+  	<update id="noticeFix" parameterType="hashmap">
+  	
+  	UPDATE INFO SET INFO_ID=#{infoId} WHERE I_NO=#{iNo}
+  	
+  	</update>
   
 </mapper>

@@ -480,4 +480,45 @@ public class AdminController {
 		return mav;
 	}
 	
+	//공지사항 삭제
+	
+	@RequestMapping(value="/admin/adminNoticeDel.do", method = RequestMethod.GET)
+	public ModelAndView noticeDel(@RequestParam int iNo, ModelAndView mav, @RequestParam(defaultValue="Y") char iDelYN, HttpSession session, HttpServletResponse response) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("iNo", iNo);
+		map.put("iDelYN", iDelYN == 'Y' ? 'N' : 'Y');
+		
+		int result = admService.noticeDelYN(map);
+		
+		mav.addObject("nm", map);
+		mav.setViewName("admin/adminNoticeDel");
+		
+		return mav;
+		
+	}
+	
+	//공지사항 글쓰기
+	
+	//공지사항 고정글
+	public ModelAndView noticeFix(@RequestParam int iNo, ModelAndView mav, @RequestParam String infoId, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("iNo", iNo);
+		map.put("infoId", infoId);
+		
+		int result = admService.noticeFix(map);
+		
+		mav.addObject("notiFix", map);
+		mav.setViewName("admin/adminNoticeManageList");
+		
+		return mav;
+		
+	}
+	
+	//카드승인리스트
+	
+	
 }

@@ -188,6 +188,19 @@ public class AdminDAO {
 		return sqlSession.selectOne("admin.cardDetailName", userNo);
 	}
 
+	//공지사항 삭제 및 복원
+	public int noticeDelYN(HashMap<String, Object> map) {
+		
+		return sqlSession.update("admin.noticeDelete", map);
+	}
+
+	//공지사항 고정글
+	public int noticeFix(HashMap<String, Object> map) {
+
+		return sqlSession.update("admin.noticeFix", map);
+	}
+
+
 
 		
 		

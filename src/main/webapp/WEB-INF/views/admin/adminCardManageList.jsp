@@ -90,20 +90,21 @@
                                 <td>${cm.ENROLLDATE }</td>
                                 <td>
                                 <c:if test='${ cm.DETAILYN.equals("Y") }'>
-                                <button type="button" class="ok_btn"><a href="/admin/adminCardConfirm.do?userNo=${cm.USERNO }">있음</a></button>
+                                <button type="button" class="ok_btn">
+                                <a href="/admin/adminMemberInfo.do?userNo=${cm.USERNO }">있음</button>
                                 </c:if>
                                 <c:if test='${ cm.DETAILYN.equals("N") }'>
-                                <button type="button" class="none_btn"><a href="/admin/adminCardConfirm.do?userNo=${cm.USERNO }">없음</a></button>
+                                <button type="button" class="none_btn">없음</button>
                                 </c:if>
                                 </td>
                                 <td>
                                 <c:if test='${cm.CHECKYN.equals("Y") }'>
                                 <button type="button" class="pass_btn">
-                                <a href="/admin/adminCardConfirm.do">확인</a></button>
+                                <a href="/admin/adminCardConfirm.do?userNo=${cm.USERNO }">확인</a></button>
                                 </c:if>
                                 <c:if test='${cm.CHECKYN.equals("N") }'>
                                 <button type="button" class="wait_btn">
-                                <a href="/admin/adminCardConfirm.do">확인</a></button>
+                                <a href="/admin/adminCardConfirm.do?userNo=${cm.USERNO }">대기</a></button>
                                 </c:if>
                                 </td>
                                 <td>

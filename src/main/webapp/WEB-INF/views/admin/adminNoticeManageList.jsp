@@ -16,8 +16,14 @@
   <link rel="stylesheet" href="/resources/commons/adminNoticeBoard.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
-
+<style>
+button {
+	color : white !important;
+}
+</style>
 </head>
+
+
 
 <body>
   
@@ -67,12 +73,17 @@
               </div>
 
                 <button class="wri_btn">
-                  <a href="/admin/adminNoticeWrite.do">글쓰기</a>
-                </button>
+                  <a href="/admin/adminNoticeWrite.do">글쓰기</a></button>
+
+                <!--<c:if test='${noti.IDELYN.equals("N") }'>-->                
+                <!--</c:if>-->
+                <button class="wri_btn" value="선택삭제" id="delBtn">
+                <a href="/admin/adminNoticeDel.do?iNo=${noti.INO }">삭제</a></button>
                 
+                <c:if test='${noti.IDELYN.equals("Y") }'>
                 <button class="wri_btn">
-                	삭제
-                </button>
+                <a href="/admin/adminNoticeDel.do?iNo=${noti.INO }">복원</a></button>
+                </c:if>                
         
             </form>        
           </div>
@@ -82,7 +93,7 @@
           <table>
             <thead>
               <tr>
-                <th width="100"><input type="checkbox" value='selecctall' name='selectall' onclick='selectAll(this)'></th>
+                <th width="100"><input type="checkbox" value='selecctall' name='selectall' onclick='selectAll(this)' id="selectall"></th>
                 <th width="100">글번호</th>
                 <th width="200">글제목</th>
                 <th width="300">글내용</th>
@@ -96,11 +107,11 @@
             <c:when test="${!requestScope.list.isEmpty()}">
             <c:forEach items="${requestScope.list}" var="noti" varStatus="i">
               <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice' value="${noti.INO }"></td>
                 <td>${ i.count + (currentPage - 1) * 10 }</td>
                 <td><a href="/admin/adminNoticeDetail.do?iNo=${noti.INO}">${noti.ITITLE }</a></td>
                 <td><a href="/admin/adminNoticeDetail.do?iNo=${noti.INO}">${noti.ICONTENT }</a></td>
-                <td><button type="button" class="ok_btn">고정</button></td>
+                <td><button type="button" class="ok_btn"><a href="/admin/adminNoticeFix.do?iNo=${noti.INO }">고정</a></button></td>
                 <td><button type="button" class="ok_btn"><a href="/admin/adminNoticeUpdatePage.do?iNo=${noti.INO}">수정</a></button></td>
               </tr>
 
@@ -141,23 +152,50 @@
 </body>
 
 <script>
-function checkSelectAll(checkbox)  {
-	  const selectall 
-	    = document.querySelector('input[name="selectall"]');
-	  
-	  if(checkbox.checked === false)  {
-	    selectall.checked = false;
-	  }
-	}
 
-	function selectAll(selectAll)  {
-	  const checkboxes 
-	     = document.getElementsByName('notice');
-	  
-	  checkboxes.forEach((checkbox) => {
-	    checkbox.checked = selectAll.checked
-	  })
-	}
+$(document).ready(function(){
+	function checkSelectAll(checkbox)  {
+		  const selectall 
+		    = document.querySelector('input[name="selectall"]');
+		  
+		  if(checkbox.checked === false)  {
+		    selectall.checked = false;
+		  };
+		};
+
+		function selectAll(selectAll)  {
+		  const checkboxes 
+		     = document.getElementsByName('notice');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked
+		  });
+		};
+		
+	$('#selectall').click(function(){
+		if($("selectall".prop("checked")){
+			$("input[type=checkbox]").prop("checked",true);
+		}else{
+			$("input[type=checkbox]").prop("checked",false);
+		}
+	});
+		
+	$('#delete').click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			$("input[name=notice]:checked").each(function(){
+				var tr_value = $(this).val();
+				var tr=$("tr[data-tr_value'"+tr_value+"']");
+				tr.remove();
+			});
+		}else{
+			return false;
+		}
+	});	
+	});
+
+	
+
+	
 </script>
 
 </html>

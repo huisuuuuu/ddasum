@@ -185,6 +185,19 @@ public class AdminServiceImpl implements AdminService{
 		return admDAO.adminSelectOneCardMemberInfo(userNo);
 	}
 
+	//공지사항 삭제 및 복원
+	@Override
+	public int noticeDelYN(HashMap<String, Object> map) {
+
+		return admDAO.noticeDelYN(map);
+	}
+
+	//공지사항 고정글
+	@Override
+	public int noticeFix(HashMap<String, Object> map) {
+		return admDAO.noticeFix(map);
+	}
+
 
 
 	}
