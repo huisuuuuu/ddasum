@@ -1,10 +1,8 @@
 @charset "UTF-8";
 
     /*푸터*/
-    body { 
-    	margin : 0px;
-    }
     
+   
      #footer {
     min-width: 1500px;
 	width: 100%;

@@ -19,7 +19,8 @@
   	
   	<update id="memberCardImage" parameterType="member">
   		update member set 
-  			cd_Image = #{cdImage}
+  			cd_Image = #{cdImage},
+  			m_join_status = 'WAIT'
   			where userNo = #{userNo}
   	</update>
 </mapper>
