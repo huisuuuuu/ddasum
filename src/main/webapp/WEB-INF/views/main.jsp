@@ -141,7 +141,7 @@
 		                   
 		                   <c:forEach items="${requestScope.list2}" var="f">
 		                  	 
-		                     <li><a href="">${f.iTitle } </a></li>
+		                     <li><a href="/board/faqBoard.do">${f.iTitle } </a></li>
 		                        
 		                    </c:forEach>
 		                   

@@ -66,7 +66,7 @@
                     <span>꿈나무 카드 인증</span>
                 </div>
                 <div id="confirm-top-left">
-                    <button id="img-enrollMent-button">등록하기</button>
+                   <a href="/member/passwordCheckPage.do"> <button id="img-enrollMent-button">등록하기</button></a>
                 </div>
                 <br><br><br><hr style="width: 100%; margin: 0px;">
                 <div id="card-img-area">
@@ -104,8 +104,6 @@
             <div id="content-center-empty-bottom-area"></div>
             <div id="delete-user-button-area">
            
-           
-            
         </div>
         </div>
         

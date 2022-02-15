@@ -11,6 +11,7 @@
       crossorigin="anonymous"></script>
 	<!-- kakao cdn -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<link rel="stylesheet" href="/resources/css/reservationCheckPage.css">
 </head>
 		<!-- 카카오 init -->
 	    <script>
@@ -20,149 +21,6 @@
         // SDK 초기화 여부를 판단합니다.
         console.log(Kakao.isInitialized());
     </script>  
-<style>
-
-	body { 
-    	margin : 0px;
-    }
-    * div {
-        box-sizing: border-box;
-    }
-
-    * a {
-        color: white;
-        text-decoration: none;
-    }
-
-    * hr {
-        margin-top: 0px;
-        width: 85%;
-        background-color: #707070;
-        border: 0px;
-        height: 1px;
-        margin-left: 50px;
-    }
-
-    
-     
-      /*컨텐츠*/
-    #content{
-        min-width: 1500px;
-        width: 100%;
-    }
-    .content-side-back{/*사이드 빈공간*/
-        border: 1px solid white;
-        width: 15%;
-        float: left;
-    }
-    #content-center{/*중앙 컨텐츠 공간*/
-        width: 70%;
-        float: left;
-    }
-    #content-center-empty-top-area1{
-        width: 100%;
-        height: 100px;
-    }
-    #resolvation-title-area {
-        /*예약내역확인 타이틀*/
-        padding-top: 10px;
-        width: 100%;
-        height: 156px;
-        text-align: center;
-        font-family: 'Noto Sans KR';
-        font-size: 22px;
-        font-weight: bolder;
-    }
-    #under {
-        width: 80px;
-        height: 5px;
-        margin-bottom: 30px;
-        background: #FFA77E;
-        position: relative;
-        display: inline-block;
-    }
-    #content-center-empty-top-area2{
-        width: 100%;
-        height: 95px;
-    }
-     #resolvation-list-area{/*내역리스트 시작*/
-         width: 100%;
-         height: 550px;
-     }
-     #list-table{
-         width: 100%;
-         text-align: center;
-         font-family: 'Noto Sans KR';
-     }
-     table td{
-         border-bottom: 1px solid black;
-         height: 100px;
-     }
-     table th{
-         background-color: rgba(255,167,126,0.3);
-     }
-     #shop-img{
-         
-         width: 90px;
-         height: 90px;
-         border-radius: 45px;
-         float: left;
-     }
-     #shop-name-menu-area{
-         float: left;
-         width: 60%;
-         height: 90px;
-         padding-left: 10px;
-         padding-top: 20px;
-     }
-     #content-center-empty-center-area{
-         width: 100%;
-         height: 50px;
-     }
-     #shop-list-page-navi{
-         width: 100%;
-         height: 50px;
-         text-align: center;
-     }
-     #content-center-empty-bottom-area{
-         width: 100%;
-         height: 50px;
-     }
-    
-    /* 페이지네비 */
-	#page_wrap {
-	width: 100%;
-	}
-	#page_wrap .page_ul {
-	    display: table;
-	    margin : 0 auto;
-	}
-	#page_wrap .page_ul li {
-	    display: block;
-	    width: 35px;
-	    height: 35px;
-	    float: left;
-	    text-align: center;
-	    margin: 0 5px;
-	    line-height: 15.5px;
-	    font-size: 16px;
-	    color: #2A2A2A;
-	}
-	#page_wrap .page_ul li a {
-	    display: block;
-	    font-family: 'Noto Sans KR', sans-serif;
-		font-size: 16px;
-		color: #2A2A2A;
-	    padding: 10px;
-	    border-radius: 50%;
-	/*     transition: ease 0.3s; */
-	}
-	#page_wrap .page_ul li a.page_active {
-	    background-color: #FFA77E;
-	    border-radius: 50%;
-	    color: #fff;
-	}
-    </style>
 <body>
 <div id=header>
          <%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>
@@ -205,11 +63,11 @@
 	                        </c:choose>
 	                        <td>${d.reservationDate }</td>
 	                        <td>${d.reNo }</td>
-	                        <td data-res="${d.authorityId}" data-reNo="${d.reNo }" data-bizName="${d.bizName }" data-menuName="${d.menuName }"  data-address="${d.address }" data-menuInfo="${d.menuInfo }" data-originalPrice="${d.originalPrice }" data-dcPrice="${d.dcPrice }"><button class="kakao" >카카오톡 전송</button></td>                
+	                        <td data-res="${d.authorityId}" data-reNo="${d.reNo }" data-bizName="${d.bizName }" data-menuName="${d.menuName }"  data-address="${d.address }" data-menuInfo="${d.menuInfo }" data-originalPrice="${d.originalPrice }" data-dcPrice="${d.dcPrice }"><button class="kakao"  id="number-Btn">카카오톡 전송</button></td>                
 	                       	<c:choose>
 								<c:when test="${d.reCancle eq 'N'.charAt(0)}">
 			                        <td>예약완료</td>
-			                        <td><a href="/member/reservationCancle.do?reNo=${d.reNo }"> <button class="cancelBtn" >예약취소</button></a></td>	 
+			                        <td><a href="/member/reservationCancle.do?reNo=${d.reNo }"> <button id="cancel" class="cancelBtn" >예약취소</button></a></td>	 
 		                        </c:when>
 		                        <c:otherwise>
 			                        <td style="color:red;">예약취소  </td>

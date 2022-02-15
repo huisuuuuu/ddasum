@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+body { 
+    	margin : 0px;
+    }
+    * div {
+        box-sizing: border-box;
+    }
+
+    * a {
+        color: white;
+        text-decoration: none;
+    }
+
+    * hr {
+        margin-top: 0px;
+        width: 85%;
+        background-color: #707070;
+        border: 0px;
+        height: 1px;
+        margin-left: 50px;
+    }
+    
+    #content button{
+    	cursor: pointer;
+    }
+
+    
+     
+      /*컨텐츠*/
+    #content{
+        min-width: 1500px;
+        width: 100%;
+    }
+    .content-side-back{/*사이드 빈공간*/
+        border: 1px solid white;
+        width: 15%;
+        float: left;
+    }
+    #content-center{/*중앙 컨텐츠 공간*/
+        width: 70%;
+        float: left;
+    }
+    #content-center-empty-top-area1{
+        width: 100%;
+        height: 100px;
+    }
+    #resolvation-title-area {
+        /*예약내역확인 타이틀*/
+        padding-top: 10px;
+        width: 100%;
+        height: 156px;
+        text-align: center;
+        font-family: 'Noto Sans KR';
+        font-size: 22px;
+        font-weight: bolder;
+    }
+    #under {
+        width: 80px;
+        height: 5px;
+        margin-bottom: 30px;
+        background: #FFA77E;
+        position: relative;
+        display: inline-block;
+    }
+    #content-center-empty-top-area2{
+        width: 100%;
+        height: 95px;
+    }
+     #resolvation-list-area{/*내역리스트 시작*/
+         width: 100%;
+         height: 550px;
+     }
+     #list-table{
+         width: 100%;
+         text-align: center;
+         font-family: 'Noto Sans KR';
+     }
+     table td{
+         border-bottom: 1px solid black;
+         height: 100px;
+     }
+     table th{
+         background-color: rgba(255,167,126,0.3);
+     }
+     #shop-img{
+         
+         width: 90px;
+         height: 90px;
+         border-radius: 45px;
+         float: left;
+     }
+     #shop-name-menu-area{
+         float: left;
+         width: 60%;
+         height: 90px;
+         padding-left: 10px;
+         padding-top: 20px;
+     }
+     #content-center-empty-center-area{
+         width: 100%;
+         height: 50px;
+     }
+     #shop-list-page-navi{
+         width: 100%;
+         height: 50px;
+         text-align: center;
+     }
+     #content-center-empty-bottom-area{
+         width: 100%;
+         height: 50px;
+     }
+     
+     #number-Btn {
+            background: rgba(255, 167, 126, 0.4);
+            font-family: 'Noto Sans KR', sans-serif;
+            color : black;
+            width: 40%;
+            height: 30%;
+            border: 0px;
+            border-radius: 0px 5px 5px 0px;
+             font-weight: bolder;
+       }
+      
+       #cancel {
+           background: rgba(255, 167, 126, 0.4);
+           font-family: 'Noto Sans KR', sans-serif;
+           color : black;
+           width: 80%;
+           height: 30%;
+           border: 0px;
+           
+           border-radius: 5px;
+           
+       }
+    
+    /* 페이지네비 */
+	#page_wrap {
+	width: 100%;
+	}
+	#page_wrap .page_ul {
+	    display: table;
+	    margin : 0 auto;
+	}
+	#page_wrap .page_ul li {
+	    display: block;
+	    width: 35px;
+	    height: 35px;
+	    float: left;
+	    text-align: center;
+	    margin: 0 5px;
+	    line-height: 15.5px;
+	    font-size: 16px;
+	    color: #2A2A2A;
+	}
+	#page_wrap .page_ul li a {
+	    display: block;
+	    font-family: 'Noto Sans KR', sans-serif;
+		font-size: 16px;
+		color: #2A2A2A;
+	    padding: 10px;
+	    border-radius: 50%;
+	/*     transition: ease 0.3s; */
+	}
+	#page_wrap .page_ul li a.page_active {
+	    background-color: #FFA77E;
+	    border-radius: 50%;
+	    color: #fff;
+	}
