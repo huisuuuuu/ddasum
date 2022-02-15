@@ -33,7 +33,9 @@ crossorigin="anonymous"></script>
 							<span class="subject">${requestScope.Notice.iTitle } </span>
 							<span class="regdate">${requestScope.Notice.iRegdate } </span>
 						</p>
-						
+						<br>
+						<hr>
+						<br>
 							<span class="noticeContent">
 								${requestScope.Notice.iContent }
 							</span>  

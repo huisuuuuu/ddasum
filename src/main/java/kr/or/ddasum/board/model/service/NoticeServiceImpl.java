@@ -58,6 +58,12 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDAO.faqBoard(currentPage, recordCountPerPage);
 	}
 
+	@Override
+	public ArrayList<Notice> selectFixNotice() {
+		return nDAO.selectFixNotice();
+		
+	}
+
 
 
 
