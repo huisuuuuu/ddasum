@@ -18,13 +18,16 @@ public class Member {
 	private long cardNo;
 	private char delYN;
 	private String mJoinStatus;
+	private String cdImage;
+	
 	
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", authorityId=" + authorityId + ", userId=" + userId + ", userPwd="
 				+ userPwd + ", userName=" + userName + ", nick=" + nick + ", phone=" + phone + ", email=" + email
 				+ ", detail=" + detail + ", address=" + address + ", pImage=" + pImage + ", enrollDate=" + enrollDate
-				+ ", cardNo=" + cardNo + ", delYN=" + delYN + ", mJoinStatus=" + mJoinStatus + "]";
+				+ ", cardNo=" + cardNo + ", delYN=" + delYN + ", mJoinStatus=" + mJoinStatus + ", cdImage=" + cdImage
+				+ "]";
 	}
 
 	public Member() {
@@ -34,7 +37,7 @@ public class Member {
 
 	public Member(int userNo, String authorityId, String userId, String userPwd, String userName, String nick,
 			String phone, String email, char detail, String address, String pImage, Date enrollDate, long cardNo,
-			char delYN, String mJoinStatus) {
+			char delYN, String mJoinStatus, String cdImage) {
 		super();
 		this.userNo = userNo;
 		this.authorityId = authorityId;
@@ -51,6 +54,7 @@ public class Member {
 		this.cardNo = cardNo;
 		this.delYN = delYN;
 		this.mJoinStatus = mJoinStatus;
+		this.cdImage = cdImage;
 	}
 
 	public int getUserNo() {
@@ -172,5 +176,15 @@ public class Member {
 	public void setmJoinStatus(String mJoinStatus) {
 		this.mJoinStatus = mJoinStatus;
 	}
+
+	public String getCdImage() {
+		return cdImage;
+	}
+
+	public void setCdImage(String cdImage) {
+		this.cdImage = cdImage;
+	}
+
+	
 	
 }

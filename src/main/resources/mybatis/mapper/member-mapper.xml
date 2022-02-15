@@ -17,7 +17,8 @@
 		enrollDate as enrollDate,
 		card_No as cardNo,
 		del_YN as delYN,
-		m_join_status as mJoinStatus
+		m_join_status as mJoinStatus,
+		cd_Image as cdImage
 		from member where userId = #{userId} and userPwd = #{userPwd} and del_YN =
 		'N'
 	</select>
@@ -38,7 +39,8 @@
 		enrollDate as enrollDate,
 		card_No as cardNo,
 		del_YN as delYN,
-		m_join_status as mJoinStatus
+		m_join_status as mJoinStatus,
+		cd_Image as cdImage
 		from member where userId = #{userId} and del_YN = 'N'
 	</select>
 
@@ -58,7 +60,8 @@
 		enrollDate as enrollDate,
 		card_No as cardNo,
 		del_YN as delYN,
-		m_join_status as mJoinStatus
+		m_join_status as mJoinStatus,
+		cd_Image as cdImage
 		from member where nick = #{nick} and del_YN = 'N'
 	</select>
 	
@@ -78,7 +81,8 @@
 		enrollDate as enrollDate,
 		card_No as cardNo,
 		del_YN as delYN,
-		m_join_status as mJoinStatus
+		m_join_status as mJoinStatus,
+		cd_Image as cdImage
 		from member where userName = #{userName} and email = #{email} and del_YN = 'N'
 	</select>
 	
@@ -98,7 +102,8 @@
 		enrollDate as enrollDate,
 		card_No as cardNo,
 		del_YN as delYN,
-		m_join_status as mJoinStatus
+		m_join_status as mJoinStatus,
+		cd_Image as cdImage
 		from member where email = #{email} and del_YN = 'N'
 	</select>
 	
@@ -109,10 +114,8 @@
 		nick = #{nick},
 		email = #{email},
 		address = #{address},
-		phone = #{phone},
-		p_image = (SELECT p_filepath
-                    FROM PROFILE_IMG
-                    WHERE member.userNo = PROFILE_IMG.userNo)
+		phone = #{phone}
+		
 		where
 		userId = #{userId}
 	</update>

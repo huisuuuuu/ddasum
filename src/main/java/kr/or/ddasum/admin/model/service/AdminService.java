@@ -77,8 +77,11 @@ public interface AdminService {
 
 	//FAQ 글 읽기
 	Notice adminFAQDetail(int iNo);
-	
-	//공지 글 수정
+
+	//공지 수정뷰
+	Notice adminNoticeOnePost(int iNo);
+
+	//공지 수정로직
 	int adminNoticeUpdate(Notice noti);
 	
 

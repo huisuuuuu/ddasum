@@ -15,20 +15,26 @@
 
 <title>Insert title here</title>
 	<style>
-		* div{
-			box-sizing: border-box;
-		}
-		* {
-			font-family: 'Noto Sans KR', sans-serif;
-		}
+     * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin : 0px;
+			padding : 0px;
+        }
 		* a{
         text-decoration: none;
         color: inherit;
     	}
 		#wrapper{
+			width: 100%;
+			height: 1080px;
+			margin: 0 auto;
+		}
+		#body{
 			width: 1920px;
 			height: 1080px;
 			margin: 0 auto;
+
 		}
 		#leftArea{
 			width: 400px;
@@ -178,9 +184,10 @@
 	</style>
 
 </head>
-<body>
+
 
 <div id="wrapper">
+<body>
 	<div id="leftArea">
 		<div id="L-upArea">
 			<div id="logoArea">
@@ -280,7 +287,10 @@
 			</div>
 		</div>
 	</div>
-</div>
+
+
+
+
 <script>
 	$(function(){
         $('.submenu').hover(function() {
@@ -291,4 +301,5 @@
     });
 </script>
 </body>
+</div>
 </html>

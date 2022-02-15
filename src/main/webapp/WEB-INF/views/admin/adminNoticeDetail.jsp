@@ -47,7 +47,6 @@
 						<div class="box-content">
 							${requestScope.notice.iContent }
 						</div>
-					</div>
 					<div class="box-button">
 						<input type="submit" value="완료" class="btn-ok">
 						<button class="btn-ok"><a href="/admin/adminNoticeManageList.do">목록</a></button>

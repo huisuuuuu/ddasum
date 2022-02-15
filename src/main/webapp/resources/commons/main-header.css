@@ -1,7 +1,13 @@
 @charset "UTF-8";
-    * div{
-        box-sizing: border-box;
+
+	
+	body { 
+    	margin : 0px;
     }
+	
+	* > div {
+		box-sizing: border-box;
+	}
     * a{
         color: white;
         text-decoration: none;
@@ -133,6 +139,8 @@
     }
     /*콘텐츠*/
     #content{
+    	margin : 0px;
+    	padding: 0px; 
         min-width: 1500px;
         width: 100%;
     }

@@ -15,16 +15,22 @@
 		* div{
 			box-sizing: border-box;
 		}
-		* {
-			font-family: 'Noto Sans KR', sans-serif;
-		}
+     * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin : 0px;
+			padding : 0px;
+        }
 		* a{
         text-decoration: none;
         color: inherit;
     	}
 		#wrapper{
-			width: 1920px;
+			width: 100%;
 			height: 1080px;
+			margin: 0 auto;
+		}
+				#body{
 			margin: 0 auto;
 		}
 		#leftArea{

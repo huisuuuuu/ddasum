@@ -12,6 +12,9 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <style>
+	body { 
+    	margin : 0px;
+    }
     * div {
         box-sizing: border-box;
     }
@@ -369,11 +372,12 @@
         height: 332px;
         float: left;
         padding-top: 40px;
-        padding-left: 30px;
+        padding-right: 25px;
+        text-align: center;
     }
 
     #card-img {
-        border: 1px solid black;
+        
         width: 90%;
         height: 60%;
     }
@@ -388,12 +392,13 @@
         color: #707070;
     }
     #info-enrollMent-update-button{
-    	 background-color: white;
+    	background-color: white;
         border-radius: 3px;
         border: 1px solid #707070;
         width: 80px;
         height: 30px;
         font-family: 'Noto Sans KR';
+        margin-right:60px;
     }
 
     #content-center-empty-bottom-area {
@@ -591,8 +596,8 @@
                 <hr style="width: 100%; margin: 0px;">
                 <div id="card-img-area">
                     <div id="card-img">
-                    <img id="e-img" src="">
-                    </div><br>
+                    <img id="e-img" src="${sessionScope.member.cdImage }" style="width:340px; height: 212px;">
+                    </div><br><br><br>
                      <form method="POST" id="enrollMentImgForm">
                     <input type="file" class="enrollMent-img" name="enrollMentImgFIle" id="enrollMentImg" accept=".jpg" style="display:none;"/>
                     </form>
