@@ -34,13 +34,12 @@ public class MemberController {
     private JavaMailSender mailSender;
 
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public String memberLogin(Member member, HttpServletRequest request, Model model) {
+	public String memberLogin(HttpSession session, Member member, HttpServletRequest request, Model model) {
 
 		Member m = mService.memberLogin(member);
 
 			if (m != null)
 			{
-				HttpSession session = request.getSession();
 				
 				if(m.getAddress().equals("서울")) {
 					m.setAddress("SEOUL");
@@ -96,6 +95,15 @@ public class MemberController {
 		Member m = mService.memberLogin(member);
 		
 		if(m != null) {
+			
+			if(m.getAddress().equals("서울")) {
+				m.setAddress("SEOUL");
+			}else if(m.getAddress().equals("인천")) {
+				m.setAddress("INCHEON");
+			}else if(m.getAddress().equals("경기")) {
+				m.setAddress("GYEONGGI");
+			};
+			
 		session.setAttribute("member", m);
 		}
 		return "member/myPage";
@@ -122,6 +130,15 @@ public class MemberController {
 			Member m = mService.memberLogin(member);
 
 			if (m != null) {
+				
+				if(m.getAddress().equals("서울")) {
+					m.setAddress("SEOUL");
+				}else if(m.getAddress().equals("인천")) {
+					m.setAddress("INCHEON");
+				}else if(m.getAddress().equals("경기")) {
+					m.setAddress("GYEONGGI");
+				};
+				
 				session.setAttribute("member", m);
 				return "member/myPageUpdate";
 			} else {
@@ -150,6 +167,15 @@ public class MemberController {
 		int result = mService.memberInfoUpdate(m);
 
 		if (result > 0) {
+			
+			if(m.getAddress().equals("서울")) {
+				m.setAddress("SEOUL");
+			}else if(m.getAddress().equals("인천")) {
+				m.setAddress("INCHEON");
+			}else if(m.getAddress().equals("경기")) {
+				m.setAddress("GYEONGGI");
+			};
+			
 			session.setAttribute("member", m);
 			response.getWriter().print(true);
 		} else {
@@ -181,8 +207,6 @@ public class MemberController {
 		
 		return mav;
 	}
-
-	// 정두식 추가 코드(끝)
 
 	@RequestMapping(value = "/member/loginPage.do", method = RequestMethod.GET)
 	public String loginPage(HttpServletRequest request, Model model) {
