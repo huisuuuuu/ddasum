@@ -77,11 +77,12 @@ button {
 
                 <!--<c:if test='${noti.IDELYN.equals("N") }'>-->                
                 <!--</c:if>-->
+                
                 <button class="wri_btn" value="선택삭제" id="delBtn">
                 <a href="/admin/adminNoticeDel.do?iNo=${noti.INO }">삭제</a></button>
                 
                 <c:if test='${noti.IDELYN.equals("Y") }'>
-                <button class="wri_btn">
+                <button class="wri_btn" value="선택복원" id="reBtn">
                 <a href="/admin/adminNoticeDel.do?iNo=${noti.INO }">복원</a></button>
                 </c:if>                
         
@@ -153,26 +154,27 @@ button {
 
 <script>
 
-$(document).ready(function(){
-	function checkSelectAll(checkbox)  {
-		  const selectall 
-		    = document.querySelector('input[name="selectall"]');
-		  
-		  if(checkbox.checked === false)  {
-		    selectall.checked = false;
-		  };
-		};
+function checkSelectAll(checkbox)  {
+	  const selectall 
+	    = document.querySelector('input[name="selectall"]');
+	  
+	  if(checkbox.checked === false)  {
+	    selectall.checked = false;
+	  }
+	}
 
-		function selectAll(selectAll)  {
-		  const checkboxes 
-		     = document.getElementsByName('notice');
-		  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectAll.checked
-		  });
-		};
+	function selectAll(selectAll)  {
+	  const checkboxes 
+	     = document.getElementsByName('notice');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = selectAll.checked
+	  })
+	}
+	
+	function
 		
-	$('#selectall').click(function(){
+/* 	$('#selectall').click(function(){
 		if($("selectall".prop("checked")){
 			$("input[type=checkbox]").prop("checked",true);
 		}else{
@@ -192,7 +194,7 @@ $(document).ready(function(){
 		}
 	});	
 	});
-
+ */
 	
 
 	
