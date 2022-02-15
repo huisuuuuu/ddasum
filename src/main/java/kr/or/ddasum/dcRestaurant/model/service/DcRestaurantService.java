@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurant;
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurantMenu;
+import kr.or.ddasum.dcRestaurant.model.vo.MReservation;
 import kr.or.ddasum.member.model.vo.BizMember;
 
 public interface DcRestaurantService {
@@ -16,6 +17,8 @@ public interface DcRestaurantService {
 
 	ArrayList<DcRestaurantMenu> selectAllDcMenu(int bizNo);
 
-	int reservation(String bizNo, String userNo, String menuNo, String reNo);
+	int inserDetail(String bizNo, String userNo, String menuNo, String reNo);
+
+	int insertBizReservation(String bizNo, String reNo);
 
 }

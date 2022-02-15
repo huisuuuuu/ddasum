@@ -164,6 +164,7 @@
 		/*page navi*/
 		#page_wrap {
 			margin-top: 10px;
+			margin-bottom: 10px;
 		    width: 100%;
 		}
 		#page_wrap .page_ul {

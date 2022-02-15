@@ -110,19 +110,19 @@
 						<div class="agree_box">
 							<ul>
 								<li class="join_agree">
-									<input type="checkbox" name="chk_personal userAgreements" value="N">
+									<input type="checkbox" class="userAgreements" name="chk_personal" value="N">
 									<label for="chk_personal">개인정보 취급방침</label>
-									<span><a href="" target="_blank">전문보기</a></span>
+									<span><a href="/member/personal.do" target="_blank">전문보기</a></span>
 								</li>
 								<li class="join_agree">
-									<input type="checkbox" name="chk_join userAgreements" value="N">
+									<input type="checkbox" class="userAgreements" name="chk_join userAgreements" value="N">
 									<label for="chk_join">이용약관 동의</label>
-									<span><a href="" target="_blank">전문보기</a></span>
+									<span><a href="/member/contract.do" target="_blank">전문보기</a></span>
 								</li>
 								<li class="join_agree">
 									<input type="checkbox" name="chk_sms" value="Y">
 									<label for="chk_join">SMS 및 이메일 수신동의(선택)</label>
-									<span><a href="" target="_blank">전문보기</a></span>
+									<span><a href="/member/smsYN.do" target="_blank">전문보기</a></span>
 								</li>
 							</ul>
 						</div>
@@ -391,7 +391,7 @@
 							return false;
 						}
 						
-						/*
+						
 						//필수 동의 사항을 체크 하지 않은 경우
 						if (!$(".userAgreements").prop("checked")) {
 							
@@ -406,7 +406,6 @@
 							return false;
 						}
 						
-						*/
 
 						// 이메일 인증을 하지 않은 경우
 						if ($("input[name=email]").attr("emailCheck") != "true") {

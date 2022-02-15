@@ -154,16 +154,17 @@ public class AdminServiceImpl implements AdminService{
 		return admDAO.adminFAQDetail(iNo);
 		
 	}
-
-	//공지 수정
+	//공지수정뷰
 	@Override
-	public int adminNoticeUpdate(Notice noti) {
-		return admDAO.Notice(noti);
+	public Notice adminNoticeOnePost(int iNo) {
+
+		return admDAO.adminNoticeOnePost(iNo);
 	}
 
+	//공지사항수정
+	@Override
+	public int adminNoticeUpdate(Notice noti) {
+		return admDAO.adminNoticeUpdate(noti);
+	}
 
-
-
-
-
-}
+	}

@@ -1,16 +1,21 @@
 package kr.or.ddasum.spRestaurant.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.ddasum.email.TempKey;
+import kr.or.ddasum.member.model.vo.Member;
 import kr.or.ddasum.spRestaurant.model.service.SpRestaurantService;
 
 @Controller
@@ -53,10 +58,33 @@ public class SpRestaurantController {
 	
 	@RequestMapping(value="/spRestaurant/spRestaurantReservation.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void insertReservation(@RequestParam(value="bizNo") int bizNo, @RequestParam(value="userNo") int userNo, @RequestParam(value="menuNo") int menuNo) {
+	public void insertReservation(@RequestParam(value="bizNo") int bizNo, @RequestParam(value="menuNo") int menuNo, HttpSession session, HttpServletResponse response) throws IOException {
 		
-		System.out.println(bizNo);
-		System.out.println(userNo);
-		System.out.println(menuNo);
+		int userNo = ((Member)session.getAttribute("member")).getUserNo();		
+	    TempKey tk = new TempKey();
+        String authKey = tk.getKey(6, false);
+		
+		HashMap<String, Object> map = new HashMap<String, Object> (); 
+//		Detail d = new  Detail();
+//		d.setBizNo(bizNo);
+//		d.setMenuNo(menuNo);
+//		d.setUserNo(userNo);
+//		d.setAuthorityId("SP");
+//		
+		map.put("bizNo", bizNo);
+		map.put("menuNo", menuNo);
+		map.put("userNo", userNo);
+		map.put("SP", "SP");
+		map.put("authKey", authKey);
+	    
+
+//    		INSERT INTO DETAIL values(M_RE_SEQ.NEXTVAL, #{userNo}, SYSDATE, #{bizNo}, 'SP', SYSDATE||#{authkey} }, #{menuNo}, 'N')
+		int result = srService.insertReservation(map);
+		if(result>0) {
+			response.getWriter().print(true);
+		}else {
+			response.getWriter().print(false);
+		}
+		
 	}
 }

@@ -161,16 +161,19 @@ public class AdminDAO {
 		return sqlSession.selectOne("admin.adminFAQDetail",iNo);
 	}
 
-	//공지사항 글 수정
-	public int adminNoticeUpdate(Notice noti) {
+	//공지사항 수정뷰
+	public Notice adminNoticeOnePost(int iNo) {
 		
+		return sqlSession.selectOne("admin.adminNoticeOnePost",iNo);
+	}
+
+	//공지사항수정
+	public int adminNoticeUpdate(Notice noti) {
+
 		return sqlSession.update("admin.updateNotice", noti);
 	}
 
-	public int Notice(Notice noti) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 		
 		
 		
