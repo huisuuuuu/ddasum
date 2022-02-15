@@ -142,8 +142,10 @@
 			border-radius: 220px;
 			border: 1px solid gray;
 			margin: 0 auto;
-			float:none;
 		}
+		.imgsize{
+			width:100%;
+		}	
 		ul{
 			list-style: none;
 			font-size: 18pt;
@@ -154,38 +156,38 @@
 			font-size: 18pt;
 			padding: 10px;
 			border-bottom: 1px solid #A5A5A5;
-			height: 40px;
+			height: 65px;
 		}
 		#typeOption{
 			width: 120px;
 			height: 30px;	
 			font-size: 16pt;
 		}
-		.imgsize{
-			width:100%;
-		}
+
 		h1{
 		float: left;
+		font-size: 23pt;
+		padding-top: 20px;
 		}
 		.bizSmallImage{
 				float: right;
 		}
 		.smaillimg{
-					padding-top: 20px;
+					padding-top: 25px;
 					padding-right: 10px;
-					width:30px;
+					width:40px;
 		}
 		.bizId{
 			float: right;
-			font-size: 18pt;
+			font-size: 16pt;
 			text-align: center;		
 			padding-right: 20px;
-			padding-top: 20px;
+			padding-top: 25px;
 		}
 		.logout{
 			float: right;
-			font-size: 18pt;
-			padding-top: 20px;
+			font-size: 16pt;
+			padding-top: 25px;
 		}
 		.inputdata{
 			width: 200px;
@@ -198,43 +200,7 @@
 			font-size: 16pt;
 			text-align: center;
 		}
-		.modal { 
-			position: absolute; 
-			top: 0; 
-			left: 0; 
-			width: 100%; 
-			height: 100%; 
-			display: none; 
-			background-color: rgba(0, 0, 0, 0.4); 
-		}
-		.modal.show { 
-			display: block; 
-		} 
-		.modal_body { 
-			  width:500px; height:900px;
-			  background:#fff; border-radius:10px;
-			  position:relative; top:20%; left:50%;
-			  margin-top:-100px; margin-left:-200px;
-			  text-align:center;
-			  box-sizing:border-box; padding:74px 0;
-			  line-height:23px; cursor:pointer;
-		}
-		.modal_content .layerpop_close {
-		    width: 30px;
-		    height: 30px;
-		    display: block;
-		    position: absolute;
-		    top: 16px;
-		    right: 16px;
-		    background: transparent url('./image/btn_exit.png') no-repeat;
-		}
-		.modal_content .layerpop_close:hover {
-		    background: transparent url('./image/btn_exit.png') no-repeat;
-		    cursor: pointer;
-		}
-		.change{
-		
-		}
+
 
 		
 	</style>
@@ -303,7 +269,6 @@
 						<div id="content-L">
 							<br><br>
 							<%-- <img id="bizImg" src="${requestScope.bizMember.bizImage }" alt="사진영역"> --%>
-                            <br><br><br>
                                 
  							<div id="selectProfile-wrap">
 	                            <div id="profileImg-area">
@@ -394,33 +359,14 @@
 	</div>
 </div>
 
-</body>
-
-
-<div class="modal"> 
-	<div class="modal_body">Modal</div> 
-</div>
-
-
-
-
-
-
-
-
-
-
 
 
 <script>
-//패스워드변경 모달창
-const modal = document.querySelector('.modal'); 
-const btnOpenPopup = document.querySelector('.pwdBTN'); 
-
-
-
-
-
+//패스워드 변경
+$('#pwdBTN').click(function(){
+		
+	
+	});
 
 //좌측 메뉴바 후버 효과
 
@@ -472,39 +418,27 @@ const btnOpenPopup = document.querySelector('.pwdBTN');
 
 	$('#withDraw').click(function(){
 		
-		var result1 = confirm("정말 탈퇴하시겠습니까?")
-		if(result1==true)
-		{
-			var result2 = prompt("패스워드를 재입력하여주세요")
-
-			if(result2==password)
-					{ $.ajax({
-			    		url : "/BizMember/withDraw.do",
-			    		type : "POST",
-			    		success : function(rst){
-			    			if(rst == "true"){
-			    				alert("회원 정보 변경 성공");
-			    				location.replace("/BizMember/bizManage.do");
-			    			}else{
-			    				alert("회원 정보 변경 실패");
-			    				location.replace("/BizMember/bizManage.do");
-			    				}
-			    			},
-			    		error : function(request,status,error){
-			    			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			    			console.log('ajax 통신 에러');
-			    		}
-			    	});
-				}else{
-					alert("패스워드를 다시 확인 바랍니다.")
-					location.replace("/bizMember/bizManage.do");
-				}
-			
-		}else{
-			alert("취소하였습니다.")
-			location.replace("/bizMember/bizManage.do");
-		}
-    });
+    	if(window.confirm('탈퇴하시겠습니까? \n -탈퇴시 복구 불가능합니다.-') == true){
+        	$.ajax({
+        		
+        		url : "/member/withdraw.do",
+        		type : "get",
+        		success : function(result){
+        			if(result == "true"){
+        				alert('회원 탈퇴 성공 \n -감사합니다 -');
+        				location.replace('/');
+        			}else{
+        				alert('회원 탈퇴 실패 \n - 지속적인 문제발생시 관리자에게 문의바랍니다.');
+        				location.replace('/member/myPage.do');
+        			}
+        		},
+        		error : function(){
+        			console.log('ajax 통신 에러');
+        		}
+        	});
+        	}
+        	
+    	});
 	
 	//후원형태 변경 ajax 설정
 	$('#suportBTN').click(function(){
@@ -570,4 +504,5 @@ const btnOpenPopup = document.querySelector('.pwdBTN');
 	
 	
 </script>
+</body>
 </html>

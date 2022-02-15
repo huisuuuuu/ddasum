@@ -154,26 +154,28 @@
 		}
 		h1{
 		float: left;
+		font-size: 23pt;
+		padding-top: 20px;
 		}
 		.bizSmallImage{
 				float: right;
 		}
 		.smaillimg{
-					padding-top: 20px;
+					padding-top: 25px;
 					padding-right: 10px;
-					width:30px;
+					width:40px;
 		}
 		.bizId{
 			float: right;
-			font-size: 18pt;
+			font-size: 16pt;
 			text-align: center;		
 			padding-right: 20px;
-			padding-top: 20px;
+			padding-top: 25px;
 		}
 		.logout{
 			float: right;
-			font-size: 18pt;
-			padding-top: 20px;
+			font-size: 16pt;
+			padding-top: 25px;
 		}	
 		
 		

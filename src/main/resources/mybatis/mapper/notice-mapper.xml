@@ -39,7 +39,7 @@
     	I_DEL_YN AS DELYN
 	FROM INFO
     	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
-    	WHERE INFO_GROUP.INFO_ID = 'HOLDNOTI' OR 
+    	WHERE 
     	INFO_GROUP.INFO_ID = 'NOTICE'
    	 
    	 </select>	
@@ -91,4 +91,20 @@
 		FROM INFO
 		WHERE INFO_ID ='FAQ'
 	</select>
+	
+  	 <select id="selectFixNotice" resultType="hashmap">
+   	 
+	SELECT
+    	INFO_NAME AS INFONAME,
+    	I_NO AS INO,
+    	I_TITLE AS ITITILE,
+    	I_CONTENT AS ICONTENT,
+    	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
+    	I_DEL_YN AS DELYN
+	FROM INFO
+    	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
+    	WHERE INFO_GROUP.INFO_ID = 'HOLDNOTI'
+   	 
+   	 </select>		
+	
 </mapper>
