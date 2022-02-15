@@ -9,7 +9,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
+	<!-- kakao cdn -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
+		<!-- 카카오 init -->
+	    <script>
+        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('783ccfa0bb53c6324959cef647098759');
+
+        // SDK 초기화 여부를 판단합니다.
+        console.log(Kakao.isInitialized());
+    </script>  
 <style>
 
 	body { 
@@ -373,7 +383,7 @@
 	                        <th>예약 유형</th>
 	                        <th>예약 일자</th>
 	                        <th>예약 번호</th>
-	                        <th>예약 번호 전송</th>
+	                        <th>예약 정보 전송</th>
 	                        <th>예약 상태</th>
 	                        <th style="width: 100px;">예약 취소</th>
 	                    </tr>
@@ -390,7 +400,7 @@
 	                        </c:choose>
 	                        <td>${d.reservationDate }</td>
 	                        <td>${d.reNo }</td>
-	                        <td><button>여기 공간이에여!</button></td>                
+	                        <td data-res="${d.authorityId}" data-reNo="${d.reNo }" data-bizName="${d.bizName }" data-menuName="${d.menuName }"  data-address="${d.address }" data-menuInfo="${d.menuInfo }" data-originalPrice="${d.originalPrice }" data-dcPrice="${d.dcPrice }"><button class="kakao" >카카오톡 전송</button></td>                
 	                       	<c:choose>
 								<c:when test="${d.reCancle eq 'N'.charAt(0)}">
 			                        <td>예약완료</td>
@@ -471,6 +481,91 @@
 		});
         
     </script>
- 
+ 	<script>
+ 	  //kakao link api
+	  //function kakaoLinkAPI(){
+ 		  /* $(document).on("click", ".more_option", function () { */
+ 		  $(".kakao").click(function(){
+ 			
+ 		  const res = $(this).parent().attr("data-res");
+ 		  const reNo = $(this).parent().attr("data-reNo");
+ 		  const bizName = $(this).parent().attr("data-bizName");
+ 		  const address = $(this).parent().attr("data-address");
+ 		  const menuName = $(this).parent().attr("data-menuName");
+ 		  const menuInfo = $(this).parent().attr("data-menuInfo");
+ 		  const oPrice = $(this).parent().attr("data-originalPrice");
+	      const dPrice = $(this).parent().attr("data-dcPrice");
+		  /* 	      
+ 		  console.log(res);
+ 		  console.log(reNo);
+ 		  console.log(bizName);
+ 		  console.log(address);
+ 		  console.log(menuName);
+ 		  console.log(menuInfo);
+ 		  console.log(oPrice);
+ 		  console.log(dPrice);
+ 		  */
+ 		  if(res=='SP'){
+ 			 sendSpLink();
+ 			 return;
+ 		  }else{ 
+ 		      sendDcLink();
+ 		      return;
+ 		  	}
+
+ 		 function sendDcLink() {
+		    Kakao.Link.sendDefault({
+				  objectType: 'location', //공유타입 -  지도공유 (option - feed, list, commerce, text)
+				  address: address, //지도 주소
+				  addressTitle: bizName, //주소 이름
+				  content: {
+				    title: bizName + "(예약번호 : " + reNo + ")", // 콘텐츠 제목
+				    description: menuName, // 콘텐츠 설명
+				    imageUrl: "http://k.kakaocdn.net/dn/b2WEO5/bl3tfdHehKl/TUlIyIrfsTRsBGzOK4wCZk/kakaolink40_original.png", // 링크공유 이미지
+				    link: {
+				      webUrl: '127.0.0.1/member/reservationPage.do',
+				    },
+				  },
+				   buttons: [
+				        {
+				          title: '웹으로 보기',
+				          link: {
+				            mobileWebUrl: '127.0.0.1/member/reservationPage.do',
+				            webUrl: '127.0.0.1/member/reservationPage.do',
+				          },
+				        },
+				      ],
+				  }
+			  );
+ 		 }
+ 		 
+ 		 function sendSpLink() {
+ 		  Kakao.Link.sendDefault({
+				  objectType: 'location', //공유타입 -  지도공유 (option - feed, list, commerce, text)
+				  address: address, //지도 주소
+				  addressTitle: bizName, //주소 이름
+				  content: {
+				    title: bizName + "(예약번호 : " + reNo + ")", // 콘텐츠 제목
+				    description: menuName, // 콘텐츠 설명
+				    imageUrl: "http://k.kakaocdn.net/dn/b2WEO5/bl3tfdHehKl/TUlIyIrfsTRsBGzOK4wCZk/kakaolink40_original.png", // 링크공유 이미지
+				    link: {
+				      webUrl: '127.0.0.1/member/reservationPage.do',
+				    },
+				  },
+				   buttons: [
+				        {
+				          title: '웹으로 보기',
+				          link: {
+				            mobileWebUrl: '127.0.0.1/member/reservationPage.do',
+				            webUrl: '127.0.0.1/member/reservationPage.do',
+				          },
+				        },
+				      ],
+				  }
+			  );
+ 		 }
+     });
+
+ 	</script>
 </body>
 </html>
