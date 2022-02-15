@@ -29,7 +29,7 @@
         color: inherit;
     	}
 		#wrapper{
-			width: 100%;
+			width: 1920px;
 			height: 1080px;
 			margin: 0 auto;
 		}
@@ -459,8 +459,8 @@ $('#pwdBTN').click(function(){
 			    				}
 			    			},
 			    		error : function(request,status,error){
-			    			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			    			console.log('ajax 통신 에러');
+
 			    			}
 			    	});
 		}else{
