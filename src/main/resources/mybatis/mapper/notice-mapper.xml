@@ -20,7 +20,7 @@
 
 
 
-   	 <select id="recordNoticeTotalCount" resultType="int">
+   	  <select id="recordNoticeTotalCount" resultType="int">
    	 
    	SELECT COUNT(*) AS AllCount FROM INFO 
     WHERE INFO_ID = 'HOLDNOTI' OR 
