@@ -158,7 +158,10 @@
   			biz_name as bizName,
             biz_image as bizImage,
   			address as address,
-  			menu_name as menuName
+  			menu_name as menuName,
+  			menu_info as menuInfo,
+  			original_price as originalPrice,
+  			dc_price as dcPrice
   		from
   			authority
   			inner join detail on(authority.AUTHORITY_ID = detail.AUTHORITY_ID)
