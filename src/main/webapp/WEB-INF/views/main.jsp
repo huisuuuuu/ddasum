@@ -8,7 +8,9 @@
 <title>따숨, 마음을 나누다</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/resources/commons/main-header.css">
+<link rel="stylesheet" href="/resources/css/mainPage.css">
 <link rel="stylesheet" href="/resources/commons/main-footer.css">
+
 </head>
 
 <body>
@@ -30,28 +32,36 @@
            </ul>
        </div>
        
-       <div id="header-login-area">
-	       <c:choose>
-				<c:when test="${sessionScope.member != null }">
-           			<div id="header-myPage-hover-text"><a href="">${sessionScope.member.userId } 님</a>
-		               <div id="hover-menu2" style="display: none">
-			               <div id="myPage-img-area">
-				               <img src="/resources/images/user.png" style="width: 18px; padding-right: 5px">
-				               <a class="hover-text2" href="/member/myPage.do">마이페이지</a>
-			               </div>
-			               <div id="resolvation-check-img-area">
-				               <img src="/resources/images/reception-bell.png" style="width: 18px; padding-right: 5px">
-				               <a class="hover-text2" href="/member/reservationPage.do">예약 내역 확인</a>
-			               </div>
-            		   </div>
-           			</div>
-            		<div id="header-logout-text"><a href="/member/logout.do">로그아웃</a></div>
-				</c:when>
-				<c:otherwise>
-		           <a class="header-login-text" href="/member/loginPage.do">로그인</a> &nbsp;&nbsp;&nbsp;&nbsp; 
-		           <a class="header-login-text" href="/member/joinPage.do">회원가입</a>
-	           	</c:otherwise>
-	       </c:choose>
+       <div id="member">
+       <c:choose>
+           <c:when test="${sessionScope.member != null}">
+              <span id="join"><a href="/member/logout.do">로그아웃</a></span>
+              <c:choose>
+              	<c:when test="${sessionScope.member.userId eq 'ADMIN' }">
+               <span id="login"><a href="/admin/adminMain.do">${sessionScope.member.nick }님</a></span>
+               </c:when>
+               <c:otherwise>
+               <span id="login">${sessionScope.member.nick }님</span>
+               <div id="mypage_submenu">
+                  <div id="mypage">
+                  <img src="/resources/images/user.png"><a href="/member/myPage.do">마이페이지</a>
+                  </div>
+                  <div id="reservation">
+                  <img src="/resources/images/reception-bell.png"><a href="/member/reservationPage.do">예약 내역 확인</a>
+                  </div>
+               </div>
+               </c:otherwise>
+              </c:choose> 
+           </c:when>
+           <c:when test="${sessionScope.bizMember != null}">
+              <span id="join"><a href="/member/logout.do">로그아웃</a></span>
+               <span id="login"><a href="/BizMember/enter.do">${sessionScope.bizMember.bizName }님</a></span>
+           </c:when>
+           <c:otherwise>
+               <span id="join"><a href="/member/joinPage.do">회원가입</a></span>
+               <span id="login"><a href="/member/loginPage.do">로그인</a></span>
+            </c:otherwise>
+        </c:choose>  
        </div>
    </div>
    
@@ -131,7 +141,7 @@
 		                   
 		                   <c:forEach items="${requestScope.list2}" var="f">
 		                  	 
-		                     <li><a href="">${f.iTitle } </a></li>
+		                     <li><a href="/board/faqBoard.do">${f.iTitle } </a></li>
 		                        
 		                    </c:forEach>
 		                   
@@ -178,11 +188,19 @@
 	   });
 	   
 	  
-	   $('#header-myPage-hover-text').hover(function(){
-	       $('#hover-menu2').css("display","block");    
-	   }, function() {
-	       $('#hover-menu2').css("display","none");
-	   });
+	   $('#login').hover(function() {
+           $('#mypage_submenu').css("display", "block");
+           $('#login').css("cursor", "pointer");
+
+       }, function() {
+           $('#mypage_submenu').css("display", "none");
+       });
+	   
+	   $('#mypage_submenu').hover(function() {
+           $(this).css("display", "block");
+       }, function() {
+           $(this).css("display", "none");
+       });
        
        $(window).scroll(function(){
         var scroll = $(window).scrollTop();
