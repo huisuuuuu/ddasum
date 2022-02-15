@@ -109,15 +109,15 @@
 }
 
 #reservationAndLocation>span:first-child>a {
+	color: #A5A5A5;
+}
+
+#reservationAndLocation>span:last-child>a {
 	color: #FFA77E;
 	font-weight: bold;
 }
 
-#reservationAndLocation>span:last-child>a {
-	color: #A5A5A5;
-}
-
-#reservationAndLocation>span:first-child:after {
+#reservationAndLocation>span:last-child:after {
 	content: "";
 	display: block;
 	border: 2px solid #FFA77E;
@@ -127,6 +127,7 @@
 }
 
 #menu {
+	width: 100%;
 	margin-bottom: 150px;
 }
 
@@ -200,4 +201,22 @@
 	border: none;
 	border-radius: 10px;
 	cursor: pointer;
+}
+
+#menu img {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	float: left;
+}
+
+#locationInfo{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#locationInfo span{
+	font-weight: 400;
+	font-size: 18px;
+	color: #5E5E5E;
 }

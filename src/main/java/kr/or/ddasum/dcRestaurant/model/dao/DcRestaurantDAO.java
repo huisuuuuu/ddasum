@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurant;
 import kr.or.ddasum.dcRestaurant.model.vo.DcRestaurantMenu;
+import kr.or.ddasum.dcRestaurant.model.vo.MReservation;
 import kr.or.ddasum.member.model.vo.BizMember;
 
 @Repository
@@ -66,7 +67,7 @@ public class DcRestaurantDAO {
 		return new ArrayList<DcRestaurantMenu>(sqlSession.selectList("dcRestaurant.selectAllDcMenu",bizNo));
 	}
 
-	public int reservation(String bizNo, String userNo, String menuNo, String reNo) {
+	public int inserDetail(String bizNo, String userNo, String menuNo, String reNo) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
@@ -75,8 +76,25 @@ public class DcRestaurantDAO {
 		map.put("menuNo", menuNo);
 		map.put("reNo", reNo);
 		
-		return sqlSession.insert("dcRestaurant.reservation",map);
+		int result;
+		
+		try {
+			return sqlSession.insert("dcRestaurant.inserDetail",map);
+		}catch(Exception e) {
+			result = 0;
+		}
+		
+		return 0;
 	}
 
+	public int insertBizReservation(String bizNo, String reNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("bizNo", bizNo);
+		map.put("reNo", reNo);
+		
+		return sqlSession.insert("dcRestaurant.insertBizReservation",map);
+	}
 
 }

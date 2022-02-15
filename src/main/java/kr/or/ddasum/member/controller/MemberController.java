@@ -41,6 +41,15 @@ public class MemberController {
 			if (m != null)
 			{
 				HttpSession session = request.getSession();
+				
+				if(m.getAddress().equals("서울")) {
+					m.setAddress("SEOUL");
+				}else if(m.getAddress().equals("인천")) {
+					m.setAddress("INCHEON");
+				}else if(m.getAddress().equals("경기")) {
+					m.setAddress("GYEONGGI");
+				};
+				
 				session.setAttribute("member", m);
 				session.setAttribute("bizMember", null);
 				return "main";
@@ -651,6 +660,27 @@ public class MemberController {
 			response.getWriter().print("false");
 		}
 		
+	}
+	
+	@RequestMapping(value = "/member/smsYN.do", method = RequestMethod.GET)
+	public String smsYN() {
+
+		return "member/sms";
+
+	}
+	
+	@RequestMapping(value = "/member/contract.do", method = RequestMethod.GET)
+	public String contract() {
+
+		return "member/contract";
+
+	}
+	
+	@RequestMapping(value = "/member/personal.do", method = RequestMethod.GET)
+	public String personal() {
+
+		return "member/personal";
+
 	}
 
 }

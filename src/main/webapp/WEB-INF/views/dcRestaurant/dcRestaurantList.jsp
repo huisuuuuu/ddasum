@@ -60,14 +60,33 @@
                   	<c:forEach items="${requestScope.list}" var="dc">    
                   	<c:choose>
                   		<c:when test="${dc.bizImage eq '/resources/images/bizProfile.png'}">
-						<div id="existRestaurant">
-							<a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dc.bizNo }"><img id="defaultImg" src="${dc.bizImage}"></a> <span>${dc.bizName}</span>
-						</div>
+                  			<c:choose>
+                  				<c:when test="${dc.bizCount <= dc.todayRSVNCount}">
+									<div id="closeRestaurant">
+										<a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dc.bizNo }&todayRSVNCount=${dc.todayRSVNCount}"><img id="defaultImg" src="${dc.bizImage}"><p>예약 마감</p></a> <span>${dc.bizName}</span>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div id="existRestaurant">
+										<a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dc.bizNo }&todayRSVNCount=${dc.todayRSVNCount}"><img id="defaultImg" src="${dc.bizImage}"></a> <span>${dc.bizName}</span>
+									</div>
+								</c:otherwise>
+							</c:choose>	
 						</c:when>
 						<c:otherwise>
-						<div id="existRestaurant">
-							<a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dc.bizNo }"><img id="restaurantImg" src="${dc.bizImage}"></a> <span>${dc.bizName}</span>
-						</div>
+							<c:choose>
+								<c:when test="${dc.bizCount <= dc.todayRSVNCount}">
+									<div id="closeRestaurant">
+										<p>예약 마감</p>
+										<a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dc.bizNo }&todayRSVNCount=${dc.todayRSVNCount}"><img id="restaurantImg" src="${dc.bizImage}"></a> <span>${dc.bizName}</span>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div id="existRestaurant">
+										<a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dc.bizNo }&todayRSVNCount=${dc.todayRSVNCount}"><img id="restaurantImg" src="${dc.bizImage}"></a> <span>${dc.bizName}</span>
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>	
 					</c:forEach>
@@ -77,7 +96,7 @@
 				</c:otherwise>
 				</c:choose>	
 				</div>
-						<div id="page_wrap">
+				<div id="page_wrap">
                         <ul id="page_ul">
                         <c:if test="${ preNavi > 0}">
                            <li><a href='/dcRestaurant/dcRestaurantList.do?currentPage=${ preNavi }&area=${requestScope.area }&restaurant=${requestScope.restaurant }&filter=${requestScope.filter }'><i class='fas fa-chevron-left'></i></a></li>
@@ -96,7 +115,7 @@
                            <li><a href='/dcRestaurant/dcRestaurantList.do?currentPage=${ nextNavi }&area=${requestScope.area }&restaurant=${requestScope.restaurant }&filter=${requestScope.filter }'><i class='fas fa-chevron-right'></i></a></li>
                         </c:if>
                         </ul>
-                    </div>
+                 </div>
 			</div>
 		</div>
 		<footer>
@@ -139,12 +158,11 @@
          };
          
          
-         if(restaurant == 'existRestaurant'){
+         if((restaurant == 'existRestaurant') || (restaurant == 'closeRestaurant')){
         	 $('#saleRestaurant').css("justify-content","space-between");
          }else{
         	 $('#saleRestaurant').css("justify-content","start");
          };
-         
          
          
      	});
