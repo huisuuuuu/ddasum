@@ -29,7 +29,7 @@ public class NoticeController {
 	@RequestMapping(value = "/board/noticeBoard.do", method = RequestMethod.GET)
 	public ModelAndView selectAllNotice(@RequestParam(defaultValue="1") int currentPage, HttpServletRequest request, ModelAndView mav) {
 		
-		int recordCountPerPage = 10;
+		int recordCountPerPage = 6;
 		int naviCountPerPage = 5;
 		int recordNoticeTotalCount = nService.recordNoticeTotalCount();
 		int pageTotalCount = (int)Math.ceil(recordNoticeTotalCount/(double)recordCountPerPage);
@@ -42,9 +42,14 @@ public class NoticeController {
 		for (int i = startNavi; i <= endNavi; i++) {
 			navi.add(i);
 		}
-				
+		
+		ArrayList<Notice> flist = nService.selectFixNotice();
+		
+		
+		
 		mav.addObject("recordNoticeTotalCount", recordNoticeTotalCount);
 		mav.addObject("list", list);
+		mav.addObject("flist", flist);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("navi", navi);
 		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );

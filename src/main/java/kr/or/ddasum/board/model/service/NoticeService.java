@@ -65,6 +65,8 @@ public interface NoticeService {
 	  */
 	ArrayList<HashMap<String, Object>> faqBoard(int currentPage, int recordCountPerPage);
 
+	ArrayList<Notice> selectFixNotice();
+
 
 
 

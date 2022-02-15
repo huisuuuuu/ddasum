@@ -14,7 +14,7 @@
 		* div{
 			box-sizing: border-box;
 		}
-     * {
+    	 * {
             box-sizing: border-box;
             font-family: 'Noto Sans KR', sans-serif;
             margin : 0px;
@@ -44,11 +44,13 @@
 			margin: 0 auto;
 			padding-bottom: 50px;
 			background-color: #FFD3BE;
+			padding-top: 80px;			
 		}
 		#menuList{
 			width: 1300px;
 			height: 550px;
 			margin: 0 auto;
+			font-size: 30pt;
 		}
 		#footer{
 			width: 100%;
@@ -101,7 +103,6 @@
 			height: 180px;
 		}
 		.title{
-			padding-top: 80px;
 		}
 		.Title{
 			width: 300px;
