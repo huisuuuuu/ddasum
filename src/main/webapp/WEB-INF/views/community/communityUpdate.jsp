@@ -16,17 +16,21 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/communityWrite.css">
+	<link rel="stylesheet" type="text/css" href="/resources/commons/layout.css">
+	<link rel="stylesheet" type="text/css" href="/resources/commons/mainTitle.css">
 	    
 </head>
 <body>
 	<!-- header -->
 	<%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>	
 
-    <div id="content_wrapper">
-        <div id="page_title"><a href="/community/communityList.do" style="all:unset;">혼밥시러</a><br>
-            <hr id="title_underbar">
-        </div><br><br><br><br>
-        				  
+ <div id="content">
+         <div class="main_tit">
+            <a href="/community/communityList.do" style="all:unset;"><h1>혼밥시러</h1></a>
+            <div class="under"></div>
+         </div>
+         <div class="contents_wrap">
+      
         	<form action="/community/communityUpdate.do" method="post" id="updateForm">
 	            <select id="area" name="area" class="area_select" onchange="categoryChange(this)" data-name="시도">
 	                <option value="" disabled selected hidden>시도 선택</option>
@@ -48,8 +52,8 @@
             <button class="basic_button" type="button" id="regBtn">등록</button>
 	        <a href="/community/communityDetail.do?cNo=${requestScope.community.cNo }" style="all:unset;"><button class="basic_button" type="reset">취소</button></a>    
        </div>
-    
-    <br /><br />
+  </div>
+  <br /><br />
     <script>
 	    $(function(){
 /* 	    	$("#area").html("${requestScope.community.area}").prop("selected", true);

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddasum.member.model.vo.Detail;
 import kr.or.ddasum.spRestaurant.model.vo.SpMenu;
 import kr.or.ddasum.spRestaurant.model.vo.SpRestaurant;
 
@@ -73,6 +74,19 @@ public class SpRestaurantDAO {
 	public ArrayList<SpMenu> selectAllBizMenu(SqlSession sqlSession, int bizNo) {
 			
 		return new ArrayList<SpMenu> (sqlSession.selectList("spRestaurant.selectAllBizMenu", bizNo));
+	}
+
+	public int insertReservation(SqlSession sqlSession, HashMap<String, Object> map) {
+
+		System.out.println(map.get("authKey"));
+		int result;
+		try {
+			result = sqlSession.insert("spRestaurant.insertReservation", map);
+		}catch(Exception e){
+			result = 0;
+		}
+
+		return result;
 	}
 
 

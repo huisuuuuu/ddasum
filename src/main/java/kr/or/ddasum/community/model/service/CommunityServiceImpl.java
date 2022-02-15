@@ -25,12 +25,10 @@ public class CommunityServiceImpl implements CommunityService{
 	
 	@Override
 	public HashMap<String, Object> selectAllCommunity(int currentPage) {
-	
+		//게시물 리스트 받기
 		ArrayList<Community> list = cDAO.selectAllCommunity(sqlSession, currentPage, recordCountPerPage);
-		
+		//페이징 네비바
 		String navi = cDAO.getPageNavi(sqlSession, currentPage, recordCountPerPage, naviCountPerPage);
-		
-		
 		
 		HashMap<String, Object> map = new HashMap<String, Object> ();
 		
@@ -40,9 +38,10 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 
 	@Override
-	public HashMap<String, Object> searchCommunity(String type, String keyword, int currentPage) {
-		ArrayList<Community> list = cDAO.searchCommunity(sqlSession, type, keyword, currentPage, recordCountPerPage);
-		
+	public HashMap<String, Object> searchCommunity(HashMap<String, String> search, int currentPage) {
+		//검색된 게시물 리스트 받기
+		ArrayList<Community> list = cDAO.searchCommunity(sqlSession, search, currentPage, recordCountPerPage);
+		//페이징 네비바
 		String navi = cDAO.getPageNavi(sqlSession, currentPage, recordCountPerPage, naviCountPerPage);
 		
 		HashMap<String, Object> map = new HashMap<String, Object> ();
@@ -55,9 +54,9 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public HashMap<String, Object> detailOneCommunity(int cNo) {
-		
+		//게시물 한개 가져오기
 		Community c = cDAO.detailOneCommunity(sqlSession, cNo);
-		
+		//게시물에 해당되는 댓글 리스트로 가져오기
 		ArrayList <CommunityComment> comList = cDAO.detailComment(sqlSession, cNo); 
 		
 		HashMap<String, Object> map = new HashMap<String, Object> ();
@@ -94,10 +93,10 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public int insertComment(CommunityComment cc) {
-		
+		// 코멘트 순서정렬을 위해 코멘트 순서를 가져오는 로직
 		int cNo = cc.getcNo();
 		int comOrder = cDAO.getOrder(sqlSession, cNo);
-		
+		// 가져온 순서를 입력할 코멘트 정보에 추가
 		cc.setComOrder(comOrder);
 
 		return cDAO.insertComment(sqlSession, cc);
@@ -120,7 +119,5 @@ public class CommunityServiceImpl implements CommunityService{
 		
 		return cDAO.updateComment(sqlSession, cc);
 	}
-	
-	
 	
 }

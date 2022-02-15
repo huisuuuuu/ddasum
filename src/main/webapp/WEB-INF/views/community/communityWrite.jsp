@@ -16,16 +16,19 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/communityWrite.css">
+	<link rel="stylesheet" type="text/css" href="/resources/commons/layout.css">
+	<link rel="stylesheet" type="text/css" href="/resources/commons/mainTitle.css">
 	    
 </head>
 <body>
 	<!-- header -->
 	<%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>	
-
-    <div id="content_wrapper">
-        <div id="page_title">혼밥시러 <br>
-            <hr id="title_underbar">
-        </div><br><br><br><br>
+	 <div id="content">
+         <div class="main_tit">
+            <h1>혼밥시러</h1>
+            <div class="under"></div>
+         </div>
+         <div class="contents_wrap">
         	<form action="/community/communityInsert.do" method="post" id="writeForm">
             <select id="area" name="area" class="area_select" onchange="categoryChange(this)" data-name="시도">
                 <option value="" selected disabled hidden>시도 선택</option>
@@ -47,7 +50,7 @@
             </form>    
             </div>
     </div>
-    <br /><br />
+   <br /><br />	
     <script> // editor
         const editor = new toastui.Editor({
             el: document.querySelector('#editor'),
