@@ -1,5 +1,6 @@
 package kr.or.ddasum.community.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -31,7 +32,8 @@ public class CommunityController {
 	
 	@RequestMapping(value="/community/communityList.do", method=RequestMethod.GET)
 	public ModelAndView selectAllCommunity(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, ModelAndView mav, HttpServletResponse response) {
-
+		
+		// 당일 생성된 게시물에 대한 표시를 위해 현재날짜 생성 후 request
 		SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		String nowDate = format.format(cal.getTime());
@@ -47,10 +49,6 @@ public class CommunityController {
 	
 	@RequestMapping(value="/community/communitySearch.do", method=RequestMethod.GET)
 	public ModelAndView searchCommunity(@RequestParam String type, @RequestParam String keyword, ModelAndView mav, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-				
-		System.out.println(type);
-		System.out.println(keyword);
-		System.out.println(currentPage);
 		
 		HashMap<String, Object> map = cService.searchCommunity(type, keyword, currentPage);
 		
@@ -69,7 +67,6 @@ public class CommunityController {
 
 		// 조회수 중복방지를 위한 쿠키 생성 및 중복방지 코드
 		// @CookieValue(value="viewCookie", required=false) Cookie viewCookie 으로 쿠기 받기
-
 		if(viewCookie != null) {
 			// 쿠키 확인 후 조회수 증가
 			if(!viewCookie.getValue().contains("["+cNo+"]")) {
@@ -100,23 +97,34 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value="/community/communityDelete.do", method=RequestMethod.POST)
-	public void deleteCommunity(@RequestParam int cNo, ModelAndView mav) {
+	public ModelAndView deleteCommunity(@RequestParam int cNo, ModelAndView mav) {
 		int result = cService.deleteCommunity(cNo);
 		
 		if(result>0) {
-			mav.addObject("msg", "글을 삭제하였습니다.");
+			mav.addObject("msg1", "성공!");
+			mav.addObject("msg2", "글을 삭제하였습니다.");
 			mav.addObject("view", "/community/communityList.do");
+			mav.setViewName("/commons/successMsg");
 		}else {
-			mav.addObject("msg", "글을 삭제하지 못하였습니다.");
-			mav.addObject("view", "/community/communityList.do");			
+			mav.addObject("msg1", "실패!");
+			mav.addObject("msg2", "글을 삭제하지 못하였습니다.");
+			mav.addObject("view", "/community/communityList.do");
+			mav.setViewName("/commons/errorMsg");
 		}
-		mav.setViewName("/community/msg");
+		return mav;
 	}
 	
 	@RequestMapping(value="/community/communityCommentDelete.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void deleteComment(@RequestParam int comNo) {
+	public void deleteComment(@RequestParam int comNo, HttpServletResponse response) throws IOException {
 		int result = cService.deleteComment(comNo);
+		
+		if(result>0) {
+			response.getWriter().print(true);
+		}else {
+			response.getWriter().print(false);
+		}
+		
 	}
 	
 	@RequestMapping(value="/community/communityWrite.do", method=RequestMethod.GET)
@@ -134,17 +142,23 @@ public class CommunityController {
 		int result = cService.insertCommunity(c);
 		
 		if(result>0) {
-			mav.addObject("msg", "게시물이 등록되었습니다.");
-			mav.addObject("view", "/community/communityList.do");
+			mav.addObject("msg1", "성공!");
+			mav.addObject("msg2", "게시물이 등록되었습니다.");
+			mav.addObject("location", "/community/communityList.do");
+			mav.setViewName("/commons/successMsg");
+		}else {
+			mav.addObject("msg1", "실패!");
+			mav.addObject("msg2", "게시물을 등록하지 못했습니다.");
+			mav.addObject("location", "/community/communityList.do");
+			mav.setViewName("/commons/errorMsg");
 		}
-		mav.setViewName("/community/msg");
 		
 		return mav;
 	}
 
 	@RequestMapping(value="/community/commentInsert.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void insertComment(CommunityComment cc, HttpSession session) {
+	public void insertComment(CommunityComment cc, HttpSession session, HttpServletResponse response) throws IOException{
 					
 		int userNo = ((Member)session.getAttribute("member")).getUserNo();
 		
@@ -153,13 +167,22 @@ public class CommunityController {
 		int depth = cc.getComDepth();
 		
 		// 댓글 뎁스 초기화
-		int quotient = depth/7;
-		depth = depth-(7*quotient);
-		int comDepth = depth==0?7:depth;
-		
-		cc.setComDepth(comDepth);
+		if(depth>7) {
+			depth = 2;
+			cc.setComDepth(depth);
+		}
+//		int quotient = depth/7;
+//		depth = depth-(7*quotient);
+//		int comDepth = depth==0?7:depth;
 		
 		int result = cService.insertComment(cc);
+		
+		if(result>0) {
+			response.getWriter().print(true);
+		}else {
+			response.getWriter().print(false);
+		}
+		
 		
 	}
 	
@@ -184,13 +207,11 @@ public class CommunityController {
 		
 		int result = cService.updateCommunity(c);
 		
-	
 			HashMap<String, Object> map = cService.detailOneCommunity(c.getcNo()); 
 			map.put("currentPage", currentPage);
 			
 			mav.addObject("map", map);
 			mav.setViewName("/community/communityDetail");
-		
 		
 		mav.setViewName("/community/communityDetail");
 		return mav;
@@ -199,7 +220,7 @@ public class CommunityController {
 	@RequestMapping(value="/community/commentUpdate.do", method=RequestMethod.POST)
 	@ResponseBody
 	public void updateComment(@RequestParam int comNo, @RequestParam String comment) {
-		
+
 		CommunityComment cc = new CommunityComment();
 		cc.setComNo(comNo);
 		cc.setComContent(comment);

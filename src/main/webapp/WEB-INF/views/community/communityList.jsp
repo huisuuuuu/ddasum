@@ -12,8 +12,8 @@
 	crossorigin="anonymous"></script>
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/communityList.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/layout.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/mainTitle.css">
+	<link rel="stylesheet" type="text/css" href="/resources/commons/layout.css">
+	<link rel="stylesheet" type="text/css" href="/resources/commons/mainTitle.css">
 	
 </head>
 <body>
@@ -21,7 +21,7 @@
 	<%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>	
       <div id="content">
          <div class="main_tit">
-            <h1>혼밥시러</h1>
+            <a href="/community/communityList.do" style="all:unset;"><h1>혼밥시러</h1></a>
             <div class="under"></div>
          </div>
          <div class="contents_wrap">
@@ -66,7 +66,7 @@
 		                    <td class="td_no">${c.cNo}</td>
 		                    <td class="td_area">${c.area } > ${c.sigu } </td>
 		                    <td class="td_title"><a href="/community/communityDetail.do?cNo=${c.cNo }&currentPage=${requestScope.map['currentPage']}">${c.cTitle } </a>
-		                    	<c:if test="${c.comCount !=null }"><sup>[${c.comCount }]</sup></c:if>
+		                    	<c:if test="${c.comCount !=0 }"><sup>[${c.comCount }]</sup></c:if>
 		                    	<c:if test="${c.cRegDate == requestScope.map['nowDate']}"><img src="/resources/images/newIcon.png" alt="" /></c:if>
 		                    </td>
 		                    <td class="td_writer">${c.nick }</td>
@@ -98,12 +98,6 @@
          
          </div>
       </div>
- <!--    <div id="content_wrapper"> -->
-<!--         <div id="page_title">혼밥시러 <br>
-            <hr id="title_underbar">
-        </div> -->
-
-    <!-- </div> -->
 
  	<!-- footer -->
 	<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>     

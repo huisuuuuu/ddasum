@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.ddasum.member.model.vo.Detail;
 import kr.or.ddasum.spRestaurant.model.dao.SpRestaurantDAO;
 import kr.or.ddasum.spRestaurant.model.vo.SpMenu;
 import kr.or.ddasum.spRestaurant.model.vo.SpRestaurant;
@@ -47,5 +48,11 @@ public class SpRestaurantServiceImpl implements SpRestaurantService{
 		map.put("mList", mList);
 		
 		return map;
+	}
+
+	@Override
+	public int insertReservation(HashMap<String, Object> map) {
+		
+		return srDAO.insertReservation(sqlSession, map);
 	}
 }

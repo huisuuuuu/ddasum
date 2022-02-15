@@ -109,4 +109,18 @@
 		WHERE
 			BIZ_NO = #{_parameter}		
 	</select>
+	
+	<insert id="insertReservation" parameterType="hashmap">
+		INSERT INTO 
+			DETAIL
+		VALUES
+			(M_RE_SEQ.NEXTVAL
+			, #{userNo}
+			, SYSDATE
+			, #{bizNo}
+			, 'SP'
+			, #{menuNo}
+			, 'N'
+			, TO_CHAR(SYSDATE, 'YYYYDDMM') || #{authKey})
+	</insert>
 </mapper>

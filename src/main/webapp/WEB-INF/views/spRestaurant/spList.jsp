@@ -20,8 +20,8 @@
         <div id="area_select">
 			<div class="area" data-area="all"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=all&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }" >전체</a></div>        
             <div class="area" data-area="SEOUL"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=SEOUL&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }" >서울</a></div>
-            <div class="area" data-area="INCHEON"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=GYEONGGI&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }" >인천</a></div>
-            <div class="area" data-area="GYEONGGI"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=INCHEON&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }">경기</a></div>
+            <div class="area" data-area="INCHEON"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=INCHEON&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }" >인천</a></div>
+            <div class="area" data-area="GYEONGGI"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=GYEONGGI&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }">경기</a></div>
         </div>
         <div id="food_select">
             <div class="type" data-type="all"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=all&order=${requestScope.terms['order'] }">전체</a></div> |
@@ -51,9 +51,17 @@
               <c:forEach items="${requestScope.map['list'] }" var="list">
                 <li class="item">
                     <a href="/spRestaurant/spRestaurantDetail.do?bizNo=${list.bizNo }" class="item_link">
-                        <div class="item_image">
-                        	<img src="${list.bizImage}" alt="" style="width:100%;height:100%"/>
-                        </div>
+						<c:if test="${list.bizCount != 0 }">
+	                        <div class="item_image">
+	                        	<img src="${list.bizImage}" alt="" style="width:100%;height:100%;border-radius: 80px;" onerror="this.src='/resources/images/bizProfile.png'"/>
+	                        </div>
+                        </c:if>
+                        <c:if test="${list.bizCount == 0 }">
+	                        <div class="item_image" style="position:relative;">
+	                        	<img src="${list.bizImage}" alt="" style="width:100%;height:100%;border-radius: 80px;"/>
+	                        	<div style="position:absolute;color:#fff;font-size:25px;background-color:black;opacity:0.5;top:0px;width:100%; height:100%;padding:60px 29px;border-radius: 80px;" onerror="this.src='/resources/images/bizProfile.png'">예약마감</div>
+	                        </div>
+                        </c:if>
                         <div class="item_name">
                      		${list.bizName }
                         </div>
@@ -86,8 +94,7 @@
     		const selectedType = "${requestScope.terms['type'] }";
     		const selectedOrder = "${requestScope.terms['order'] }";
     		
-    		$(".area").filter(function(index){
-    			console.log(".area");
+    		$(".area").filter(function(index){    			
     			if($(this).attr("data-area")==selectedArea){
     				$(this).addClass("selected");
     				return;
@@ -95,7 +102,6 @@
     		});
     		
     		$(".type").filter(function(index){
-    			console.log(".type");
     			if($(this).attr("data-type")==selectedType){
     				$(this).addClass("selected");
     				return;

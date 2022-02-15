@@ -18,7 +18,7 @@
 		     FROM 
 		     	COM_COMMENT 
 		     WHERE 
-		     	COMMUNITY.C_NO = COM_COMMENT.C_NO 
+		     	COMMUNITY.C_NO = COM_COMMENT.C_NO AND COM_DEL_YN = 'N'  
 		     GROUP BY C_NO) AS comCount
 		FROM
 		    COMMUNITY 
