@@ -14,6 +14,8 @@
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <!--Toast editor css-->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    <!-- SweetAlert2 CDN -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/communityWrite.css">
 	<link rel="stylesheet" type="text/css" href="/resources/commons/layout.css">
@@ -50,7 +52,7 @@
 	            <div style="text-align:center">
             </form>
             <button class="basic_button" type="button" id="regBtn">등록</button>
-	        <a href="/community/communityDetail.do?cNo=${requestScope.community.cNo }" style="all:unset;"><button class="basic_button" type="reset">취소</button></a>    
+	        <a href="/community/communityList.do" style="all:unset;"><button class="basic_button" type="reset">취소</button></a>    
        </div>
   </div>
   <br /><br />
@@ -80,10 +82,9 @@
 
         $("board_content").html(editor.getHTML()); //입력값 가져오기
         $("#editor").keyup(function() {
-            console.log('getHTML :' + editor.getHTML());
-            console.log('getMarkdown :' + editor.getMarkdown());
+
             $("#board_content").html(editor.getHTML());
-            console.log("board_content: " + $("#board_content").html());
+
         })
     </script>
 
@@ -132,27 +133,41 @@
 			const boardContent = editor.getMarkdown();
 			const area = $("#area").val();
 			const sigu = $("#sigu").val();
-			
+			let text;
 			if(!boardTitle){
-				alert("제목을 입력해주세요");
+				text = "제목을 입력해주세요!";
+				alertModal(text);
 				return ;
 			}
 			if(!boardContent){
-				alert("내용을 입력해주세요");
+				text = "내용을 입력해주세요!";
+				alertModal(text);
 				return ;
 			}
 			if(!area){
-				alert("지역을 선택해주세요");
+				text = "지역을 선택해주세요";
+				alertModal(text);
 				return ;
 			}
 			if(!sigu){
-				alert("시구를 선택해주세요");
+				text = "시구를 선택해주세요";
+				alertModal(text);
 				return ;
 			}
 			$("#board_content").val(editor.getHTML()); //입력값 가져오기
 			
 			$("#updateForm").submit();
 		})
+		
+		function alertModal(text){
+		
+			Swal.fire({
+				  icon: "warning",
+				  title: "실패!",
+				  text: text,
+				  confirmButtonText: "확인"
+				});
+	}
 	</script>
 	<!-- footer -->
 	<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>  	

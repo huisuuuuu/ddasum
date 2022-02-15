@@ -57,7 +57,7 @@
 		        LEFT JOIN MEMBER ON (COMMUNITY.USERNO = MEMBER.USERNO)
 		        LEFT JOIN AREA_GROUP ON (COMMUNITY.AREA = AREA_GROUP.AREA)
 		        LEFT JOIN SIGU_GROUP ON (COMMUNITY.SIGU = SIGU_GROUP.SIGU)
-		<trim prefix="WHER (" prefixOverrides="AND|OR" suffix =") AND C_DEL_YN = 'N'">
+		<trim prefix="WHERE (" prefixOverrides="AND|OR" suffix =") AND C_DEL_YN = 'N'">
 
 			<if test="type.equals('title') || type.equals('all')">
 				C_TITLE LIKE '%'||#{keyword}||'%'

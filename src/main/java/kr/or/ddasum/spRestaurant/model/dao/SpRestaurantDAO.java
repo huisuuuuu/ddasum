@@ -78,14 +78,13 @@ public class SpRestaurantDAO {
 
 	public int insertReservation(SqlSession sqlSession, HashMap<String, Object> map) {
 
-		System.out.println(map.get("authKey"));
 		int result;
 		try {
 			result = sqlSession.insert("spRestaurant.insertReservation", map);
 		}catch(Exception e){
 			result = 0;
 		}
-
+		
 		return result;
 	}
 

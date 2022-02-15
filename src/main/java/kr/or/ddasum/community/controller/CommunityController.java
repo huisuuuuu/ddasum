@@ -100,21 +100,14 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value="/community/communityDelete.do", method=RequestMethod.POST)
-	public ModelAndView deleteCommunity(@RequestParam int cNo, ModelAndView mav) {
+	public void deleteCommunity(@RequestParam int cNo,  HttpServletResponse response) throws IOException  {
 		int result = cService.deleteCommunity(cNo);
 		
 		if(result>0) {
-			mav.addObject("msg1", "성공!");
-			mav.addObject("msg2", "글을 삭제하였습니다.");
-			mav.addObject("view", "/community/communityList.do");
-			mav.setViewName("/commons/successMsg");
+			response.getWriter().print(true);
 		}else {
-			mav.addObject("msg1", "실패!");
-			mav.addObject("msg2", "글을 삭제하지 못하였습니다.");
-			mav.addObject("view", "/community/communityList.do");
-			mav.setViewName("/commons/errorMsg");
+			response.getWriter().print(false);
 		}
-		return mav;
 	}
 	
 	@RequestMapping(value="/community/communityCommentDelete.do", method=RequestMethod.POST)

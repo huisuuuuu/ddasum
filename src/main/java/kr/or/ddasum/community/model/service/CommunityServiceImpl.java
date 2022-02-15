@@ -70,7 +70,8 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public int deleteCommunity(int cNo) {
 		int cResult = cDAO.deleteCommunity(sqlSession, cNo);
-		return 0;
+		System.out.println(cResult);
+		return cResult;
 	}
 
 	@Override
