@@ -17,15 +17,18 @@
 		* div{
 			box-sizing: border-box;
 		}
-		* {
-			font-family: 'Noto Sans KR', sans-serif;
-		}
+     * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin : 0px;
+			padding : 0px;
+        }
 		* a{
         text-decoration: none;
         color: inherit;
     	}
 		#wrapper{
-			width: 1920px;
+			width: 100%;
 			height: 1080px;
 			margin: 0 auto;
 		}
@@ -151,27 +154,29 @@
 		}
 		h1{
 		float: left;
+		font-size: 23pt;
+		padding-top: 20px;
 		}
 		.bizSmallImage{
 				float: right;
 		}
 		.smaillimg{
-					padding-top: 20px;
+					padding-top: 25px;
 					padding-right: 10px;
-					width:30px;
+					width:40px;
 		}
 		.bizId{
 			float: right;
-			font-size: 18pt;
+			font-size: 16pt;
 			text-align: center;		
 			padding-right: 20px;
-			padding-top: 20px;
+			padding-top: 25px;
 		}
 		.logout{
 			float: right;
-			font-size: 18pt;
-			padding-top: 20px;
-		}	
+			font-size: 16pt;
+			padding-top: 25px;
+		}
 		
 		
 		

@@ -20,6 +20,31 @@
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
   <script src="/resources/js/ui.js"></script>
+  <style>
+
+  form {
+  	width : 90%;
+  	height : 100%x;
+  	margin : 0px auto;
+  	padding : 0 !important;
+  	box-sizing : border-box;
+
+  }
+  
+  form > div {
+  	margin : 0px auto;
+  }
+  
+  .input-group-2 d-flex mb-4 {
+  	margin : 0px auto;
+  }
+  
+  #cardImgBox {
+  	padding-top : 50px;
+  	padding-left : 50px;
+  	margin : 0px auto;
+  }
+  </style>
 </head>
 
 <body>
@@ -47,14 +72,16 @@
       <div class="container">
         <div class="cont-head">
           <h3 class="cont-title">
-            <span>${user.NICK }</span>님의 인증내역 확인
+            <span>${info.USERNAME }</span>님의 인증내역 확인
           </h3>
         </div>
         <div class="cont-body px-0 py-8">
           <div class="d-flex">
-            <div class="w-50">
-              <img class="card-img" src="../img/card.png" alt="">
+            <div class="w-50" id="cardImgBox">
+              <img class="card-img" src="/resources/images/card.png" alt="카드">
             </div>
+            
+            <form action="/admin/adminCardCheck.do" method="post" class="cardinput">
             <div class="w-50">
               <div class="input-group-2 d-flex mb-4">
                 <input type="text" placeholder="카드번호 입력: 1234-1234-1234-1234" />
@@ -64,11 +91,12 @@
                 <textarea name="content" placeholder="코멘트를 입력하세요"></textarea>
               </div>
               <div class="btn-group">
-                <button class="btn-sm-2 bg-2">승인</button>
-                <button class="btn-sm-2 bg-3">반려</button>
-                <button class="btn-sm-2 bg-4">취소</button>
+                <button class="btn-sm-2 bg-2"><a href="/admin/adminCardConfirmOk.do?cmNo=${info.CMNO }">승인</a></button>
+                <button class="btn-sm-2 bg-3"><a href="/admin/adminCardConfirmNo.do?cmNo=${info.CMNO }">반려</a></button>
+                <button class="btn-sm-2 bg-4"><a href="/admin/adminCardManageList.do">취소</a></button>
               </div>
             </div>
+            </form>
           </div>
         </div>
 

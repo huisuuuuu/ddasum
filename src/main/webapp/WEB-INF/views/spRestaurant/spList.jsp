@@ -8,6 +8,10 @@
 <title>후원식당리스트</title>
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/spList.css">
+	<!--  jQuery 라이브러리 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<!-- header -->
@@ -15,7 +19,7 @@
 
     <div id="content_wrapper">
         <div id="page_title">
-            <a href="/spRestaurant/spRestaurantList.do" style="all:unset;">후원식당</a>
+            <a href="/spRestaurant/spRestaurantList.do" style="all:unset;">후원 식당</a>
         </div>
         <div id="area_select">
 			<div class="area" data-area="all"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=all&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }" >전체</a></div>        
@@ -24,11 +28,11 @@
             <div class="area" data-area="GYEONGGI"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=GYEONGGI&type=${requestScope.terms['type'] }&order=${requestScope.terms['order'] }">경기</a></div>
         </div>
         <div id="food_select">
-            <div class="type" data-type="all"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=all&order=${requestScope.terms['order'] }">전체</a></div> |
-            <div class="type" data-type="KOR"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=KOR&order=${requestScope.terms['order'] }">한식</a></div> |
-            <div class="type" data-type="SCH"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=SCH&order=${requestScope.terms['order'] }">분식</a></div> |
-            <div class="type" data-type="WES"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=WES&order=${requestScope.terms['order'] }">양식</a></div> |
-            <div class="type" data-type="CHI"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=CHI&order=${requestScope.terms['order'] }">중식</a></div> |
+            <div class="type" data-type="all"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=all&order=${requestScope.terms['order'] }">전체</a></div><div class="bar" style="margin-left: 0px;margin-right: -4px"></div>	
+            <div class="type" data-type="KOR"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=KOR&order=${requestScope.terms['order'] }">한식</a></div><div class="bar" style="margin-left: 0px;margin-right: -4px"></div>
+            <div class="type" data-type="SCH"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=SCH&order=${requestScope.terms['order'] }">분식</a></div><div class="bar" style="margin-left: 0px;margin-right: -4px"></div>
+            <div class="type" data-type="WES"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=WES&order=${requestScope.terms['order'] }">양식</a></div><div class="bar" style="margin-left: 0px;margin-right: -4px"></div>
+            <div class="type" data-type="CHI"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=CHI&order=${requestScope.terms['order'] }">중식</a></div><div class="bar" style="margin-left: 0px;margin-right: -4px"></div>
             <div class="type" data-type="JAP"><a href="/spRestaurant/spRestaurantList.do?currentPage=1&area=${requestScope.terms['area'] }&type=JAP&order=${requestScope.terms['order'] }">일식</a></div>
         </div>
         <div id="list_order">
@@ -49,23 +53,35 @@
 		  <br />
             <ul>
               <c:forEach items="${requestScope.map['list'] }" var="list">
-                <li class="item">
-                    <a href="/spRestaurant/spRestaurantDetail.do?bizNo=${list.bizNo }" class="item_link">
+                <li class="item";">
+                    
 						<c:if test="${list.bizCount != 0 }">
 	                        <div class="item_image">
-	                        	<img src="${list.bizImage}" alt="" style="width:100%;height:100%;border-radius: 80px;" onerror="this.src='/resources/images/bizProfile.png'"/>
+	                        <a href="/spRestaurant/spRestaurantDetail.do?bizNo=${list.bizNo }" class="item_link">
+	                        	<img src="${list.bizImage}" alt="" style="width:165px;height:165px;border-radius: 80px;" onerror="this.src='/resources/images/bizProfile.png'"/>
+	                        </a>	
+	                        </div>
+	                        <div class="item_name">
+	                        <a href="/spRestaurant/spRestaurantDetail.do?bizNo=${list.bizNo }" class="item_link" style="all:unset">
+	                     		${list.bizName }
+	                     	</a>	
 	                        </div>
                         </c:if>
                         <c:if test="${list.bizCount == 0 }">
 	                        <div class="item_image" style="position:relative;">
-	                        	<img src="${list.bizImage}" alt="" style="width:100%;height:100%;border-radius: 80px;"/>
-	                        	<div style="position:absolute;color:#fff;font-size:25px;background-color:black;opacity:0.5;top:0px;width:100%; height:100%;padding:60px 29px;border-radius: 80px;" onerror="this.src='/resources/images/bizProfile.png'">예약마감</div>
+	                        <a href="/spRestaurant/spRestaurantDetail.do?bizNo=${list.bizNo }" class="item_link">
+	                        	<img src="${list.bizImage}" alt="" class="closeSP" style="width:165px;height:165px;border-radius: 80px;" onerror="this.src='/resources/images/bizProfile.png'"/>
+	                        	<!-- <div style="position:absolute;color:#fff;font-size:25px;background-color:black;opacity:0.5;top:0px;width:100%; height:100%;padding:60px 29px;border-radius: 80px;" >예약마감</div> -->
+	                        	<div class="closeText"  >예약마감</div>
+	                        </a>	
 	                        </div>
+	                        <div class="item_name">
+	                        <a href="/spRestaurant/spRestaurantDetail.do?bizNo=${list.bizNo }" class="item_link" style="all:unset;">
+	                     		${list.bizName }
+	                     	</a>	
+	                        </div>
+	                        
                         </c:if>
-                        <div class="item_name">
-                     		${list.bizName }
-                        </div>
-                    </a>
                 </li>
               </c:forEach> 
             </ul>

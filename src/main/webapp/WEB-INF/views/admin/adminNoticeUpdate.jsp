@@ -46,7 +46,7 @@
 							<input type="text" name="iTitle" value="${upNo.iTitle }">
 						</div>
 						<div class="box-content">
-							<textarea name="iContent" value="${requestScope.notice.iContent }">${upNo.iContent }</textarea>
+							<textarea name="iContent" value="${upNo.iContent }">${upNo.iContent }</textarea>
 						</div>
 					</div>
 					<div class="box-button">

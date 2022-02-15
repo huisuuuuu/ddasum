@@ -12,6 +12,8 @@ crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/faqBoard.css">
 
+
+
 <title>자주묻는질문</title>
 </head>
 <body>
@@ -40,19 +42,19 @@ crossorigin="anonymous"></script>
 				</c:forEach>
 
 				</div>
-									<!-- paging -->
+					<!-- paging -->
                     <div id="page_wrap">
-                        <ul id="page_ul">
+                        <ul class="page_ul">
                         <c:if test="${ preNavi > 0}">
                            <li><a href='/board/faqBoard.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
                         </c:if>
                         <c:forEach items="${ navi }" var="i">
                            <c:choose>
                               <c:when test="${i==currentPage}">
-                                 <li><a id="page_active" href='/board/faqBoard.do?currentPage=${i}'>${i}</a></li>
+                                 <li><a class="page_active" href='/board/faqBoard.do?currentPage=${i}'>${i}</a></li>
                               </c:when>
                               <c:otherwise>
-                                 <li><a id="page_inactive" href='/board/faqBoard.do?currentPage=${i}'>${i}</a></li>
+                                 <li><a class="page_inactive" href='/board/faqBoard.do?currentPage=${i}'>${i}</a></li>
                               </c:otherwise>
                               </c:choose>
                         </c:forEach>
@@ -61,6 +63,7 @@ crossorigin="anonymous"></script>
                         </c:if>
                         </ul>
                     </div>
+               </div>
 			</div>
 		<div id="footer">
 			<jsp:include page="../commons/footer/site-footer.jsp"/>			

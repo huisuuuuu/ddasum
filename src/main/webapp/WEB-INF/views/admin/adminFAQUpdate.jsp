@@ -27,7 +27,7 @@
         	<div id="header-box">
             <div class="admin-path">
                 <p>고객센터 관리</p>
-                <p>공지사항 관리</p>
+                <p>자주 묻는 질문 관리</p>
             </div>
            
             <div class="box-user">
@@ -39,13 +39,14 @@
         
         <div id="content">
         	<div class="container">
-        		<form action="/admin/adminFAQUpdate.do" method="post">
+        		<form action="/admin/adminFAQUpdate.do" method="get">
+        		<input type="hidden" name="iNo" value="${faqNo.iNo }">
 					<div class="box-write">
 						<div class="box-subject">
-							${requestScope.notice.iTitle }
+							<input type="text" name="iTitle" value="${faqNo.iTitle }">
 						</div>
 						<div class="box-content">
-							${requestScope.notice.iContent }
+							<textarea name="iContent" value="${faqNo.iContent }">${faqNo.iContent }</textarea>
 						</div>
 					</div>
 					<div class="box-button">

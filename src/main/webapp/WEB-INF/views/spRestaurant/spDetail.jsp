@@ -36,16 +36,35 @@
     
     <div id="content_wrapper">
         <div id="page_title">
-            <a style="all:unset;" href="/spRestaurant/spRestaurantList.do">후원식당</a> > <strong>상세페이지</strong>
+            <a style="all:unset;color:#A5A5A5;" href="/spRestaurant/spRestaurantList.do" >후원&nbsp식당</a><strong style="font-size:18px;color:#666">&nbsp>&nbsp상세&nbsp페이지</strong>
         </div>
         <div id="item_image">
-            <img src="${requestScope.map['sr'].bizImage }" alt="식당이미지">
+            <img src="${requestScope.map['sr'].bizImage }"  onerror="this.src='/resources/images/bizProfile.png'" style="width:500px;height:500px;">
         </div>
         <div id="item_info">
             <div id="name">
-                <img src="/resources/images/${requestScope.map['sr'].restaurant }.png" alt="">
+                <%-- <img src="/resources/images/${requestScope.map['sr'].restaurant }.png"> --%>
+                <c:choose>
+                	<c:when test="${requestScope.map['sr'].restaurant eq 'KOR'}">
+                		<div class="f_image" style="font-size:18px;">한식</div>		
+                	</c:when>
+                	<c:when test="${requestScope.map['sr'].restaurant eq 'SCH'}">
+                		<div class="f_image" style="font-size:18px;">분식</div>		
+                	</c:when>
+                	<c:when test="${requestScope.map['sr'].restaurant eq 'WES'}">
+                		<div class="f_image" style="font-size:18px;">양식</div>		
+                	</c:when>
+                	<c:when test="${requestScope.map['sr'].restaurant eq 'CHI'}">
+                		<div class="f_image" style="font-size:18px;">중식</div>		
+                	</c:when>
+                	<c:when test="${requestScope.map['sr'].restaurant eq 'JAP'}">
+                		<div class="f_image" style="font-size:18px;">일식</div>		
+                	</c:when>
+                </c:choose>
+                
                 <div>${requestScope.map['sr'].bizName }</div>
             </div>
+            <div style="line-height:0px;" ><br /></div>
             <div class="item_info">
                 <img src="/resources/images/phone-call.png" alt="">
                 <div>${requestScope.map['sr'].bizPhone }</div>
@@ -110,7 +129,7 @@
 				              		<button type="button" class="reservation_btn" data-menuNo="${menu.menuNo }" data-menuNane="${menu.menuName }">예약하기</button>
 				              	</c:when>
 				              	<c:otherwise>
-			                        <button class="reservationBtn" style="background-color:#FFEAE0" disabled="true">예약하기</button>
+			                        <button class="reservation_btn" style="background-color:#FFEAE0" disabled="true">예약하기</button>
 			                    </c:otherwise>
 		                    </c:choose>    
 		                    </div>
@@ -182,9 +201,9 @@
 		function alertReservation(menuNo, menuNane){
 			Swal.fire({
 				  icon: "info",
-				  title: "당일에만 이용 가능합니다. <br> 예약 진행하시겠습니까?",
+				  title: "당일에만 이용 가능합니다.",
+				  text: "예약 진행하시겠습니까?",		  
 				  confirmButtonText: "예",
-				  confirmButtonColor: "#FFA77E",
 				  showCancelButton: true,
 				  cancelButtonText: "아니오"				  
 				}).then((result) => {
@@ -203,23 +222,18 @@
 	            						  title: "예약이 완료되었습니다.",
 	            						  text: "예약 페이지로 이동하시겠습니까?",
 	            						  confirmButtonText: "예",
-	            						  confirmButtonColor: "#FFA77E",
 	            						  showCancelButton: true,
 	            						  cancelButtonText: "아니오"			  
 	            						}).then((result) => {
 	            							if(result.isConfirmed){
 	            								location.replace("/member/reservationPage.do");
-	            							}else{
-	            								kakaoLinkAPI(menuNane);
 	            							}
 	            						})
             					}else{ // 예약 실패
 	            					Swal.fire({
 	            						  icon: "error",
 	            						  title: "예약 실패!",
-	            						  text: "사용한도가 초과되었습니다.",
-	            						  confirmButtonText: "예",
-	            						  confirmButtonColor: "#FFA77E",
+	            						  text: "잔여 이용 횟수를 확인해주세요"
 	            						});
             					}		
             				},
@@ -227,13 +241,7 @@
             					console.log("서버 호출 실패");
             				}
 						})
-					}else{
-						swal.fire({
-							icon: "info",
-							title: "예약을 취소하였습니다.",
-							confirmButtonText: "확인"
-						});
-					};
+					}
 				});
 		};
 		
@@ -337,8 +345,6 @@
         		//지도 중심좌표 다시 불러오기
         		map.setCenter(coords);
         	}
-        	
-
         })
         </script>      
           

@@ -15,20 +15,23 @@
 
 <title>Insert title here</title>
 	<style>
-		* div{
-			box-sizing: border-box;
-		}
-		* {
-			font-family: 'Noto Sans KR', sans-serif;
-		}
+     * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin : 0 auto;
+			padding : 0px;
+        }
 		* a{
         text-decoration: none;
         color: inherit;
     	}
 		#wrapper{
+			width: 100%;
+			height: 1080px;
+		}
+		#body{
 			width: 1920px;
 			height: 1080px;
-			margin: 0 auto;
 		}
 		#leftArea{
 			width: 400px;
@@ -131,6 +134,9 @@
 			border: 1px solid gray;
 			margin: 0 auto;
 		}
+		.imgsize{
+			width:100%;
+		}
 		ul{
 			list-style: none;
 			font-size: 18pt;
@@ -141,46 +147,43 @@
 			font-size: 18pt;
 			padding: 10px;
 			border-bottom: 1px solid #A5A5A5;
-			height: 40px;
-		}
-		#typeOption{
-			width: 120px;
-			height: 30px;	
-			font-size: 16pt;
-		}
-		.imgsize{
-			width:100%;
+			height: 65px;
 		}
 		h1{
 		float: left;
+		font-size: 23pt;
+		padding-top: 20px;
 		}
 		.bizSmallImage{
 				float: right;
 		}
 		.smaillimg{
-					padding-top: 20px;
+					padding-top: 25px;
 					padding-right: 10px;
-					width:30px;
+					width:40px;
 		}
 		.bizId{
 			float: right;
-			font-size: 18pt;
+			font-size: 16pt;
 			text-align: center;		
 			padding-right: 20px;
-			padding-top: 20px;
+			padding-top: 25px;
 		}
 		.logout{
 			float: right;
-			font-size: 18pt;
-			padding-top: 20px;
+			font-size: 16pt;
+			padding-top: 25px;
 		}
-		
+		#wrap{
+			margin: 0 auto;
+		}
 	</style>
 
 </head>
-<body>
 
+<body>
 <div id="wrapper">
+<div id="wrap">
 	<div id="leftArea">
 		<div id="L-upArea">
 			<div id="logoArea">
@@ -280,7 +283,10 @@
 			</div>
 		</div>
 	</div>
-</div>
+
+
+
+
 <script>
 	$(function(){
         $('.submenu').hover(function() {
@@ -290,5 +296,7 @@
         });
     });
 </script>
+</div>
+</div>
 </body>
 </html>

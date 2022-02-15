@@ -16,16 +16,22 @@
 		* div{
 			box-sizing: border-box;
 		}
-		* {
-			font-family: 'Noto Sans KR', sans-serif;
-		}
+     * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin : 0px;
+			padding : 0px;
+        }
 		* a{
         text-decoration: none;
         color: inherit;
     	}
 		#wrapper{
-			width: 1920px;
+			width: 100%;
 			height: 1080px;
+			margin: 0 auto;
+		}
+				#body{
 			margin: 0 auto;
 		}
 		#leftArea{
@@ -124,31 +130,70 @@
 		}
 		h1{
 		float: left;
+		font-size: 23pt;
+		padding-top: 20px;
 		}
 		.bizSmallImage{
 				float: right;
 		}
+		.smaillimg{
+					padding-top: 25px;
+					padding-right: 10px;
+					width:40px;
+		}
 		.bizId{
 			float: right;
-			font-size: 18pt;
+			font-size: 16pt;
 			text-align: center;		
 			padding-right: 20px;
-			padding-top: 20px;
-		}
-		.smaillimg{
-					padding-top: 20px;
-					padding-right: 10px;
-					width:30px;
+			padding-top: 25px;
 		}
 		.logout{
 			float: right;
-			font-size: 18pt;
-			padding-top: 20px;
+			font-size: 16pt;
+			padding-top: 25px;
 		}
 		#searchBTN{
 			width: 20px;
 		}
+/*page navi*/
 
+	#page_wrap {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		    width: 100%;
+		}
+
+		
+		#page_wrap .page_ul {
+		    display: table;
+		    margin : 0 auto;
+		}
+		#page_wrap .page_ul li {
+		    display: block;
+		    width: 35px;
+		    height: 35px;
+		    float: left;
+		    text-align: center;
+		    margin: 0 5px;
+		    line-height: 15.5px;
+		    font-size: 16px;
+		    color: #2A2A2A;
+		}	
+		#page_wrap .page_ul li a {
+		    display: block;
+		    font-family: 'Noto Sans KR', sans-serif;
+			font-size: 16px;
+			color: #2A2A2A;
+		    padding: 10px;
+		    border-radius: 100%;
+			width: 35px;
+		}
+		#page_wrap .page_ul li a.page_active {
+		    background-color: #FFA77E;
+		    border-radius: 50%;
+		    color: #fff;
+		} 
 		
 		
 	</style>
@@ -253,17 +298,17 @@
 					</div>
 					<!-- paging -->
                     <div id="page_wrap">
-                        <ul id="page_ul">
+                        <ul class="page_ul">
                         <c:if test="${ preNavi > 0}">
                            <li><a href='/BizMember/bizReserv.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
                         </c:if>
                         <c:forEach items="${ navi }" var="i">
                            <c:choose>
                               <c:when test="${i==currentPage}">
-                                 <li><a id="page_active" href='/BizMember/bizReserv.do?currentPage=${i}'>${i}</a></li>
+                                 <li><a class="page_active" href='/BizMember/bizReserv.do?currentPage=${i}'>${i}</a></li>
                               </c:when>
                               <c:otherwise>
-                                 <li><a id="page_inactive" href='/BizMember/bizReserv.do?currentPage=${i}'>${i}</a></li>
+                                 <li><a class="page_inactive" href='/BizMember/bizReserv.do?currentPage=${i}'>${i}</a></li>
                               </c:otherwise>
                               </c:choose>
                         </c:forEach>

@@ -56,9 +56,6 @@ public class CommunityController {
 		
 		HashMap<String, Object> map = cService.searchCommunity(search, currentPage);
 		
-		System.out.println(type);
-		System.out.println(keyword);
-		
 		mav.addObject("map", map);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("type", type);
@@ -93,7 +90,6 @@ public class CommunityController {
 
 		}
 
-	
 		HashMap<String, Object> map = cService.detailOneCommunity(cNo); 
 		map.put("currentPage", currentPage);
 		
@@ -131,7 +127,6 @@ public class CommunityController {
 		}else {
 			response.getWriter().print(false);
 		}
-		
 	}
 	
 	@RequestMapping(value="/community/communityWrite.do", method=RequestMethod.GET)

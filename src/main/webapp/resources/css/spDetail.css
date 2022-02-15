@@ -11,7 +11,7 @@
             min-height: 800px;
             display: grid;
             grid-template-columns: 500px 650px;
-            grid-template-rows: 50px 90px 500px 90px minmax(300px, auto);
+            grid-template-rows: 100px 70px 500px 90px minmax(300px, auto);
             grid-column-gap: 130px;
             margin: 0 auto;
         }
@@ -22,7 +22,9 @@
             font-size: 18px;
             line-height: 30px;
         }
-
+		#page_title>a{
+			color: #A5A5A5;
+		}
         #item_image {
             grid-column: 1/2;
             grid-row: 3/4;
@@ -46,8 +48,8 @@
         #name>div {
             font-size: 28px;
             font-weight: bold;
-            line-height: 30px;
-            margin-bottom: 50px;
+            line-height: 23px;
+            margin-bottom: 20px;
         }
 
         #name>img {
@@ -61,7 +63,7 @@
         .item_info {
             margin-top: 30px;
             font-size: 18px;
-            color: #5E5E5E;
+            color: #000;
             line-height: 20px;
         }
 
@@ -84,7 +86,7 @@
         }
         #menu>ul>li{
             text-decoration: none;
-            height: 44px;
+            height: 45px;
             text-align: center;
             width: 80px;
             cursor: pointer;
@@ -106,8 +108,8 @@
             height: 160px;
             width: 100%px;
             border: 1px solid #707070;
-            border-radius: 5px;
-            margin-top: 10px;
+            border-radius: 10px;
+            margin: 20px 0px 40px;
         }
         .menu>div{
             float: left;
@@ -116,14 +118,15 @@
         .menu>div>img{
             width: 150px;
             height: 120px;
-            margin: 0px 15px;
+            margin: 0px 30px;
         }
         .menu_info{
-            width: 70%;
+            width: 67.5%;
             height: 100%;
         }
         .menu_name{
             font-size: 18px;
+            font-weight: bold;
             margin-bottom: 10px;
         }
         .menu_detail{
@@ -144,7 +147,7 @@
             opacity: 0.8;
             border: none;
             border-radius: 10px;
-            margin-top: 94px;
+            margin-top: 75px;
             margin-left: 20px;
             cursor: pointer;
         }
@@ -175,4 +178,20 @@
             line-height: 17px;
             margin-left: 30px;
             margin-bottom: 20px;
+        }
+        .f_image{
+        	width: 69px;
+        	height: 27px;
+        	line-height: 29px;
+        	border-radius: 10px;
+        	border: 1px solid #666;
+        	display: inline-block;
+        	text-align: center;
+        	font-size: 18px;
+        	font-weight: bold;
+        	color: #666;
+        	margin-right: 10px;
+        	float: left;
+        	padding-bottom: 2px;
+        	
         }

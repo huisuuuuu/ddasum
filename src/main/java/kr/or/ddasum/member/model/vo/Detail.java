@@ -20,6 +20,8 @@ public class Detail {
 	private int originalPrice;
 	private int dcPrice;
 	private String bizImage;
+	private String address;
+	private String menuInfo;
 
 	
 	
@@ -30,7 +32,7 @@ public class Detail {
 	}
 	public Detail(int mReNo, int userNo, Date reservationDate, int bizNo, String authorityId, String reNo, int menuNo,
 
-			char reCancle, String bizName, String menuName, String userName, String authorityInfo, String bizImage, int originalPrice, int dcPrice) {
+			char reCancle, String bizName, String menuName, String userName, String authorityInfo, String bizImage, int originalPrice, int dcPrice, String address, String menuInfo) {
 
 		super();
 		this.mReNo = mReNo;
@@ -48,6 +50,8 @@ public class Detail {
 		this.bizImage=bizImage;
 		this.originalPrice = originalPrice;
 		this.dcPrice = dcPrice;
+		this.address = address;
+		this.menuInfo = menuInfo;
 		
 	}
 	public int getOriginalPrice() {
@@ -139,6 +143,18 @@ public class Detail {
 	}
 	public void setAuthorityInfo(String authorityInfo) {
 		this.authorityInfo = authorityInfo;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getMenuInfo() {
+		return menuInfo;
+	}
+	public void setMenuInfo(String menuInfo) {
+		this.menuInfo = menuInfo;
 	}
 	
 }

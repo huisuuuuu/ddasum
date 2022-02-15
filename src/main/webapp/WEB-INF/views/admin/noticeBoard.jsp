@@ -41,7 +41,14 @@ crossorigin="anonymous"></script>
 				                    <th class="rt-th-3">작성일</th>
 				                </tr>
 				                
-				                <c:forEach items="${requestScope.list }" var="m" varStatus="i">
+				                <c:forEach items="${requestScope.flist }" var="m" varStatus="i">
+								<tr>
+				                    <td><span id='fix'>필독</span></td>
+				                	<td><a href="/board/noticeDetail.do?iNo=${m.INO }">${m.ITITILE }</a></td>
+				                    <td>${m.REGDATE }</td>
+				                </tr>
+								</c:forEach>
+				                <c:forEach items="${requestScope.list }" var="m" varStatus="i">				                
 								<tr>
 				                    <td>${i.count }</td>
 				                	<td><a href="/board/noticeDetail.do?iNo=${m.INO }">${m.ITITILE }</a></td>
@@ -59,19 +66,20 @@ crossorigin="anonymous"></script>
 				</div>
 				
 				<div class="pagingArea">
+	
 					<!-- paging -->
-					<div id="page_wrap">
-						<ul id="page_ul">
+					<div id=page_wrap>
+						<ul class="page_ul">
 							<c:if test="${ preNavi > 0}">
 								<li><a href='/board/noticeBoard.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
 							</c:if>
 							<c:forEach items="${ navi }" var="i">
 								<c:choose>
 									<c:when test="${i==currentPage}">
-										<li><a id="page_active" href='/board/noticeBoard.do?currentPage=${i}'>${i}</a></li>
+										<li><a class="page_active" href='/board/noticeBoard.do?currentPage=${i}'>${i}</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a id="page_inactive" href='/board/noticeBoard.do?currentPage=${i}'>${i}</a></li>
+										<li><a class="page_inactive" href='/board/noticeBoard.do?currentPage=${i}'>${i}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
