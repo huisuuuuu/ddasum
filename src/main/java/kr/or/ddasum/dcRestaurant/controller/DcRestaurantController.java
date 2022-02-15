@@ -76,7 +76,7 @@ public class DcRestaurantController {
 	}
 	
 	@RequestMapping(value = "/dcRestaurant/dcRestaurantDetail.do", method = RequestMethod.GET)
-	public ModelAndView dcRestaurantDetail(@RequestParam int bizNo, ModelAndView mav) {
+	public ModelAndView dcRestaurantDetail(@RequestParam int bizNo, @RequestParam int todayRSVNCount, ModelAndView mav) {
 		
 		BizMember bm = dcService.selectoneDcRestaurant(bizNo);
 		
@@ -85,7 +85,31 @@ public class DcRestaurantController {
 			ArrayList<DcRestaurantMenu> dcMenu = dcService.selectAllDcMenu(bizNo);
 			mav.addObject("dcInfo", bm);
 			mav.addObject("dcMenu", dcMenu);
+			mav.addObject("todayRSVNCount", todayRSVNCount);
 			mav.setViewName("dcRestaurant/dcRestaurantDetail");
+			return mav;
+
+		}else {
+			mav.addObject("msg1", "비정상적인 접근입니다.");
+			mav.addObject("msg2", "지속적인 문제 발생 시 관리자에게 문의해주세요.");
+			mav.addObject("location", "/member/loginPage.do");
+			mav.setViewName("commons/errorMsg");
+			return mav;
+		}
+	}
+	
+	@RequestMapping(value = "/dcRestaurant/dcRestaurantDetailLocation.do", method = RequestMethod.GET)
+	public ModelAndView dcRestaurantDetailLocation(@RequestParam int bizNo, @RequestParam int todayRSVNCount, ModelAndView mav) {
+		
+		BizMember bm = dcService.selectoneDcRestaurant(bizNo);
+		
+		if(bm != null) {
+			
+			ArrayList<DcRestaurantMenu> dcMenu = dcService.selectAllDcMenu(bizNo);
+			mav.addObject("dcInfo", bm);
+			mav.addObject("dcMenu", dcMenu);
+			mav.addObject("todayRSVNCount", todayRSVNCount);
+			mav.setViewName("dcRestaurant/dcRestaurantDetailLocation");
 			return mav;
 
 		}else {

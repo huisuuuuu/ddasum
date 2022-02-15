@@ -655,5 +655,26 @@ public class MemberController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/member/smsYN.do", method = RequestMethod.GET)
+	public String smsYN() {
+
+		return "member/sms";
+
+	}
+	
+	@RequestMapping(value = "/member/contract.do", method = RequestMethod.GET)
+	public String contract() {
+
+		return "member/contract";
+
+	}
+	
+	@RequestMapping(value = "/member/personal.do", method = RequestMethod.GET)
+	public String personal() {
+
+		return "member/personal";
+
+	}
 
 }

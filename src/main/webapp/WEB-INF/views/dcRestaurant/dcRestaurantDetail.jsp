@@ -71,7 +71,7 @@
 				</div>
 			</div>
 			<div id="reservationAndLocation">
-				<span id="reservation">메뉴 예약</span> <span id="restaurantLocation">업체 정보</span>
+				<span id="reservation"><a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dcInfo.bizNo }&todayRSVNCount=${todayRSVNCount}">메뉴 예약</a></span> <span id="restaurantLocation"><a href="/dcRestaurant/dcRestaurantDetailLocation.do?bizNo=${dcInfo.bizNo }&todayRSVNCount=${todayRSVNCount}">업체 정보</a></span>
 			</div>
 				<input type="hidden" id="bizNo" value="${dcInfo.bizNo }">
 				<input type="hidden" id="userNo" value="${sessionScope.member.userNo }">
@@ -84,7 +84,7 @@
 					<c:when test="${sessionScope.member.authorityId ne 'DREAM'}">
 						<h3>※ 꿈나무 회원만 예약 가능합니다.</h3>
 					</c:when>
-					<c:when test="${dcInfo.area ne '[sessionScope.member.address]'}">
+					<c:when test="${dcInfo.area ne sessionScope.member.address }">
 						<c:choose>
 							<c:when test="${dcInfo.area eq 'SEOUL' }">
 								<h3>※ 서울 거주자만 예약 가능합니다.</h3>
@@ -96,6 +96,9 @@
 								<h3>※ 경기도 거주자만 예약 가능합니다.</h3>
 							</c:when>
 						</c:choose>
+					</c:when>
+					<c:when test="${dcInfo.bizCount <= todayRSVNCount}">
+						<h3>※ 금일 물량이 모두 소진되었습니다.</h3>
 					</c:when>
 					<c:otherwise>
 						<h3>※ 당일 예약만 가능한 점 유의하시기 바랍니다.</h3>
@@ -113,7 +116,10 @@
 							<c:when test="${sessionScope.member.authorityId ne 'DREAM'}">
 								<button class="reservationBtn" style="background-color:#FFEAE0" disabled="true">예약하기</button>
 							</c:when>
-							<c:when test="${dcInfo.area ne '[sessionScope.member.address]' }">
+							<c:when test="${dcInfo.area ne sessionScope.member.address }">
+								<button class="reservationBtn" style="background-color:#FFEAE0" disabled="true">예약하기</button>
+							</c:when>
+							<c:when test="${dcInfo.bizCount <= todayRSVNCount}">
 								<button class="reservationBtn" style="background-color:#FFEAE0" disabled="true">예약하기</button>
 							</c:when>
 							<c:otherwise>
@@ -189,7 +195,7 @@
 	            			 
 	            			 }else{
 	            				 Swal.fire({
-	       						  icon: 'success',
+	       						  icon: 'error',
 	       						  title: '예약 실패',
 	       						  text: '잔여 이용 횟수를 확인해주세요.'
 	       						})
