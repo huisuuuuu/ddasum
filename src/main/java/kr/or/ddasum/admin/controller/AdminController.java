@@ -376,26 +376,50 @@ public class AdminController {
 		mav.setViewName("admin/adminNoticeDetail");
 		return mav;
 	}
+		
+	//공지사항 글 수정뷰
+	@RequestMapping(value="/admin/adminNoticeUpdatePage.do")
+	public ModelAndView adminNoticeOnePost(ModelAndView mav, @RequestParam int iNo)
+	{
+		Notice upNo = admService.adminNoticeOnePost(iNo);
+		
+		mav.addObject("upNo", upNo);
+		mav.setViewName("admin/adminNoticeUpdate");
+		return mav;
+	}	
 	
 
+	//공지사항 수정로직
 	@RequestMapping(value="/admin/adminNoticeUpdate.do", method = RequestMethod.GET)
-	public ModelAndView adminNoticeUpdate(ModelAndView mav, @RequestParam int iNo, @RequestParam String iTitle, @RequestParam String iContent, HttpSession session, HttpServletResponse response) {
+	public ModelAndView adminNoticeUpdate(@RequestParam int iNo, ModelAndView mav, @RequestParam String iTitle, 
+			@RequestParam String iContent, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+		String title = iTitle;
+		String content = iContent;
 		
 		Notice noti = new Notice();
 		
 		noti.setiNo(iNo);
 		noti.setiTitle(iTitle);
-		noti.setiContent(iContent);
+		noti.setiContent(iContent);		
 		
 		int result = admService.adminNoticeUpdate(noti);
+						
+		if(result>0)
+		{
+			mav.addObject("noti", noti);
+			mav.setViewName("admin/adminNoticeDetail");
+
+		}else
+		{
+			mav.addObject("noti", noti);
+			mav.setViewName("commons/errorMSG");
+		}
 				
-		mav.addObject("noti", noti);
-		mav.setViewName("admin/adminNoticeUpdate");
-		
 		return mav;
 	}
 
-	
+//	
 	//FAQ 글 읽기
 	@RequestMapping(value="/admin/adminFAQDetail.do", method = RequestMethod.GET)
 	public ModelAndView adminFAQDetail(ModelAndView mav, @RequestParam int iNo)

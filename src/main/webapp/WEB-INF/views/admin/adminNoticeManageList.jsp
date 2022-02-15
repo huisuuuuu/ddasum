@@ -101,7 +101,7 @@
                 <td><a href="/admin/adminNoticeDetail.do?iNo=${noti.INO}">${noti.ITITLE }</a></td>
                 <td><a href="/admin/adminNoticeDetail.do?iNo=${noti.INO}">${noti.ICONTENT }</a></td>
                 <td><button type="button" class="ok_btn">고정</button></td>
-                <td><button type="button" class="ok_btn"><a href="/admin/adminNoticeUpdate.do?&iNo=${noti.INO}">수정</a></button></td>
+                <td><button type="button" class="ok_btn"><a href="/admin/adminNoticeUpdatePage.do?iNo=${noti.INO}">수정</a></button></td>
               </tr>
 
             

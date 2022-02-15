@@ -192,6 +192,7 @@ a {
 
 .container table tr td button.ok_btn {
   background-color: #ffa77e;
+  color : white;
 }
 
 .container table tr td button.none_btn {
@@ -282,3 +283,42 @@ a {
   color: white !important;
 }
 
+#page_active > a{
+	color : white;
+
+input[type="checkbox"] {
+        -webkit-appearance: none;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        outline: none !important;
+        border: 1px solid #eeeeee;
+        border-radius: 2px;
+        background: #fbfbfb;
+    }
+ 
+    input[type="checkbox"]::before {
+        content: "\2713";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        transform: scale(0) translate(-50%, -50%);
+        line-height: 1;
+    }
+ 
+    input[type="checkbox"]:hover {
+        border-color: rgba(170, 170, 170, 0.5);
+    }
+ 
+    input[type="checkbox"]:checked {
+        background-color: #FFA77E;
+        border-color: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+ 
+    input[type="checkbox"]:checked::before {
+        border-radius: 2px;
+        transform: scale(1) translate(-50%, -50%)
+    }

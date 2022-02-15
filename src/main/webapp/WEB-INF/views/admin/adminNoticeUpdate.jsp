@@ -39,19 +39,22 @@
         
         <div id="content">
         	<div class="container">
-        		<form action="/admin/adminNoticeUpdate.do" method="post">
+        		<form action="/admin/adminNoticeUpdate.do" method="get">
+        		<input type="hidden" name="iNo" value="${upNo.iNo }">
 					<div class="box-write">
 						<div class="box-subject">
-							<input type="text" name="title" value="${notice.iTitle }">
+							<input type="text" name="iTitle" value="${upNo.iTitle }">
 						</div>
 						<div class="box-content">
-							<textarea name="content" value="${notice.iContent }"></textarea>
+							<textarea name="iContent" value="${requestScope.notice.iContent }">${upNo.iContent }</textarea>
 						</div>
+					</div>
 					<div class="box-button">
 						<input type="submit" value="완료" class="btn-ok">
 						<button class="btn-ok"><a href="/admin/adminNoticeManageList.do">목록</a></button>
 					</div>
 				</form>
+					
         	</div>
         </div>          
     </div>
