@@ -52,8 +52,8 @@ li {
 }
 
 .py-8 {
-  padding-top: 80px !important;
-  padding-bottom: 80px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
 }
 
 /* button style */
@@ -389,8 +389,9 @@ li {
   color: #a5a5a5;
   font-size: 1rem;
   height: 62px;
-  width: 80%;
+  width: 100%;
   padding: 0 16px;
+  margin : 0px auto;
 }
 
 .input-group-2 textarea {
@@ -403,9 +404,12 @@ li {
   padding: 16px;
 }
 
+
 .btn-group {
   text-align: center;
   margin-top: 30px;
+  padding-left : 50px;
+  padding-bottom : 20px;
 }
 
 .btn-group button {

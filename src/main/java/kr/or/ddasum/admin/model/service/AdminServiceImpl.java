@@ -167,4 +167,37 @@ public class AdminServiceImpl implements AdminService{
 		return admDAO.adminNoticeUpdate(noti);
 	}
 
+	//FAQ 수정뷰
+	@Override
+	public Notice adminFAQOnePost(int iNo) {
+		return admDAO.adminFAQOnePost(iNo);
+	}
+
+	//FAQ 수정
+	@Override
+	public int adminFAQUpdate(Notice noFaq) {
+		return admDAO.admFAQUpdate(noFaq);
+	}
+
+	//카드인증멤버
+	@Override
+	public HashMap<String, Object> adminCardMemberInfo(int userNo) {
+		return admDAO.adminSelectOneCardMemberInfo(userNo);
+	}
+
+	//공지사항 삭제 및 복원
+	@Override
+	public int noticeDelYN(HashMap<String, Object> map) {
+
+		return admDAO.noticeDelYN(map);
+	}
+
+	//공지사항 고정글
+	@Override
+	public int noticeFix(HashMap<String, Object> map) {
+		return admDAO.noticeFix(map);
+	}
+
+
+
 	}

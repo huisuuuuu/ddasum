@@ -85,6 +85,7 @@
    	 <select id="selectAllCardMember" resultType="hashmap">
     SELECT
         C_M_NO AS CMNO,
+        MEMBER.USERNO AS USERNO,
         USERID AS USERID,
         USERNAME AS USERNAME,
         TO_CHAR(ENROLLDATE, 'YYYY-MM-DD') AS ENROLLDATE,
@@ -155,7 +156,7 @@
     	I_TITLE AS ITITLE,
     	I_CONTENT AS ICONTENT,
     	TO_CHAR(I_REGDATE, 'YYYY-MM-DD') AS REGDATE,
-    	I_DEL_YN AS DELYN
+    	I_DEL_YN AS IDELYN
 	FROM INFO
     	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
     	WHERE INFO_GROUP.INFO_ID = 'HOLDNOTI' OR 
@@ -277,6 +278,52 @@
     UPDATE INFO SET I_TITLE=#{iTitle}, I_CONTENT=#{iContent} WHERE I_NO = #{iNo}	
 	
 	</update>
+	
+	<select id="adminFAQOnePost" parameterType="int" resultType="notice">
+	
+	SELECT
+    	INFO_NAME AS INFONAME,
+    	I_NO AS INO,
+    	I_TITLE AS ITITLE,
+    	I_CONTENT AS ICONTENT
+	FROM INFO
+    	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
+    WHERE I_NO=#{_params}
+	
+	</select>
 
+	<update id="updateFAQ" parameterType="notice">
+
+    UPDATE INFO SET I_TITLE=#{iTitle}, I_CONTENT=#{iContent} WHERE I_NO = #{iNo}	
+	
+	</update>
+  
+     <select id="cardDetailName" resultType="hashmap">
+     
+    SELECT 
+    	C_M_NO AS CMNO,
+        MEMBER.USERNO AS USERNO,
+        MEMBER.USERNAME AS USERNAME,
+        C_FILE_NO AS CFILENO
+    FROM CARD_MANAGE
+        INNER JOIN MEMBER ON (CARD_MANAGE.USERNO=MEMBER.USERNO)
+        WHERE MEMBER.USERNO=#{_params}   
+        
+     </select>
+  
+  	<!-- 게시글 삭제 -->   
+     <update id="noticeDelete" parameterType="hashmap">
+     
+     UPDATE INFO SET I_DEL_YN=#{iDelYN} WHERE I_NO=#{iNo}
+     
+     </update>
+  
+  <!-- 공지사항 고정글 -->
+  
+  	<update id="noticeFix" parameterType="hashmap">
+  	
+  	UPDATE INFO SET INFO_ID=#{infoId} WHERE I_NO=#{iNo}
+  	
+  	</update>
   
 </mapper>

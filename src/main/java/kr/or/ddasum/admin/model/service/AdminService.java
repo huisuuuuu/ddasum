@@ -83,6 +83,25 @@ public interface AdminService {
 
 	//공지 수정로직
 	int adminNoticeUpdate(Notice noti);
+
+	//FAQ 수정뷰
+	Notice adminFAQOnePost(int iNo);
+
+	//FAQ 수정로직
+	int adminFAQUpdate(Notice noFaq);
+	
+	//카드인증멤버
+	HashMap<String, Object> adminCardMemberInfo(int userNo);
+
+	//공지사항 삭제
+	int noticeDelYN(HashMap<String, Object> map);
+
+	//공지사항 고정글
+	int noticeFix(HashMap<String, Object> map);
+
+
+
+
 	
 
 

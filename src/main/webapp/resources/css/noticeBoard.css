@@ -48,7 +48,7 @@
 		}
 		.title{
 			font-size: 32pt;
-			border-bottom: 6px solid #FFD3BE;
+			border-bottom: 6px solid #FFA77E;
 		}
 		.searchForm{
 			float: right;
@@ -110,10 +110,6 @@
 			width: 17%;
 			height: 5px;
 		}
-/* 		p{
-			border-bottom: 1px solid #707070;
-			height: 130px;
-		} */
 		.detailTable{
 			width: 80%;
 			height: 100%;
@@ -137,11 +133,6 @@
 		}
 		.regdate{
 			font-size: 18pt;
-		}
-		.noticeContent{
-			padding-top: 10px;		
-			font-size: 18pt;
-			word-break:break-all;
 		}
 		.moveBTN{
 			width: 75px;
@@ -170,44 +161,54 @@
         	}
 		ul{
    			list-style:none;
-   			font-size: 24pt;
+   			font-size: 18pt;
    		}
 		li{
 			list-style: none;
-			font-size: 18pt;
+			font-size: 16pt;
 			padding: 10px;
 			text-align: center;
 		}
- /*page navi*/
-#page_wrap {
-    width: 100%;
-}
-#page_wrap .page_ul {
-    display: table;
-    margin : 0 auto;
-}
-#page_wrap .page_ul li {
-    display: block;
-    width: 35px;
-    height: 35px;
-    float: left;
-    text-align: center;
-    margin: 0 5px;
-    line-height: 15.5px;
-    font-size: 16px;
-    color: #2A2A2A;
-}
-#page_wrap .page_ul li a {
-    display: block;
-    font-family: 'Noto Sans KR', sans-serif;
-	font-size: 16px;
-	color: #2A2A2A;
-    padding: 10px;
-    border-radius: 50%;
-/*     transition: ease 0.3s; */
-}
-#page_wrap .page_ul li a.page_active {
-    background-color: #FFA77E;
-    border-radius: 50%;
-    color: #fff;
-}  		
+		#fix{
+			border: none;
+			background-color: #E6510B;
+			color: white;
+			border-radius: 5px;
+			
+		
+			
+		}
+		/*page navi*/
+
+		#page_wrap {
+		  width: 100%;
+		}
+		#page_wrap .page_ul {
+		  display: table;
+		  margin: 0 auto;
+		}
+		#page_wrap .page_ul li {
+		  display: block;
+		  width: 35px;
+		  height: 35px;
+		  float: left;
+		  text-align: center;
+		  margin: 0 5px;
+		  line-height: 15.5px;
+		  font-size: 16px;
+		  color: #2a2a2a;
+		}
+		#page_wrap .page_ul li a {
+		    display: block;
+		    font-family: 'Noto Sans KR', sans-serif;
+			font-size: 16px;
+			color: #2A2A2A;
+		    padding: 10px;
+		    border-radius: 100%;
+			width: 35px;
+		}
+		#page_wrap .page_ul li a.page_active {
+		  background-color: #ffa77e;
+		  border-radius: 50%;
+		  color: #fff;
+		}

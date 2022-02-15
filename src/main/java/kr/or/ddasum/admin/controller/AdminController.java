@@ -160,6 +160,18 @@ public class AdminController {
 		
 	}
 	
+	//카드인증관리확인멤버
+	@RequestMapping(value="/admin/adminCardConfirm.do", method = RequestMethod.GET)
+	public ModelAndView CardMemberInfo(@RequestParam int userNo, HttpServletRequest request, ModelAndView mav) {
+		
+		HashMap<String, Object> map = admService.adminCardMemberInfo(userNo);
+		
+		mav.addObject("info", map);
+		mav.setViewName("admin/adminCardConfirm");
+
+		return mav;
+	}
+	
 	//사업자페이지 페이징 처리
 	@RequestMapping(value="/admin/adminBizManageList.do", method = RequestMethod.GET)
 	public ModelAndView adminSelectAllBizMember(@RequestParam(defaultValue ="1") int currentPage, HttpServletRequest request, ModelAndView mav){
@@ -354,12 +366,6 @@ public class AdminController {
 		return "/admin/adminNoticeWrite";
 	}	
 	
-	//카드인증관리확인
-	@RequestMapping(value="/admin/adminCardConfirm.do", method = RequestMethod.GET)
-	public String adminCardConfirm() {
-		return "/admin/adminCardConfirm";
-	}
-	
 	//스토리보드 연결
 	@RequestMapping(value="/member/storyBoard.do", method = RequestMethod.GET)
 	public String stroyBoard() {
@@ -413,13 +419,14 @@ public class AdminController {
 		}else
 		{
 			mav.addObject("noti", noti);
-			mav.setViewName("commons/errorMSG");
+			mav.setViewName("views/commons/errorMSG");
 		}
-				
+		
+		
 		return mav;
 	}
 
-//	
+
 	//FAQ 글 읽기
 	@RequestMapping(value="/admin/adminFAQDetail.do", method = RequestMethod.GET)
 	public ModelAndView adminFAQDetail(ModelAndView mav, @RequestParam int iNo)
@@ -430,6 +437,88 @@ public class AdminController {
 		mav.setViewName("admin/adminFAQDetail");
 		return mav;
 	}
+	
+	//FAQ 수정뷰
+	@RequestMapping(value="/admin/adminFAQUpdatePage.do")
+	public ModelAndView adminFAQOnePost(ModelAndView mav, @RequestParam int iNo) {
+		
+		Notice faqNo = admService.adminFAQOnePost(iNo);
+		
+		mav.addObject("faqNo", faqNo);
+		mav.setViewName("admin/adminFAQUpdate");
+		return mav;
+	}
+	
+	//FAQ 수정로직
+	
+	@RequestMapping(value="/admin/adminFAQUpdate.do", method = RequestMethod.GET)
+	public ModelAndView adminFAQUpdate(@RequestParam int iNo, ModelAndView mav, @RequestParam String iTitle,
+			@RequestParam String iContent, HttpSession session, HttpServletRequest request, HttpServletResponse response)
+	{
+	
+		String title = iTitle;
+		String content = iContent;
+		
+		Notice noFaq = new Notice();
+		
+		noFaq.setiNo(iNo);
+		noFaq.setiTitle(iTitle);
+		noFaq.setiContent(iContent);
+		
+		int result = admService.adminFAQUpdate(noFaq);
+
+		if(result>0)
+		{
+			mav.addObject("noFaq", noFaq);
+			mav.setViewName("admin/adminFAQDetail");
+		}else
+		{
+			mav.addObject("noFaq", noFaq);
+			mav.setViewName("views/commons/errorMSG");
+		}
+		
+		return mav;
+	}
+	
+	//공지사항 삭제
+	
+	@RequestMapping(value="/admin/adminNoticeDel.do", method = RequestMethod.GET)
+	public ModelAndView noticeDel(@RequestParam int iNo, ModelAndView mav, @RequestParam(defaultValue="Y") char iDelYN, HttpSession session, HttpServletResponse response) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("iNo", iNo);
+		map.put("iDelYN", iDelYN == 'Y' ? 'N' : 'Y');
+		
+		int result = admService.noticeDelYN(map);
+		
+		mav.addObject("nm", map);
+		mav.setViewName("admin/adminNoticeDel");
+		
+		return mav;
+		
+	}
+	
+	//공지사항 글쓰기
+	
+	//공지사항 고정글
+	public ModelAndView noticeFix(@RequestParam int iNo, ModelAndView mav, @RequestParam String infoId, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("iNo", iNo);
+		map.put("infoId", infoId);
+		
+		int result = admService.noticeFix(map);
+		
+		mav.addObject("notiFix", map);
+		mav.setViewName("admin/adminNoticeManageList");
+		
+		return mav;
+		
+	}
+	
+	//카드승인리스트
 	
 	
 }
