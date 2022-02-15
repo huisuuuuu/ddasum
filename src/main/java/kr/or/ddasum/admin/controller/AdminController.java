@@ -610,11 +610,20 @@ public class AdminController {
 	}
 	
 	//카드승인 업데이트
-	
-	@RequestMapping(value="/admin/adminCardConfirm.do", method=RequestMethod.POST)
-	public void cardNoUpdate(@RequestParam int userNo, @RequestParam int cardNo, ModelAndView mav, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
-		
-	}
+//	
+//	@RequestMapping(value="/admin/adminCardCheck.do", method=RequestMethod.POST)
+//	public void cardNoUpdate(@RequestParam int userNo, @RequestParam int cardNo, ModelAndView mav, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+//		
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("userNo", userNo);
+//		map.put("cardNo", cardNo);
+//		
+//		int result = admService.adminCardCheck(map);
+//		
+//		
+//		
+//	}
 	
 	
 	
