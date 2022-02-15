@@ -58,7 +58,7 @@
             <div id="detail_area">${requestScope.map['community'].area } > <Strong>${requestScope.map['community'].sigu }</Strong></div>
             <div id="detail_title"><Strong>${requestScope.map['community'].cTitle }</Strong></div>
             <div>
-                <div class="profile"><img src="${requestScope.map[community].pImage }" alt="" /></div>
+                <div class="profile"><img src="${requestScope.map[community].pImage }" alt="" style="width:100%;height:100%;border-radius:20px;" onerror="this.src='/resources/images/userProfile.png'"/></div>
                 <div id="info">
                     <div class="info">${requestScope.map['community'].nick }</div>
                     <div class="info">${requestScope.map['community'].cRegDate }</div>
@@ -99,7 +99,7 @@
 		                	<div>
 		                		<div class="depth${com.comDepth }"></div>	
 			                	<div class="commment_box" data-comNo="${com.comNo }">
-				                    <div class="profile"><img src="${com.pImage }" alt="" /></div>
+				                    <div class="profile"><img src="${com.pImage }" alt="" style="width:100%;height:100%;border-radius:20px;"onerror="this.src='/resources/images/userProfile.png'"/></div>
 				                    <div class="comment_detail comment_detail${com.comDepth }">
 				                        <div class="comment_nick"><Strong>${com.nick }</Strong></div>
 			                   
@@ -396,7 +396,7 @@
       	            						  confirmButtonText: "확인",
       	            						}).then((result) => {
       	            							if(result){
-      	            								location.replace("/community/communityDetail.do?currentPage=1");
+      	            								location.replace("/community/communityList.do?currentPage=1");
       	            							}
       	            						})
                   					}else{ // 삭제 실패

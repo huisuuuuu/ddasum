@@ -19,7 +19,7 @@
 <body>
 	<!-- header -->
 	<%@include file="/WEB-INF/views/commons/header/site-header.jsp"%>	
-      <div id="content">
+      <div id="content" style="margin-bottom:200px;">
          <div class="main_tit">
             <a href="/community/communityList.do" style="all:unset;"><h1>혼밥시러</h1></a>
             <div class="under"></div>

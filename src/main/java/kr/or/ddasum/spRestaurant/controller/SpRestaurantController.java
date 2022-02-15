@@ -69,17 +69,16 @@ public class SpRestaurantController {
 //		d.setBizNo(bizNo);
 //		d.setMenuNo(menuNo);
 //		d.setUserNo(userNo);
-//		d.setAuthorityId("SP");
-//		
+//		d.setAuthorityId("SP");	
+
 		map.put("bizNo", bizNo);
 		map.put("menuNo", menuNo);
 		map.put("userNo", userNo);
 		map.put("SP", "SP");
 		map.put("authKey", authKey);
 	    
-
-//    		INSERT INTO DETAIL values(M_RE_SEQ.NEXTVAL, #{userNo}, SYSDATE, #{bizNo}, 'SP', SYSDATE||#{authkey} }, #{menuNo}, 'N')
 		int result = srService.insertReservation(map);
+		System.out.println(result);
 		if(result>0) {
 			response.getWriter().print(true);
 		}else {
