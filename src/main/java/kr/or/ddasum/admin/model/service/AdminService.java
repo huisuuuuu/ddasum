@@ -99,7 +99,22 @@ public interface AdminService {
 	//공지사항 고정글
 	int noticeFix(HashMap<String, Object> map);
 
+	//공지사항 글쓰기
 	void insert(Notice notice);
+
+	int adminNoticePostDelete(String[] noticeBoardNoValues);
+
+	int adminNoticeFix(String iNo);
+	
+	//카드번호 확인
+	int adminCardCheck(HashMap<String, Object> map);
+
+	//카드번호중복확인
+	
+	int cardCheck(int cardNo);
+
+	//회원 검색
+	int recordMemberSearchCount(String type, String keyword);
 
 
 

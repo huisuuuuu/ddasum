@@ -1,5 +1,6 @@
 package kr.or.ddasum.admin.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -390,11 +391,11 @@ public class AdminController {
 	
 	//회원관리페이지 검색처리
 	@RequestMapping(value="/admin/memberSearch.do", method=RequestMethod.GET)
-	public ModelAndView searchMember(@RequestParam(defaultValue="1") int currentPage, ModelAndView mav, @RequestParam String type, @RequestParam String keyword) {
+	public ModelAndView searchMember(@RequestParam(defaultValue="1") int currentPage, ModelAndView mav, @RequestParam(defaultValue="") String type, @RequestParam(defaultValue="") String keyword) {
 	
 		int recordCountPerPage = 10;
 		int naviCountPerPage = 5;
-		int recordMemberSearchCount = admService.recordMemberSearchCount();
+		int recordMemberSearchCount = admService.recordMemberSearchCount(type, keyword);
 		int pageTotalCount = (int)Math.ceil(recordMemberSearchCount/(double)recordCountPerPage);
 		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
 		int endNavi = startNavi + naviCountPerPage - 1;
@@ -417,9 +418,7 @@ public class AdminController {
 		mav.setViewName("admin/adminMemberManageList");
 					
 		return mav;
-		
-		
-		
+				
 	}
 	
 	
@@ -610,20 +609,95 @@ public class AdminController {
 	}
 	
 	//카드승인 업데이트
-//	
-//	@RequestMapping(value="/admin/adminCardCheck.do", method=RequestMethod.POST)
-//	public void cardNoUpdate(@RequestParam int userNo, @RequestParam int cardNo, ModelAndView mav, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
-//		
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		
-//		map.put("userNo", userNo);
-//		map.put("cardNo", cardNo);
-//		
-//		int result = admService.adminCardCheck(map);
-//		
-//		
-//		
-//	}
+	
+	@RequestMapping(value="/admin/adminCardCheck.do", method=RequestMethod.GET)
+	public ModelAndView cardNoUpdate(@RequestParam int userNo, @RequestParam int cardNo,
+									@RequestParam int cmNo, ModelAndView mav, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userNo", userNo);
+		map.put("cmNo", cmNo);
+		map.put("cardNo", cardNo);
+		
+		int result = admService.adminCardCheck(map);
+		
+		if(result>0) {
+			mav.addObject("msg1", "카드 정보 입력완료");
+			mav.addObject("msg2", "정상적으로 입력이 완료되었습니다.");
+			mav.addObject("location", "/admin/adminCardConfirm.do?userNo="+userNo);
+			mav.setViewName("commons/succesMsg");
+			
+			return mav;
+			
+		}else {
+			mav.addObject("msg1", "카드 정보 입력실패");
+			mav.addObject("msg2", "카드 정보 입력에 실패하였습니다.");
+			mav.addObject("location", "/admin/adminCardConfirm.do?userNo="+userNo);
+			mav.setViewName("commons/erroMsg");
+			
+			return mav;
+		}
+		
+	}
+	
+	@RequestMapping(value="/admin/adminCardNoCheck.do", method=RequestMethod.GET)
+	public void cardCheck(@RequestParam int cardNo, HttpServletResponse response) throws IOException {
+		
+		int result = admService.cardCheck(cardNo);
+		
+		response.getWriter().println(result > 0);
+		
+	}
+	
+	//공지사항 글 고정
+	@RequestMapping(value="/admin/adminNoticeFix.do", method = RequestMethod.GET)
+	public ModelAndView adminNoticeFix(@RequestParam String iNo, HttpServletRequest request, ModelAndView mav) {
+					
+		int result = admService.adminNoticeFix(iNo);
+		
+		if(result>0){
+		
+			mav.addObject("msg1", "상단 고정 완료");
+			mav.addObject("msg2", "요청하신 글의 상단 고정이 완료되었습니다.");
+			mav.addObject("location", "/admin/adminNoticeManageList.do");
+			mav.setViewName("commons/successMsg");
+		}else{
+			mav.addObject("msg1", "삭제 실패");
+			mav.addObject("msg2", "지속적인 문제 발생 시 관리자에게 문의 바랍니다.");
+			mav.addObject("location", "/admin/adminNoticeManageList.do");
+			mav.setViewName("commons/errorMsg");
+		}
+		
+		return mav;
+	
+	}
+	
+	//공지사항페이지
+	@RequestMapping(value="/admin/adminNoticePostDelete.do", method = RequestMethod.POST)
+	public ModelAndView adminNoticePostDelete(HttpServletRequest request, ModelAndView mav) {
+					
+		    String[] noticeBoardNoValues = request.getParameterValues("noticeNo");
+		
+			int result = admService.adminNoticePostDelete(noticeBoardNoValues);
+			
+			
+			if(result==noticeBoardNoValues.length){
+			
+				mav.addObject("msg1", "삭제 완료");
+				mav.addObject("msg2", "요청하신 글의 삭제가 완료되었습니다.");
+				mav.addObject("location", "/admin/adminNoticeManageList.do");
+				mav.setViewName("commons/successMsg");
+			}else{
+				mav.addObject("msg1", "삭제 실패");
+				mav.addObject("msg2", "지속적인 문제 발생 시 관리자에게 문의 바랍니다.");
+				mav.addObject("location", "/admin/adminNoticeManageList.do");
+				mav.setViewName("commons/errorMsg");
+			}
+			
+			return mav;
+						
+	}
 	
 	
 	
