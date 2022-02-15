@@ -92,12 +92,16 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/myPage.do")
 	public String myPageIn(HttpSession session,@SessionAttribute Member member) {
+		
 		Member m = mService.memberLogin(member);
+		
+		if(m != null) {
 		session.setAttribute("member", m);
+		}
 		return "member/myPage";
 	}
 
-	@RequestMapping(value = "/member/PasswordCheckPage.do")
+	@RequestMapping(value = "/member/passwordCheckPage.do")
 	public String memberPasswordCheck() {
 		return "member/passwordCheckPage";
 	}

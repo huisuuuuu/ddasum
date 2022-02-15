@@ -155,6 +155,8 @@ public class FileController {
 	
 		int result1 = fService.enrollMentImgUpload(c);
 		
+		 member.setCdImage(filePath);
+		
 		int result2 = 0;
 		 if(result1>0) {
 			 result2 = fService.memberCardImage(member);
