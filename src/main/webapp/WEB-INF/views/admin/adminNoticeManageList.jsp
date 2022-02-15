@@ -172,7 +172,7 @@ function checkSelectAll(checkbox)  {
 	  })
 	}
 	
-	function
+
 		
 /* 	$('#selectall').click(function(){
 		if($("selectall".prop("checked")){

@@ -99,6 +99,8 @@ public interface AdminService {
 	//공지사항 고정글
 	int noticeFix(HashMap<String, Object> map);
 
+	void insert(Notice notice);
+
 
 
 

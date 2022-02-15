@@ -325,5 +325,18 @@
   	UPDATE INFO SET INFO_ID=#{infoId} WHERE I_NO=#{iNo}
   	
   	</update>
+  	
+  	<insert id="noticeWrite" parameterType="notice">
+  	
+  	INSERT INTO INFO VALUES (
+  		#{infoId}, 
+  		INFO_SEQ.NEXTVAL, 
+  		#{iTitle}, 
+  		#{iContent}, 
+  		SYSDATE, 
+  		NULL, 
+  		#{iDelYN})
+  	
+  	</insert>
   
 </mapper>

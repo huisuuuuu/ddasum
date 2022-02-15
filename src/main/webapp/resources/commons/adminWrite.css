@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+* {
+	margin : 0px;
+	padding : 0px;
+}
+
 form {
 	width: 100%;
 }
@@ -21,6 +26,26 @@ form {
 .box-subject>input {
 	width: 100%;
 	height: 100%;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	color: #2A2A2A;
+	border: 0
+}
+
+.select-search {
+	margin-bottom : 10px;
+}
+
+.box-select {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	color: #2A2A2A;
+	border : 0px;
+	margin-bottom : 10px;
+	float : right;
+}
+
+.box-select>a {
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 18px;
 	color: #2A2A2A;
@@ -83,3 +108,4 @@ form {
 .box-button>button {
 	background-color: #C8C8C8;
 }
+

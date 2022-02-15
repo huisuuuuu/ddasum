@@ -198,6 +198,12 @@ public class AdminServiceImpl implements AdminService{
 		return admDAO.noticeFix(map);
 	}
 
+	@Override
+	public void insert(Notice notice) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 	}
