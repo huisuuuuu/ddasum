@@ -22,7 +22,7 @@
                 <li><a href="/spRestaurant/spRestaurantList.do">후원식당</a></li>
                 <li><a href="/dcRestaurant/dcRestaurantList.do">할인식당</a></li>
                 <li><a href="/community/communityList.do">커뮤니티</a></li>
-                <li id="customercenter"><a href="">고객센터</a>
+                <li id="customercenter"><a href="/board/noticeBoard.do">고객센터</a>
                 <div id="submenu"><a href="/board/noticeBoard.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="/board/faqBoard.do">자주 묻는 질문</a></div>
                 </li>
             </ul>
@@ -50,7 +50,7 @@
            </c:when>
            <c:when test="${sessionScope.bizMember != null}">
               <span id="join"><a href="/member/logout.do">로그아웃</a></span>
-               <span id="login"><a href="/BizMember/enter.do">${sessionScope.bizMember.bizName }님</a></span>
+               <span id="login"><a href="/member/bizMemberLoginPage.do">${sessionScope.bizMember.bizName }님</a></span>
            </c:when>
            <c:otherwise>
                <span id="join"><a href="/member/joinPage.do">회원가입</a></span>

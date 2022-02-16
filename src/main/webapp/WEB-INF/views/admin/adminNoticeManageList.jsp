@@ -78,8 +78,7 @@ button {
                 <!--<c:if test='${noti.IDELYN.equals("N") }'>-->                
                 <!--</c:if>-->
                 
-                <button class="wri_btn" value="선택삭제" id="delBtn">
-                <a href="/admin/adminNoticeDel.do?iNo=${noti.INO }">삭제</a></button>
+                <button class="wri_btn" type="button" id="delBtn">삭제</button>
                 
                 <c:if test='${noti.IDELYN.equals("Y") }'>
                 <button class="wri_btn" value="선택복원" id="reBtn">
@@ -91,6 +90,7 @@ button {
         </div>
 
         <div class="table_wrap">
+        <form action="" method="post" id="boardForm">	
           <table>
             <thead>
               <tr>
@@ -108,15 +108,13 @@ button {
             <c:when test="${!requestScope.list.isEmpty()}">
             <c:forEach items="${requestScope.list}" var="noti" varStatus="i">
               <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice' value="${noti.INO }"></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='noticeNo' value="${noti.INO }"></td>
                 <td>${ i.count + (currentPage - 1) * 10 }</td>
                 <td><a href="/admin/adminNoticeDetail.do?iNo=${noti.INO}">${noti.ITITLE }</a></td>
                 <td><a href="/admin/adminNoticeDetail.do?iNo=${noti.INO}">${noti.ICONTENT }</a></td>
                 <td><button type="button" class="ok_btn"><a href="/admin/adminNoticeFix.do?iNo=${noti.INO }">고정</a></button></td>
                 <td><button type="button" class="ok_btn"><a href="/admin/adminNoticeUpdatePage.do?iNo=${noti.INO}">수정</a></button></td>
               </tr>
-
-            
             </c:forEach>
             </c:when>
             </c:choose>
@@ -144,7 +142,7 @@ button {
                </c:if>
             </ul>
           </div>
-
+		</form>	
         </div>
       </div>
     </div>
@@ -161,18 +159,22 @@ function checkSelectAll(checkbox)  {
 	  if(checkbox.checked === false)  {
 	    selectall.checked = false;
 	  }
-	}
+	};
 
 	function selectAll(selectAll)  {
 	  const checkboxes 
-	     = document.getElementsByName('notice');
+	     = document.getElementsByName('noticeNo');
 	  
 	  checkboxes.forEach((checkbox) => {
 	    checkbox.checked = selectAll.checked
 	  })
-	}
+	};
 	
-	function
+	$('#delBtn').click(function(){
+		$('#boardForm').attr("action", "/admin/adminNoticePostDelete.do");
+		$('#boardForm').submit();
+	});
+
 		
 /* 	$('#selectall').click(function(){
 		if($("selectall".prop("checked")){

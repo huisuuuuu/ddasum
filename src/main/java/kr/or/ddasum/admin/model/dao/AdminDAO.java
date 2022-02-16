@@ -143,13 +143,7 @@ public class AdminDAO {
 		return sqlSession.selectOne("admin.memberSearchTotalCount");
 	}
 
-	public ArrayList<HashMap<String, Object>> adminMemberSearchList(String type, String keyword, int currentPage,
-		int recordCountPerPage) {
-		int start = (currentPage - 1) * recordCountPerPage;
-		int end = recordCountPerPage;
-		RowBounds rb = new RowBounds(start, end);
-		return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.memberSearchList", null, rb));
-	}
+	
 	
 	//공지사항 글 읽기
 	public Notice adminNoticeDetail (int iNo) {
@@ -200,6 +194,69 @@ public class AdminDAO {
 		return sqlSession.update("admin.noticeFix", map);
 	}
 
+	//카드번호 입력
+	public int cardCheck(HashMap<String, Object> map) {
+
+		return sqlSession.update("admin.cardNoUpdate", map);
+	}
+	
+	public int adminNoticePostDelete(String[] noticeBoardNoValues) {
+		
+		String values = String.join("','", noticeBoardNoValues);
+		System.out.println(values);
+		
+		return sqlSession.update("admin.adminNoticePostDelete", values);
+	}
+
+	public int adminNoticeFix(String iNo) {
+		
+		return sqlSession.update("admin.adminNoticeFix", iNo);
+	}
+
+	
+	//카드번호 중복확인
+	
+	public int cardCheck(int cardNo) {
+		
+		return sqlSession.selectOne("admin.cardNoCheck", cardNo);
+		
+	}
+
+	//회원검색(totalCount)
+	public int searchMember(String type, String keyword) {
+
+		String query = "";
+		switch(type) {
+			case "none": query = "1 = 1"; break;
+			default: query = type + " LIKE '%" + keyword + "%'"; break;
+		}
+		
+		return sqlSession.selectOne("admin.selectSearchMemberTotalCount", query);
+	}
+
+	public ArrayList<HashMap<String, Object>> adminMemberSearchList(String type, String keyword, int currentPage,
+			int recordCountPerPage) {
+			int start = (currentPage - 1) * recordCountPerPage;
+			int end = recordCountPerPage;
+			
+			String query = "";
+			switch(type) {
+				case "none": query = "1 = 1"; break;
+				default: query = type + " LIKE '%" + keyword + "%'"; break;
+			}
+			
+			RowBounds rb = new RowBounds(start, end);
+			return new ArrayList<HashMap<String, Object>> (sqlSession.selectList("admin.adminSearchMember", query, rb));
+		}
+
+	//FAQ 글삭제
+	public int adminFAQPostDelete(String[] noticeFAQNoValues) {
+
+		String values = String.join("','", noticeFAQNoValues);
+		System.out.println(values);
+		
+		return sqlSession.update("admin.adminFAQPostDelete", values);
+	}
 
 
 		

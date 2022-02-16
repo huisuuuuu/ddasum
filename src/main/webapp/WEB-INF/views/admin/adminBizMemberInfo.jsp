@@ -24,6 +24,9 @@
 
 .wrap {
 	width : 100%;
+	position:absolute;
+	top:20%;
+	z-index:-1;
 }
 
 .info-wrap {
@@ -91,7 +94,6 @@
 	height : 100%;
 	display : inline-block;
 	padding-right : 50px;
-	
 }
 
 .info-check {
@@ -100,6 +102,13 @@
 	display : inline-block;
 	padding-left : 50px;
 }
+
+.info-footer{
+	position:absolute;
+	top:80%;
+}
+
+
 </style>
 </head>
 <body>
@@ -160,11 +169,15 @@
 					</tr>
 					<tr>
 						<td class="data-area">탈퇴여부</td>
-						<td class="info-area">${info.BIZDELYN.equals("Y") ? "탈퇴" : "사용중" }
+						<td class="info-area">${info.BIZDELYN.equals("Y") ? "사용중" : "탈퇴" }
 						</td>
 					</tr>
 					</tbody>					
 				</table>
+				
+			</div>
+		</div>
+		</div>
 				<div class="info-footer">
 					<div class="del-btn">
 						<c:if test='${info.BIZDELYN.equals("Y") }'>
@@ -177,9 +190,8 @@
 						탈퇴</a></button></c:if>					
 							</div>						
 					<div class="info-check"><button type="button" class="btn-ok">
-						<a href="/admin/adminBizMemberManageList">확인</button></a></div>
+						<a href="/admin/adminBizManageList.do">확인</button></a></div>
 				</div>
-
 	
 
 </body>

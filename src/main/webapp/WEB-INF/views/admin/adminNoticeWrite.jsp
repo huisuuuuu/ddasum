@@ -40,6 +40,15 @@
         <div id="content">
         	<div class="container">
         		<form action="/admin/adminNoticeWrite.do" method="post">
+        		<div class="select-search">
+        		<select id="infoId" name="infoId" onchange="select">
+                  <option>유형선택</option>
+                  <option value="holdnoti">고정글</option>
+                  <option value="notice">공지사항</option>
+                  <option value="faq">자주 묻는 질문</option>
+                </select>
+                <i class="fas fa-chevron-down icon-arrow"></i>
+              </div>
 					<div class="box-write">
 						<div class="box-subject">
 							<input type="text" name="title" placeholder="제목을 입력하세요">
@@ -48,13 +57,19 @@
 							<textarea name="content" placeholder="내용을 입력하세요"></textarea>
 						</div>
 					<div class="box-button">
-						<input type="submit" value="완료" class="btn-ok">
+						<input type="submit" value="완료" class="btn-ok" id="wirte-send">
 						<button class="btn-ok"><a href="/admin/adminNoticeManageList.do">목록</a></button>
 					</div>
 				</form>
         	</div>
         </div>          
     </div>
+
+<script>
+
+var 
+
+</script>
 
 </body>
 </html>

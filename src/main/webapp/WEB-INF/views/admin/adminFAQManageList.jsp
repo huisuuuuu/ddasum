@@ -17,6 +17,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/js/ui.js"></script>
 <style>
+button {
+	color : white !important;
+}
 </style>
 
 </head>
@@ -72,15 +75,14 @@
                   <a href="/admin/adminNoticeWrite.do">글쓰기</a>
                 </button>
                 
-                <button class="wri_btn">
-                	삭제
-                </button>
+                <button class="wri_btn" type="button" id="delBtn">삭제</button>
         
             </form>        
           </div>
         </div>
 
         <div class="table_wrap">
+        <form action="" method="post" id="boardForm">	
           <table>
             <thead>
               <tr>
@@ -97,7 +99,7 @@
             <c:when test="${!requestScope.list.isEmpty()}">
             <c:forEach items="${requestScope.list}" var="faq" varStatus="i">
               <tr>
-                <td><input type="checkbox" onclick='checkSelectAll(this)' name='notice'></td>
+                <td><input type="checkbox" onclick='checkSelectAll(this)' name='FAQNo' value="${faq.INO }"></td>
                 <td>${ i.count + (currentPage - 1) * 10 }</td>
                 <td><a href="/admin/adminFAQDetail.do?iNo=${faq.INO}">${faq.ITITLE }</a></td>
                 <td><a href="/admin/adminFAQDetail.do?iNo=${faq.INO}">${faq.ICONTENT }</a></td>
@@ -148,16 +150,21 @@ function checkSelectAll(checkbox)  {
 	  if(checkbox.checked === false)  {
 	    selectall.checked = false;
 	  }
-	}
+	};
 
 	function selectAll(selectAll)  {
 	  const checkboxes 
-	     = document.getElementsByName('notice');
+	     = document.getElementsByName('FAQNo');
 	  
 	  checkboxes.forEach((checkbox) => {
 	    checkbox.checked = selectAll.checked
 	  })
-	}
+	};
+	
+	$('#delBtn').click(function(){
+		$('#boardForm').attr("action", "/admin/adminFAQPostDelete.do");
+		$('#boardForm').submit();
+	});
 </script>
 
 </html>

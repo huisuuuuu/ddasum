@@ -30,7 +30,7 @@ crossorigin="anonymous"></script>
 				<div class="resultArea">
 					<div class="detailTable">
 						<p>
-							<span class="subject">${requestScope.Notice.iTitle } </span>
+							<span class="subject">${requestScope.Notice.iTitle } </span><br><br>
 							<span class="regdate">${requestScope.Notice.iRegdate } </span>
 						</p>
 						<br>

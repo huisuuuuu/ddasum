@@ -197,8 +197,7 @@ td:nth-of-type(1) {
                      <div class="select-search">
                         <select name="type" id="searchtype">
                            <option>검색필터</option>
-                           <option value="userId">
-                           <c:if test="${map.searchtype == 'userId' }">selected</c:if>아이디</option>
+                           <option value="userId">아이디</option>
                            <option value="nick">닉네임</option>
                            <option value="userName">이름</option>
                         </select>
@@ -262,6 +261,7 @@ td:nth-of-type(1) {
                   		     </c:forEach>
        		                 </c:when>
                         </c:choose>
+                        
                             
                         </tbody> 
                         

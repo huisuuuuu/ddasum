@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
 
+	<!-- 회원전체검색/페이징 -->
    <select id="adminSelectAllMember" resultType="admin">
       SELECT 
          userno as userNo,
@@ -19,8 +20,32 @@
       FROM MEMBER 
    </select>
    
+   <!-- 전체회원 총 수 -->
    <select id="selectAllMemberTotalCount" resultType="int">
       SELECT COUNT(*) AS AllCount FROM MEMBER
+   </select>
+
+<!--  -->
+ <select id="adminSearchMember" parameterType="string" resultType="admin">
+      SELECT 
+         userno as userNo,
+         authority_id as authorityId,
+         userid as userId,
+         username as userName,
+         nick as nick,
+         email as email,
+         phone as phone,
+         address as address,
+         detail as detailYN,
+         enrolldate as enrollDate,
+         card_no as cardNo,
+         del_yn as delYN
+      FROM MEMBER 
+      WHERE ${_parameter}
+   </select>
+   
+   <select id="selectSearchMemberTotalCount" resultType="int">
+      SELECT COUNT(*) AS AllCount FROM MEMBER WHERE ${_parameter}
    </select>
 
      <select id="adminMemberDetail" parameterType="int" resultType="detail">
@@ -159,8 +184,8 @@
     	I_DEL_YN AS IDELYN
 	FROM INFO
     	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
-    	WHERE INFO_GROUP.INFO_ID = 'HOLDNOTI' OR 
-    	INFO_GROUP.INFO_ID = 'NOTICE'
+    	WHERE (INFO_GROUP.INFO_ID = 'HOLDNOTI' OR 
+    	INFO_GROUP.INFO_ID = 'NOTICE') AND I_DEL_YN ='N'     
    	 
    	 </select>
    	 
@@ -182,7 +207,7 @@
     	I_DEL_YN AS DELYN
 	FROM INFO
     	INNER JOIN INFO_GROUP ON (INFO_GROUP.INFO_ID = INFO.INFO_ID)
-    	WHERE INFO_GROUP.INFO_ID = 'FAQ'   	 
+    	WHERE INFO_GROUP.INFO_ID = 'FAQ' AND I_DEL_YN ='N'   	 
    	 </select>
 
 	<select id="selectAllFAQTotalCount" resultType="int">
@@ -304,6 +329,7 @@
     	C_M_NO AS CMNO,
         MEMBER.USERNO AS USERNO,
         MEMBER.USERNAME AS USERNAME,
+        CARD_MANAGE.CARD_NO AS CARDNO,        
         C_FILE_NO AS CFILENO
     FROM CARD_MANAGE
         INNER JOIN MEMBER ON (CARD_MANAGE.USERNO=MEMBER.USERNO)
@@ -325,5 +351,48 @@
   	UPDATE INFO SET INFO_ID=#{infoId} WHERE I_NO=#{iNo}
   	
   	</update>
+  	
+  	<insert id="noticeWrite" parameterType="notice">
+  	
+  	INSERT INTO INFO VALUES (
+  		#{infoId}, 
+  		INFO_SEQ.NEXTVAL, 
+  		#{iTitle}, 
+  		#{iContent}, 
+  		SYSDATE, 
+  		NULL, 
+  		#{iDelYN})
+  	
+  	</insert>
+  	 	
+  	<update id="adminNoticePostDelete" parameterType="String">
+  		UPDATE
+  		 	INFO SET I_DEL_YN='Y'
+  		WHERE I_NO IN(#{values})
+  	</update>
   
+    <update id="adminNoticeFix" parameterType="String">
+  		UPDATE
+  		 	INFO SET INFO_ID='HOLDNOTI'
+  		WHERE I_NO = #{iNo}
+  	</update>
+  
+  	<update id="cardNoUpdate" parameterType="hashmap">
+  	
+  	UPDATE CARD_MANAGE SET CARD_NO=#{cardNo} WHERE USERNO = #{userNo}
+  	
+  	</update>
+  	
+  	<select id="cardNoCheck" parameterType="int" resultType="int">
+  	
+  	SELECT COUNT (*) FROM CARD_MANAGE WHERE CARD_NO=#{_params}
+  	
+  	</select>
+  	
+  	<update id="adminFAQPostDelete" parameterType="String">
+  		UPDATE
+  		 	INFO SET I_DEL_YN='Y'
+  		WHERE I_NO IN(#{values})
+  	</update>
+  	
 </mapper>

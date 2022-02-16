@@ -198,6 +198,56 @@ public class AdminServiceImpl implements AdminService{
 		return admDAO.noticeFix(map);
 	}
 
+	//공지사항 글쓰기
+	@Override
+	public void insert(Notice notice) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	//카드번호 확인
+	@Override
+	public int adminCardCheck(HashMap<String, Object> map) {
+
+		return admDAO.cardCheck(map);
+	}
+	
+	//카드번호 확인 ajax
+	public int cardCheck(int cardNo) {
+		return admDAO.cardCheck(cardNo);
+	}
+	
+	@Override
+	public int adminNoticePostDelete(String[] noticeBoardNoValues) {
+		
+		return admDAO.adminNoticePostDelete(noticeBoardNoValues);
+	}
+
+	@Override
+	public int adminNoticeFix(String iNo) {
+		
+		return admDAO.adminNoticeFix(iNo);
+	}
+
+	//회원검색
+	@Override
+	public int recordMemberSearchCount(String type, String keyword) {
+		return admDAO.searchMember(type, keyword);
+	}
+
+	//FAQ 글삭제
+	@Override
+	public int adminFAQPostDelete(String[] noticeFAQNoValues) {
+		return admDAO.adminFAQPostDelete(noticeFAQNoValues);
+	
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> adminMembersearchList(String type, String keyword, int currentPage,
+			int recordCountPerPage) {
+		return admDAO.adminMemberSearchList(type, keyword, currentPage, recordCountPerPage);
+	}
+
 
 
 	}

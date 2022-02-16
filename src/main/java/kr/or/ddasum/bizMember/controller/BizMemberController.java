@@ -385,7 +385,7 @@ public class BizMemberController {
 			mav.addObject("/bizMember/goodsManage.do");
 		} else {
 			mav.addObject("msg", "상품 수정 실패");
-			mav.addObject("/bizMember/goodModify.do");
+			mav.addObject("/bizMember/goodsManage.do");
 		}
 		mav.setViewName("commons/msg");
 		return mav;
