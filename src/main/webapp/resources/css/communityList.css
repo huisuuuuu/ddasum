@@ -7,6 +7,8 @@
 
         #content_wrapper {
             width: 1280px;
+            height: 100%;
+            minheight: 1000px;
             margin: 0 auto;
         }
 

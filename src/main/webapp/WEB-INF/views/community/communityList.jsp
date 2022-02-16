@@ -24,7 +24,7 @@
             <a href="/community/communityList.do" style="all:unset;"><h1>혼밥시러</h1></a>
             <div class="under"></div>
          </div>
-         <div class="contents_wrap">
+         <div class="contents_wrap" style="min-height:635px;">
          	        <div id="board_wrapper">
             <div class="table_tr">
             	<c:if test="${sessionScope.member !=null }">
