@@ -8,6 +8,9 @@
 <title>따숨 - 마음을 나누다</title>
 <link rel="stylesheet" type="text/css"	href="/resources/commons/layout.css">
 <link rel="stylesheet" type="text/css"	href="/resources/commons/mainTitle.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="css/swiper.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 
@@ -21,8 +24,9 @@
 
 .contents_wrap {
 	width : 1000px;
-	height : 800px;
+	height : 700px;
 	margin : 0px auto;
+	margin-top : 20px;
 	padding-top : 60px;
 }
 
@@ -35,13 +39,14 @@
 	width : 1000px;
 	height : 800px;
 	margin : 0px auto;
+	margin-top: 10px;
+	margin-bottom: 150px;
 }
 
 .text-area {
 	width : 60%;
 	height : 80%;
 	padding-top : 70px;
-	padding-left : 70px;
 	float : left;
 	font-size : 16px;
 }
@@ -59,9 +64,14 @@
 	display : inline-block;
 }
 
-img {
+.swiperImg {
 	max-width : 100%;
-	height : auto;
+	height : 700px;
+}
+
+#stroryImg {
+	max-width : 100%;
+	height : 450px;
 }
 
 #img {
@@ -87,8 +97,6 @@ button {
 	border : none;
 	font-size : 1.5em;
 	display : block;
-	margin : 30px auto;
-	margin-left : 80px;
 	color : white;	
 }
 
@@ -119,17 +127,18 @@ button > a:visited {
          </div>
          <div class="contents_wrap">
          			<!-- Slider main container -->
-				<div class="swiper">
+				<div class="swiper mySwiper">
 					<!-- Additional required wrapper -->
   					<div class="swiper-wrapper">
     					<!-- Slides -->
     						<div class="swiper-slide">
-    							<img src="/resources/images/story1.jpg" alt="스토리사진">
+    							<img class="swiperImg" src="/resources/images/story1.jpg" alt="스토리사진">
     						</div>
   							<div class="swiper-slide">
-    							<img src="/resources/images/story2.jpg" alt="스토리사진">  							
+    							<img class="swiperImg" src="/resources/images/story2.jpg" alt="스토리사진">
+    						</div>	  							
 							<div class="swiper-slide">
-    							<img src="/resources/images/story3.jpg" alt="스토리사진">  														
+    							<img class="swiperImg" src="/resources/images/story3.jpg" alt="스토리사진">  														
 							</div>
   					</div>
 
@@ -160,7 +169,7 @@ button > a:visited {
 			</div>
 			<div class="img-area">
 				<div id="img">
-					<img src="/resources/images/storyboard.png">
+					<img id="stroryImg" src="/resources/images/storyboard.png">
 				</div>
 			</div>
 			<div class="btn-area">
@@ -174,5 +183,27 @@ button > a:visited {
          <%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>
       </footer>
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+	<!-- Initialize Swiper -->
+	<script>
+		var swiper = new Swiper(".mySwiper", {
+			spaceBetween: 0,
+			centeredSlides: true,
+			loop: true,
+			autoplay: {
+				delay: 3000,
+				disableOnInteraction: false,
+			},
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+		});
+	</script>
+
 </body>
 </html>
