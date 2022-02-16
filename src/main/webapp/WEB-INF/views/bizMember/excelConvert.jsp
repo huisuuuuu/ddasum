@@ -50,7 +50,7 @@
 				<td style="text-align:left;">${m.reNo }</td>
 				<td style="text-align:left;">${m.bizName }</td>
 				<td style="text-align:left;">${m.menuName }</td>
-				<td style="text-align:left; mso-number-format:\#\,\#\#0\;">${m.originalPrice }</td>
+				<td style="text-align:left; mso-number-format:\#\,\#\#0\;">${m.originalPrice -m.dcPrice }</td>
 			</tr>
 		</c:forEach>
 	</tbody>
