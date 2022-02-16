@@ -161,13 +161,11 @@
 		
 		function alertModal(text){
 		
-			Swal.fire({
-				  icon: "warning",
-				  title: "실패!",
-				  text: text,
-				  confirmButtonText: "확인"
-				});
-	}
+			Swal.fire(text);
+		    $('.swal2-styled.swal2-confirm').html('확인');
+		    $('.swal2-styled.swal2-confirm').css('background-color','#F8976A');
+			
+		}
 	</script>
 	<!-- footer -->
 	<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>  	
