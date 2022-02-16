@@ -108,7 +108,7 @@ public class AdminController {
 		
 		int result = admService.adminUpdateMemberEndYN(map);
 		
-		if(delYN == 'Y') {
+		if(delYN == 'N') {
 			if(result>0) {
 				mav.addObject("msg1", "탈퇴완료");
 				mav.addObject("msg2", userId + "회원이 정상탈퇴처리되었습니다.");

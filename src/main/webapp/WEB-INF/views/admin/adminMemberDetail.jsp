@@ -30,9 +30,11 @@
 .detail-wrap {
 	border : 1px solid #c8c8c8;
 	width : 800px;
-	height : 600px;
+	height : 750px;
 	border-radius : 20px;
-	margin : 0px auto;
+	position: absolute;
+	top: 25%;
+	left: 25%;
 }
 
 .detail-header {
@@ -69,9 +71,11 @@
 .reset_area {
 	width : 30%;
 	height : 40px;
-	margin : 0px auto;
+	position: relative;
 	text-align : center;
 	padding-top : 20px;
+	top: -8%;
+	left: 70%;
 }
 
 .reset-text-area {
@@ -91,9 +95,11 @@
 }
 
 .close-btn {
-	margin : 0px auto;
 	padding-top : 20px;
 	padding-left : 350px;
+	padding-bottom : 200px;
+	position: relative;
+	top: -10%;
 }
 
 #cl-btn {
@@ -226,7 +232,7 @@ td:nth-of-type(1) {
 				</div>
 				<br><br><br>
 				<div class="close-btn">
-					<button type="button" class="btn-ok" id="cl-btn"><a href="/admin/adminMemberManageList">닫기</a></button>
+					<button type="button" class="btn-ok" id="cl-btn"><a href="/admin/adminMemberManageList.do">닫기</a></button>
 				</div>
                     
                 </div>

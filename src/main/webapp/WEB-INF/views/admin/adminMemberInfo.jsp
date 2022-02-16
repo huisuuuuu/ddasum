@@ -152,7 +152,7 @@
 					</tr>
 					<tr>
 						<td class="data-area">탈퇴여부</td>
-						<td class="info-area">${info.DELYN.equals("Y") ? "사용중" : "탈퇴" }
+						<td class="info-area">${info.DELYN.equals("Y") ? "탈퇴" : "사용중" }
 						</td>
 					</tr>
 					</tbody>					
@@ -169,7 +169,7 @@
 						탈퇴</a></button></c:if>					
 							</div>						
 					<div class="info-check"><button type="button" class="btn-ok">
-						<a href="/admin/adminMemberManageList">확인</button></a></div>
+						<a href="/admin/adminMemberManageList.do">확인</button></a></div>
 				</div>
 				
 			</div>
