@@ -157,8 +157,6 @@
 			var authorityId = $('#authorityId').val();
 			var menuNo = $(this).attr("value");
 			
-			console.log(userNo,authorityId,menuNo);
-			
 			Swal.fire({
 	            title: '당일에만 이용 가능합니다.',
 	            text: "예약 진행하시겠습니까?",
@@ -166,6 +164,7 @@
 	            showCancelButton: true,
 	            confirmButtonText: '예',
 	            cancelButtonText: '아니오',
+	            confirmButtonColor: '#F8976A',
 	            showLoaderOnConfirm: true,
 	            preConfirm: () => {
 	                

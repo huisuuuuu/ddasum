@@ -103,3 +103,16 @@
 	height: 100%;
 	line-height: 60px;
 }
+
+/* 버튼 테투리 css */
+.swal2-actions {
+    display: none;
+    z-index: 1;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    margin: 1.25em auto 0;
+    padding: 0;
+}
