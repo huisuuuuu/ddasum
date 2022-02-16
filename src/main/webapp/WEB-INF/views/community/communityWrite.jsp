@@ -14,6 +14,8 @@
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <!--Toast editor css-->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+	<!-- SweetAlert2 CDN -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/communityWrite.css">
 	<link rel="stylesheet" type="text/css" href="/resources/commons/layout.css">
@@ -69,10 +71,9 @@
 
         $("board_content").html(editor.getHTML()); //입력값 가져오기
         $("#editor").keyup(function() {
-            console.log('getHTML :' + editor.getHTML());
-            console.log('getMarkdown :' + editor.getMarkdown());
+
             $("#board_content").html(editor.getHTML());
-            console.log("board_content: " + $("#board_content").html());
+
         })
     </script>
 
@@ -116,33 +117,47 @@
     </script>
 	
 	<script> // data submit
-		$("#regBtn").click(function(){
-			const boardTitle = $("#board_title").val();
-			const boardContent = editor.getMarkdown();
-			const area = $("#area").val();
-			const sigu = $("#sigu").val();
-			
-			if(!boardTitle){
-				alert("제목을 입력해주세요");
-				return ;
-			}
-			if(!boardContent){
-				alert("내용을 입력해주세요");
-				return ;
-			}
-			if(!area){
-				alert("지역을 선택해주세요");
-				return ;
-			}
-			if(!sigu){
-				alert("시구를 선택해주세요");
-				return ;
-			}
-			$("#board_content").val(editor.getHTML()); //입력값 가져오기
-			
-			$("#writeForm").submit();
-		})
+	$("#regBtn").click(function(){
+		
+		const boardTitle = $("#board_title").val();
+		const boardContent = editor.getMarkdown();
+		const area = $("#area").val();
+		const sigu = $("#sigu").val();
+		let text;
+		if(!boardTitle){
+			text = "제목을 입력해주세요!";
+			alertModal(text);
+			return ;
+		}
+		if(!boardContent){
+			text = "내용을 입력해주세요!";
+			alertModal(text);
+			return ;
+		}
+		if(!area){
+			text = "지역을 선택해주세요";
+			alertModal(text);
+			return ;
+		}
+		if(!sigu){
+			text = "시구를 선택해주세요";
+			alertModal(text);
+			return ;
+		}
+		$("#board_content").val(editor.getHTML()); //입력값 가져오기
+		
+		$("#writeForm").submit();
+	})
+	
+	function alertModal(text){
+	
+		Swal.fire(text);
+	    $('.swal2-styled.swal2-confirm').html('확인');
+	    $('.swal2-styled.swal2-confirm').css('background-color','#F8976A');
+		
+	}
 	</script>
+
 	<!-- footer -->
 	<%@include file="/WEB-INF/views/commons/footer/site-footer.jsp"%>  	
 </body>
