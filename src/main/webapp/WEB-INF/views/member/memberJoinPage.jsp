@@ -16,6 +16,12 @@
 	crossorigin="anonymous"></script>
 <!-- SweetAlert2 CDN -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+	.swal2-popup {
+		width: 45em;
+	}
+	
+</style>
 <title>따숨, 마음을 나누다.</title>
 </head>
 <body>

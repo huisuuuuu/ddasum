@@ -66,7 +66,7 @@
 	        }else if(userPwd.value ==""){
 	        	Swal.fire('비밀번호를 입력해주세요.');
 	        	$('.swal2-styled.swal2-confirm').html('확인');
-	        	$('.swal2-popup').css('background-color','#F8976A');
+	        	$('.swal2-styled.swal2-confirm').css('background-color','#F8976A');
 	            return false;
 	        }else{
 	            return true;
