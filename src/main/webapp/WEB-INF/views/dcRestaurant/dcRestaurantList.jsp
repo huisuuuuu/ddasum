@@ -77,8 +77,7 @@
 							<c:choose>
 								<c:when test="${dc.bizCount <= dc.todayRSVNCount}">
 									<div id="closeRestaurant">
-										<p>예약 마감</p>
-										<a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dc.bizNo }&todayRSVNCount=${dc.todayRSVNCount}"><img id="restaurantImg" src="${dc.bizImage}"></a> <span>${dc.bizName}</span>
+										<a href="/dcRestaurant/dcRestaurantDetail.do?bizNo=${dc.bizNo }&todayRSVNCount=${dc.todayRSVNCount}"><img id="restaurantImg" src="${dc.bizImage}"><p>예약 마감</p></a> <span>${dc.bizName}</span>
 									</div>
 								</c:when>
 								<c:otherwise>
